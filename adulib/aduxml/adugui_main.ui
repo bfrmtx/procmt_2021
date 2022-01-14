@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mw_adugui</class>
+ <widget class="QMainWindow" name="mw_adugui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1136</width>
+    <height>978</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>mw_adugui</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_config_site">
+       <attribute name="title">
+        <string>Site</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_site_name">
+            <property name="text">
+             <string>Site Name</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_site_name">
+            <property name="placeholderText">
+             <string>Site Name like Three Apple Trees OR 摩周湖 (the site name is not part of EDI)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_site_name_2">
+            <property name="text">
+             <string>Site Name RR Site</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_site_name_rr">
+            <property name="placeholderText">
+             <string>Site Name of Remote Reference SIte to be used for this Site</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Site Name EMAP</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_site_name_emap">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>if this is a 2 channel EAMP: site name of site with corresponding H</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_area">
+            <property name="text">
+             <string>Area</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_area">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Area Name like NE Germany, Lower Saxony or  Hokkaido (use Latin Chars, is part of EDI)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_config_e">
+       <attribute name="title">
+        <string>E-Field</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="hzl_E_comments">
+            <item>
+             <widget class="QLabel" name="E_comments">
+              <property name="text">
+               <string>This interface accepts positive numbers only; South and West will be automatically mapped negative</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_E_sensortypes">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>E sensors</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_exNS"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_exEW"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_eyNS"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_eyEW"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_ex_down_up"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_ey_down_up"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_13"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_config_h">
+       <attribute name="title">
+        <string>H-Field</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="hzl_H_comments"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_H_sensortypes">
+            <item>
+             <widget class="QLabel" name="h_sensors_label">
+              <property name="text">
+               <string>H Sensors</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hxNS"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hxEW"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hyNS"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hyEW"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hzNS"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hzEW"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hx_down_up"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hy_down_up"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hzl_hz_down_up"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close|QDialogButtonBox::Save</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="JobTablepushButton">
+      <property name="text">
+       <string>JobTable</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1136</width>
+     <height>34</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/pic/Button_Checked.png</file>
+        <file>resources/pic/Button_Clear.png</file>
+        <file>resources/pic/Button_Disable.png</file>
+        <file>resources/pic/Button_Edit.png</file>
+        <file>resources/pic/Button_ElectrodeArrangement_Complex.png</file>
+        <file>resources/pic/Button_ElectrodeArrangement_Free.png</file>
+        <file>resources/pic/Button_ElectrodeArrangement_RotatingDipole.png</file>
+        <file>resources/pic/Button_ElectrodeArrangement_Simple.png</file>
+        <file>resources/pic/Button_Enab.png</file>
+        <file>resources/pic/Button_Move1Down.png</file>
+        <file>resources/pic/Button_Move1Up.png</file>
+        <file>resources/pic/Button_New.png</file>
+        <file>resources/pic/Button_NOK.png</file>
+        <file>resources/pic/Button_OK.png</file>
+        <file>resources/pic/Button_PolEastWedt.png</file>
+        <file>resources/pic/Button_PolNorthSouth.png</file>
+        <file>resources/pic/Button_PolRotating.png</file>
+        <file>resources/pic/Button_Reset_Error.png</file>
+        <file>resources/pic/Button_ShiftDown.png</file>
+        <file>resources/pic/Button_ShiftDownDown.png</file>
+        <file>resources/pic/Button_ShiftLeft.png</file>
+        <file>resources/pic/Button_ShiftLeftLeft.png</file>
+        <file>resources/pic/Button_ShiftLeftSmall.png</file>
+        <file>resources/pic/Button_ShiftRight.png</file>
+        <file>resources/pic/Button_ShiftRightRight.png</file>
+        <file>resources/pic/Button_ShiftUp.png</file>
+        <file>resources/pic/Button_ShiftUpUp.png</file>
+        <file>resources/pic/Button_ShowXML.png</file>
+        <file>resources/pic/Button_StartNow.png</file>
+        <file>resources/pic/Button_Stop.png</file>
+        <file>resources/pic/Button_StopAllJobs.png</file>
+        <file>resources/pic/Button_StopCurrentJob.png</file>
+        <file>resources/pic/Button_Submit.png</file>
+        <file>resources/pic/Button_UnChecked.png</file>
+        <file>resources/pic/Locked.png</file>
+        <file>resources/pic/Logo-metronix-geophysics_4c.png</file>
+        <file>resources/pic/Unlocked.png</file>
+    </qresource>
+</RCC>

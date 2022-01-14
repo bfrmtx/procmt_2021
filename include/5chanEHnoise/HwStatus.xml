@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HwStatus Version="2.0" Name="ADU-08e" GMS="8" Type="1">
+  <GPS>
+    <Date>2017-02-06</Date>
+    <DynamicMode>0</DynamicMode>
+    <Height>9890</Height>
+    <Latitude>188057874</Latitude>
+    <Longitude>37758774</Longitude>
+    <NumSats>6</NumSats>
+    <NumSatsBeiDou>0</NumSatsBeiDou>
+    <NumSatsGPS>13</NumSatsGPS>
+    <NumSatsGalileo>0</NumSatsGalileo>
+    <NumSatsGlonass>9</NumSatsGlonass>
+    <SyncState>4</SyncState>
+    <Time>15:46:11</Time>
+  </GPS>
+  <Recording>
+    <BadDataDetected>1</BadDataDetected>
+    <FlushActive>0</FlushActive>
+    <NumMeasActive>0</NumMeasActive>
+    <NumMeasRemaining>0</NumMeasRemaining>
+    <SDRAMActFill>0</SDRAMActFill>
+    <SDRAMFlushFill>0</SDRAMFlushFill>
+    <SDRAMMaxFill>0</SDRAMMaxFill>
+    <SDRAMOvlFill>0</SDRAMOvlFill>
+    <SDRAMStartStopFill>0</SDRAMStartStopFill>
+    <SecondsToFinishAll>0</SecondsToFinishAll>
+    <SecondsToNextJob>-1</SecondsToNextJob>
+    <SelftestActive>0</SelftestActive>
+  </Recording>
+  <System>
+    <BattState>2</BattState>
+    <BiosDate>2017-02-06</BiosDate>
+    <BiosTime>15:46:12</BiosTime>
+    <CurrBatt1>141</CurrBatt1>
+    <CurrBatt2>0</CurrBatt2>
+    <DiskFreeSpace>3630640</DiskFreeSpace>
+    <DiskFreeSpaceDB>433079</DiskFreeSpaceDB>
+    <DiskFreeSpaceUSB1>N/A</DiskFreeSpaceUSB1>
+    <DiskFreeSpaceUSB2>N/A</DiskFreeSpaceUSB2>
+    <DiskSize>7508824</DiskSize>
+    <DiskSizeDB>464580</DiskSizeDB>
+    <DiskSizeUSB1>N/A</DiskSizeUSB1>
+    <DiskSizeUSB2>N/A</DiskSizeUSB2>
+    <FullySynced>1</FullySynced>
+    <LANIP>192.168.0.19</LANIP>
+    <LANNetmask>255.255.255.0</LANNetmask>
+    <TSCopyPercentComplete>-1.00</TSCopyPercentComplete>
+    <Temperature>49</Temperature>
+    <Voltage>125</Voltage>
+    <WLANIP>N/A</WLANIP>
+    <WLANNetmask>N/A</WLANNetmask>
+  </System>
+</HwStatus>
+

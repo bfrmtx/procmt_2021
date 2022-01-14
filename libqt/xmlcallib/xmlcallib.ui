@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>xmlcallib</class>
+ <widget class="QMainWindow" name="xmlcallib">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1165</width>
+    <height>838</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>xmlcallib</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab_ampl">
+       <attribute name="title">
+        <string>Amplitude</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="plots_ampl">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="right_ampl">
+          <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="text">
+             <string>stack</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_un">
+            <property name="text">
+             <string>un-normalize</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_On">
+            <property name="text">
+             <string>Chopper On</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_Off">
+            <property name="text">
+             <string>Chopper Off</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_Both">
+            <property name="text">
+             <string>Chopper OnOff</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_show_master_cal">
+            <property name="text">
+             <string>show master</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_ipl">
+            <property name="text">
+             <string>show interpol.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_theo">
+            <property name="text">
+             <string>show theo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_map_to_zero">
+            <property name="text">
+             <string>map to zero</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_rescale">
+            <property name="text">
+             <string>rescale</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_phase">
+       <attribute name="title">
+        <string>Phase</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="plots_phase">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="right_phase">
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_On_2">
+            <property name="text">
+             <string>Chopper On</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_Off_2">
+            <property name="text">
+             <string>Chopper Off</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_Chopper_Both_2">
+            <property name="text">
+             <string>Chopper OnOff</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_show_master_cal_2">
+            <property name="text">
+             <string>show master</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_ipl_2">
+            <property name="text">
+             <string>show interpol.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_theo_2">
+            <property name="text">
+             <string>show theo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_map_to_zero_2">
+            <property name="text">
+             <string>map to zero</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_rescale_2">
+            <property name="text">
+             <string>rescale</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="x_y_label">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1165</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Fi&amp;le</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionExtendFull"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuExport">
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>E&amp;xport</string>
+    </property>
+    <addaction name="actionMTX_Format"/>
+    <addaction name="actionXML_Format"/>
+    <addaction name="actionCSV_Format"/>
+    <addaction name="actionJSON_Format"/>
+   </widget>
+   <widget class="QMenu" name="menuMaster">
+    <property name="title">
+     <string>Master</string>
+    </property>
+    <addaction name="actionload_master"/>
+   </widget>
+   <widget class="QMenu" name="menuFunc">
+    <property name="title">
+     <string>Func</string>
+    </property>
+    <addaction name="actiondiv_Gain_1"/>
+    <addaction name="actiondiv_Gain_2"/>
+    <addaction name="actionManual_Scales"/>
+    <addaction name="separator"/>
+    <addaction name="actionremove_fixed_2x_Gain"/>
+    <addaction name="actionremove_DIV_8"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuExport"/>
+   <addaction name="menuMaster"/>
+   <addaction name="menuFunc"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionMTX_Format">
+   <property name="text">
+    <string>&amp;MTX Format</string>
+   </property>
+  </action>
+  <action name="actionXML_Format">
+   <property name="text">
+    <string>&amp;XML Format</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionExtendFull">
+   <property name="text">
+    <string>&amp;ExtendFull</string>
+   </property>
+  </action>
+  <action name="actionstack">
+   <property name="text">
+    <string>stack</string>
+   </property>
+  </action>
+  <action name="actionCSV_Format">
+   <property name="text">
+    <string>CSV Format</string>
+   </property>
+  </action>
+  <action name="actionload_master">
+   <property name="text">
+    <string>load master</string>
+   </property>
+  </action>
+  <action name="actiondiv_Gain_1">
+   <property name="text">
+    <string>div Gain 1</string>
+   </property>
+  </action>
+  <action name="actiondiv_Gain_2">
+   <property name="text">
+    <string>div Gain 2</string>
+   </property>
+  </action>
+  <action name="actionManual_Scales">
+   <property name="text">
+    <string>Manual Scales</string>
+   </property>
+  </action>
+  <action name="actionremove_fixed_2x_Gain">
+   <property name="text">
+    <string>remove fixed 2x Gain</string>
+   </property>
+  </action>
+  <action name="actionremove_DIV_8">
+   <property name="text">
+    <string>remove DIV-8</string>
+   </property>
+  </action>
+  <action name="actionJSON_Format">
+   <property name="text">
+    <string>JSON Format</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

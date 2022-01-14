@@ -1,0 +1,1461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ediplotter</class>
+ <widget class="QMainWindow" name="ediplotter">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1065</width>
+    <height>1185</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ediplotter</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout" rowstretch="10,1" columnstretch="0,0,0,0">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QFrame" name="frame_center">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QTabWidget" name="tab_widget">
+           <property name="currentIndex">
+            <number>2</number>
+           </property>
+           <widget class="DualPlot" name="tab_xyyx">
+            <attribute name="title">
+             <string>XY - YX</string>
+            </attribute>
+           </widget>
+           <widget class="DualPlot" name="tab_xxyy">
+            <attribute name="title">
+             <string>XX - YY</string>
+            </attribute>
+           </widget>
+           <widget class="QCustomPlot" name="tab_coh">
+            <attribute name="title">
+             <string>Coh</string>
+            </attribute>
+           </widget>
+           <widget class="QCustomPlot" name="tab_tipper">
+            <attribute name="title">
+             <string>Tipper</string>
+            </attribute>
+           </widget>
+           <widget class="QCustomPlot" name="tab_anisotropy">
+            <attribute name="title">
+             <string>Anisotropy</string>
+            </attribute>
+           </widget>
+           <widget class="QCustomPlot" name="tab_strike">
+            <attribute name="title">
+             <string>Strike</string>
+            </attribute>
+           </widget>
+           <widget class="QCustomPlot" name="tab_rho_z">
+            <attribute name="title">
+             <string>rho* - z*</string>
+            </attribute>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <widget class="QFrame" name="frame_right">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="grid_layout_right">
+           <property name="horizontalSpacing">
+            <number>2</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>4</number>
+           </property>
+           <item row="6" column="1">
+            <widget class="QPushButton" name="button_actions_rotate">
+             <property name="text">
+              <string>rotate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="button_actions_reading_z">
+             <property name="text">
+              <string>READING &gt;Z</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <widget class="QPushButton" name="button_actions_mouse_delete">
+             <property name="text">
+              <string>delete</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_mouse_mode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QToolButton" name="button_sidemenu">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="1">
+            <spacer name="spacer_menu_right_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="button_actions_openmode_replace">
+             <property name="text">
+              <string>Replace</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_open_mode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="button_actions_openmode_overlay">
+             <property name="text">
+              <string>Overlay</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_open_mode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="button_actions_openmode_add">
+             <property name="text">
+              <string>Add</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_open_mode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="11" column="2">
+            <spacer name="spacer_menu_right_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="11" column="0">
+            <spacer name="spacer_menu_right_1">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="5" column="0" colspan="3">
+            <widget class="Line" name="line_right_1">
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="3">
+            <widget class="QLabel" name="label_menu_right_open_mode">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Open Mode:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QPushButton" name="button_actions_swift">
+             <property name="text">
+              <string>swift</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QPushButton" name="button_actions_toggle_errorbars">
+             <property name="text">
+              <string>error bars</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0" colspan="3">
+            <widget class="QLabel" name="label_menu_right_open_mode_2">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Mouse Mode:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QPushButton" name="button_actions_toggle_map_phase">
+             <property name="text">
+              <string>map phase</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="1">
+            <widget class="QPushButton" name="button_actions_mouse_merge">
+             <property name="text">
+              <string>merge</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_mouse_mode</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QDial" name="dial_active_plot"/>
+           </item>
+           <item row="14" column="1">
+            <widget class="QLabel" name="label_line_plot">
+             <property name="text">
+              <string>line: 0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="2">
+       <widget class="QFrame" name="frame_left">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="grid_layout_left">
+           <property name="horizontalSpacing">
+            <number>2</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>4</number>
+           </property>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="button_rho_5">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>1 - 1000</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>1000.000000000000000</double>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_b</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="button_rho_3">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>1 - 10</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_b</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="21" column="1">
+            <widget class="QPushButton" name="button_phi_7">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>-180 - 180</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>-180.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>180.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="12" column="1">
+            <widget class="QPushButton" name="button_rho_12">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>1000 - 1E6</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_e</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>1000.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="0">
+            <spacer name="spacer_menu_left_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="0" colspan="3">
+            <widget class="QLabel" name="label_menu_left_rho">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Rho Range</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="2">
+            <spacer name="spacer_menu_left_1">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="11" column="1">
+            <widget class="QPushButton" name="button_rho_11">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>100 - 1E5</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_d</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>100000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="button_rho_2">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>0.1 - 100</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_a</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QPushButton" name="button_rho_6">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>10 - 100 TEST</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_c</string>
+             </property>
+            </widget>
+           </item>
+           <item row="23" column="1">
+            <spacer name="spacer_menu_left_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="20" column="1">
+            <widget class="QPushButton" name="button_phi_6">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>30 - 60</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>30.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>60.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QPushButton" name="button_rho_7">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>10 - 1000</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_c</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>1000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="19" column="1">
+            <widget class="QPushButton" name="button_phi_5">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>20 - 70</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>20.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>70.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="15" column="1">
+            <widget class="QPushButton" name="button_phi_1">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>0 - 90</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>90.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QPushButton" name="button_rho_10">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>100 - 1E4</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_d</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>10000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="0" colspan="3">
+            <widget class="QLabel" name="label_menu_left_phi">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Phi Range</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="22" column="1">
+            <widget class="QPushButton" name="button_phi_fit">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <italic>true</italic>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>FIT</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="button_rho_1">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>0.1 - 10</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_a</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="1">
+            <widget class="QPushButton" name="button_phi_2">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>0 - 60</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>60.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="18" column="1">
+            <widget class="QPushButton" name="button_phi_4">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>20 - 90</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>20.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>90.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="17" column="1">
+            <widget class="QPushButton" name="button_phi_3">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>10 - 80</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="min" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>80.000000000000000</double>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">button_group_phi</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QPushButton" name="button_rho_8">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>10 - 1E4</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_c</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>10000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="button_rho_4">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>1 - 100</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_b</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QPushButton" name="button_rho_9">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>100 - 1000</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_d</string>
+             </property>
+             <property name="min" stdset="0">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="max" stdset="0">
+              <double>1000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QPushButton" name="button_rho_fit">
+             <property name="font">
+              <font>
+               <italic>true</italic>
+              </font>
+             </property>
+             <property name="text">
+              <string>FIT</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>rho_f</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QFrame" name="frame_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_x_axis">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_y_axis">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="3" rowspan="2">
+       <widget class="QFrame" name="frame_optional">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="grid_layout_optional">
+           <property name="leftMargin">
+            <number>6</number>
+           </property>
+           <property name="rightMargin">
+            <number>6</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_menu_right_open_mode_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Current Plots</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="PlotOptions" name="widget_plot_options" native="true"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1065</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="action_open"/>
+    <addaction name="separator"/>
+    <addaction name="action_save_overwrite"/>
+    <addaction name="action_save_edited"/>
+    <addaction name="action_save_merged"/>
+    <addaction name="action_export_ascii"/>
+    <addaction name="action_export_gmt_map"/>
+    <addaction name="separator"/>
+    <addaction name="action_print"/>
+    <addaction name="action_export_svg"/>
+    <addaction name="separator"/>
+    <addaction name="action_quit"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QToolBar" name="toolbar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_open">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="action_save_overwrite">
+   <property name="text">
+    <string>Save All - Overwrite</string>
+   </property>
+  </action>
+  <action name="action_save_edited">
+   <property name="text">
+    <string>Save All - Edited</string>
+   </property>
+  </action>
+  <action name="action_save_merged">
+   <property name="text">
+    <string>Save Merged</string>
+   </property>
+  </action>
+  <action name="action_export_ascii">
+   <property name="text">
+    <string>Export to ASCII</string>
+   </property>
+  </action>
+  <action name="action_export_gmt_map">
+   <property name="text">
+    <string>Export to GMT MAP</string>
+   </property>
+  </action>
+  <action name="action_print">
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="action_export_svg">
+   <property name="text">
+    <string>Export SVG</string>
+   </property>
+  </action>
+  <action name="action_quit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="action_show_dialog">
+   <property name="text">
+    <string>Show Dialog...</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DualPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">dualplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlotOptions</class>
+   <extends>QWidget</extends>
+   <header location="global">plotoptions.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>button_phi_1</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1062</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_2</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>49</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1062</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_3</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>467</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1063</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_4</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1061</x>
+     <y>527</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_5</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1057</x>
+     <y>561</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_6</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>53</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1062</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_phi_7</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>phi_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>567</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1061</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_1</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1059</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_2</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1064</x>
+     <y>160</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_3</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1057</x>
+     <y>230</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_4</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>126</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_5</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_6</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>56</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_7</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>71</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_8</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_9</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_10</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_11</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>47</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_rho_12</sender>
+   <signal>clicked()</signal>
+   <receiver>ediplotter</receiver>
+   <slot>rho_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>87</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>phi_button_clicked()</slot>
+  <slot>rho_button_clicked()</slot>
+ </slots>
+ <buttongroups>
+  <buttongroup name="button_group_phi"/>
+  <buttongroup name="button_group_mouse_mode"/>
+  <buttongroup name="button_group_open_mode"/>
+ </buttongroups>
+</ui>

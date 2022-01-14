@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="tex_cross_small.png">default_assets/textures/cross_small.png</file>
+        <file alias="tex_dot_small.png">default_assets/textures/dot_small.png</file>
+        <file alias="/plot/tex_frag.glsl">default_assets/shaders/plot_shaders/plot_tex_fragment.glsl</file>
+        <file alias="/plot/tex_geom.glsl">default_assets/shaders/plot_shaders/plot_tex_geometry.glsl</file>
+        <file alias="/plot/tex_vert.glsl">default_assets/shaders/plot_shaders/plot_tex_vertex.glsl</file>
+        <file alias="/plot/line_frag.glsl">default_assets/shaders/plot_shaders/plot_line_frag.glsl</file>
+        <file alias="/plot/line_vert.glsl">default_assets/shaders/plot_shaders/plot_line_vert.glsl</file>
+        <file alias="/plot/performance_frag.glsl">default_assets/shaders/plot_shaders/plot_perf_fragment.glsl</file>
+        <file alias="/plot/performance_vert.glsl">default_assets/shaders/plot_shaders/plot_perf_vertex.glsl</file>
+    </qresource>
+</RCC>

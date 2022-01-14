@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<measurement>
+  <recording>
+    <start_time>09:00:00</start_time>
+    <stop_time>10:30:00</stop_time>
+    <start_date>2016-09-14</start_date>
+    <stop_date>2016-09-14</stop_date>
+    <target_directory>/mtdata/data</target_directory>
+    <CyclicEvent>0</CyclicEvent>
+    <Cycle>1</Cycle>
+    <Granularity>days</Granularity>
+    <input>
+      <ADU07Hardware>
+        <global_config>
+          <meas_channels>5</meas_channels>
+          <sample_freq>1024</sample_freq>
+          <buffer>256</buffer>
+          <start_stop_mode>0</start_stop_mode>
+          <calon>0</calon>
+          <atton>0</atton>
+          <calref>0</calref>
+          <calint>0</calint>
+          <calfreq>16384.0</calfreq>
+          <short_circuit>0</short_circuit>
+          <decimation>0</decimation>
+          <flush_fill>64</flush_fill>
+          <ovl_fill>1024</ovl_fill>
+          <start_stop_fill>512</start_stop_fill>
+        </global_config>
+        <channel_config>
+          <channel id="0">
+            <gain_stage1>1</gain_stage1>
+            <gain_stage2>4</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>ADU07_LF_RF_4</filter_type>
+            <hchopper>0</hchopper>
+            <echopper>0</echopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>0</input_divider>
+          </channel>
+          <channel id="1">
+            <gain_stage1>1</gain_stage1>
+            <gain_stage2>4</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>ADU07_LF_RF_4</filter_type>
+            <hchopper>0</hchopper>
+            <echopper>0</echopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>0</input_divider>
+          </channel>
+          <channel id="2">
+            <gain_stage1>1</gain_stage1>
+            <gain_stage2>1</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>ADU07_LF_RF_4</filter_type>
+            <hchopper>0</hchopper>
+            <echopper>0</echopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+          <channel id="3">
+            <gain_stage1>1</gain_stage1>
+            <gain_stage2>1</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>ADU07_LF_RF_4</filter_type>
+            <hchopper>0</hchopper>
+            <echopper>0</echopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+          <channel id="4">
+            <gain_stage1>1</gain_stage1>
+            <gain_stage2>1</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>ADU07_LF_RF_4</filter_type>
+            <hchopper>0</hchopper>
+            <echopper>0</echopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+        </channel_config>
+      </ADU07Hardware>
+      <TXM22Hardware>
+        <Waveform>
+          <Name>DefaultRect</Name>
+          <MaxAmplitude>2</MaxAmplitude>
+          <NumSamplPoints>0</NumSamplPoints>
+          <SamplePointList/>
+        </Waveform>
+        <Sequence>
+          <Name>Template</Name>
+          <ActivateRotDipole>0</ActivateRotDipole>
+          <ActivateAltDipole>1</ActivateAltDipole>
+          <DipoleRotFreq>1</DipoleRotFreq>
+          <TransmissionList>
+            <Cycle id="0">
+              <BaseFrequency>1</BaseFrequency>
+              <Iterations>5400</Iterations>
+              <Polarisation dipole="0">0</Polarisation>
+            </Cycle>
+          </TransmissionList>
+        </Sequence>
+        <ElectrodePositions>
+          <E1>
+            <Position id="0">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+            <Position id="1">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+          </E1>
+          <E2>
+            <Position id="0">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+            <Position id="1">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+          </E2>
+          <E3>
+            <Position id="0">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+            <Position id="1">
+              <Longitude>0</Longitude>
+              <Latitude>0</Latitude>
+              <Elevation>0</Elevation>
+            </Position>
+          </E3>
+        </ElectrodePositions>
+      </TXM22Hardware>
+    </input>
+    <output>
+      <!-- Processing Tree 1 -->
+      <ProcessingTree1>
+        <configuration>
+          <processings>mt_auto, mtx_smooth</processings>
+        </configuration>
+        <output>
+          <DigitalFilter>
+            <configuration>
+              <filter_type>mtx32x</filter_type>
+              <filter_factor/>
+              <filter_length/>
+            </configuration>
+            <output>
+              <ATSWriter>
+                <configuration>
+                  <!-- x1,y1 = north, east are positive count, x2, y2 south, west are negative count like in UTM-->
+                  <information>
+                    <ADUSerials>three digits</ADUSerials>
+                    <ChannelLetters>A, B, C, D, E, F,</ChannelLetters>
+                    <ChannelTypes>A = Ex, B = Ey, X = Hx, Y = Hy, Z = Hz</ChannelTypes>
+                    <Runs>two digits</Runs>
+                    <Bands>HF, LF1, LF2, LF3, LF4, LF5, FreeFreq</Bands>
+                    <BandIndices>A, B, C, D, E, G, F</BandIndices>
+                    <FileNames>nnn_ADU c_Channel rr_Run t_Channel_Type b_BandIndex .ats</FileNames>
+                  </information>
+                  <channel id="0">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Ex</channel_type>
+                    <sensor_sernum>0</sensor_sernum>
+                    <sensor_type>EFP06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>-50</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>50</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="1">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Ey</channel_type>
+                    <sensor_sernum>0</sensor_sernum>
+                    <sensor_type>EFP06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>-50</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>50</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="2">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hx</channel_type>
+                    <sensor_sernum>12</sensor_sernum>
+                    <sensor_type>MFS06e</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="3">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hy</channel_type>
+                    <sensor_sernum>15</sensor_sernum>
+                    <sensor_type>MFS06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="4">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hz</channel_type>
+                    <sensor_sernum>19</sensor_sernum>
+                    <sensor_type>MFS06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <survey_header_name>pst</survey_header_name>
+                  <meas_type>MT</meas_type>
+                  <powerline_freq1>0</powerline_freq1>
+                  <powerline_freq2>0</powerline_freq2>
+                </configuration>
+                <comments>
+                  <site_name>Rhoden Test</site_name>
+                  <client>Tübitak (Türkiye Bilimsel ve Teknolojik Araştırma Kurumu)</client>
+                  <contractor>mtx</contractor>
+                  <area>摩周湖,北海道,日本国</area>
+                  <survey_id>HOK-VULC</survey_id>
+                  <operator>Dr. Bernhard Friedrichs</operator>
+                  <weather>weather will be deleted</weather>
+                  <general_comments>no comments yet</general_comments>
+                </comments>
+                <!-- ats file name for each channel needed-->
+                <!-- delta_start needed for start time correction auch wenn mal unsere Uhr falsch gegangen ist..-->
+                <!-- delta_stop for systems where GPS sync is made a second time - like for submarine systems-->
+                <output_file>
+                  <line_num>12</line_num>
+                  <site_num>LOC 23-87 AFB</site_num>
+                  <run_num>0</run_num>
+                  <adu_ser_num>1</adu_ser_num>
+                  <band>LF1</band>
+                  <ats_file_size>534773760</ats_file_size>
+                </output_file>
+              </ATSWriter>
+            </output>
+          </DigitalFilter>
+        </output>
+      </ProcessingTree1>
+      <!-- Processing Tree 2 -->
+      <ProcessingTree2>
+        <configuration>
+          <processings>mt_auto, mtx_smooth</processings>
+        </configuration>
+        <output>
+          <SubJobManager>
+            <configuration>
+              <CyclicEvent>0</CyclicEvent>
+              <Cycle>60</Cycle>
+              <Granularity>seconds</Granularity>
+            </configuration>
+            <subjob>
+              <start_time>17:00:00</start_time>
+              <stop_time>18:00:00</stop_time>
+              <start_date>2015-10-22</start_date>
+              <stop_date>2015-10-22</stop_date>
+            </subjob>
+            <output>
+              <ATSWriter>
+                <configuration>
+                  <!-- x1,y1 = north, east are positive count, x2, y2 south, west are negative count like in UTM-->
+                  <information>
+                    <ADUSerials>three digits</ADUSerials>
+                    <ChannelLetters>A, B, C, D, E, F,</ChannelLetters>
+                    <ChannelTypes>A = Ex, B = Ey, X = Hx, Y = Hy, Z = Hz</ChannelTypes>
+                    <Runs>two digits</Runs>
+                    <Bands>HF, LF1, LF2, LF3, LF4, LF5, FreeFreq</Bands>
+                    <BandIndices>A, B, C, D, E, G, F</BandIndices>
+                    <FileNames>nnn_ADU c_Channel rr_Run t_Channel_Type b_BandIndex .ats</FileNames>
+                  </information>
+                  <channel id="0">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Ex</channel_type>
+                    <sensor_sernum>0</sensor_sernum>
+                    <sensor_type>EFP06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>-50</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>50</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="1">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Ey</channel_type>
+                    <sensor_sernum>0</sensor_sernum>
+                    <sensor_type>EFP06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>-50</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>50</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="2">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hx</channel_type>
+                    <sensor_sernum>12</sensor_sernum>
+                    <sensor_type>MFS06e</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="3">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hy</channel_type>
+                    <sensor_sernum>15</sensor_sernum>
+                    <sensor_type>MFS06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <channel id="4">
+                    <start_time>
+                    </start_time>
+                    <start_date>
+                    </start_date>
+                    <sample_freq>
+                    </sample_freq>
+                    <num_samples>
+                    </num_samples>
+                    <ats_data_file>
+                    </ats_data_file>
+                    <ts_lsb>
+                    </ts_lsb>
+                    <channel_type>Hz</channel_type>
+                    <sensor_sernum>19</sensor_sernum>
+                    <sensor_type>MFS06</sensor_type>
+                    <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                    <pos_x1>0</pos_x1>
+                    <pos_y1>0</pos_y1>
+                    <pos_z1>0</pos_z1>
+                    <pos_x2>0</pos_x2>
+                    <pos_y2>0</pos_y2>
+                    <pos_z2>0</pos_z2>
+                  </channel>
+                  <survey_header_name>pst</survey_header_name>
+                  <meas_type>MT</meas_type>
+                  <powerline_freq1>0</powerline_freq1>
+                  <powerline_freq2>0</powerline_freq2>
+                </configuration>
+                <comments>
+                  <site_name>Rhoden Test</site_name>
+                  <client>Tübitak (Türkiye Bilimsel ve Teknolojik Araştırma Kurumu)</client>
+                  <contractor>mtx</contractor>
+                  <area>摩周湖,北海道,日本国</area>
+                  <survey_id>HOK-VULC</survey_id>
+                  <operator>Dr. Bernhard Friedrichs</operator>
+                  <weather>weather will be deleted</weather>
+                  <general_comments>no comments yet</general_comments>
+                </comments>
+                <!-- ats file name for each channel needed-->
+                <!-- delta_start needed for start time correction auch wenn mal unsere Uhr falsch gegangen ist..-->
+                <!-- delta_stop for systems where GPS sync is made a second time - like for submarine systems-->
+                <output_file>
+                  <line_num>12</line_num>
+                  <site_num>LOC 23-87 AFB</site_num>
+                  <run_num>0</run_num>
+                  <adu_ser_num>1</adu_ser_num>
+                  <band>LF1</band>
+                  <ats_file_size>534773760</ats_file_size>
+                </output_file>
+              </ATSWriter>
+            </output>
+          </SubJobManager>
+        </output>
+      </ProcessingTree2>
+    </output>
+  </recording>
+  <calibration_channels>
+    <channel id="0">
+      <calibration />
+    </channel>
+    <channel id="1">
+      <calibration />
+    </channel>
+    <channel id="2">
+      <calibration />
+    </channel>
+    <channel id="3">
+      <calibration />
+    </channel>
+    <channel id="4">
+      <calibration />
+    </channel>
+  </calibration_channels>
+  <!-- here we put the XML calibration format of Metronix-->
+  <calibration_sensors>
+    <channel id="0">
+      <calibration />
+    </channel>
+    <channel id="1">
+      <calibration />
+    </channel>
+    <channel id="2">
+      <calibration />
+    </channel>
+    <channel id="3">
+      <calibration />
+    </channel>
+    <channel id="4">
+      <calibration />
+    </channel>
+  </calibration_sensors>
+  <coordinates_external>
+    <Latitude />
+    <Longitude />
+    <Elevation />
+    <Ellipsoid>WGS84</Ellipsoid>
+    <UTM_Northing />
+    <UTM_Easting />
+    <UTM_Zone_Number />
+    <UTM_Letter_Designator />
+    <UTM_Reference_Meridian />
+    <GK_Hochwert />
+    <GK_Rechtswert />
+    <GK_Reference_Median />
+    <!-- is -41.1 meters for Rehberg-Loccum for example-->
+    <GPS_Elevation_Correction />
+    <Inclination />
+    <Declination />
+    <Map />
+  </coordinates_external>
+</measurement>

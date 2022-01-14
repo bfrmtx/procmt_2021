@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>530</width>
+    <height>485</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Cal2SQL</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QListWidget" name="qlw"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="getcal_pushButton">
+      <property name="text">
+       <string>get calibration</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="plot_pushButton">
+      <property name="text">
+       <string>plot: </string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="plot_append_pushButton">
+      <property name="text">
+       <string>plot (append):</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>530</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuData">
+    <property name="title">
+     <string>Data</string>
+    </property>
+    <addaction name="actionOpenDataBase"/>
+    <addaction name="actionGetCalibration"/>
+    <addaction name="actionDumpAll"/>
+    <addaction name="actionOpenCreate"/>
+    <addaction name="actionStats"/>
+    <addaction name="actionWrite_LogFile"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuData"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionGetCalibration">
+   <property name="text">
+    <string>&amp;GetCalibration</string>
+   </property>
+  </action>
+  <action name="actionOpenDataBase">
+   <property name="text">
+    <string>&amp;OpenDataBase</string>
+   </property>
+  </action>
+  <action name="actionDumpAll">
+   <property name="text">
+    <string>&amp;DumpAll</string>
+   </property>
+  </action>
+  <action name="actionOpenCreate">
+   <property name="text">
+    <string>O&amp;penCreate</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionStats">
+   <property name="text">
+    <string>&amp;Stats</string>
+   </property>
+  </action>
+  <action name="actionWrite_LogFile">
+   <property name="text">
+    <string>&amp;Write LogFile</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

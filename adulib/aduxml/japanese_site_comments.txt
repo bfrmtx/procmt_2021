@@ -1,0 +1,22 @@
+Line: 山田町 - 盛岡市
+Site: 薬師岳
+Run: 32
+Header: ヘッダー
+Client: 東京大学地震研究所
+Contractor: 探索隊 (たんさく･たい)
+Area: 岩手県
+Survey ID: HONK
+Operator: 改作者
+Comment: 和文で書かれた
+
+
+<output_file>
+<!-- not used - also not in ats --->
+<line_num>山田町 - 盛岡市</line_num>
+<!-- not used - also not in ats --->
+<site_num/>
+<!-- run is USED for FILENAME --->
+<run_num/>
+<!-- dont touched --->
+<ats_file_size>534773760</ats_file_size>
+</output_file>

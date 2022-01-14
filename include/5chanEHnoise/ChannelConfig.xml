@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ChannelConfig Version="2.0" Name="ADU-08e" GMS="8" Type="1">
+  <!-- values from test / calibration measurement -->
+  <ATSWriterSettings>
+    <configuration>
+      <!-- x1,y1 = north, east are positive count, x2, y2 south, west are negative count like in UTM-->
+      <channel id="0">
+        <channel_type>Ex</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>EFP06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>-122</pos_x1>
+        <pos_y1>0.0</pos_y1>
+        <pos_z1>0.0</pos_z1>
+        <pos_x2>57.60</pos_x2>
+        <pos_y2>0.0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="1">
+        <channel_type>Ey</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>EFP06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0.0</pos_x1>
+        <pos_y1>-29.20</pos_y1>
+        <pos_z1>0.0</pos_z1>
+        <pos_x2>0.0</pos_x2>
+        <pos_y2>4.50</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="2">
+        <channel_type>Hx</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0.00</pos_x1>
+        <pos_y1>0.0</pos_y1>
+        <pos_z1>0.0</pos_z1>
+        <pos_x2>0.00</pos_x2>
+        <pos_y2>0.0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="3">
+        <channel_type>Hy</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0.0</pos_x1>
+        <pos_y1>0.00</pos_y1>
+        <pos_z1>0.0</pos_z1>
+        <pos_x2>0.0</pos_x2>
+        <pos_y2>0.00</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="4">
+        <channel_type>Hz</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0.0</pos_x1>
+        <pos_y1>0.0</pos_y1>
+        <pos_z1>0.00</pos_z1>
+        <pos_x2>0.0</pos_x2>
+        <pos_y2>0</pos_y2>
+        <pos_z2>0.00</pos_z2>
+      </channel>
+      <channel id="5">
+        <channel_type>Ex</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>EFP06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>-50</pos_x1>
+        <pos_y1>0</pos_y1>
+        <pos_z1>0</pos_z1>
+        <pos_x2>50</pos_x2>
+        <pos_y2>0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="6">
+        <channel_type>Ey</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>EFP06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0</pos_x1>
+        <pos_y1>-50</pos_y1>
+        <pos_z1>0</pos_z1>
+        <pos_x2>0</pos_x2>
+        <pos_y2>50</pos_y2>
+        <pos_z2>  0</pos_z2>
+      </channel>
+      <channel id="7">
+        <channel_type>Hx</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0</pos_x1>
+        <pos_y1>0</pos_y1>
+        <pos_z1>0</pos_z1>
+        <pos_x2>0</pos_x2>
+        <pos_y2>0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="8">
+        <channel_type>Hy</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0</pos_x1>
+        <pos_y1>0</pos_y1>
+        <pos_z1>0</pos_z1>
+        <pos_x2>0</pos_x2>
+        <pos_y2>0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <channel id="9">
+        <channel_type>Hz</channel_type>
+        <sensor_sernum>0</sensor_sernum>
+        <sensor_type>MFS06</sensor_type>
+        <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+        <pos_x1>0</pos_x1>
+        <pos_y1>0</pos_y1>
+        <pos_z1>0</pos_z1>
+        <pos_x2>0</pos_x2>
+        <pos_y2>0</pos_y2>
+        <pos_z2>0</pos_z2>
+      </channel>
+      <survey_header_name>ookura</survey_header_name>
+      <meas_type>MT</meas_type>
+      <powerline_freq1>0</powerline_freq1>
+      <powerline_freq2>0</powerline_freq2>
+    </configuration>
+    <comments>
+      <site_name/>
+      <client>gerd</client>
+      <contractor>gerd</contractor>
+      <area>ookura</area>
+      <survey_id>OKR</survey_id>
+      <operator>hase</operator>
+      <weather>cloudy</weather>
+      <general_comments/>
+    </comments>
+    <!-- ats file name for each channel needed-->
+    <!-- delta_start needed for start time correction auch wenn mal unsere Uhr falsch gegangen ist..-->
+    <!-- delta_stop for systems where GPS sync is made a second time - like for submarine systems-->
+    <output_file>
+      <line_num>01</line_num>
+      <site_num>001</site_num>
+      <run_num>01</run_num>
+      <adu_ser_num>1</adu_ser_num>
+      <band>LF1</band>
+      <ats_file_size>534773760</ats_file_size>
+    </output_file>
+  </ATSWriterSettings>
+  <AdbBoards>
+    <ci_date>2017-02-06</ci_date>
+    <ci_time>15:34:53</ci_time>
+    <Latitude>188058060</Latitude>
+    <Longitude>37758036</Longitude>
+    <channel id="0" Name="ADU-08-BB" GMS="8" Type="13">
+      <Settings input="0" input_circuitry="LF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>8</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="">
+        <gain_stage1>4</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+    </channel>
+    <channel id="1" Name="ADU-08-BB" GMS="8" Type="13">
+      <Settings input="0" input_circuitry="LF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="">
+        <gain_stage1>8</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>16</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+    </channel>
+    <channel id="2" Name="ADU-08-BB" GMS="8" Type="13">
+      <Settings input="0" input_circuitry="LF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type>LF_RF_1</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type>LF_RF_1</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+    </channel>
+    <channel id="3" Name="ADU-08-BB" GMS="8" Type="13">
+      <Settings input="0" input_circuitry="LF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type>LF_RF_1</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type>LF_RF_1</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>16</gain_stage1>
+        <gain_stage2>4</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+    </channel>
+    <channel id="4" Name="ADU-08-BB" GMS="8" Type="13">
+      <Settings input="0" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="0" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="LF" filter_type="LF_LP_4HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type>LF_RF_2</filter_type>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+      <Settings input="1" input_circuitry="HF" filter_type="HF_HP_500HZ">
+        <gain_stage1>1</gain_stage1>
+        <gain_stage2>1</gain_stage2>
+        <filter_type/>
+        <dac_val>0</dac_val>
+        <dac_on>0</dac_on>
+      </Settings>
+    </channel>
+  </AdbBoards>
+</ChannelConfig>
+

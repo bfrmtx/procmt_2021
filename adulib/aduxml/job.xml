@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<measurement>
+  <recording>
+    <start_date>2016-06-14</start_date>
+    <start_time>10:55:55</start_time>
+    <stop_date>2016-06-14</stop_date>
+    <stop_time>10:56:55</stop_time>
+    <target_directory>/mtdata/data</target_directory>
+    <CyclicEvent>0</CyclicEvent>
+    <Cycle>60</Cycle>
+    <Granularity>seconds</Granularity>
+    <input>
+      <ADU07Hardware>
+        <global_config>
+        </global_config>
+        <channel_config>
+          <channel id="0">
+            <gain_stage1>4</gain_stage1>
+            <gain_stage2>0</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>0</filter_type>
+            <echopper>0</echopper>
+            <hchopper>1</hchopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>0</input_divider>
+          </channel>
+          <channel id="1">
+            <gain_stage1>4</gain_stage1>
+            <gain_stage2>0</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>0</filter_type>
+            <echopper>0</echopper>
+            <hchopper>1</hchopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>0</input_divider>
+          </channel>
+          <channel id="2">
+            <gain_stage1>4</gain_stage1>
+            <gain_stage2>0</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>0</filter_type>
+            <echopper>0</echopper>
+            <hchopper>1</hchopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+          <channel id="3">
+            <gain_stage1>4</gain_stage1>
+            <gain_stage2>0</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>0</filter_type>
+            <echopper>0</echopper>
+            <hchopper>1</hchopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+          <channel id="4">
+            <gain_stage1>4</gain_stage1>
+            <gain_stage2>0</gain_stage2>
+            <ext_gain>1</ext_gain>
+            <filter_type>0</filter_type>
+            <echopper>0</echopper>
+            <hchopper>1</hchopper>
+            <dac_val>0</dac_val>
+            <dac_on>0</dac_on>
+            <input>0</input>
+            <input_divider>1</input_divider>
+          </channel>
+        </channel_config>
+      </ADU07Hardware>
+    </input>
+    <output>
+      <ProcessingTree1>
+        <configuration>
+          <processings>mt_auto</processings>
+        </configuration>
+        <output>
+          <ATSWriter>
+            <configuration>
+              <survey_header_name></survey_header_name>
+              <meas_type>MT</meas_type>
+              <powerline_freq1>0</powerline_freq1>
+              <powerline_freq2>0</powerline_freq2>
+              <channel id="0">
+                <start_time></start_time>
+                <start_date></start_date>
+                <sample_freq></sample_freq>
+                <num_samples></num_samples>
+                <ats_data_file></ats_data_file>
+                <channel_type>Ex</channel_type>
+                <sensor_sernum>0</sensor_sernum>
+                <sensor_type>EFP06</sensor_type>
+                <ts_lsb></ts_lsb>
+                <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                <pos_x1>0</pos_x1>
+                <pos_y1>0</pos_y1>
+                <pos_z1>0</pos_z1>
+                <pos_x2>0</pos_x2>
+                <pos_y2>0</pos_y2>
+                <pos_z2>0</pos_z2>
+              </channel>
+              <channel id="1">
+                <start_time></start_time>
+                <start_date></start_date>
+                <sample_freq></sample_freq>
+                <num_samples></num_samples>
+                <ats_data_file></ats_data_file>
+                <channel_type>Ey</channel_type>
+                <sensor_sernum>0</sensor_sernum>
+                <sensor_type>EFP06</sensor_type>
+                <ts_lsb></ts_lsb>
+                <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                <pos_x1>-156</pos_x1>
+                <pos_y1>0</pos_y1>
+                <pos_z1>0</pos_z1>
+                <pos_x2>256</pos_x2>
+                <pos_y2>0</pos_y2>
+                <pos_z2>0</pos_z2>
+              </channel>
+              <channel id="2">
+                <start_time></start_time>
+                <start_date></start_date>
+                <sample_freq></sample_freq>
+                <num_samples></num_samples>
+                <ats_data_file></ats_data_file>
+                <channel_type>Hx</channel_type>
+                <sensor_sernum>0</sensor_sernum>
+                <sensor_type>MFS06e</sensor_type>
+                <ts_lsb></ts_lsb>
+                <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                <pos_x1>0</pos_x1>
+                <pos_y1>0</pos_y1>
+                <pos_z1>0</pos_z1>
+                <pos_x2>0</pos_x2>
+                <pos_y2>0</pos_y2>
+                <pos_z2>0</pos_z2>
+              </channel>
+              <channel id="3">
+                <start_time></start_time>
+                <start_date></start_date>
+                <sample_freq></sample_freq>
+                <num_samples></num_samples>
+                <ats_data_file></ats_data_file>
+                <channel_type>Hy</channel_type>
+                <sensor_sernum>0</sensor_sernum>
+                <sensor_type>MFS06e</sensor_type>
+                <ts_lsb></ts_lsb>
+                <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                <pos_x1>0</pos_x1>
+                <pos_y1>0</pos_y1>
+                <pos_z1>0</pos_z1>
+                <pos_x2>0</pos_x2>
+                <pos_y2>0</pos_y2>
+                <pos_z2>0</pos_z2>
+              </channel>
+              <channel id="4">
+                <start_time></start_time>
+                <start_date></start_date>
+                <sample_freq></sample_freq>
+                <num_samples></num_samples>
+                <ats_data_file></ats_data_file>
+                <channel_type>Hz</channel_type>
+                <sensor_sernum>0</sensor_sernum>
+                <sensor_type>MFS06e</sensor_type>
+                <ts_lsb></ts_lsb>
+                <sensor_cal_file>SENSOR.CAL</sensor_cal_file>
+                <pos_x1>0</pos_x1>
+                <pos_y1>0</pos_y1>
+                <pos_z1>0</pos_z1>
+                <pos_x2>0</pos_x2>
+                <pos_y2>0</pos_y2>
+                <pos_z2>0</pos_z2>
+              </channel>
+            </configuration>
+            <comments>
+              <site_name></site_name>
+              <client></client>
+              <contractor></contractor>
+              <area></area>
+              <survey_id></survey_id>
+              <operator></operator>
+              <general_comments></general_comments>
+            </comments>
+            <output_file>
+              <line_num></line_num>
+              <site_num></site_num>
+              <run_num></run_num>
+              <adu_ser_num></adu_ser_num>
+              <ats_file_size></ats_file_size>
+            </output_file>
+          </ATSWriter>
+        </output>
+      </ProcessingTree1>
+    </output>
+  </recording>
+  <calibration_channels>
+    <channel id="0">
+      <calibration/>
+    </channel>
+    <channel id="1">
+      <calibration/>
+    </channel>
+    <channel id="2">
+      <calibration/>
+    </channel>
+    <channel id="3">
+      <calibration/>
+    </channel>
+    <channel id="4">
+      <calibration/>
+    </channel>
+  </calibration_channels>
+  <calibration_sensors>
+    <channel id="0">
+      <calibration/>
+    </channel>
+    <channel id="1">
+      <calibration/>
+    </channel>
+    <channel id="2">
+      <calibration/>
+    </channel>
+    <channel id="3">
+      <calibration/>
+    </channel>
+    <channel id="4">
+      <calibration/>
+    </channel>
+  </calibration_sensors>
+</measurement>
