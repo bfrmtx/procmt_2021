@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
@@ -16,24 +16,23 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include 
 
 set(SOURCES
   plotlib.cpp
-  )
+)
 
 set(HEADERS_INSTALL
-
   plotlib.h
- )
+)
 
 
-add_library(plotlib SHARED  ${SOURCES} ${HEADERS_INSTALL})
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
-target_link_libraries(plotlib
+target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
 PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE qcustomplot
 )
 
-target_compile_definitions(plotlib PRIVATE PLOTLIB_LIBRARY)
-install(TARGETS plotlib DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+target_compile_definitions(${PROJECT_NAME} PRIVATE PLOTLIB_LIBRARY)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)

@@ -138,6 +138,9 @@ void FloatBufferSet::draw(GLenum mode, GLint start, GLsizei count) {
                 // Qt 6
                 // auto funcs = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_1>();
                 auto funcs = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_1>();
+                if (!funcs) {
+                    qFatal("Could not obtain required OpenGL context version");
+                }
                 if(has_break_index) {
                     funcs->glEnable(GL_PRIMITIVE_RESTART);
                     funcs->glPrimitiveRestartIndex(GLuint(break_index));

@@ -64,11 +64,13 @@
 #include <QMap>
 #include <QStandardPaths>
 
-// #ifdef use_qustomplot_spcplotter
-// #include "spectra_plotter.h"
-// #else
-#include "spectra_plotter_pro.h"
-// #endif
+#include "qcustomplot.h"
+
+#ifdef QCUSTOMPLOT_USE_OPENGL
+ #include "spectra_plotter_pro.h"
+#else
+ #include "spectra_plotter.h"
+#endif
 #include "lineedit_file.h"
 
 #include "static_plot.h"

@@ -31,11 +31,6 @@
 #ifndef ITERATOR_TEMPLATES
 #define ITERATOR_TEMPLATES
 
-
-#ifdef _msvc
-    #define _USE_MATH_DEFINES
-#endif
-
 #include <numeric>
 #include <valarray>
 #include <cmath>

@@ -58,9 +58,6 @@
 #include "GlobalIncludes.h"
 
 
-#ifdef _msvc
-#define _USE_MATH_DEFINES
-#endif
 /**
  * Version Number
  */

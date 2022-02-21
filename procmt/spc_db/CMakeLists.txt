@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 COMPONENTS Core Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql REQUIRED)
@@ -19,21 +19,21 @@ ${CMAKE_SOURCE_DIR}/include
 ${CMAKE_SOURCE_DIR}/base/prc_com
 ${CMAKE_SOURCE_DIR}/procmt/mt_data
 ${CMAKE_SOURCE_DIR}/libvector/math_vector
-
 )
 
 set(SOURCES
   spc_db.cpp
-  )
+)
 
 set(HEADERS_INSTALL
   spc_db.h
- )
+)
 
-add_library(spc_db STATIC ${SOURCES} ${HEADERS_INSTALL} )
-target_include_directories(spc_db PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# want STATIC
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS_INSTALL} )
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(spc_db
+target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE prc_com
@@ -42,9 +42,9 @@ PRIVATE math_vector
 
 )
 
-target_compile_definitions(spc_db PRIVATE SPC_DB_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SPC_DB_LIBRARY)
 
-install(TARGETS spc_db DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 

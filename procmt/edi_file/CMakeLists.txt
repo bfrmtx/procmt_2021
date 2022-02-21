@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 COMPONENTS Core Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql REQUIRED)
@@ -38,16 +38,17 @@ ${CMAKE_SOURCE_DIR}/libvector/math_vector
 )
 set(SOURCES
   edi_file.cpp
-  )
+)
 
 set(HEADERS_INSTALL
   edi_file.h
- )
+)
 
-add_library(edi_file SHARED ${SOURCES} ${HEADERS_INSTALL} )
-target_include_directories(edi_file PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL} )
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(edi_file
+target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE prc_com
@@ -75,9 +76,9 @@ PRIVATE geocoordinates
 
 )
 
-target_compile_definitions(edi_file PRIVATE EDI_FILE_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE EDI_FILE_LIBRARY)
 
-install(TARGETS edi_file DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 

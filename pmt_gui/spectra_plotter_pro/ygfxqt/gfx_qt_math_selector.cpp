@@ -163,6 +163,7 @@ void YMathWidgetSelectorEllipse::handle_key_press_event(QKeyEvent *event) {
 void YMathWidgetSelectorEllipse::handle_mouse_wheel_event(QWheelEvent *event) {
     YMathWidgetSelector::handle_mouse_wheel_event(event);
     // Qt6
+    //if(event->delta() > 0) {
     if(event->angleDelta().y() > 0) {
         radius = std::max(radius_min, radius - 2);
     } else {

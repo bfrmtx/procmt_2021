@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
@@ -27,17 +27,17 @@ ${CMAKE_SOURCE_DIR}/libvector/math_vector
 
 set(SOURCES
   xy_regression_plot.cpp
-  )
+)
 
 set(HEADERS_INSTALL
 
   xy_regression_plot.h
- )
+)
 
+# want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
-add_library(xy_regression_plot SHARED  ${SOURCES} ${HEADERS_INSTALL})
-
-target_link_libraries(xy_regression_plot PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
@@ -48,7 +48,7 @@ PRIVATE boost_student
 PRIVATE math_vector
 )
 
-target_compile_definitions(xy_regression_plot PRIVATE XY_REGRESSION_PLOT_LIBRARY)
-install(TARGETS xy_regression_plot DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+target_compile_definitions(${PROJECT_NAME} PRIVATE XY_REGRESSION_PLOT_LIBRARY)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)

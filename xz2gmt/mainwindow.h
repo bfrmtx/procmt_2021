@@ -25,9 +25,6 @@
 #include <cfloat>
 #include <algorithm>
 #include <functional>
-#ifdef _msvc
-    #define _USE_MATH_DEFINES
-#endif
 
 
 namespace xz2gmt {

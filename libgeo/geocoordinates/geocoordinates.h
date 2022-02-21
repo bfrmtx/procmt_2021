@@ -31,9 +31,6 @@
 #define GEOCOORDINATES_H
 
 
-#ifdef _msvc
-    #define _USE_MATH_DEFINES
-#endif
 
 // MSVC only supports c++11 behaviour for fabs() with integral types from 2015 upwards
 //  otherwise you'll get a compilation error when using something like "fabs(-1);"

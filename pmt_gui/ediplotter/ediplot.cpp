@@ -103,7 +103,7 @@ void EdiPlot::slot_line_for_crosshair(const int graph_number)
     if (this->graph_number_chc < 0) this->graph_number_chc = 0;
 }
 
-void EdiPlot::handle_readout(int x, int y) {
+void EdiPlot::handle_readout(double x, double y) {
     Q_UNUSED(y);
     double xval = xAxis->pixelToCoord(x);
 
@@ -178,14 +178,14 @@ void EdiPlot::set_cursor_coords(double x, double y) {
 
 void EdiPlot::mousePressEvent(QMouseEvent * event) {
     if(event->button() == Qt::LeftButton) {
-        handle_readout(event->x(), event->y());
+        handle_readout(event->position().x(), event->position().y());
         layer(layer_selection)->replot();
     }
 }
 
 void EdiPlot::mouseMoveEvent(QMouseEvent * event) {
     if(event->buttons().testFlag(Qt::LeftButton)) {
-        handle_readout(event->x(), event->y());
+        handle_readout(event->position().x(), event->position().y());
         layer(layer_selection)->replot();
     }
 }

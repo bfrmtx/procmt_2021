@@ -2117,9 +2117,10 @@ XMLUnknown* XMLDocument::NewUnknown( const char* str )
 
 static FILE* callfopen( const QString filepath, const char* mode )
 {
+    // Windows special characteres UTF-8 ANSI
     TIXMLASSERT( filepath );
     TIXMLASSERT( mode );
-#if defined(_MSC_VER) && (_MSC_VER >= 1400 ) && (!defined WINCE)
+#if defined  (_MSC_VER) && (_MSC_VER >= 1400 ) && (!defined WINCE) || (	__MINGW64__)
     FILE* fp = 0;
     errno_t err;
     if (mode == "rb") err = _wfopen_s( &fp, filepath.toStdWString().c_str(), L"rb" );

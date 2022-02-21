@@ -70,7 +70,7 @@ public slots:
     void slot_line_for_crosshair(const int graph_number);
 
 private:
-    void handle_readout(int x, int y);
+    void handle_readout(double x, double y);
     void set_cursor_coords(double x, double y);
 
 protected:

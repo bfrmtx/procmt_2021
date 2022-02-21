@@ -288,7 +288,9 @@ void atsedit::on_buttonBox_accepted()
     this->atsh->set_filter(act_filters);
 
 
-    this->atsh->set_key_value("sensor_type", this->allsensors->get_atsheader_sensor_name());
+    this->atsh->set_key_value("sensor_type", this->allsensors->get_current_index_atsheader_sensor_name(this->ui->comboBox_sensortype->currentIndex()));
+    //int myindex = this->ch_combos[i]->currentIndex();
+    //qDebug() << "new sensor" << this->scboxes.at(i)->get_current_index_atsheader_sensor_name(myindex);
     this->atsh->prc_com_to_classmembers();
 
     // editor must change in place

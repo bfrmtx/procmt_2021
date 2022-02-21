@@ -3,15 +3,13 @@
 #include <QApplication>
 #include <QStringList>
 
-int main(int argc, char *argv[])
-{
-#ifdef use_qustomplot_spcplotter
+int main(int argc, char *argv[]) {
 
-#else
+// use OpenGL
+#ifdef QCUSTOMPLOT_USE_OPENGL
     Q_INIT_RESOURCE(default_resources);
     QApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
-    //QApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
-
+    QApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
     QSurfaceFormat fmt;
     fmt.setDepthBufferSize(16);
     fmt.setProfile(QSurfaceFormat::CoreProfile);

@@ -1427,13 +1427,13 @@ void atsheader::prc_com_to_classmembers()
     this->bin_atsheader.iLatitude =                     qint32 (this->value("latitude").toInt());
     this->bin_atsheader.iLongitude =                    qint32 (this->value("longitude").toInt());
     this->bin_atsheader.iElevation =                    qint32 (this->value("elevation").toInt());
-    this->bin_atsheader.byLatLongType = this->value("lat_long_type").toChar().toLatin1();
-    this->bin_atsheader.byAddCoordType = this->value("AddCoordType").toChar().toLatin1();
+    this->bin_atsheader.byLatLongType =                 QVariant_QString_to_aby("lat_long_type");
+    this->bin_atsheader.byAddCoordType =                quint8(this->ivalue("AddCoordType"));
     this->bin_atsheader.siRefMeridian =                 qint16 (this->value("GaussRefMeridian").toInt());
     this->bin_atsheader.dblNorthing =                   this->value("northing").toDouble();
     this->bin_atsheader.dblEasting =                    this->value("easting").toDouble();
-    this->bin_atsheader.byGPSStat =                     qint8 (this->value("GPS_status").toUInt());
-    this->bin_atsheader.byGPSAccuracy =                 qint8 (this->value("GPS_accuracy").toUInt());
+    this->bin_atsheader.byGPSStat =                     QVariant_QString_to_aby("GPS_status");
+    this->bin_atsheader.byGPSAccuracy =                 quint8(this->ivalue("GPS_accuracy"));
     this->bin_atsheader.iUTCOffset =                    qint16(this->value("UTCOffset").toInt());
     strncpy(this->bin_atsheader.achSystemType, this->value("system_type").toString().toLatin1(), sizeof(this->bin_atsheader.achSystemType));
     strncpy(this->bin_atsheader.achSurveyHeaderName, this->value("survey_header_name").toString().toUtf8(), sizeof(this->bin_atsheader.achSurveyHeaderName));
@@ -1488,7 +1488,7 @@ void atsheader::prc_com_to_classmembers()
 
 
     if (this->atswriter_section.size()) {
-        QMap<QString, QVariant>::const_iterator m = this->begin();
+        QMap<QString, QVariant>::const_iterator m = this->cbegin();
 
         this->atswriter_section.insert("ats_data_file", this->fileName());
 
@@ -1518,6 +1518,7 @@ void atsheader::prc_com_to_classmembers()
 void atsheader::classmembers_to_prc_com()
 {
 
+    const QChar gchar('G'), uchar('U');
     // some values will be used as doubles as we want to use them; converted back to float finally
     this->insert("header_length",         quint16 (this->bin_atsheader.uiHeaderLength));
     this->insert("header_version",        qint16 (this->bin_atsheader.siHeaderVers));
@@ -1551,12 +1552,12 @@ void atsheader::classmembers_to_prc_com()
     this->insert("latitude",              qint32(this->bin_atsheader.iLatitude));
     this->insert("longitude",             qint32(this->bin_atsheader.iLongitude));
     this->insert("elevation",             qint32(this->bin_atsheader.iElevation));
-    this->insert("lat_long_type",         QChar (this->bin_atsheader.byLatLongType));
-    this->insert("AddCoordType",          QChar (this->bin_atsheader.byAddCoordType));
+    this->insert("lat_long_type",         this->aby_to_QString(this->bin_atsheader.byLatLongType));
+    this->insert("AddCoordType",          quint8(this->bin_atsheader.byAddCoordType));
     this->insert("GaussRefMeridian",      qint16(this->bin_atsheader.siRefMeridian));
     this->insert("northing",              double(this->bin_atsheader.dblNorthing));
     this->insert("easting",               double(this->bin_atsheader.dblEasting));
-    this->insert("GPS_status",            quint8(this->bin_atsheader.byGPSStat));
+    this->insert("GPS_status",            this->aby_to_QString(this->bin_atsheader.byGPSStat));
     this->insert("GPS_accuracy",          quint8(this->bin_atsheader.byGPSAccuracy));
     this->insert("UTCOffset",             qint16(this->bin_atsheader.iUTCOffset));
     this->insert("system_type",           this->clean_b_string(this->bin_atsheader.achSystemType, sizeof(this->bin_atsheader.achSystemType)));
@@ -1565,7 +1566,7 @@ void atsheader::classmembers_to_prc_com()
     this->insert("DC_offset_correction_value", double(this->bin_atsheader.DCOffsetCorrValue));
     this->insert("DC_offset_corr_on",     qint8 (this->bin_atsheader.DCOffsetCorrOn));
     this->insert("input_divder_on",       qint8 (this->bin_atsheader.InputDivOn));
-    this->insert("bit_indicator",          qint16(this->bin_atsheader.bit_indicator));
+    this->insert("bit_indicator",         qint16(this->bin_atsheader.bit_indicator));
     this->insert("selftest_result",       this->clean_b_string(this->bin_atsheader.achSelfTestResult, sizeof(this->bin_atsheader.achSelfTestResult)));
     this->insert("num_slices",            quint16(this->bin_atsheader.numslices));
     this->insert("cal_freqs",             qint16(this->bin_atsheader.siCalFreqs));
@@ -1616,7 +1617,7 @@ void atsheader::classmembers_to_prc_com()
 
 
 
-
+/*
     // make UTF-8 UTF8 out of it
     QByteArray utfhelp(this->bin_atsheader.tscComment.achSiteName, sizeof(this->bin_atsheader.tscComment.achSiteName));
     this->insert("site_name",             QString::fromUtf8(utfhelp).simplified());
@@ -1629,7 +1630,15 @@ void atsheader::classmembers_to_prc_com()
     this->insert("site_name_rr",             QString::fromUtf8(utfhelprr).simplified());
     QByteArray utfhelpem(this->bin_atsheader.tscComment.achSiteNameEMAP, sizeof(this->bin_atsheader.tscComment.achSiteNameEMAP));
     this->insert("site_name_emap",             QString::fromUtf8(utfhelpem).simplified());
-
+*/
+    this->insert("site_name", this->clean_b_stringUTF8(this->bin_atsheader.tscComment.achSiteName, sizeof(this->bin_atsheader.tscComment.achSiteName)));
+    this->insert("xml_header",    this->clean_b_stringUTF8(this->bin_atsheader.tscComment.achXmlHeader, sizeof(this->bin_atsheader.tscComment.achXmlHeader)));
+    QString comments(this->clean_b_stringUTF8(this->bin_atsheader.tscComment.achComments, sizeof(this->bin_atsheader.tscComment.achComments)));
+    if (comments.startsWith('\n')) comments.remove(0,1);
+    if (comments.endsWith('\n')) comments.remove(comments.size()-1,1);
+    this->insert("comments",              comments);
+    this->insert("site_name_rr", this->clean_b_stringUTF8(this->bin_atsheader.tscComment.achSiteNameRR, sizeof(this->bin_atsheader.tscComment.achSiteNameRR)));
+    this->insert("site_name_emap", this->clean_b_stringUTF8(this->bin_atsheader.tscComment.achSiteNameEMAP, sizeof(this->bin_atsheader.tscComment.achSiteNameEMAP)));
     //
     this->insert("numslices", uint(0));
 
@@ -1843,6 +1852,9 @@ QString atsheader::clean_b_string(const char *ins, const int s_size, const bool 
     QString rstring = QString::fromLatin1(ins, s_size);
     QChar bend('\x0');
     int fpos = rstring.indexOf(bend);
+    if (fpos == 0) {        // string starts with NULL terminator
+        return QString();
+    }
     if (fpos > 0)rstring.truncate(fpos);
     rstring.remove(bend, Qt::CaseInsensitive);
     if (remove_terminator) {
@@ -1855,6 +1867,9 @@ QString atsheader::clean_b_stringUTF8(const char *ins, const int s_size, const b
     QString rstring = QString::fromUtf8(ins, s_size);
     QChar bend('\x0');
     int fpos = rstring.indexOf(bend);
+    if (fpos == 0) {        // string starts with NULL terminator
+        return QString();
+    }
     if (fpos > 0)rstring.truncate(fpos);
     if (remove_terminator) {
         rstring.remove(bend, Qt::CaseInsensitive);

@@ -171,6 +171,14 @@ public:
     bool operator == (const adulib& rhs);
 
     /*!
+       \brief operator != compare start times
+       \param rhs
+       \return class with equal start time
+     */
+    bool operator != (const adulib& rhs);
+
+
+    /*!
      * \brief size returns the size we want to iterate over;
      * \return 0...5 (ADU-08) and 0...4 (ADU-07 with LF/HF) and 0 .. 9 (ADU-07 with LF OR HF only)
      */

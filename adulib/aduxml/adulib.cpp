@@ -201,6 +201,11 @@ bool adulib::operator ==(const adulib &rhs)
     return (this->start_time == rhs.start_time);
 }
 
+bool adulib::operator !=(const adulib &rhs)
+{
+    return (this->start_time != rhs.start_time);
+}
+
 size_t adulib::size() const
 {
 

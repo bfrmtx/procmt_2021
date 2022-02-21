@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
@@ -17,20 +17,21 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include)
 
 set(SOURCES
   msg_logger.cpp
-  )
+)
 
 set(HEADERS_INSTALL
   msg_logger.h
- )
+)
 
-add_library(msg_logger STATIC ${SOURCES} ${HEADERS_INSTALL} )
-target_include_directories(msg_logger PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# want STATIC
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS_INSTALL} )
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(msg_logger PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
-target_compile_definitions(msg_logger PRIVATE MSG_LOGGER_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE MSG_LOGGER_LIBRARY)
 
-install(TARGETS msg_logger DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 

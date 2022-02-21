@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ------------------RPATH for loading .so from ../lib ------------------------------------------
 # use, i.e. don't skip the full RPATH for the build tree
@@ -30,8 +30,8 @@ endif()
 
 # ------------------------------------------------------------
 
-find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL OpenGLWidgets PrintSupport  REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui  Widgets Network OpenGL OpenGLWidgets PrintSupport  REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets OpenGLWidgets Network OpenGL PrintSupport  REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui  Widgets OpenGLWidgets Network OpenGL PrintSupport  REQUIRED)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -74,9 +74,25 @@ ${CMAKE_SOURCE_DIR}/adulib/adu_json
 ${CMAKE_SOURCE_DIR}/pmt_adulib/group_atsfiles
 ${CMAKE_SOURCE_DIR}/qcustomplot
 ${CMAKE_INSTALL_PREFIX}/include
-${CMAKE_SOURCE_DIR}/pmt_gui/spectra_plotter_pro
 
 )
+
+if(QCUSTOMPLOT_USE_OPENGL)
+    include_directories(
+    ${CMAKE_SOURCE_DIR}/pmt_gui/spectra_plotter_pro
+    )
+    message ("INCLUDING spectra_plotter_pro for OpenGL +++++++++++++++++++++++++++++++++++++++++++++++")
+else ()
+    include_directories(
+    ${CMAKE_SOURCE_DIR}/pmt_gui/spectra_plotter
+    )
+    message ("INCLUDING spectra_plotter -------------------------------------------------------------")
+endif()
+
+
+
+
+
 set(PROJECT_SOURCES
 main.cpp
 procmt_mini.cpp
@@ -90,41 +106,41 @@ dir_dialog.ui
 
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(procmt_mini
+    qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET procmt_mini APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(procmt_mini SHARED
+        add_library(${PROJECT_NAME} SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(procmt_mini
+        add_executable(${PROJECT_NAME}
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
 
-target_link_libraries(procmt_mini
+target_link_libraries(${PROJECT_NAME}
+PRIVATE Qt${QT_VERSION_MAJOR}::Core
+PRIVATE Qt${QT_VERSION_MAJOR}::Gui
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
-PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE Qt${QT_VERSION_MAJOR}::Network
 
-PRIVATE spectra_plotter_pro
+
 PRIVATE static_plot
 PRIVATE qcustomplot
-
 PRIVATE prc_com
 PRIVATE prc_com_table
 PRIVATE atsfile
@@ -159,21 +175,40 @@ PRIVATE lineedit_file
 PRIVATE group_atsfiles
 PRIVATE qstring_utilities
 
-
 PRIVATE procmt_lib
 PRIVATE prc_com_xml
 PRIVATE spc_db
 )
 
-set_target_properties(procmt_mini PROPERTIES
+if(QCUSTOMPLOT_USE_OPENGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter_pro)
+    message ("LINKING   spectra_plotter_pro for OpenGL +++++++++++++++++++++++++++++++++++++++++++++++")
+else ()
+    target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter)
+    message ("LINKING   spectra_plotter -------------------------------------------------------------")
+
+endif()
+
+if (WIN32)
+    if(QCUSTOMPLOT_USE_OPENGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    endif()
+endif()
+
+
+
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    # for GUI
+    WIN32_EXECUTABLE TRUE
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(procmt_mini)
+    qt_finalize_executable(${PROJECT_NAME})
 endif()
 
-install(TARGETS procmt_mini DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 

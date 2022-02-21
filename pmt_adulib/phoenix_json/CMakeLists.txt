@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 COMPONENTS Core Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql REQUIRED)
@@ -41,16 +41,17 @@ ${CMAKE_SOURCE_DIR}/libvector/fftreal_vector
 )
 set(SOURCES
   phoenix_json.cpp
-  )
+)
 
 set(HEADERS_INSTALL
   phoenix_json.h
- )
+)
 
-add_library(phoenix_json SHARED ${SOURCES} ${HEADERS_INSTALL} )
-target_include_directories(phoenix_json PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL} )
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(phoenix_json
+target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE prc_com
@@ -70,9 +71,9 @@ PRIVATE atsfile
 
 )
 
-target_compile_definitions(phoenix_json PRIVATE PHOENIX_JSON_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE PHOENIX_JSON_LIBRARY)
 
-install(TARGETS phoenix_json DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 

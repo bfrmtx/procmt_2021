@@ -31,11 +31,11 @@ public:
         auto microseconds = nanoseconds / 1000;
         double milliseconds = microseconds / 1000.0;
         double seconds = milliseconds / 1000.0;
-        std::cout << output_prefix_ << std::endl;
+        std::cout << output_prefix_ << Qt::endl;
         std::cout << "[" << nanoseconds << " ns][";
         std::cout << microseconds << " mys][";
         std::cout << milliseconds << " ms][";
-        std::cout << seconds << " s]" << std::endl;
+        std::cout << seconds << " s]" << Qt::endl;
     }
 };
 

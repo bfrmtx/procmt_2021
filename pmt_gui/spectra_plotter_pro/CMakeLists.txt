@@ -6,12 +6,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 20)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets Sql OpenGL OpenGLWidgets PrintSupport REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql OpenGL OpenGLWidgets PrintSupport REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Widgets Gui OpenGL OpenGLWidgets PrintSupport Sql REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui Widgets OpenGL OpenGLWidgets PrintSupport Sql REQUIRED)
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include
@@ -50,8 +50,6 @@ ${CMAKE_SOURCE_DIR}/spectra_plotter_pro/ygfxqt
 
 set(SOURCES
 
-
-    main.cpp
     progressdialog.cpp
     ygfx/gfxarraybasecontainer.cpp
     ygfx/gfxfloatbufferset.cpp
@@ -65,7 +63,6 @@ set(SOURCES
     ygfxqt/gfx_qt_helper.cpp
     ygfxqt/gfx_qt_assetmanager.cpp
     spectra_plotter_pro.cpp
-
 
     progressdialog.h
     ygfx.h
@@ -85,32 +82,29 @@ set(SOURCES
     ygfxqt/gfx_qt_widget_maths.h
     ygfxqt/gfx_qt_helper.h
     ygfxqt/gfx_qt_assetmanager.h
-    spectra_plotter_pro.h
 
     spectra_plotter.ui
     progressdialog.ui
 
-  default_resources.qrc
+    default_resources.qrc
 
-  )
-
+)
 set(HEADERS_INSTALL
+    spectra_plotter_pro.h
+)
 
 
 
+# want STATIC
+add_library(${PROJECT_NAME} STATIC ${SOURCES} )
 
- )
-
-
-add_library(spectra_plotter_pro STATIC ${SOURCES} ${HEADERS_INSTALL})
-
-target_link_libraries(spectra_plotter_pro
+target_link_libraries(${PROJECT_NAME}
+PRIVATE Qt${QT_VERSION_MAJOR}::Core
+PRIVATE Qt${QT_VERSION_MAJOR}::Gui
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets
 PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
-PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
-PRIVATE qcustomplot
 PRIVATE prc_com
 PRIVATE prc_com_table
 PRIVATE atsfile
@@ -138,9 +132,16 @@ PRIVATE gui_items
 PRIVATE mc_data
 PRIVATE aduxml
 PRIVATE mt_site
+PRIVATE qcustomplot
 )
+if (WIN32)
+    if(QCUSTOMPLOT_USE_OPENGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    endif()
+endif()
 
-target_compile_definitions(spectra_plotter_pro PRIVATE SPECTRA_PLOTTER_PRO_LIBRARY)
-install(TARGETS spectra_plotter_pro DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE SPECTRA_PLOTTER_PRO_LIBRARY)
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)

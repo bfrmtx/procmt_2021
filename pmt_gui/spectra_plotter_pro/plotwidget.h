@@ -3,12 +3,12 @@
 
 #include "qcustomplot.h"
 #include "plotdata.h"
-#include "graph_selector.h"
-#include "ygfxqt/gfx_qt_math_selector.h"
 
 // stl-includes
 #include <map>
-
+// Qt 6
+#include "ygfxqt/gfx_qt_math_selector.h"
+using namespace ygfxqt;
 
 enum class SelectionMode {
     NO_SELECTION,
@@ -27,7 +27,7 @@ private:
     std::map<double, QCPGraph *> graph_map;
     std::map<double, AdditionalPlotData> graph_data;
 
-    ygfxqt::YMathSelectionMode * selector = nullptr;
+    YMathSelectionMode * selector = nullptr;
     QCPSelectorItem * selector_item = nullptr;
 
 public:
@@ -47,10 +47,11 @@ public:
     void show_all_graphs();
     void show_single_graph(double freq);
     void clear_all_plots();
-    void set_selector(GraphWidgetSelector * selector) {
-        // Qt6
-        //this->selector = selector;
-        selector_item->selector = selector;
+    void set_selector(GraphWidgetSelector* selector) {
+        // Qt 6
+        //this->selector = selector; selector_item->selector = selector;
+        this->selector_item->selector = selector;
+
     }
 
 public slots:
@@ -61,6 +62,7 @@ public slots:
     QCPDataSelection remove_and_get_selection(size_t graph_id, const std::unordered_set<size_t> & indices);
 
 protected:
+    // Qt 6 removed override
     void mouseMoveEvent(QMouseEvent * event) ;
     void mousePressEvent(QMouseEvent * event) ;
     void mouseReleaseEvent(QMouseEvent * event) ;

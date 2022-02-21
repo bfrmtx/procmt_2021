@@ -30,10 +30,6 @@
 #ifndef MATH_VECTOR_H
 #define MATH_VECTOR_H
 
-#ifdef _msvc
-#define _USE_MATH_DEFINES
-#endif
-
 #include <QObject>
 #include <numeric>
 #include <limits>

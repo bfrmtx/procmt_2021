@@ -87,7 +87,7 @@ void TSPlotterPlot::set_plot_type(TSPlotType new_type) {
 void TSPlotterPlot::mousePressEvent(QMouseEvent * event) {
     QCustomPlot::mousePressEvent(event);
     if(event->button() == Qt::LeftButton) {
-        m_pressed_pos_x = xAxis->pixelToCoord(event->x());
+        m_pressed_pos_x = xAxis->pixelToCoord(event->position().x());
         layer(layer_selection)->replot();
     } else if(event->button() == Qt::MiddleButton) {
         event->ignore();
@@ -98,7 +98,7 @@ void TSPlotterPlot::mouseReleaseEvent(QMouseEvent * event) {
     QCustomPlot::mouseReleaseEvent(event);
     if(event->button() == Qt::LeftButton) {
         if(is_interval_mode(m_cursor_mode)) {
-            handle_current_interval_dropped(m_pressed_pos_x, xAxis->pixelToCoord(event->x()));
+            handle_current_interval_dropped(m_pressed_pos_x, xAxis->pixelToCoord(event->position().x()));
             set_selection_coords(rectangle_min, rectangle_min);
         } else if(m_cursor_mode == CursorMode::READOUT) {
             set_cursor_coords(rectangle_min, rectangle_min);
@@ -110,9 +110,9 @@ void TSPlotterPlot::mouseReleaseEvent(QMouseEvent * event) {
 void TSPlotterPlot::mouseMoveEvent(QMouseEvent * event) {
     QCustomPlot::mouseMoveEvent(event);
     if(m_cursor_mode == CursorMode::READOUT && event->buttons().testFlag(Qt::LeftButton)) {
-        handle_readout(event->x(), event->y());
+        handle_readout(event->position().x(), event->position().y());
     } else if(is_interval_mode(m_cursor_mode)) {
-        handle_current_interval_moved(event->x(), event->buttons().testFlag(Qt::LeftButton));
+        handle_current_interval_moved(event->position().x(), event->buttons().testFlag(Qt::LeftButton));
     }
     layer(layer_selection)->replot();
 }

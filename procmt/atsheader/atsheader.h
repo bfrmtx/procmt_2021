@@ -436,6 +436,22 @@ public:
     QString subname_file() const;
     QString subname_xml() const;
 
+    /*!
+     * \brief aby_to_QString ascii byte (aka unsigned int 8 aka char) to QString - Qt6 QVariant HELL!! dont get a Qchar - stays with int!
+     * \return a string of length 1 to be stored as char back again later
+     */
+    QString aby_to_QString(const quint8 numchar) {
+        QLatin1Char a8(numchar);
+        QString asc;
+        asc.append(a8.unicode());
+        return asc;
+    }
+
+    quint8 QVariant_QString_to_aby(const QString qmap_variant_name) {
+         QString str(this->svalue(qmap_variant_name));
+         return quint8(str.at(0).toLatin1());
+    }
+
     std::shared_ptr<calibration> get_cal() const;
 
     friend bool compsamples_ats_lhs_lt(const atsheader& lhs, const atsheader& rhs);

@@ -414,7 +414,7 @@ void adurt::onResourceFetched(adunetwork::ResourceType resourceType, QString fil
         if (listsMatch) {
             for (int i = 0; i < m_shadowList->size(); i++) {
                 if ( (m_shadowList->job(i) != m_joblist->job(i)) &&
-                        m_shadowList->job(i).is_submitted_adujobtable() != m_joblist->job(i).is_submitted_adujobtable()) {
+                        (m_shadowList->job(i).is_submitted_adujobtable() != m_joblist->job(i).is_submitted_adujobtable())) {
                     listsMatch = false;
                     break;
                 }

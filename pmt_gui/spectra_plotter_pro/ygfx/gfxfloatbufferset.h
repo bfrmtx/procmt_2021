@@ -4,6 +4,7 @@
 #include "gfxvector.h"
 #include "gfxincludes.h"
 #include <unordered_map>
+// Qt 6
 #include <QOpenGLVersionFunctionsFactory>
 
 namespace ygfx {

@@ -265,6 +265,7 @@ void ygfxqt::YMathOpenGLWidget::paintGL() {
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     QPainter painter(this);
+    // Qt 6
     //painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::TextAntialiasing);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     paintAxes(painter);
@@ -364,7 +365,6 @@ void ygfxqt::YMathOpenGLWidget::paintAxesValues(QPainter & painter) {
     for(auto current_y = std::floor(bounds_min.y / plot_stepsize.y) * plot_stepsize.y;
         current_y < bounds_max.y; current_y += plot_stepsize.y) {
         QString yValue = QString::number(current_y);
-        // Qt6 .width to horizontalAdvance
         min_text_x = std::min(axes_offset.x() - 6 - painter.fontMetrics().horizontalAdvance(yValue), min_text_x);
         min_text_exp_x = std::min(axes_offset.x() - 6 - painter.fontMetrics().horizontalAdvance(yValue) - painter.fontMetrics().horizontalAdvance("10"), min_text_exp_x);
     }
@@ -420,11 +420,11 @@ void ygfxqt::YMathOpenGLWidget::paintAxesValues(QPainter & painter) {
     bFont.setPointSize(bFont.pointSize() + 3);
     bFont.setStyleStrategy(QFont::StyleStrategy::PreferAntialias);
     painter.setFont(bFont);
-    // Qt6
-    painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+    // Qt 6
+    //painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::TextAntialiasing);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     QFontMetrics bMetrics(bFont);
-    // Qt6
     auto x1 = (width() + axes_offset.x() - bMetrics.horizontalAdvance(label_x_axis)) / 2;
     auto y1 = height() - (painter.font().pointSize() + 2);
     auto x2 = 16;
@@ -715,7 +715,8 @@ void ygfxqt::YMathOpenGLWidget::wheelEvent(QWheelEvent *event) {
     if(state_info.testFlag(InternalInfo::MouseAboveXAxis) || state_info.testFlag(InternalInfo::MouseAboveYAxis)) {
         double zoom_x = options_plot.testFlag(PlotOption::EnableXAxisZoom) ? 0.05 : 0.0;
         double zoom_y = options_plot.testFlag(PlotOption::EnableYAxisZoom) ? 0.05 : 0.0;
-        // Qt6
+        // Qt 6
+        // if(event->delta() < 0) {
         if(event->angleDelta().y() < 0) {
             scaleBoundingRectangle(state_info.testFlag(InternalInfo::MouseAboveXAxis) ? 1.0 + zoom_x : 1.0,
                                    state_info.testFlag(InternalInfo::MouseAboveYAxis) ? 1.0 + zoom_y : 1.0, 0.5, 0.5);
@@ -735,11 +736,13 @@ void ygfxqt::YMathOpenGLWidget::wheelEvent(QWheelEvent *event) {
         }
 
         if(dont_ignore_mouse_wheel) {
-            // Qt6
+            // Qt 6
+            // auto plot_pos = plotPosition(event->pos());
             auto plot_pos = plotPosition(event->position().toPoint());
             auto sx = (plot_pos.x - bounds_min.x) / plot_size.x;
             auto sy = (plot_pos.y - bounds_min.y) / plot_size.y;
-            // Qt6
+            // Qt 6
+            // double delta = event->delta() > 0 ? -0.1 : 0.1;
             double delta = event->angleDelta().y() > 0 ? -0.1 : 0.1;
             double delta_x = options_plot.testFlag(PlotOption::EnableXAxisZoom) ? delta : 0;
             double delta_y = options_plot.testFlag(PlotOption::EnableYAxisZoom) ? delta : 0;

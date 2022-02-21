@@ -168,4 +168,6 @@ bool measdoc_from_mc_data::data_from_ats_files()
 
         }
     }
+
+    return true;
 }

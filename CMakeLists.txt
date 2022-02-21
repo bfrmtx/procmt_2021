@@ -2,49 +2,61 @@
 cmake_minimum_required(VERSION 3.20)
 project(procmt_2021 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #
 # set CMAKE_BUILD_TYPE RELEASE for CLANG
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
   # using regular Clang or AppleClang
   message ("UNIX LINUX Apple Clang build")
+  # on Linux and MacOS we can build shared libs for all not explicitly marked as STATIC
+  option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
  IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    message ("debug build")
-    add_compile_options("-std=c++20 -march=native -pthread -DDEBUG -ggdb3 -O0 -Wsign-compare -Wall -Wextra -Werror -pedantic")
+    message ("debug build ---------------------")
+    add_compile_options("-pthread -DDEBUG -ggdb3 -O0 -Wsign-compare -Wall -Wextra -Werror -pedantic")
     set(CMAKE_VERBOSE_MAKEFILE ON)
  ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
  IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    message ("release build")
-    add_compile_options("-std=c++20 -march=native -pthread -DNDEBUG -O3 -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare")
+    message ("release build ---------------------")
+    add_compile_options("-pthread -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare")
  ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
 endif()
 #
 #
-# set CMAKE_BUILD_TYPE RELEASE for MSVC
-if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
-  message ( "WINDOWS MSVC build" )
-  add_compile_definitions( _USE_MATH_DEFINES _HAS_STD_BYTE _msvc )
+# set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
+if (WIN32)
+  message ( "WINDOWS build" )
+  # on WINDOWS it is easier to make STATIC libs
+    option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+  add_compile_definitions( _USE_MATH_DEFINES _msvc )
   IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    message ("debug build")
-    add_compile_options(" /std:c++20 /DEBUG ")
+    message ("debug build ---------------------")
+    add_compile_options("-DDEBUG ")
     set(CMAKE_VERBOSE_MAKEFILE ON)
  ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
  IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    message ("release build")
-    add_compile_options(" /std:c++20 /O2 ")
+    message ("release build ---------------------")
+    add_compile_options("-DNDEBUG")
  ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
 
 endif()
 
-
+IF (WIN32)
+message ( "starting WINDOWS build" )
+ add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+ set(QCUSTOMPLOT_USE_OPENGL TRUE)
+ELSE()
+ add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+ set(QCUSTOMPLOT_USE_OPENGL TRUE)
+ message ("starting UNIX LINUX Apple Clang build")
+ENDIF()
 
 message ( "adding subdirs" )
 # the info.sql3 and others will be copied to your build dir - the software will look for SQLite databases
 # DEFINES += PMTSQLPATH=\"\\\"$${PJH}/$${OSDIR}$${CPLDIR}\\\"\"
 add_definitions(-DPMTSQLPATH="${CMAKE_INSTALL_PREFIX}")
 add_definitions(-DPMTSQLPATH_UNIX="${CMAKE_INSTALL_PREFIX}/bin")
-add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+#
 ## templates FIRST
 add_subdirectory(include)
 add_subdirectory(base/prc_com)
@@ -78,7 +90,6 @@ add_subdirectory(libqt/xmlcallib)
 add_subdirectory(libqt/cal_stat_display_lib) ## nor needed for adroid app?
 add_subdirectory(libqt/lineedit_file)
 add_subdirectory(libqt/gen_trf_filename) ## nor needed for adroid app
-add_subdirectory(libqt/cal2sql) ## nor needed for adroid app
 add_subdirectory(libqt/xmlcal ) ## nor needed for adroid app
 add_subdirectory(libqt/mk_master_cal) ## nor needed for adroid app
 add_subdirectory(firfilter) ## nor needed for adroid app
@@ -114,7 +125,15 @@ add_subdirectory(pmt_adulib/measdoc_from_mc_data)
 add_subdirectory(pmt_adulib/phoenix_json)
 add_subdirectory(adulib/adu_demonstrator)
 add_subdirectory(pmt_adulib/ts_tools)
+add_subdirectory(pmt_gui/ats_multi_edit)
 add_subdirectory(pmt_gui/tsplotter)
 add_subdirectory(pmt_gui/ediplotter)
+add_subdirectory(libqt/cal2sql) ## nor needed for adroid app
+if (QCUSTOMPLOT_USE_OPENGL)
+message ( "ADDING spectra plotter pro for OpenGL" )
 add_subdirectory(pmt_gui/spectra_plotter_pro)
+else()
+message ( "ADDING spectra plotter standard" )
+add_subdirectory(pmt_gui/spectra_plotter)
+endif()
 add_subdirectory(pmt_gui/procmt_mini)
