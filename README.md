@@ -6,18 +6,21 @@ Presently (Jan 2022) this repository contains a flawly pre-release of the  [Qt6]
 
 Other libraries are marked individually.
 
-# Prequisities
+# Prerequisites
 
-* Linux: clang++ compiler with C++ 20 support 
+* Linux: clang++ / gcc compiler with C++ 17 support 
 * Apple clang version 12 or above
 * MSVC on Windows ... to be checked
-* CMake 3.20 or above
+* tested with MinGW64 compiler & Ninja make, shipped with Qt 6.2
+* CMake 3.20 or above (Verion is upgrading fast)
 * C++ Boost library installed 1.6 or later (*find_package(Boost REQUIRED)*)
+* the Boost libraries do not necessarily to be compiled
+* on Windows Khronos Vulkan is needed in order to avoid error messages [Vulkan](https://vulkan.lunarg.com/sdk/home)
 * C++ package Qt 6.2 or later
 * OpenGL and Sql libraries from Qt
 
 # License
 
 GPL v3<br>
-(this is due to some underlying libraries).
+(this is due to some underlying libraries, not decided by me).
 
