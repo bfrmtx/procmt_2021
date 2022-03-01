@@ -77,7 +77,9 @@ ${CMAKE_INSTALL_PREFIX}/include
 
 )
 
-if(QCUSTOMPLOT_USE_OPENGL)
+
+
+if(USE_SPECTRAL_PLOTTER_PRO)
     include_directories(
     ${CMAKE_SOURCE_DIR}/pmt_gui/spectra_plotter_pro
     )
@@ -133,12 +135,8 @@ target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
 PRIVATE Qt${QT_VERSION_MAJOR}::Gui
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets
-PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE Qt${QT_VERSION_MAJOR}::Network
-
-
 PRIVATE static_plot
 PRIVATE qcustomplot
 PRIVATE prc_com
@@ -180,19 +178,24 @@ PRIVATE prc_com_xml
 PRIVATE spc_db
 )
 
-if(QCUSTOMPLOT_USE_OPENGL)
+IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGLWidgets
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+    )
+    IF(WIN32)
+        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    ENDIF()
+ENDIF()
+
+
+if(USE_SPECTRAL_PLOTTER_PRO)
     target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter_pro)
     message ("LINKING   spectra_plotter_pro for OpenGL +++++++++++++++++++++++++++++++++++++++++++++++")
-else ()
+else()
     target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter)
     message ("LINKING   spectra_plotter -------------------------------------------------------------")
 
-endif()
-
-if (WIN32)
-    if(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    endif()
 endif()
 
 

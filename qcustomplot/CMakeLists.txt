@@ -27,14 +27,17 @@ add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
 PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 )
-if (WIN32)
-    if(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    endif()
-endif()
+
+IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+    )
+    IF(WIN32)
+        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    ENDIF()
+ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE QCUSTOMPLOT_LIBRARY)

@@ -66,7 +66,7 @@
 
 #include "qcustomplot.h"
 
-#ifdef QCUSTOMPLOT_USE_OPENGL
+#ifdef USE_SPECTRAL_PLOTTER_PRO
  #include "spectra_plotter_pro.h"
 #else
  #include "spectra_plotter.h"

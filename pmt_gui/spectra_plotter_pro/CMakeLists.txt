@@ -134,10 +134,9 @@ PRIVATE aduxml
 PRIVATE mt_site
 PRIVATE qcustomplot
 )
+
 if (WIN32)
-    if(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    endif()
 endif()
 
 

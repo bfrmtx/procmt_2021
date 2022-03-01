@@ -4,51 +4,71 @@ project(procmt_2021 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+IF (NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
+    message ("BUILD WITHOUT OpenGL               <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+ELSE()
+    message ("BUILD WITH OpenGL                  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    # make it availabe in header and sources
+    # this also switches OpenGL on in general
+    #ifdef QCUSTOMPLOT_USE_OPENGL
+    add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+ENDIF()
+
+IF (NOT DEFINED USE_SPECTRAL_PLOTTER_PRO)
+    message ("BUILD WITHOUT SPECTRAL_PLOTTER_PRO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+ELSE()
+    message ("BUILD WITH SPECTRAL_PLOTTER_PRO    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    # make it availabe in header and sources
+    #ifdef USE_SPECTRAL_PLOTTER_PRO
+    add_definitions(-DUSE_SPECTRAL_PLOTTER_PRO)
+
+ENDIF()
 #
 # set CMAKE_BUILD_TYPE RELEASE for CLANG
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
-  # using regular Clang or AppleClang
-  message ("UNIX LINUX Apple Clang build")
-  # on Linux and MacOS we can build shared libs for all not explicitly marked as STATIC
-  option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
- IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    message ("debug build ---------------------")
-    add_compile_options("-pthread -DDEBUG -ggdb3 -O0 -Wsign-compare -Wall -Wextra -Werror -pedantic")
-    set(CMAKE_VERBOSE_MAKEFILE ON)
- ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
- IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    message ("release build ---------------------")
-    add_compile_options("-pthread -DNDEBUG -Wno-unused-parameter -Wno-unused-variable -Wno-sign-compare")
- ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-endif()
+IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
+# using regular Clang or AppleClang
+    message ("UNIX LINUX Apple Clang build")
+    # on Linux and MacOS we can build shared libs for all not explicitly marked as STATIC
+    option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        message ("debug build ---------------------")
+        add_compile_options(-pthread -ggdb3 -O0 -Wsign-compare -Wall -Wextra -Werror -pedantic)
+        set(CMAKE_VERBOSE_MAKEFILE ON)
+    ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+        message ("release build ---------------------")
+        add_compile_options(-pthread -Wno-unused-parameter -Wno-sign-compare)
+    ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
-if (WIN32)
-  message ( "WINDOWS build" )
-  # on WINDOWS it is easier to make STATIC libs
+IF(WIN32)
+    message ( "WINDOWS build" )
+    # on WINDOWS it is easier to make STATIC libs
     option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
-  add_compile_definitions( _USE_MATH_DEFINES _msvc )
-  IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    message ("debug build ---------------------")
-    add_compile_options("-DDEBUG ")
-    set(CMAKE_VERBOSE_MAKEFILE ON)
- ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
- IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    message ("release build ---------------------")
-    add_compile_options("-DNDEBUG")
- ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-
-endif()
+    add_compile_definitions( _USE_MATH_DEFINES _msvc )
+    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        message ("debug build ---------------------")
+        add_compile_options(-DDEBUG)
+        set(CMAKE_VERBOSE_MAKEFILE ON)
+    ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+        message ("release build ---------------------")
+        add_compile_options(-DNDEBUG)
+    ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+ENDIF(WIN32)
 
 IF (WIN32)
-message ( "starting WINDOWS build" )
- add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
- set(QCUSTOMPLOT_USE_OPENGL TRUE)
+    message ( "starting WINDOWS build" )
+# add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+# set(QCUSTOMPLOT_USE_OPENGL TRUE)
 ELSE()
- add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
- set(QCUSTOMPLOT_USE_OPENGL TRUE)
- message ("starting UNIX LINUX Apple Clang build")
+# add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
+# set(QCUSTOMPLOT_USE_OPENGL TRUE)
+    message ("starting UNIX LINUX Apple Clang build")
 ENDIF()
 
 message ( "adding subdirs" )
@@ -129,11 +149,11 @@ add_subdirectory(pmt_gui/ats_multi_edit)
 add_subdirectory(pmt_gui/tsplotter)
 add_subdirectory(pmt_gui/ediplotter)
 add_subdirectory(libqt/cal2sql) ## nor needed for adroid app
-if (QCUSTOMPLOT_USE_OPENGL)
-message ( "ADDING spectra plotter pro for OpenGL" )
-add_subdirectory(pmt_gui/spectra_plotter_pro)
-else()
-message ( "ADDING spectra plotter standard" )
-add_subdirectory(pmt_gui/spectra_plotter)
-endif()
+IF(USE_SPECTRAL_PLOTTER_PRO)
+    message ( "ADDING spectra plotter pro" )
+    add_subdirectory(pmt_gui/spectra_plotter_pro)
+ELSE()
+    message ( "ADDING spectra plotter standard" )
+    add_subdirectory(pmt_gui/spectra_plotter)
+ENDIF()
 add_subdirectory(pmt_gui/procmt_mini)

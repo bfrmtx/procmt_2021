@@ -52,8 +52,8 @@ set( HEADERS_INSTALL
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL} )
 
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+target_link_libraries(${PROJECT_NAME}
+PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE qcustomplot
@@ -70,11 +70,14 @@ PRIVATE sql_base_tools
 PRIVATE sql_vector
 )
 
-if (WIN32)
-    if(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    endif()
-endif()
+IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+    )
+    IF(WIN32)
+        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    ENDIF()
+ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE XMLCALLIB_LIBRARY)

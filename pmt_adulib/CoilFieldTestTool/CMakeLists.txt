@@ -110,7 +110,6 @@ endif()
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
 PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE qcustomplot
@@ -129,8 +128,16 @@ PRIVATE calib_lab
 PRIVATE mt_site
 PRIVATE mt_data
 PRIVATE mc_data
-
 )
+IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+    )
+    IF(WIN32)
+        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+    ENDIF()
+ENDIF()
+
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
