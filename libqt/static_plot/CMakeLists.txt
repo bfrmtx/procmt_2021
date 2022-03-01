@@ -10,8 +10,14 @@ set(CMAKE_AUTORCC ON)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
+IF(QCUSTOMPLOT_USE_OPENGL)
+  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
+  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
+ELSE()
+  find_package(QT NAMES Qt6 COMPONENTS Widgets PrintSupport REQUIRED)
+  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets PrintSupport REQUIRED)
+ENDIF()
+
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/qcustomplot)
 
 set(SOURCES
@@ -33,7 +39,7 @@ PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE qcustomplot
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )

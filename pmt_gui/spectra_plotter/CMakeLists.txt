@@ -9,9 +9,14 @@ set(CMAKE_AUTORCC ON)
 # set(CMAKE_CXX_STANDARD 20)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+IF(QCUSTOMPLOT_USE_OPENGL)
+    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+ELSE()
+    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
+ENDIF()
 
-find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -108,7 +113,7 @@ PRIVATE mt_site
 PRIVATE qcustomplot
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )

@@ -10,8 +10,14 @@ set(CMAKE_AUTORCC ON)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
+IF(QCUSTOMPLOT_USE_OPENGL)
+  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
+  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
+ELSE()
+  find_package(QT NAMES Qt6 COMPONENTS Widgets Sql PrintSupport REQUIRED)
+  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql PrintSupport REQUIRED)
+ENDIF()
+
 find_package(Boost REQUIRED)
 
 include_directories(
@@ -48,7 +54,7 @@ PRIVATE boost_student
 PRIVATE math_vector
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )

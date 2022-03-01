@@ -12,6 +12,8 @@ set(CMAKE_AUTORCC ON)
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets Gui OpenGL OpenGLWidgets PrintSupport Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Gui Widgets OpenGL OpenGLWidgets PrintSupport Sql REQUIRED)
+
+
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include

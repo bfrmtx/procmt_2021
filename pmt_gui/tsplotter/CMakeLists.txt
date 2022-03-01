@@ -29,8 +29,15 @@ if (APPLE OR UNIX)
 endif()
 # ------------------------------------------------------------
 
-find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+
+IF(QCUSTOMPLOT_USE_OPENGL)
+    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+ELSE()
+    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
+ENDIF()
+
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -174,7 +181,7 @@ PRIVATE qcustomplot
 PRIVATE xmlcallib
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )

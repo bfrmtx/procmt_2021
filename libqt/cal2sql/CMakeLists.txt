@@ -31,9 +31,15 @@ endif()
 # ------------------------------------------------------------
 
 
+IF(QCUSTOMPLOT_USE_OPENGL)
+    find_package(QT NAMES Qt6 COMPONENTS Core Widgets OpenGL Sql PrintSupport REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets OpenGL Sql PrintSupport REQUIRED)
+ELSE()
+    find_package(QT NAMES Qt6 COMPONENTS Core Widgets Sql PrintSupport REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql PrintSupport REQUIRED)
+ENDIF()
 
-find_package(QT NAMES Qt6 COMPONENTS Core Widgets OpenGL Sql PrintSupport REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets OpenGL Sql PrintSupport REQUIRED)
+
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include
@@ -120,7 +126,7 @@ PRIVATE xmlcallib
 PRIVATE prc_com_table
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
+IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )
