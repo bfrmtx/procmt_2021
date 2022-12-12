@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1065</width>
-    <height>1185</height>
+    <width>1513</width>
+    <height>1009</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
          <item>
           <widget class="QTabWidget" name="tab_widget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="DualPlot" name="tab_xyyx">
             <attribute name="title">
@@ -242,7 +242,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -276,7 +275,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -374,7 +372,6 @@
             <widget class="QPushButton" name="button_rho_5">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -396,7 +393,6 @@
             <widget class="QPushButton" name="button_rho_3">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -418,7 +414,6 @@
             <widget class="QPushButton" name="button_phi_7">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -443,7 +438,6 @@
             <widget class="QPushButton" name="button_rho_12">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -479,7 +473,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -508,7 +501,6 @@
             <widget class="QPushButton" name="button_rho_11">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -530,7 +522,6 @@
             <widget class="QPushButton" name="button_rho_2">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -552,7 +543,6 @@
             <widget class="QPushButton" name="button_rho_6">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -587,7 +577,6 @@
             <widget class="QPushButton" name="button_phi_6">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -612,7 +601,6 @@
             <widget class="QPushButton" name="button_rho_7">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -634,7 +622,6 @@
             <widget class="QPushButton" name="button_phi_5">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -659,7 +646,6 @@
             <widget class="QPushButton" name="button_phi_1">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -687,7 +673,6 @@
             <widget class="QPushButton" name="button_rho_10">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -710,7 +695,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -726,7 +710,6 @@
             <widget class="QPushButton" name="button_phi_fit">
              <property name="font">
               <font>
-               <weight>75</weight>
                <italic>true</italic>
                <bold>true</bold>
               </font>
@@ -740,7 +723,6 @@
             <widget class="QPushButton" name="button_rho_1">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -768,7 +750,6 @@
             <widget class="QPushButton" name="button_phi_2">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -793,7 +774,6 @@
             <widget class="QPushButton" name="button_phi_4">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -818,7 +798,6 @@
             <widget class="QPushButton" name="button_phi_3">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -843,7 +822,6 @@
             <widget class="QPushButton" name="button_rho_8">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -865,7 +843,6 @@
             <widget class="QPushButton" name="button_rho_4">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -887,7 +864,6 @@
             <widget class="QPushButton" name="button_rho_9">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -1009,7 +985,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -1038,8 +1013,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1065</width>
-     <height>21</height>
+     <width>1513</width>
+     <height>38</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1455,7 +1430,7 @@
  </slots>
  <buttongroups>
   <buttongroup name="button_group_phi"/>
-  <buttongroup name="button_group_mouse_mode"/>
   <buttongroup name="button_group_open_mode"/>
+  <buttongroup name="button_group_mouse_mode"/>
  </buttongroups>
 </ui>

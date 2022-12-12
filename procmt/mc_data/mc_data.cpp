@@ -1332,7 +1332,7 @@ bool mc_data::prepare_csem_spectra(const size_t &nbuffers, const size_t &wl, con
     tmpfr = create_nharmonics<double>(this->dvalue("BaseFrequency"), this->sztvalue("n_harmonics"), true);
 
     for (auto &f : tmpfr) {
-        if ((f < f_max) && f > f_min) this->target_frequencies.push_back(f);
+        if ((f < f_max) && (f > f_min)) this->target_frequencies.push_back(f);
     }
 
     // try calc overlapping auto
@@ -1428,7 +1428,7 @@ void mc_data::auto_bw_prz()
             this->parzen_radius = 0.1 * prz;
         }
         else {
-            this->parzen_radius = 0.2 * prz;
+            this->parzen_radius = 0.1 * prz;
         }
         // limit parzen
 

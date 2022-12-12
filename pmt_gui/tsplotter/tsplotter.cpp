@@ -904,6 +904,12 @@ void tsplotter::open_files()
     }
     }
 
+    if (!this->m_mcdata->in_atsfiles.size()) {
+        QMessageBox::warning(this, "xml file loaded, but no data inside, file read error", "QUIT");
+
+        return;
+    }
+
     if (this->m_mcdata->in_atsfiles.at(0)->get_num_samples() < this->m_current_window_length) {
         //this->set_sample_window(0,this->m_mcdata->in_atsfiles.at(0)->get_num_samples(),false);
     }

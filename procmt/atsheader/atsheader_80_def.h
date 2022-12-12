@@ -163,7 +163,7 @@ struct ATSHeader_80 {
     double        dblNorthing;                  //!< 070h  also xcoord should not be used, default 0 (external)
     double        dblEasting;                   //!< 078h  also ycoord should not be used  default 0 (external)
     char          byGPSStat;                    //!< 080h  '-' unknown, 'N' no fix, 'C' full fix
-    char          byGPSAccuracy;                //!< 081h  '0' - not used
+    char          byGPSAccuracy;                //!< 081h  '0' - not used, 1 in case GF4-Fix & Syrlinks was active (system was synced before Syrlinks took over)
     std::int16_t  iUTCOffset;                   //!< 082h  UTC + iUTCOffset = GPS time for example; can be used for other offsets, not used, default 0
     char          achSystemType[12];            //!< 084h  MMS03e GMS05 ADU06 ADU07 ADU08 ADU09 SPAMMKV SPAMMKIII
 

@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>tsplotter</class>
  <widget class="QMainWindow" name="tsplotter">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>981</width>
-    <height>1272</height>
-   </rect>
-  </property>
   <property name="acceptDrops">
    <bool>true</bool>
   </property>
@@ -64,7 +56,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -81,7 +72,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -258,7 +248,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -320,7 +309,6 @@
              <property name="font">
               <font>
                <pointsize>11</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -476,7 +464,6 @@
              <property name="font">
               <font>
                <pointsize>10</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -630,7 +617,6 @@
              <property name="font">
               <font>
                <pointsize>10</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -781,8 +767,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>981</width>
-     <height>39</height>
+     <width>1061</width>
+     <height>38</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -1000,8 +986,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_adding_mode"/>
   <buttongroup name="button_group_cursor_mode"/>
+  <buttongroup name="button_group_adding_mode"/>
   <buttongroup name="button_group_plot_mode"/>
  </buttongroups>
 </ui>

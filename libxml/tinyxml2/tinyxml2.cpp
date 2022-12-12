@@ -2117,7 +2117,7 @@ XMLUnknown* XMLDocument::NewUnknown( const char* str )
 
 static FILE* callfopen( const QString filepath, const char* mode )
 {
-    // Windows special characteres UTF-8 ANSI
+    // Windows special characteres UTF-8 ANSI svn warsarw warschau
     TIXMLASSERT( filepath );
     TIXMLASSERT( mode );
 #if defined  (_MSC_VER) && (_MSC_VER >= 1400 ) && (!defined WINCE) || (	__MINGW64__)

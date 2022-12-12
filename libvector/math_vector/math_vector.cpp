@@ -805,8 +805,9 @@ size_t math_vector::slot_parzen_vector(const std::vector<double> &freqs, const s
                 if ((lower_prz_bounds[i] >= *min_freq) && (upper_prz_bounds[i] <= *max_freq) ) {
                     low =  std::lower_bound(min_freq, max_freq, lower_prz_bounds[i]) ;
                     high = std::upper_bound(min_freq, max_freq, upper_prz_bounds[i]) ;
-                    qDebug() << *high << *low;
-                    if (high - low > 2) {
+                    qDebug() << *high  << " <-> "   << *low;
+                    qDebug() << 1.0 / (*high) << " <-> " << 1.0 / (*low) << " target: " << 1.0 / target_freqs[i];
+                    if (high - low > 1) {
                         // all lower start points
                         iter_lwr_bnds.push_back(low);
                         // all upper end points
@@ -816,6 +817,8 @@ size_t math_vector::slot_parzen_vector(const std::vector<double> &freqs, const s
                     }
                     else {
                         qDebug() << "slot_parzen_vector -> no bounds" << lower_prz_bounds[i] << *min_freq << upper_prz_bounds[i] << *max_freq;
+                        qDebug() << "slot_parzen_vector -> no bounds" << 1.0  / lower_prz_bounds[i] << 1.0/ (*min_freq) << 1.0 / upper_prz_bounds[i] << 1.0 / (*max_freq);
+
                     }
                 }
 

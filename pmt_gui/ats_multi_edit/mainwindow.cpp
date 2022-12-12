@@ -21,7 +21,7 @@ MainWindow::MainWindow(const QString &dbname, QWidget *parent) :
     this->ui->pushButton_accept->setEnabled(false);
     this->ui->buttonBox->setEnabled(false);
 
-    this->excludes << "sample_freq" << "num_samples" << "start_date" << "stop_date" << "stop_date_time"
+    this->excludes << "sample_freq" << "start_date" << "stop_date" << "stop_date_time"
                    << "start_time" << "dipole_length" << "dipole_angle"
                    << "stop_date" << "stop_time" << "run_number"
                    << "UTMZone" << "HF_filters" << "LF_filters";

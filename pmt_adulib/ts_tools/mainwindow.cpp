@@ -241,7 +241,7 @@ void MainWindow::dropEvent(QDropEvent *event)
         else return;
 
 
-        for (auto qfi : allfiles) {
+        for (auto &qfi : allfiles) {
 
             if (qfi.fileName().endsWith("ts.json")) {
 
@@ -469,7 +469,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 
         if (freq > 4096) board = "HF";
 
-        for (auto qfi : allfiles) {
+        for (auto &qfi : allfiles) {
 
             chan_no = 100;
             bool has_sfreq = false;
@@ -905,28 +905,28 @@ void MainWindow::check_for_overlap_tscat()
         }
     }
     if (this->atsey.size()) {
-        for (int i = 0; i < this->atsey.size() -1 ; ++i) {
+        for (size_t i = 0; i < this->atsey.size() -1 ; ++i) {
             if (delta_stop_start_sp(atsey.at(i), atsey.at(i+1)) < 0) this->tscat_continue = false;
             else this->tscat_continue = true;
 
         }
     }
     if (this->atshx.size()) {
-        for (int i = 0; i < this->atshx.size() -1 ; ++i) {
+        for (size_t i = 0; i < this->atshx.size() -1 ; ++i) {
             if (delta_stop_start_sp(atshx.at(i), atshx.at(i+1)) < 0) this->tscat_continue = false;
             else this->tscat_continue = true;
 
         }
     }
     if (this->atshy.size()) {
-        for (int i = 0; i < this->atshy.size() -1 ; ++i) {
+        for (size_t i = 0; i < this->atshy.size() -1 ; ++i) {
             if (delta_stop_start_sp(atshy.at(i), atshy.at(i+1)) < 0) this->tscat_continue = false;
             else this->tscat_continue = true;
 
         }
     }
     if (this->atshz.size()) {
-        for (int i = 0; i < this->atshz.size() -1 ; ++i) {
+        for (size_t i = 0; i < this->atshz.size() -1 ; ++i) {
             if (delta_stop_start_sp(atshz.at(i), atshz.at(i+1)) < 0) this->tscat_continue = false;
             else this->tscat_continue = true;
 
@@ -1274,6 +1274,7 @@ void MainWindow::on_pushButton_create_xml_clicked()
     if (!this->qfi_target.exists()) return;
 
     for (auto &mxcd : this->mxcds) {
+        if (!mxcd->in_atsfiles.size()) return;
         this->prepare();
 
         // create the target meas subdir

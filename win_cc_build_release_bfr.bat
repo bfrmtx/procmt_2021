@@ -11,6 +11,7 @@ rem setx Boost_INCLUDEDIR C:/boost/boost_1_78_0/boost
 rem
 md %out%
 md %targ%
+rem -DCMAKE_CXX_STANDARD=17
 cmake -S %in% -B %out% -GNinja -DCMAKE_CXX_COMPILER=c++ -DCMAKE_INSTALL_PREFIX=%targ% -DCMAKE_VERBOSE_MAKEFILE=OFF -DCMAKE_BUILD_TYPE=RELEASE
 cmake --build %out%
 cmake --install %out%

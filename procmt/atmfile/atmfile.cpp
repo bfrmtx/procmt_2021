@@ -154,7 +154,7 @@ size_t atmfile::write_all()
         qds.setByteOrder(QDataStream::LittleEndian);
         qds << qint16 (this->atm.siHeaderLength);
         qds << qint16 (this->atm.siHeaderVers);
-        // qds << quint32(this->b.size()); NO!
+        // qds << quint32(this->b.size()); // NO!
         // the selector has a quint32 header
         qds << b;
         this->file.close();
