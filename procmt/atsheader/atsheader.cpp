@@ -1573,14 +1573,14 @@ void atsheader::classmembers_to_prc_com()
     this->insert("cal_entry_length",      qint16(this->bin_atsheader.siCalEntryLength));
     this->insert("cal_version",           qint16(this->bin_atsheader.siCalVersion));
     this->insert("cal_start_address",     qint16(this->bin_atsheader.siCalStartAddress));
-    this->insert("LF_filters",            this->bin_atsheader.abyLFFilters);
+    this->insert("LF_filters",            this->clean_b_string(this->bin_atsheader.abyLFFilters, sizeof(this->bin_atsheader.abyLFFilters)));
     this->insert("UTMZone",               this->clean_b_string(this->bin_atsheader.achUTMZone, sizeof(this->bin_atsheader.achUTMZone)));
     this->insert("ADU_cal_time_date",     quint32(this->bin_atsheader.uiADUCalTimeDate));
     this->insert("sensor_cal_file",       this->clean_b_string(this->bin_atsheader.achSensorCalFilename, sizeof(this->bin_atsheader.achSensorCalFilename)));
     this->insert("sensor_cal_date_time",  quint32(this->bin_atsheader.uiSensorCalTimeDate));
     this->insert("powerline_freq1",       double (this->bin_atsheader.rPowerlineFreq1));
     this->insert("powerline_freq2",       double (this->bin_atsheader.rPowerlineFreq2));
-    this->insert("HF_filters",            this->bin_atsheader.abyHFFilters);
+    this->insert("HF_filters",            this->clean_b_string(this->bin_atsheader.abyHFFilters, sizeof(this->bin_atsheader.abyHFFilters)));
 
     // num_samples_64bit is mapped to num_samples - and will be set during mapping class member
     if (this->bin_atsheader.uiSamples == UINT32_MAX) {
