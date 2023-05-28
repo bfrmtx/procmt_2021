@@ -35,8 +35,8 @@ namespace ygfx {
 
     template<typename T, GLuint N, BufferTarget TGT, BufferDataUsage USE>
     std::ostream& operator << (std::ostream& ostr, gfxArray<T, N, TGT, USE>& arr) {
-        ostr << "[gfxArray|size:" << arr.gfxSize() << "|vbo:" << arr.getVBO() << "]" << Qt::endl;
-        ostr << "[TARGET: " << TGT << "|USAGE: " << USE << Qt::endl;
+        ostr << "[gfxArray|size:" << arr.gfxSize() << "|vbo:" << arr.getVBO() << "]" << std::endl;
+        ostr << "[TARGET: " << TGT << "|USAGE: " << USE << std::endl;
         ostr << "{";
         auto size = arr.gfxSize() / sizeof(T);
         for (GLuint i = 0; i < size; ++i) {

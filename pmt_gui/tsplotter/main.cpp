@@ -34,9 +34,7 @@ int main(int argc, char *argv[])
 
     if (allatsfiles.size()) tsplot->open_file_list(allatsfiles);
 
-
     tsplot->show();
-
 
     return a.exec();
 }

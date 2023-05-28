@@ -4,6 +4,8 @@ ProcMT stands for **Proc**ess **M**agneto**T**elluric data.
 
 Presently (Feb 2022) this repository contains a flawly pre-release of the  [Qt6](https://www.qt.io/) version.
 
+May 2023: changes for Qt 6.5
+
 Other libraries are marked individually.
 
 # Prerequisites

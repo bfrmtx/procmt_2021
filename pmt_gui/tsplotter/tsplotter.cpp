@@ -192,9 +192,26 @@ tsplotter::tsplotter(QWidget *parent) :
     this->qprgb = new QProgressBar(this);
     this->ui->statusBar->addPermanentWidget(this->qprgb);
     //QRect rec = QApplication::desktop()->screenGeometry();
-    QRect rec = QGuiApplication::screens().at(0)->availableGeometry();
-    this->setMinimumWidth(int(rec.width() * 0.7));
-    this->setMinimumHeight(int(rec.height() * 0.7));
+    int mw, mh, jj = 0;
+    auto sls = QGuiApplication::screens();
+    for (const auto sl : sls) {
+        QRect rec = sl->availableGeometry();
+        if (!jj) {
+            mw = int(rec.width());
+            mh = int(rec.height());
+        }
+        else {
+            if (int(rec.width() < mw)) mw = int(rec.width());
+            if (int(rec.height() < mh)) mh = int(rec.height()) ;
+        }
+        ++jj;
+
+    }
+    this->setMinimumWidth(mw * 0.7);
+    this->setMinimumHeight(mh * 0.7);
+//    QRect rec = QGuiApplication::screens().at(0)->availableGeometry();
+//    this->setMinimumWidth(int(rec.width() * 0.7));
+//    this->setMinimumHeight(int(rec.height() * 0.7));
 
 
     info_db.setFile("info.sql3"); master_cal_db.setFile("master_calibration.sql3");

@@ -692,17 +692,17 @@ void mt_site::calc_z_vector_rr(const double &f)
             this->z[f_idx].d[yy][i] =  ( ( this->ac_spectra[f_idx].ac[pmt::hxrhx][i] * this->ac_spectra[f_idx].ac[pmt::eyrhy][i] ) - ( this->ac_spectra[f_idx].ac[pmt::hxrhy][i] * this->ac_spectra[f_idx].ac[pmt::eyrhx][i] ) )       / denom;  // Z_yy
 
 
-            //            std::cout <<    ( this->ac_spectra[f_idx].ac[pmt::hxrhx][i] * this->ac_spectra[f_idx].ac[pmt::exrhy][i] ) << ( this->ac_spectra[f_idx].ac[pmt::hxrhy][i] * this->ac_spectra[f_idx].ac[pmt::exrhx][i] )  << std::endl;    // Z_xy
+            //            std::cout <<    ( this->ac_spectra[f_idx].ac[pmt::hxrhx][i] * this->ac_spectra[f_idx].ac[pmt::exrhy][i] ) << ( this->ac_spectra[f_idx].ac[pmt::hxrhy][i] * this->ac_spectra[f_idx].ac[pmt::exrhx][i] )  << Qt::endl;    // Z_xy
 
-            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hyrhy][i] * this->ac_spectra[f_idx].ac[pmt::eyrhx][i] ) << ( conj(this->ac_spectra[f_idx].ac[pmt::hxrhy][i]) * this->ac_spectra[f_idx].ac[pmt::eyrhy][i] )  << std::endl;  // Z_yx
+            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hyrhy][i] * this->ac_spectra[f_idx].ac[pmt::eyrhx][i] ) << ( conj(this->ac_spectra[f_idx].ac[pmt::hxrhy][i]) * this->ac_spectra[f_idx].ac[pmt::eyrhy][i] )  << Qt::endl;  // Z_yx
 
-            //            std::cout << denom << std::endl;
+            //            std::cout << denom << Qt::endl;
 
-            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hxhx][i] * this->ac_spectra[f_idx].ac[pmt::exhy][i] ) << ( this->ac_spectra[f_idx].ac[pmt::hxhy][i] * this->ac_spectra[f_idx].ac[pmt::exhx][i] )  << std::endl;  // Z_xy
+            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hxhx][i] * this->ac_spectra[f_idx].ac[pmt::exhy][i] ) << ( this->ac_spectra[f_idx].ac[pmt::hxhy][i] * this->ac_spectra[f_idx].ac[pmt::exhx][i] )  << Qt::endl;  // Z_xy
 
-            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hyhy][i] * this->ac_spectra[f_idx].ac[pmt::eyhx][i] ) << ( conj(this->ac_spectra[f_idx].ac[pmt::hxhy][i]) * this->ac_spectra[f_idx].ac[pmt::eyhy][i] ) << std::endl;  // Z_yx
+            //            std::cout <<  ( this->ac_spectra[f_idx].ac[pmt::hyhy][i] * this->ac_spectra[f_idx].ac[pmt::eyhx][i] ) << ( conj(this->ac_spectra[f_idx].ac[pmt::hxhy][i]) * this->ac_spectra[f_idx].ac[pmt::eyhy][i] ) << Qt::endl;  // Z_yx
 
-            //            std::cout << denoml << std::endl;
+            //            std::cout << denoml << Qt::endl;
 
 
             //                        this->z[f_idx].d[xx][i] =  ( ( this->ac_spectra[f_idx].ac[pmt::hyrhy][i] * this->ac_spectra[f_idx].ac[pmt::exhx][i] ) - ( conj(this->ac_spectra[f_idx].ac[pmt::hxrhy][i]) * this->ac_spectra[f_idx].ac[pmt::exhy][i] ) ) / denom;  // Z_xx
@@ -990,7 +990,7 @@ void mt_site::ssp_dump_stack_all_vector(const size_t &spce, bool error_bars)
 {
     //    this->z_mutex.lock();
     //    std::thread::id this_id = std::this_thread::get_id();
-    //    std::cerr << "thread mt_site::ssp_dump_stack_all_vector: " << this_id << std::endl;
+    //    std::cerr << "thread mt_site::ssp_dump_stack_all_vector: " << this_id << Qt::endl;
     //    this->z_mutex.unlock();
 
     QString name (this->dump_path);
@@ -1199,7 +1199,7 @@ void mt_site::calc_parallel_coherency_vector(const double& f)
 void mt_site::append_spectra_collector(std::shared_ptr<spectra_collector> &spcl, const std::vector<prc_com> &prcs)
 {
 
-    std::cout << "mtsite receive" << std::endl;
+    std::cout << "mtsite receive" << Qt::endl;
 
     // types, maps pf frequencies
 

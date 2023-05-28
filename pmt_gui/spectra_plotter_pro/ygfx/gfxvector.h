@@ -204,7 +204,7 @@ private:
 template<typename T>
 std::ostream& operator<< (std::ostream& ostr, const gfxVector<T>& vector)
 {
-    ostr << "[gfxVector|size:" << vector.size() << "|cap:" << vector.capacity() << "|vbo:" << vector.getVBO() << "]" << Qt::endl;
+    ostr << "[gfxVector|size:" << vector.size() << "|cap:" << vector.capacity() << "|vbo:" << vector.getVBO() << "]" << std::endl;
     ostr << "{";
     for (GLuint i = 0; i < vector.size(); ++i) {
         ostr << vector[i];

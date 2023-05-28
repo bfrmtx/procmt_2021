@@ -44,7 +44,7 @@ edi_file::edi_file(QObject *parent): QObject(parent), QFileInfo(), prc_com(false
     //this->tnames_real << ">TXR.EXP //" << ">TYR.EXP //";
     //this->tnames_imag << ">TXI.EXP //" << ">TYI.EXP //";
     //this->tnames_var  << ">TXVAR.EXP //" << ">TYVAR.EXP //";
-    // std::cerr << "edi header" << std::endl;
+    // std::cerr << "edi header" << Qt::endl;
 
 }
 
@@ -298,12 +298,12 @@ bool edi_file::write_mtsect()
         ++i;
     }
     qts << Qt::endl;
-    // std::cerr << "write mtss f done" << std::endl;
+    // std::cerr << "write mtss f done" << Qt::endl;
 
 
     size_t elm;
     //xx, xy ..yy
-    // std::cerr <<  " dsize " << this->z.d.size() << std::endl;
+    // std::cerr <<  " dsize " << this->z.d.size() << Qt::endl;
 
     for (elm = 0; elm < this->z.d.size(); ++elm) {
 
@@ -323,7 +323,7 @@ bool edi_file::write_mtsect()
         }
         qts << Qt::endl;
 
-        // std::cerr << "write mtss re done" << std::endl;
+        // std::cerr << "write mtss re done" << Qt::endl;
 
 
         qts << Qt::endl << this->znames_imag.at(elm) << z.freqs.size() << Qt::endl;
@@ -339,13 +339,13 @@ bool edi_file::write_mtsect()
             ++i;
         }
         qts << Qt::endl;
-        // std::cerr << "write mtss im done" << std::endl;
+        // std::cerr << "write mtss im done" << Qt::endl;
 
 
         qts << Qt::endl << this->znames_var.at(elm) << z.freqs.size() << Qt::endl;
         i = 0;
 
-        // std::cerr <<  " err size " << this->z.err.size() << std::endl;
+        // std::cerr <<  " err size " << this->z.err.size() << Qt::endl;
 
         for (auto &allf : this->z.err[elm]) {
 
@@ -359,7 +359,7 @@ bool edi_file::write_mtsect()
         qts << Qt::endl;
 
 
-        // std::cerr << "write mtss var done" << std::endl;
+        // std::cerr << "write mtss var done" << Qt::endl;
     }
 
     if (this->z.coh[xy].size() && this->z.coh[yx].size()) {
@@ -394,7 +394,7 @@ bool edi_file::write_mtsect()
 
     }
 
-    // std::cerr << "hell on earth" << std::endl;
+    // std::cerr << "hell on earth" << Qt::endl;
     qts << Qt::endl;
 
     return this->is_open;
@@ -1072,22 +1072,22 @@ bool edi_file::write()
     // std::cerr << "write fna" << Qt::endl;
 
     this->open_write();
-    // std::cerr << "write open done" << std::endl;
+    // std::cerr << "write open done" << Qt::endl;
 
     this->write_head();
-    // std::cerr << "write header done" << std::endl;
+    // std::cerr << "write header done" << Qt::endl;
 
     this->write_info();
-    // std::cerr << "write info done" << std::endl;
+    // std::cerr << "write info done" << Qt::endl;
 
     this->write_definemeas();
-    // std::cerr << "write definemeas done" << std::endl;
+    // std::cerr << "write definemeas done" << Qt::endl;
 
     this->write_e_h_meas();
-    // std::cerr << "write emeas done" << std::endl;
+    // std::cerr << "write emeas done" << Qt::endl;
 
     this->write_mtsect();
-    // std::cerr << "write mtsect donene" << std::endl;
+    // std::cerr << "write mtsect donene" << Qt::endl;
 
 
     qts << ">END" << Qt::endl;

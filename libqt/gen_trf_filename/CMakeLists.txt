@@ -7,15 +7,17 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 
-set(PROJECT_SOURCES
+set(SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
@@ -25,7 +27,7 @@ set(PROJECT_SOURCES
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
+        ${SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -36,13 +38,13 @@ else()
 
     if(ANDROID)
         add_library(${PROJECT_NAME} SHARED
-            ${PROJECT_SOURCES}
+            ${SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(${PROJECT_NAME}
-            ${PROJECT_SOURCES}
+            ${SOURCES}
         )
     endif()
 endif()

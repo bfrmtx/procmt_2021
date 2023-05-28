@@ -6,8 +6,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 IF(QCUSTOMPLOT_USE_OPENGL)
     find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
@@ -52,7 +54,7 @@ ${CMAKE_SOURCE_DIR}/adulib/aduxml
 
 )
 # take all files from this directory
-# does not work with QTCreator file(GLOB PROJECT_SOURCES "*.h" "*.cpp" ".ui")
+# does not work with QTCreator file(GLOB SOURCES "*.h" "*.cpp" ".ui")
 set(SOURCES
 graph_selector.cpp
 graph_selector.h
@@ -74,7 +76,7 @@ set(HEADERS_INSTALL
 )
 
 # want STATIC
-add_library(${PROJECT_NAME} STATIC ${SOURCES} )
+add_library(${PROJECT_NAME}   ${SOURCES} )
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core

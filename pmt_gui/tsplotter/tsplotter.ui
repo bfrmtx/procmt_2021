@@ -2,6 +2,26 @@
 <ui version="4.0">
  <class>tsplotter</class>
  <widget class="QMainWindow" name="tsplotter">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1001</width>
+    <height>777</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="acceptDrops">
    <bool>true</bool>
   </property>
@@ -767,8 +787,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1061</width>
-     <height>38</height>
+     <width>1001</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -986,8 +1006,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="button_group_cursor_mode"/>
   <buttongroup name="button_group_adding_mode"/>
+  <buttongroup name="button_group_cursor_mode"/>
   <buttongroup name="button_group_plot_mode"/>
  </buttongroups>
 </ui>

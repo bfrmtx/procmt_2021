@@ -6,16 +6,23 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
-  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
+find_package(Qt6
+    REQUIRED COMPONENTS Core Gui Widgets OpenGL
+    OPTIONAL_COMPONENTS PrintSupport
+)
 ELSE()
-  find_package(QT NAMES Qt6 COMPONENTS Widgets PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets PrintSupport REQUIRED)
+find_package(Qt6
+    REQUIRED COMPONENTS Core Gui Widgets
+    OPTIONAL_COMPONENTS PrintSupport
+)
 ENDIF()
 
 
@@ -31,10 +38,15 @@ set(HEADERS_INSTALL
 # want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
-target_link_libraries(${PROJECT_NAME}
-PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
 )
+
+if(TARGET Qt6::PrintSupport)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
+endif()
 
 IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}

@@ -1734,7 +1734,7 @@ quint64 atsfile::dump_tsbuffer(const QString &filename, const eQDateTime &starts
     out.setRealNumberNotation(QTextStream::ScientificNotation);
     if (timecol) {
         for (size_t i = 0; i < this->tsdata.size(); ++i) {
-            out << starts.ISO_date_time_frac(current_sample_position + i) << " " << this->tsdata[i] << Qt::endl;
+            out << starts.ISO_date_time_frac(current_sample_position + i) << " " << this->tsdata[i] <<Qt::endl;
         }
     }
     else {

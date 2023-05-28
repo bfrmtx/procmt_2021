@@ -322,13 +322,13 @@ inline void gen_trf_adb_08e_lf(const double &f, std::complex<double> &p1, std::c
     p1 = (f / 318.0E3) * im;
     p2 = (f / 2.0E6) * im;
 
-    trf = (1. / (1. + p1)) *  (1. / (1. + p2)) *  (1. / ( 1. + p4));
 
 
     if      ((radio_filter == cal::adu08e_rf_1) && (input_div == cal::div_8)) p4 = (f / 30.0E3) * im;
     else if ((radio_filter == cal::adu08e_rf_2) && (input_div == cal::div_8)) p4 = (f / 10.5E3) * im;
     else if ((radio_filter == cal::adu08e_rf_1) && (input_div == cal::div_1)) p4 = (f / ( 0.159 / ((resistance + 200.) * 470.0E-12) ) ) * im;
     else if ((radio_filter == cal::adu08e_rf_2) && (input_div == cal::div_1)) p4 = (f / ( 0.159 / ((resistance + 200.) * 7.27E-9) ) ) * im;
+    trf = (1. / (1. + p1)) *  (1. / (1. + p2)) *  (1. / ( 1. + p4));
 
     if (lp_filter == cal::adu08e_lp4hz_on) {
         p3 = (f / 4.) * im;

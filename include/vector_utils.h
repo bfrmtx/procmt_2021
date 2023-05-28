@@ -218,7 +218,7 @@ size_t write_vector(const QString filename, const std::vector<T> &v,
     if (filename == "console") {
 
         while ( b != e ) {
-            std::cout << *b << Qt::endl;
+            std::cout << *b <<std::endl;
             ++b;
         }
     }
@@ -237,7 +237,7 @@ size_t write_vector(const QString filename, const std::vector<T> &v,
             out.setRealNumberNotation(QTextStream::ScientificNotation);
 
             while (b != e) {
-                out << *b  << Qt::endl;
+                out << *b  <<std::endl;
                 ++b;
             }
 
@@ -266,7 +266,7 @@ size_t write_vector_qstring(const QString filename, const std::vector<QString> s
         out.setRealNumberNotation(QTextStream::ScientificNotation);
 
         for ( size_t i = 0; i < v.size(); ++i) {
-            out << str[i] << " " << v[i] << Qt::endl;
+            out << str[i] << " " << v[i] <<std::endl;
         }
 
 
@@ -300,7 +300,7 @@ template <typename T, typename S> size_t write_vector(const QString filename, co
 
     if (filename == "console") {
         while ( b != e ) {
-            std::cout << *b << "   " << *bs << Qt::endl;
+            std::cout << *b << "   " << *bs <<std::endl;
             ++b; ++bs;
         }
     }
@@ -318,7 +318,7 @@ template <typename T, typename S> size_t write_vector(const QString filename, co
             out.setRealNumberNotation(QTextStream::ScientificNotation);
 
             while (b != e) {
-                out << *b << "   " << *bs << Qt::endl;
+                out << *b << "   " << *bs <<std::endl;
                 ++b; ++bs;
             }
 
@@ -358,7 +358,7 @@ template <typename T> size_t write_vector(const QString filename, const std::vec
 
     if (filename == "console") {
         while ( b != e ) {
-            std::cout << *b << "   " << *bs << "   " << *es << Qt::endl;
+            std::cout << *b << "   " << *bs << "   " << *es <<std::endl;
             ++b; ++bs; ++es;
         }
     }
@@ -376,7 +376,7 @@ template <typename T> size_t write_vector(const QString filename, const std::vec
             out.setRealNumberNotation(QTextStream::ScientificNotation);
 
             while (b != e) {
-                out << *b << "   " << *bs << "   " << *es << Qt::endl;
+                out << *b << "   " << *bs << "   " << *es <<std::endl;
                 ++b; ++bs; ++es;
             }
 
@@ -474,7 +474,7 @@ template <typename T, typename S> size_t write_vector_real_cplx(const QString fi
     if (filename == "console") {
         while ( b != e ) {
             //--qDebug() << QString::number(*b, 'E', 8) << "   " << cplx_to_reals<S>(*bs, which);
-            std::cout << *b << "  " << cplx_to_reals<S>(*bs, which).toStdString() << Qt::endl;
+            std::cout << *b << "  " << cplx_to_reals<S>(*bs, which).toStdString() <<std::endl;
             ++b; ++bs;
         }
     }
@@ -493,7 +493,7 @@ template <typename T, typename S> size_t write_vector_real_cplx(const QString fi
 
 
             while (b != e) {
-                out << *b << "   " << cplx_to_reals<S>(*bs, which) << Qt::endl;
+                out << *b << "   " << cplx_to_reals<S>(*bs, which) <<std::endl;
                 ++b; ++bs;
             }
 

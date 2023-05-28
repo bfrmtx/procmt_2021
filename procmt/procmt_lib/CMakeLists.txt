@@ -6,11 +6,15 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 COMPONENTS Core Sql REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql REQUIRED)
+
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
+
+find_package(Qt6
+    REQUIRED COMPONENTS Core Sql
+)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -41,8 +45,6 @@ ${CMAKE_SOURCE_DIR}/procmt/mc_data
 ${CMAKE_SOURCE_DIR}/procmt/mt_site
 ${CMAKE_SOURCE_DIR}/libqt/qstring_utilities
 
-
-
 )
 set(SOURCES
   procmt_lib.cpp
@@ -54,7 +56,7 @@ set(HEADERS_INSTALL
 
 
 # want STATIC
-add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS_INSTALL} )
+add_library(${PROJECT_NAME}   ${SOURCES} ${HEADERS_INSTALL} )
 
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

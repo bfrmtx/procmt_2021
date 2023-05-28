@@ -39,7 +39,7 @@
 
 #include <cmath>
 #include <iostream>
-#include "mtx_tmath.h"
+
 
 class std_colour_scale
 {

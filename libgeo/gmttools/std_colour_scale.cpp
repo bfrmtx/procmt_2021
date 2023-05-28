@@ -1,4 +1,5 @@
 #include "std_colour_scale.h"
+#include "mtx_tmath.h"
 
 std_colour_scale::std_colour_scale(const QString which, const bool extends_colour, const bool nodata_white, const bool revert)
 {
@@ -58,7 +59,7 @@ int std_colour_scale::create_cpt_scale(QTextStream *qtx, const double min, const
     else lnf = (max - min) / steps;
 
     qtx->setFieldWidth(14);
-    qtx->AlignLeft;
+    //qtx->AlignLeft;
 
     for (i = 0; i < steps; ++ i) {
         if (!log) {
@@ -107,7 +108,7 @@ int std_colour_scale::create_cpt_scale(QTextStream *qtx, const double min, const
 
                 if (!contour) {
                     std::cout <<   rdmin << " " << this->rgb.at(i).toStdString() << " "  << rdmax << " " << this->rgb.at(i).toStdString() << std::endl;
-                    *qtx <<  rdmin << this->rgb.at(i) << rdmax << this->rgb.at(i) << Qt::endl;
+                    *qtx <<  rdmin << this->rgb.at(i) << rdmax << this->rgb.at(i) <<Qt::endl;
                 }
                 else {
                     std::cout <<   rdmin << " A" <<  std::endl;

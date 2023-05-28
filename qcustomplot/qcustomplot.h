@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  QCustomPlot, an easy to use, modern plotting widget for Qt            **
-**  Copyright (C) 2011-2021 Emanuel Eichhammer                            **
+**  Copyright (C) 2011-2022 Emanuel Eichhammer                            **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -18,14 +18,14 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Emanuel Eichhammer                                   **
-**  Website/Contact: http://www.qcustomplot.com/                          **
-**             Date: 29.03.21                                             **
-**          Version: 2.1.0                                                **
+**  Website/Contact: https://www.qcustomplot.com/                         **
+**             Date: 06.11.22                                             **
+**          Version: 2.1.1                                                **
 ****************************************************************************/
 
 #ifndef QCUSTOMPLOT_H
 #define QCUSTOMPLOT_H
-#include "qcustomplot_global.h"
+
 #include <QtCore/qglobal.h>
 
 // some Qt version/configuration dependent macros to include or exclude certain code paths:
@@ -132,10 +132,10 @@ class QCPPolarGrid;
 class QCPPolarGraph;
 
 /* including file 'src/global.h'            */
-/* modified 2021-03-29T02:30:44, size 16981 */
+/* modified 2022-11-06T12:45:57, size 18102 */
 
-#define QCUSTOMPLOT_VERSION_STR "2.1.0"
-#define QCUSTOMPLOT_VERSION 0x020100
+#define QCUSTOMPLOT_VERSION_STR "2.1.1"
+#define QCUSTOMPLOT_VERSION 0x020101
 
 // decl definitions for shared library compilation/usage:
 #if defined(QT_STATIC_BUILD)
@@ -159,27 +159,35 @@ class QCPPolarGraph;
   
   It provides QMetaObject-based reflection of its enums and flags via \a QCP::staticMetaObject.
 */
- // #ifndef Q_MOC_RUN
+
+// Qt version < 6.2.0: to get metatypes Q_GADGET/Q_ENUMS/Q_FLAGS in namespace we have to make it look like a class during moc-run
+#if QT_VERSION >= 0x060200 // don't use QT_VERSION_CHECK here, some moc versions don't understand it
 namespace QCP {
-    Q_NAMESPACE
-// #else
-// class QCP { // when in moc-run, make it look like a class, so we get Q_GADGET, Q_ENUMS/Q_FLAGS features in namespace
-//     Q_GADGET
-//     Q_ENUMS(ExportPen)
-//     Q_ENUMS(ResolutionUnit)
-//     Q_ENUMS(SignDomain)
-//     Q_ENUMS(MarginSide)
-//     Q_FLAGS(MarginSides)
-//     Q_ENUMS(AntialiasedElement)
-//     Q_FLAGS(AntialiasedElements)
-//     Q_ENUMS(PlottingHint)
-//     Q_FLAGS(PlottingHints)
-//     Q_ENUMS(Interaction)
-//     Q_FLAGS(Interactions)
-//     Q_ENUMS(SelectionRectMode)
-//     Q_ENUMS(SelectionType)
-// public:
-// #endif
+Q_NAMESPACE // this is how to add the staticMetaObject to namespaces in newer Qt versions
+#else // Qt version older than 6.2.0
+#  ifndef Q_MOC_RUN
+namespace QCP {
+#  else // not in moc run
+class QCP {
+    Q_GADGET
+        Q_ENUMS(ExportPen)
+        Q_ENUMS(ResolutionUnit)
+        Q_ENUMS(SignDomain)
+        Q_ENUMS(MarginSide)
+        Q_ENUMS(AntialiasedElement)
+        Q_ENUMS(PlottingHint)
+        Q_ENUMS(Interaction)
+        Q_ENUMS(SelectionRectMode)
+        Q_ENUMS(SelectionType)
+
+        Q_FLAGS(AntialiasedElements)
+        Q_FLAGS(PlottingHints)
+        Q_FLAGS(MarginSides)
+        Q_FLAGS(Interactions)
+        public:
+#  endif
+#endif
+
 
     /*!
   Defines the different units in which the image resolution can be specified in the export
@@ -190,44 +198,44 @@ namespace QCP {
     enum ResolutionUnit { ruDotsPerMeter       ///< Resolution is given in dots per meter (dpm)
                           ,ruDotsPerCentimeter ///< Resolution is given in dots per centimeter (dpcm)
                           ,ruDotsPerInch       ///< Resolution is given in dots per inch (DPI/PPI)
-                        };
+    };
 
-    /*!
+/*!
   Defines how cosmetic pens (pens with numerical width 0) are handled during export.
 
   \see QCustomPlot::savePdf
 */
-    enum ExportPen { epNoCosmetic     ///< Cosmetic pens are converted to pens with pixel width 1 when exporting
-                     ,epAllowCosmetic ///< Cosmetic pens are exported normally (e.g. in PDF exports, cosmetic pens always appear as 1 pixel on screen, independent of viewer zoom level)
-                   };
+enum ExportPen { epNoCosmetic     ///< Cosmetic pens are converted to pens with pixel width 1 when exporting
+                 ,epAllowCosmetic ///< Cosmetic pens are exported normally (e.g. in PDF exports, cosmetic pens always appear as 1 pixel on screen, independent of viewer zoom level)
+};
 
-    /*!
+/*!
   Represents negative and positive sign domain, e.g. for passing to \ref
   QCPAbstractPlottable::getKeyRange and \ref QCPAbstractPlottable::getValueRange.
   
   This is primarily needed when working with logarithmic axis scales, since only one of the sign
   domains can be visible at a time.
 */
-    enum SignDomain { sdNegative  ///< The negative sign domain, i.e. numbers smaller than zero
-                      ,sdBoth     ///< Both sign domains, including zero, i.e. all numbers
-                      ,sdPositive ///< The positive sign domain, i.e. numbers greater than zero
-                    };
+enum SignDomain { sdNegative  ///< The negative sign domain, i.e. numbers smaller than zero
+                  ,sdBoth     ///< Both sign domains, including zero, i.e. all numbers
+                  ,sdPositive ///< The positive sign domain, i.e. numbers greater than zero
+};
 
-    /*!
+/*!
   Defines the sides of a rectangular entity to which margins can be applied.
   
   \see QCPLayoutElement::setAutoMargins, QCPAxisRect::setAutoMargins
 */
-    enum MarginSide { msLeft     = 0x01 ///< <tt>0x01</tt> left margin
-                      ,msRight   = 0x02 ///< <tt>0x02</tt> right margin
-                      ,msTop     = 0x04 ///< <tt>0x04</tt> top margin
-                      ,msBottom  = 0x08 ///< <tt>0x08</tt> bottom margin
-                      ,msAll     = 0xFF ///< <tt>0xFF</tt> all margins
-                      ,msNone    = 0x00 ///< <tt>0x00</tt> no margin
-                    };
-    Q_DECLARE_FLAGS(MarginSides, MarginSide)
+enum MarginSide { msLeft     = 0x01 ///< <tt>0x01</tt> left margin
+                  ,msRight   = 0x02 ///< <tt>0x02</tt> right margin
+                  ,msTop     = 0x04 ///< <tt>0x04</tt> top margin
+                  ,msBottom  = 0x08 ///< <tt>0x08</tt> bottom margin
+                  ,msAll     = 0xFF ///< <tt>0xFF</tt> all margins
+                  ,msNone    = 0x00 ///< <tt>0x00</tt> no margin
+};
+Q_DECLARE_FLAGS(MarginSides, MarginSide)
 
-    /*!
+/*!
   Defines what objects of a plot can be forcibly drawn antialiased/not antialiased. If an object is
   neither forcibly drawn antialiased nor forcibly drawn not antialiased, it is up to the respective
   element how it is drawn. Typically it provides a \a setAntialiased function for this.
@@ -236,68 +244,68 @@ namespace QCP {
   
   \see QCustomPlot::setAntialiasedElements, QCustomPlot::setNotAntialiasedElements
 */
-    enum AntialiasedElement { aeAxes           = 0x0001 ///< <tt>0x0001</tt> Axis base line and tick marks
-                              ,aeGrid          = 0x0002 ///< <tt>0x0002</tt> Grid lines
-                              ,aeSubGrid       = 0x0004 ///< <tt>0x0004</tt> Sub grid lines
-                              ,aeLegend        = 0x0008 ///< <tt>0x0008</tt> Legend box
-                              ,aeLegendItems   = 0x0010 ///< <tt>0x0010</tt> Legend items
-                              ,aePlottables    = 0x0020 ///< <tt>0x0020</tt> Main lines of plottables
-                              ,aeItems         = 0x0040 ///< <tt>0x0040</tt> Main lines of items
-                              ,aeScatters      = 0x0080 ///< <tt>0x0080</tt> Scatter symbols of plottables (excluding scatter symbols of type ssPixmap)
-                              ,aeFills         = 0x0100 ///< <tt>0x0100</tt> Borders of fills (e.g. under or between graphs)
-                              ,aeZeroLine      = 0x0200 ///< <tt>0x0200</tt> Zero-lines, see \ref QCPGrid::setZeroLinePen
-                              ,aeOther         = 0x8000 ///< <tt>0x8000</tt> Other elements that don't fit into any of the existing categories
-                              ,aeAll           = 0xFFFF ///< <tt>0xFFFF</tt> All elements
-                              ,aeNone          = 0x0000 ///< <tt>0x0000</tt> No elements
-                            };
-    Q_DECLARE_FLAGS(AntialiasedElements, AntialiasedElement)
+enum AntialiasedElement { aeAxes           = 0x0001 ///< <tt>0x0001</tt> Axis base line and tick marks
+                          ,aeGrid          = 0x0002 ///< <tt>0x0002</tt> Grid lines
+                          ,aeSubGrid       = 0x0004 ///< <tt>0x0004</tt> Sub grid lines
+                          ,aeLegend        = 0x0008 ///< <tt>0x0008</tt> Legend box
+                          ,aeLegendItems   = 0x0010 ///< <tt>0x0010</tt> Legend items
+                          ,aePlottables    = 0x0020 ///< <tt>0x0020</tt> Main lines of plottables
+                          ,aeItems         = 0x0040 ///< <tt>0x0040</tt> Main lines of items
+                          ,aeScatters      = 0x0080 ///< <tt>0x0080</tt> Scatter symbols of plottables (excluding scatter symbols of type ssPixmap)
+                          ,aeFills         = 0x0100 ///< <tt>0x0100</tt> Borders of fills (e.g. under or between graphs)
+                          ,aeZeroLine      = 0x0200 ///< <tt>0x0200</tt> Zero-lines, see \ref QCPGrid::setZeroLinePen
+                          ,aeOther         = 0x8000 ///< <tt>0x8000</tt> Other elements that don't fit into any of the existing categories
+                          ,aeAll           = 0xFFFF ///< <tt>0xFFFF</tt> All elements
+                          ,aeNone          = 0x0000 ///< <tt>0x0000</tt> No elements
+};
+Q_DECLARE_FLAGS(AntialiasedElements, AntialiasedElement)
 
-    /*!
+/*!
   Defines plotting hints that control various aspects of the quality and speed of plotting.
   
   \see QCustomPlot::setPlottingHints
 */
-    enum PlottingHint { phNone              = 0x000 ///< <tt>0x000</tt> No hints are set
-                        ,phFastPolylines    = 0x001 ///< <tt>0x001</tt> Graph/Curve lines are drawn with a faster method. This reduces the quality especially of the line segment
-                        ///<                joins, thus is most effective for pen sizes larger than 1. It is only used for solid line pens.
-                        ,phImmediateRefresh = 0x002 ///< <tt>0x002</tt> causes an immediate repaint() instead of a soft update() when QCustomPlot::replot() is called with parameter \ref QCustomPlot::rpRefreshHint.
-                        ///<                This is set by default to prevent the plot from freezing on fast consecutive replots (e.g. user drags ranges with mouse).
-                        ,phCacheLabels      = 0x004 ///< <tt>0x004</tt> axis (tick) labels will be cached as pixmaps, increasing replot performance.
-                      };
-    Q_DECLARE_FLAGS(PlottingHints, PlottingHint)
+enum PlottingHint { phNone              = 0x000 ///< <tt>0x000</tt> No hints are set
+                    ,phFastPolylines    = 0x001 ///< <tt>0x001</tt> Graph/Curve lines are drawn with a faster method. This reduces the quality especially of the line segment
+                    ///<                joins, thus is most effective for pen sizes larger than 1. It is only used for solid line pens.
+                    ,phImmediateRefresh = 0x002 ///< <tt>0x002</tt> causes an immediate repaint() instead of a soft update() when QCustomPlot::replot() is called with parameter \ref QCustomPlot::rpRefreshHint.
+                    ///<                This is set by default to prevent the plot from freezing on fast consecutive replots (e.g. user drags ranges with mouse).
+                    ,phCacheLabels      = 0x004 ///< <tt>0x004</tt> axis (tick) labels will be cached as pixmaps, increasing replot performance.
+};
+Q_DECLARE_FLAGS(PlottingHints, PlottingHint)
 
-    /*!
+/*!
   Defines the mouse interactions possible with QCustomPlot.
   
   \c Interactions is a flag of or-combined elements of this enum type.
   
   \see QCustomPlot::setInteractions
 */
-    enum Interaction { iNone              = 0x000 ///< <tt>0x000</tt> None of the interactions are possible
-                       ,iRangeDrag        = 0x001 ///< <tt>0x001</tt> Axis ranges are draggable (see \ref QCPAxisRect::setRangeDrag, \ref QCPAxisRect::setRangeDragAxes)
-                       ,iRangeZoom        = 0x002 ///< <tt>0x002</tt> Axis ranges are zoomable with the mouse wheel (see \ref QCPAxisRect::setRangeZoom, \ref QCPAxisRect::setRangeZoomAxes)
-                       ,iMultiSelect      = 0x004 ///< <tt>0x004</tt> The user can select multiple objects by holding the modifier set by \ref QCustomPlot::setMultiSelectModifier while clicking
-                       ,iSelectPlottables = 0x008 ///< <tt>0x008</tt> Plottables are selectable (e.g. graphs, curves, bars,... see QCPAbstractPlottable)
-                       ,iSelectAxes       = 0x010 ///< <tt>0x010</tt> Axes are selectable (or parts of them, see QCPAxis::setSelectableParts)
-                       ,iSelectLegend     = 0x020 ///< <tt>0x020</tt> Legends are selectable (or their child items, see QCPLegend::setSelectableParts)
-                       ,iSelectItems      = 0x040 ///< <tt>0x040</tt> Items are selectable (Rectangles, Arrows, Textitems, etc. see \ref QCPAbstractItem)
-                       ,iSelectOther      = 0x080 ///< <tt>0x080</tt> All other objects are selectable (e.g. your own derived layerables, other layout elements,...)
-                       ,iSelectPlottablesBeyondAxisRect = 0x100 ///< <tt>0x100</tt> When performing plottable selection/hit tests, this flag extends the sensitive area beyond the axis rect
-                     };
-    Q_DECLARE_FLAGS(Interactions, Interaction)
+enum Interaction { iNone              = 0x000 ///< <tt>0x000</tt> None of the interactions are possible
+                   ,iRangeDrag        = 0x001 ///< <tt>0x001</tt> Axis ranges are draggable (see \ref QCPAxisRect::setRangeDrag, \ref QCPAxisRect::setRangeDragAxes)
+                   ,iRangeZoom        = 0x002 ///< <tt>0x002</tt> Axis ranges are zoomable with the mouse wheel (see \ref QCPAxisRect::setRangeZoom, \ref QCPAxisRect::setRangeZoomAxes)
+                   ,iMultiSelect      = 0x004 ///< <tt>0x004</tt> The user can select multiple objects by holding the modifier set by \ref QCustomPlot::setMultiSelectModifier while clicking
+                   ,iSelectPlottables = 0x008 ///< <tt>0x008</tt> Plottables are selectable (e.g. graphs, curves, bars,... see QCPAbstractPlottable)
+                   ,iSelectAxes       = 0x010 ///< <tt>0x010</tt> Axes are selectable (or parts of them, see QCPAxis::setSelectableParts)
+                   ,iSelectLegend     = 0x020 ///< <tt>0x020</tt> Legends are selectable (or their child items, see QCPLegend::setSelectableParts)
+                   ,iSelectItems      = 0x040 ///< <tt>0x040</tt> Items are selectable (Rectangles, Arrows, Textitems, etc. see \ref QCPAbstractItem)
+                   ,iSelectOther      = 0x080 ///< <tt>0x080</tt> All other objects are selectable (e.g. your own derived layerables, other layout elements,...)
+                   ,iSelectPlottablesBeyondAxisRect = 0x100 ///< <tt>0x100</tt> When performing plottable selection/hit tests, this flag extends the sensitive area beyond the axis rect
+};
+Q_DECLARE_FLAGS(Interactions, Interaction)
 
-    /*!
+/*!
   Defines the behaviour of the selection rect.
   
   \see QCustomPlot::setSelectionRectMode, QCustomPlot::selectionRect, QCPSelectionRect
 */
-    enum SelectionRectMode { srmNone    ///< The selection rect is disabled, and all mouse events are forwarded to the underlying objects, e.g. for axis range dragging
-                             ,srmZoom   ///< When dragging the mouse, a selection rect becomes active. Upon releasing, the axes that are currently set as range zoom axes (\ref QCPAxisRect::setRangeZoomAxes) will have their ranges zoomed accordingly.
-                             ,srmSelect ///< When dragging the mouse, a selection rect becomes active. Upon releasing, plottable data points that were within the selection rect are selected, if the plottable's selectability setting permits. (See  \ref dataselection "data selection mechanism" for details.)
-                             ,srmCustom ///< When dragging the mouse, a selection rect becomes active. It is the programmer's responsibility to connect according slots to the selection rect's signals (e.g. \ref QCPSelectionRect::accepted) in order to process the user interaction.
-                           };
+enum SelectionRectMode { srmNone    ///< The selection rect is disabled, and all mouse events are forwarded to the underlying objects, e.g. for axis range dragging
+                         ,srmZoom   ///< When dragging the mouse, a selection rect becomes active. Upon releasing, the axes that are currently set as range zoom axes (\ref QCPAxisRect::setRangeZoomAxes) will have their ranges zoomed accordingly.
+                         ,srmSelect ///< When dragging the mouse, a selection rect becomes active. Upon releasing, plottable data points that were within the selection rect are selected, if the plottable's selectability setting permits. (See  \ref dataselection "data selection mechanism" for details.)
+                         ,srmCustom ///< When dragging the mouse, a selection rect becomes active. It is the programmer's responsibility to connect according slots to the selection rect's signals (e.g. \ref QCPSelectionRect::accepted) in order to process the user interaction.
+};
 
-    /*!
+/*!
   Defines the different ways a plottable can be selected. These images show the effect of the
   different selection types, when the indicated selection rect was dragged:
   
@@ -315,81 +323,106 @@ namespace QCP {
   
   \see QCPAbstractPlottable::setSelectable, QCPDataSelection::enforceType
 */
-    enum SelectionType { stNone                ///< The plottable is not selectable
-                         ,stWhole              ///< Selection behaves like \ref stMultipleDataRanges, but if there are any data points selected, the entire plottable is drawn as selected.
-                         ,stSingleData         ///< One individual data point can be selected at a time
-                         ,stDataRange          ///< Multiple contiguous data points (a data range) can be selected
-                         ,stMultipleDataRanges ///< Any combination of data points/ranges can be selected
-                       };
+enum SelectionType { stNone                ///< The plottable is not selectable
+                     ,stWhole              ///< Selection behaves like \ref stMultipleDataRanges, but if there are any data points selected, the entire plottable is drawn as selected.
+                     ,stSingleData         ///< One individual data point can be selected at a time
+                     ,stDataRange          ///< Multiple contiguous data points (a data range) can be selected
+                     ,stMultipleDataRanges ///< Any combination of data points/ranges can be selected
+};
 
-    /*! \internal
-
+/*! \internal
+  
   Returns whether the specified \a value is considered an invalid data value for plottables (i.e.
   is \e nan or \e +/-inf). This function is used to check data validity upon replots, when the
   compiler flag \c QCUSTOMPLOT_CHECK_DATA is set.
 */
-    inline bool isInvalidData(double value)
-    {
-        return qIsNaN(value) || qIsInf(value);
-    }
+inline bool isInvalidData(double value)
+{
+    return qIsNaN(value) || qIsInf(value);
+}
 
-    /*! \internal
+/*! \internal
   \overload
   
   Checks two arguments instead of one.
 */
-    inline bool isInvalidData(double value1, double value2)
-    {
-        return isInvalidData(value1) || isInvalidData(value2);
-    }
+inline bool isInvalidData(double value1, double value2)
+{
+    return isInvalidData(value1) || isInvalidData(value2);
+}
 
-    /*! \internal
-
+/*! \internal
+  
   Sets the specified \a side of \a margins to \a value
   
   \see getMarginValue
 */
-    inline void setMarginValue(QMargins &margins, QCP::MarginSide side, int value)
+inline void setMarginValue(QMargins &margins, QCP::MarginSide side, int value)
+{
+    switch (side)
     {
-        switch (side)
-        {
-        case QCP::msLeft: margins.setLeft(value); break;
-        case QCP::msRight: margins.setRight(value); break;
-        case QCP::msTop: margins.setTop(value); break;
-        case QCP::msBottom: margins.setBottom(value); break;
-        case QCP::msAll: margins = QMargins(value, value, value, value); break;
-        default: break;
-        }
+    case QCP::msLeft: margins.setLeft(value); break;
+    case QCP::msRight: margins.setRight(value); break;
+    case QCP::msTop: margins.setTop(value); break;
+    case QCP::msBottom: margins.setBottom(value); break;
+    case QCP::msAll: margins = QMargins(value, value, value, value); break;
+    default: break;
     }
+}
 
-    /*! \internal
-
+/*! \internal
+  
   Returns the value of the specified \a side of \a margins. If \a side is \ref QCP::msNone or
   \ref QCP::msAll, returns 0.
   
   \see setMarginValue
 */
-    inline int getMarginValue(const QMargins &margins, QCP::MarginSide side)
+inline int getMarginValue(const QMargins &margins, QCP::MarginSide side)
+{
+    switch (side)
     {
-        switch (side)
-        {
-        case QCP::msLeft: return margins.left();
-        case QCP::msRight: return margins.right();
-        case QCP::msTop: return margins.top();
-        case QCP::msBottom: return margins.bottom();
-        default: break;
-        }
-        return 0;
+    case QCP::msLeft: return margins.left();
+    case QCP::msRight: return margins.right();
+    case QCP::msTop: return margins.top();
+    case QCP::msBottom: return margins.bottom();
+    default: break;
     }
+    return 0;
+}
 
+// for newer Qt versions we have to declare the enums/flags as metatypes inside the namespace using Q_ENUM_NS/Q_FLAG_NS:
+// if you change anything here, don't forget to change it for older Qt versions below, too,
+// and at the start of the namespace in the fake moc-run class
+#if QT_VERSION >= 0x060200
+Q_ENUM_NS(ExportPen)
+Q_ENUM_NS(ResolutionUnit)
+Q_ENUM_NS(SignDomain)
+Q_ENUM_NS(MarginSide)
+Q_ENUM_NS(AntialiasedElement)
+Q_ENUM_NS(PlottingHint)
+Q_ENUM_NS(Interaction)
+Q_ENUM_NS(SelectionRectMode)
+Q_ENUM_NS(SelectionType)
 
-    extern const QMetaObject staticMetaObject; // in moc-run we create a static meta object for QCP "fake" object. This line is the link to it via QCP::staticMetaObject in normal operation as namespace
+Q_FLAG_NS(AntialiasedElements)
+Q_FLAG_NS(PlottingHints)
+Q_FLAG_NS(MarginSides)
+Q_FLAG_NS(Interactions)
+#else
+extern const QMetaObject staticMetaObject;
+#endif
 
 } // end of namespace QCP
+
 Q_DECLARE_OPERATORS_FOR_FLAGS(QCP::AntialiasedElements)
 Q_DECLARE_OPERATORS_FOR_FLAGS(QCP::PlottingHints)
 Q_DECLARE_OPERATORS_FOR_FLAGS(QCP::MarginSides)
 Q_DECLARE_OPERATORS_FOR_FLAGS(QCP::Interactions)
+
+// for older Qt versions we have to declare the enums/flags as metatypes outside the namespace using Q_DECLARE_METATYPE:
+// if you change anything here, don't forget to change it for newer Qt versions above, too,
+// and at the start of the namespace in the fake moc-run class
+#if QT_VERSION < QT_VERSION_CHECK(6, 2, 0)
 Q_DECLARE_METATYPE(QCP::ExportPen)
 Q_DECLARE_METATYPE(QCP::ResolutionUnit)
 Q_DECLARE_METATYPE(QCP::SignDomain)
@@ -399,16 +432,17 @@ Q_DECLARE_METATYPE(QCP::PlottingHint)
 Q_DECLARE_METATYPE(QCP::Interaction)
 Q_DECLARE_METATYPE(QCP::SelectionRectMode)
 Q_DECLARE_METATYPE(QCP::SelectionType)
+#endif
 
 /* end of 'src/global.h' */
 
 
 /* including file 'src/vector2d.h'         */
-/* modified 2021-03-29T02:30:44, size 4988 */
+/* modified 2022-11-06T12:45:56, size 4988 */
 
 class QCP_LIB_DECL QCPVector2D
 {
-    public:
+public:
     QCPVector2D();
     QCPVector2D(double x, double y);
     QCPVector2D(const QPoint &point);
@@ -445,7 +479,7 @@ class QCP_LIB_DECL QCPVector2D
     QCPVector2D &operator+=(const QCPVector2D &vector);
     QCPVector2D &operator-=(const QCPVector2D &vector);
 
-    private:
+private:
     // property members:
     double mX, mY;
 
@@ -479,21 +513,21 @@ inline QDebug operator<< (QDebug d, const QCPVector2D &vec)
 
 
 /* including file 'src/painter.h'          */
-/* modified 2021-03-29T02:30:44, size 4035 */
+/* modified 2022-11-06T12:45:56, size 4035 */
 
 class QCP_LIB_DECL QCPPainter : public QPainter
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines special modes the painter can operate in. They disable or enable certain subsets of features/fixes/workarounds,
     depending on whether they are wanted on the respective output device.
   */
-    enum PainterMode { pmDefault       = 0x00   ///< <tt>0x00</tt> Default mode for painting on screen devices
-                       ,pmVectorized   = 0x01   ///< <tt>0x01</tt> Mode for vectorized painting (e.g. PDF export). For example, this prevents some antialiasing fixes.
-                       ,pmNoCaching    = 0x02   ///< <tt>0x02</tt> Mode for all sorts of exports (e.g. PNG, PDF,...). For example, this prevents using cached pixmap labels
-                       ,pmNonCosmetic  = 0x04   ///< <tt>0x04</tt> Turns pen widths 0 to 1, i.e. disables cosmetic pens. (A cosmetic pen is always drawn with width 1 pixel in the vector image/pdf viewer, independent of zoom.)
-                     };
+                 enum PainterMode { pmDefault       = 0x00   ///< <tt>0x00</tt> Default mode for painting on screen devices
+                                    ,pmVectorized   = 0x01   ///< <tt>0x01</tt> Mode for vectorized painting (e.g. PDF export). For example, this prevents some antialiasing fixes.
+                                    ,pmNoCaching    = 0x02   ///< <tt>0x02</tt> Mode for all sorts of exports (e.g. PNG, PDF,...). For example, this prevents using cached pixmap labels
+                                    ,pmNonCosmetic  = 0x04   ///< <tt>0x04</tt> Turns pen widths 0 to 1, i.e. disables cosmetic pens. (A cosmetic pen is always drawn with width 1 pixel in the vector image/pdf viewer, independent of zoom.)
+                 };
     Q_ENUMS(PainterMode)
     Q_FLAGS(PainterModes)
     Q_DECLARE_FLAGS(PainterModes, PainterMode)
@@ -538,7 +572,7 @@ Q_DECLARE_METATYPE(QCPPainter::PainterMode)
 
 
 /* including file 'src/paintbuffer.h'      */
-/* modified 2021-03-29T02:30:44, size 5006 */
+/* modified 2022-11-06T12:45:56, size 5006 */
 
 class QCP_LIB_DECL QCPAbstractPaintBuffer
 {
@@ -646,7 +680,7 @@ protected:
 
 
 /* including file 'src/layer.h'            */
-/* modified 2021-03-29T02:30:44, size 7038 */
+/* modified 2022-11-06T12:45:56, size 7038 */
 
 class QCP_LIB_DECL QCPLayer : public QObject
 {
@@ -670,7 +704,7 @@ public:
   */
     enum LayerMode { lmLogical   ///< Layer is used only for rendering order, and shares paint buffer with all other adjacent logical layers.
                      ,lmBuffered ///< Layer has its own paint buffer and may be replotted individually (see \ref replot).
-                   };
+    };
     Q_ENUMS(LayerMode)
 
     QCPLayer(QCustomPlot* parentPlot, const QString &layerName);
@@ -795,7 +829,7 @@ private:
 
 
 /* including file 'src/axis/range.h'       */
-/* modified 2021-03-29T02:30:44, size 5280 */
+/* modified 2022-11-06T12:45:56, size 5280 */
 
 class QCP_LIB_DECL QCPRange
 {
@@ -913,7 +947,7 @@ inline const QCPRange operator/(const QCPRange& range, double value)
 
 
 /* including file 'src/selection.h'        */
-/* modified 2021-03-29T02:30:44, size 8569 */
+/* modified 2022-11-06T12:45:56, size 8569 */
 
 class QCP_LIB_DECL QCPDataRange
 {
@@ -1117,7 +1151,7 @@ inline QDebug operator<< (QDebug d, const QCPDataSelection &selection)
 
 
 /* including file 'src/selectionrect.h'    */
-/* modified 2021-03-29T02:30:44, size 3354 */
+/* modified 2022-11-06T12:45:56, size 3354 */
 
 class QCP_LIB_DECL QCPSelectionRect : public QCPLayerable
 {
@@ -1171,7 +1205,7 @@ protected:
 
 
 /* including file 'src/layout.h'            */
-/* modified 2021-03-29T02:30:44, size 14279 */
+/* modified 2022-11-06T12:45:56, size 14279 */
 
 class QCP_LIB_DECL QCPMarginGroup : public QObject
 {
@@ -1225,7 +1259,7 @@ public:
     enum UpdatePhase { upPreparation ///< Phase used for any type of preparation that needs to be done before margin calculation and layout
                        ,upMargins    ///< Phase in which the margins are calculated and set
                        ,upLayout     ///< Final phase in which the layout system places the rects of the elements
-                     };
+    };
     Q_ENUMS(UpdatePhase)
 
     /*!
@@ -1238,7 +1272,7 @@ public:
   */
     enum SizeConstraintRect { scrInnerRect ///< Minimum/Maximum size constraints apply to inner rect
                               , scrOuterRect ///< Minimum/Maximum size constraints apply to outer rect, thus include layout element margins
-                            };
+    };
     Q_ENUMS(SizeConstraintRect)
 
     explicit QCPLayoutElement(QCustomPlot *parentPlot=nullptr);
@@ -1371,7 +1405,7 @@ public:
   */
     enum FillOrder { foRowsFirst    ///< Rows are filled first, and a new element is wrapped to the next column if the row count would exceed \ref setWrap.
                      ,foColumnsFirst ///< Columns are filled first, and a new element is wrapped to the next row if the column count would exceed \ref setWrap.
-                   };
+    };
     Q_ENUMS(FillOrder)
 
     explicit QCPLayoutGrid();
@@ -1447,7 +1481,7 @@ public:
   */
     enum InsetPlacement { ipFree            ///< The element may be positioned/sized arbitrarily, see \ref setInsetRect
                           ,ipBorderAligned  ///< The element is aligned to one of the layout sides, see \ref setInsetAlignment
-                        };
+    };
     Q_ENUMS(InsetPlacement)
 
     explicit QCPLayoutInset();
@@ -1492,13 +1526,13 @@ Q_DECLARE_METATYPE(QCPLayoutInset::InsetPlacement)
 
 
 /* including file 'src/lineending.h'       */
-/* modified 2021-03-29T02:30:44, size 4426 */
+/* modified 2022-11-06T12:45:56, size 4426 */
 
 class QCP_LIB_DECL QCPLineEnding
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines the type of ending decoration for line-like items, e.g. an arrow.
     
     \image html QCPLineEnding.png
@@ -1509,17 +1543,17 @@ public:
     
     \see QCPItemLine::setHead, QCPItemLine::setTail, QCPItemCurve::setHead, QCPItemCurve::setTail, QCPAxis::setLowerEnding, QCPAxis::setUpperEnding
   */
-    enum EndingStyle { esNone          ///< No ending decoration
-                       ,esFlatArrow    ///< A filled arrow head with a straight/flat back (a triangle)
-                       ,esSpikeArrow   ///< A filled arrow head with an indented back
-                       ,esLineArrow    ///< A non-filled arrow head with open back
-                       ,esDisc         ///< A filled circle
-                       ,esSquare       ///< A filled square
-                       ,esDiamond      ///< A filled diamond (45 degrees rotated square)
-                       ,esBar          ///< A bar perpendicular to the line
-                       ,esHalfBar      ///< A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \ref setInverted)
-                       ,esSkewedBar    ///< A bar that is skewed (skew controllable via \ref setLength)
-                     };
+                 enum EndingStyle { esNone          ///< No ending decoration
+                                    ,esFlatArrow    ///< A filled arrow head with a straight/flat back (a triangle)
+                                    ,esSpikeArrow   ///< A filled arrow head with an indented back
+                                    ,esLineArrow    ///< A non-filled arrow head with open back
+                                    ,esDisc         ///< A filled circle
+                                    ,esSquare       ///< A filled square
+                                    ,esDiamond      ///< A filled diamond (45 degrees rotated square)
+                                    ,esBar          ///< A bar perpendicular to the line
+                                    ,esHalfBar      ///< A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \ref setInverted)
+                                    ,esSkewedBar    ///< A bar that is skewed (skew controllable via \ref setLength)
+                 };
     Q_ENUMS(EndingStyle)
 
     QCPLineEnding();
@@ -1556,19 +1590,19 @@ Q_DECLARE_METATYPE(QCPLineEnding::EndingStyle)
 
 
 /* including file 'src/axis/labelpainter.h' */
-/* modified 2021-03-29T02:30:44, size 7086  */
+/* modified 2022-11-06T12:45:56, size 7086  */
 
 class QCPLabelPainterPrivate
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     TODO
   */
-    enum AnchorMode { amRectangular    ///<
-                      ,amSkewedUpright ///<
-                      ,amSkewedRotated ///<
-                    };
+                 enum AnchorMode { amRectangular    ///<
+                                   ,amSkewedUpright ///<
+                                   ,amSkewedRotated ///<
+                 };
     Q_ENUMS(AnchorMode)
 
     /*!
@@ -1576,7 +1610,7 @@ public:
   */
     enum AnchorReferenceType { artNormal    ///<
                                ,artTangent ///<
-                             };
+    };
     Q_ENUMS(AnchorReferenceType)
 
     /*!
@@ -1590,7 +1624,7 @@ public:
                       ,asTopRight
                       ,asBottomRight
                       ,asBottomLeft
-                    };
+    };
     Q_ENUMS(AnchorSide)
 
     explicit QCPLabelPainterPrivate(QCustomPlot *parentPlot);
@@ -1696,18 +1730,18 @@ Q_DECLARE_METATYPE(QCPLabelPainterPrivate::AnchorSide)
 
 
 /* including file 'src/axis/axisticker.h'  */
-/* modified 2021-03-29T02:30:44, size 4230 */
+/* modified 2022-11-06T12:45:56, size 4230 */
 
 class QCP_LIB_DECL QCPAxisTicker
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines the strategies that the axis ticker may follow when choosing the size of the tick step.
     
     \see setTickStepStrategy
   */
-    enum TickStepStrategy
+                 enum TickStepStrategy
     {
         tssReadability    ///< A nicely readable tick step is prioritized over matching the requested number of ticks (see \ref setTickCount)
         ,tssMeetTickCount ///< Less readable tick steps are allowed which in turn facilitates getting closer to the requested tick count
@@ -1761,7 +1795,7 @@ Q_DECLARE_METATYPE(QSharedPointer<QCPAxisTicker>)
 
 
 /* including file 'src/axis/axistickerdatetime.h' */
-/* modified 2021-03-29T02:30:44, size 3600        */
+/* modified 2022-11-06T12:45:56, size 3600        */
 
 class QCP_LIB_DECL QCPAxisTickerDateTime : public QCPAxisTicker
 {
@@ -1810,23 +1844,23 @@ protected:
 
 
 /* including file 'src/axis/axistickertime.h' */
-/* modified 2021-03-29T02:30:44, size 3542    */
+/* modified 2022-11-06T12:45:56, size 3542    */
 
 class QCP_LIB_DECL QCPAxisTickerTime : public QCPAxisTicker
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines the logical units in which fractions of time spans can be expressed.
     
     \see setFieldWidth, setTimeFormat
   */
-    enum TimeUnit { tuMilliseconds ///< Milliseconds, one thousandth of a second (%%z in \ref setTimeFormat)
-                    ,tuSeconds     ///< Seconds (%%s in \ref setTimeFormat)
-                    ,tuMinutes     ///< Minutes (%%m in \ref setTimeFormat)
-                    ,tuHours       ///< Hours (%%h in \ref setTimeFormat)
-                    ,tuDays        ///< Days (%%d in \ref setTimeFormat)
-                  };
+                 enum TimeUnit { tuMilliseconds ///< Milliseconds, one thousandth of a second (%%z in \ref setTimeFormat)
+                                 ,tuSeconds     ///< Seconds (%%s in \ref setTimeFormat)
+                                 ,tuMinutes     ///< Minutes (%%m in \ref setTimeFormat)
+                                 ,tuHours       ///< Hours (%%h in \ref setTimeFormat)
+                                 ,tuDays        ///< Days (%%d in \ref setTimeFormat)
+                 };
     Q_ENUMS(TimeUnit)
 
     QCPAxisTickerTime();
@@ -1862,22 +1896,22 @@ Q_DECLARE_METATYPE(QCPAxisTickerTime::TimeUnit)
 
 
 /* including file 'src/axis/axistickerfixed.h' */
-/* modified 2021-03-29T02:30:44, size 3308     */
+/* modified 2022-11-06T12:45:56, size 3308     */
 
 class QCP_LIB_DECL QCPAxisTickerFixed : public QCPAxisTicker
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines how the axis ticker may modify the specified tick step (\ref setTickStep) in order to
     control the number of ticks in the axis range.
     
     \see setScaleStrategy
   */
-    enum ScaleStrategy { ssNone      ///< Modifications are not allowed, the specified tick step is absolutely fixed. This might cause a high tick density and overlapping labels if the axis range is zoomed out.
-                         ,ssMultiples ///< An integer multiple of the specified tick step is allowed. The used factor follows the base class properties of \ref setTickStepStrategy and \ref setTickCount.
-                         ,ssPowers    ///< An integer power of the specified tick step is allowed.
-                       };
+                 enum ScaleStrategy { ssNone      ///< Modifications are not allowed, the specified tick step is absolutely fixed. This might cause a high tick density and overlapping labels if the axis range is zoomed out.
+                                      ,ssMultiples ///< An integer multiple of the specified tick step is allowed. The used factor follows the base class properties of \ref setTickStepStrategy and \ref setTickCount.
+                                      ,ssPowers    ///< An integer power of the specified tick step is allowed.
+                 };
     Q_ENUMS(ScaleStrategy)
 
     QCPAxisTickerFixed();
@@ -1904,7 +1938,7 @@ Q_DECLARE_METATYPE(QCPAxisTickerFixed::ScaleStrategy)
 
 
 /* including file 'src/axis/axistickertext.h' */
-/* modified 2021-03-29T02:30:44, size 3090    */
+/* modified 2022-11-06T12:45:56, size 3090    */
 
 class QCP_LIB_DECL QCPAxisTickerText : public QCPAxisTicker
 {
@@ -1942,21 +1976,21 @@ protected:
 
 
 /* including file 'src/axis/axistickerpi.h' */
-/* modified 2021-03-29T02:30:44, size 3911  */
+/* modified 2022-11-06T12:45:56, size 3911  */
 
 class QCP_LIB_DECL QCPAxisTickerPi : public QCPAxisTicker
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines how fractions should be displayed in tick labels.
     
     \see setFractionStyle
   */
-    enum FractionStyle { fsFloatingPoint     ///< Fractions are displayed as regular decimal floating point numbers, e.g. "0.25" or "0.125".
-                         ,fsAsciiFractions   ///< Fractions are written as rationals using ASCII characters only, e.g. "1/4" or "1/8"
-                         ,fsUnicodeFractions ///< Fractions are written using sub- and superscript UTF-8 digits and the fraction symbol.
-                       };
+                 enum FractionStyle { fsFloatingPoint     ///< Fractions are displayed as regular decimal floating point numbers, e.g. "0.25" or "0.125".
+                                      ,fsAsciiFractions   ///< Fractions are written as rationals using ASCII characters only, e.g. "1/4" or "1/8"
+                                      ,fsUnicodeFractions ///< Fractions are written using sub- and superscript UTF-8 digits and the fraction symbol.
+                 };
     Q_ENUMS(FractionStyle)
 
     QCPAxisTickerPi();
@@ -2001,7 +2035,7 @@ Q_DECLARE_METATYPE(QCPAxisTickerPi::FractionStyle)
 
 
 /* including file 'src/axis/axistickerlog.h' */
-/* modified 2021-03-29T02:30:44, size 2594   */
+/* modified 2022-11-06T12:45:56, size 2594   */
 
 class QCP_LIB_DECL QCPAxisTickerLog : public QCPAxisTicker
 {
@@ -2033,7 +2067,7 @@ protected:
 
 
 /* including file 'src/axis/axis.h'         */
-/* modified 2021-03-29T02:30:44, size 20913 */
+/* modified 2022-11-06T12:45:56, size 20913 */
 
 class QCP_LIB_DECL QCPGrid :public QCPLayerable
 {
@@ -2143,7 +2177,7 @@ public:
                     ,atRight  = 0x02  ///< <tt>0x02</tt> Axis is vertical and on the right side of the axis rect
                     ,atTop    = 0x04  ///< <tt>0x04</tt> Axis is horizontal and on the top side of the axis rect
                     ,atBottom = 0x08  ///< <tt>0x08</tt> Axis is horizontal and on the bottom side of the axis rect
-                  };
+    };
     Q_ENUMS(AxisType)
     Q_FLAGS(AxisTypes)
     Q_DECLARE_FLAGS(AxisTypes, AxisType)
@@ -2154,7 +2188,7 @@ public:
   */
     enum LabelSide { lsInside    ///< Tick labels will be displayed inside the axis rect and clipped to the inner axis rect
                      ,lsOutside  ///< Tick labels will be displayed outside the axis rect
-                   };
+    };
     Q_ENUMS(LabelSide)
     /*!
     Defines the scale of an axis.
@@ -2162,7 +2196,7 @@ public:
   */
     enum ScaleType { stLinear       ///< Linear scaling
                      ,stLogarithmic ///< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
-                   };
+    };
     Q_ENUMS(ScaleType)
     /*!
     Defines the selectable parts of an axis.
@@ -2172,7 +2206,7 @@ public:
                           ,spAxis       = 0x001  ///< The axis backbone and tick marks
                           ,spTickLabels = 0x002  ///< Tick labels (numbers) of this axis (as a whole, not individually)
                           ,spAxisLabel  = 0x004  ///< The axis label
-                        };
+    };
     Q_ENUMS(SelectablePart)
     Q_FLAGS(SelectableParts)
     Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
@@ -2461,13 +2495,13 @@ protected:
 
 
 /* including file 'src/scatterstyle.h'     */
-/* modified 2021-03-29T02:30:44, size 7275 */
+/* modified 2022-11-06T12:45:56, size 7275 */
 
 class QCP_LIB_DECL QCPScatterStyle
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Represents the various properties of a scatter style instance. For example, this enum is used
     to specify which properties of \ref QCPSelectionDecorator::setScatterStyle will be used when
     highlighting selected data points.
@@ -2475,13 +2509,13 @@ public:
     Specific scatter properties can be transferred between \ref QCPScatterStyle instances via \ref
     setFromOther.
   */
-    enum ScatterProperty { spNone  = 0x00  ///< <tt>0x00</tt> None
-                           ,spPen   = 0x01  ///< <tt>0x01</tt> The pen property, see \ref setPen
-                           ,spBrush = 0x02  ///< <tt>0x02</tt> The brush property, see \ref setBrush
-                           ,spSize  = 0x04  ///< <tt>0x04</tt> The size property, see \ref setSize
-                           ,spShape = 0x08  ///< <tt>0x08</tt> The shape property, see \ref setShape
-                           ,spAll   = 0xFF  ///< <tt>0xFF</tt> All properties
-                         };
+                 enum ScatterProperty { spNone  = 0x00  ///< <tt>0x00</tt> None
+                                        ,spPen   = 0x01  ///< <tt>0x01</tt> The pen property, see \ref setPen
+                                        ,spBrush = 0x02  ///< <tt>0x02</tt> The brush property, see \ref setBrush
+                                        ,spSize  = 0x04  ///< <tt>0x04</tt> The size property, see \ref setSize
+                                        ,spShape = 0x08  ///< <tt>0x08</tt> The shape property, see \ref setShape
+                                        ,spAll   = 0xFF  ///< <tt>0xFF</tt> All properties
+                 };
     Q_ENUMS(ScatterProperty)
     Q_FLAGS(ScatterProperties)
     Q_DECLARE_FLAGS(ScatterProperties, ScatterProperty)
@@ -2511,7 +2545,7 @@ public:
                         ,ssPeace     ///< \enumimage{ssPeace.png} a circle, with one vertical and two downward diagonal lines
                         ,ssPixmap    ///< a custom pixmap specified by \ref setPixmap, centered on the data point coordinates
                         ,ssCustom    ///< custom painter operations are performed per scatter (As QPainterPath, see \ref setCustomPath)
-                      };
+    };
     Q_ENUMS(ScatterShape)
 
     QCPScatterStyle();
@@ -2568,7 +2602,7 @@ Q_DECLARE_METATYPE(QCPScatterStyle::ScatterShape)
 
 
 /* including file 'src/datacontainer.h'     */
-/* modified 2021-03-29T02:30:44, size 34070 */
+/* modified 2022-11-06T12:45:56, size 34305 */
 
 /*! \relates QCPDataContainer
   Returns whether the sort key of \a a is less than the sort key of \a b.
@@ -3237,6 +3271,8 @@ QCPRange QCPDataContainer<DataType>::keyRange(bool &foundRange, QCP::SignDomain 
   output parameter \a foundRange indicates whether a sensible range was found. If this is false,
   you should not use the returned QCPRange (e.g. the data container is empty or all points have the
   same value).
+  
+  Inf and -Inf data values are ignored.
 
   If \a inKeyRange has both lower and upper bound set to zero (is equal to <tt>QCPRange()</tt>),
   all data points are considered, without any restriction on the keys.
@@ -3274,12 +3310,12 @@ QCPRange QCPDataContainer<DataType>::valueRange(bool &foundRange, QCP::SignDomai
             if (restrictKeyRange && (it->mainKey() < inKeyRange.lower || it->mainKey() > inKeyRange.upper))
                 continue;
             current = it->valueRange();
-            if ((current.lower < range.lower || !haveLower) && !qIsNaN(current.lower))
+            if ((current.lower < range.lower || !haveLower) && !qIsNaN(current.lower) && std::isfinite(current.lower))
             {
                 range.lower = current.lower;
                 haveLower = true;
             }
-            if ((current.upper > range.upper || !haveUpper) && !qIsNaN(current.upper))
+            if ((current.upper > range.upper || !haveUpper) && !qIsNaN(current.upper) && std::isfinite(current.upper))
             {
                 range.upper = current.upper;
                 haveUpper = true;
@@ -3292,12 +3328,12 @@ QCPRange QCPDataContainer<DataType>::valueRange(bool &foundRange, QCP::SignDomai
             if (restrictKeyRange && (it->mainKey() < inKeyRange.lower || it->mainKey() > inKeyRange.upper))
                 continue;
             current = it->valueRange();
-            if ((current.lower < range.lower || !haveLower) && current.lower < 0 && !qIsNaN(current.lower))
+            if ((current.lower < range.lower || !haveLower) && current.lower < 0 && !qIsNaN(current.lower) && std::isfinite(current.lower))
             {
                 range.lower = current.lower;
                 haveLower = true;
             }
-            if ((current.upper > range.upper || !haveUpper) && current.upper < 0 && !qIsNaN(current.upper))
+            if ((current.upper > range.upper || !haveUpper) && current.upper < 0 && !qIsNaN(current.upper) && std::isfinite(current.upper))
             {
                 range.upper = current.upper;
                 haveUpper = true;
@@ -3310,12 +3346,12 @@ QCPRange QCPDataContainer<DataType>::valueRange(bool &foundRange, QCP::SignDomai
             if (restrictKeyRange && (it->mainKey() < inKeyRange.lower || it->mainKey() > inKeyRange.upper))
                 continue;
             current = it->valueRange();
-            if ((current.lower < range.lower || !haveLower) && current.lower > 0 && !qIsNaN(current.lower))
+            if ((current.lower < range.lower || !haveLower) && current.lower > 0 && !qIsNaN(current.lower) && std::isfinite(current.lower))
             {
                 range.lower = current.lower;
                 haveLower = true;
             }
-            if ((current.upper > range.upper || !haveUpper) && current.upper > 0 && !qIsNaN(current.upper))
+            if ((current.upper > range.upper || !haveUpper) && current.upper > 0 && !qIsNaN(current.upper) && std::isfinite(current.upper))
             {
                 range.upper = current.upper;
                 haveUpper = true;
@@ -3410,13 +3446,13 @@ void QCPDataContainer<DataType>::performAutoSqueeze()
 
 
 /* including file 'src/plottable.h'        */
-/* modified 2021-03-29T02:30:44, size 8461 */
+/* modified 2022-11-06T12:45:56, size 8461 */
 
 class QCP_LIB_DECL QCPSelectionDecorator
 {
     Q_GADGET
-public:
-    QCPSelectionDecorator();
+        public:
+                 QCPSelectionDecorator();
     virtual ~QCPSelectionDecorator();
 
     // getters:
@@ -3567,13 +3603,13 @@ private:
 
 
 /* including file 'src/item.h'             */
-/* modified 2021-03-29T02:30:44, size 9425 */
+/* modified 2022-11-06T12:45:56, size 9425 */
 
 class QCP_LIB_DECL QCPItemAnchor
 {
     Q_GADGET
-public:
-    QCPItemAnchor(QCustomPlot *parentPlot, QCPAbstractItem *parentItem, const QString &name, int anchorId=-1);
+        public:
+                 QCPItemAnchor(QCustomPlot *parentPlot, QCPAbstractItem *parentItem, const QString &name, int anchorId=-1);
     virtual ~QCPItemAnchor();
 
     // getters:
@@ -3610,22 +3646,22 @@ private:
 class QCP_LIB_DECL QCPItemPosition : public QCPItemAnchor
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines the ways an item position can be specified. Thus it defines what the numbers passed to
     \ref setCoords actually mean.
     
     \see setType
   */
-    enum PositionType { ptAbsolute        ///< Static positioning in pixels, starting from the top left corner of the viewport/widget.
-                        ,ptViewportRatio  ///< Static positioning given by a fraction of the viewport size. For example, if you call setCoords(0, 0), the position will be at the top
-                        ///< left corner of the viewport/widget. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
-                        ///< vertically at the top of the viewport/widget, etc.
-                        ,ptAxisRectRatio  ///< Static positioning given by a fraction of the axis rect size (see \ref setAxisRect). For example, if you call setCoords(0, 0), the position will be at the top
-                        ///< left corner of the axis rect. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
-                        ///< vertically at the top of the axis rect, etc. You can also go beyond the axis rect by providing negative coordinates or coordinates larger than 1.
-                        ,ptPlotCoords     ///< Dynamic positioning at a plot coordinate defined by two axes (see \ref setAxes).
-                      };
+                 enum PositionType { ptAbsolute        ///< Static positioning in pixels, starting from the top left corner of the viewport/widget.
+                                     ,ptViewportRatio  ///< Static positioning given by a fraction of the viewport size. For example, if you call setCoords(0, 0), the position will be at the top
+                                     ///< left corner of the viewport/widget. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
+                                     ///< vertically at the top of the viewport/widget, etc.
+                                     ,ptAxisRectRatio  ///< Static positioning given by a fraction of the axis rect size (see \ref setAxisRect). For example, if you call setCoords(0, 0), the position will be at the top
+                                     ///< left corner of the axis rect. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
+                                     ///< vertically at the top of the axis rect, etc. You can also go beyond the axis rect by providing negative coordinates or coordinates larger than 1.
+                                     ,ptPlotCoords     ///< Dynamic positioning at a plot coordinate defined by two axes (see \ref setAxes).
+                 };
     Q_ENUMS(PositionType)
 
     QCPItemPosition(QCustomPlot *parentPlot, QCPAbstractItem *parentItem, const QString &name);
@@ -3752,7 +3788,7 @@ private:
 
 
 /* including file 'src/core.h'              */
-/* modified 2021-03-29T02:30:44, size 19304 */
+/* modified 2022-11-06T12:45:56, size 19304 */
 
 class QCP_LIB_DECL QCustomPlot : public QWidget
 {
@@ -3777,7 +3813,7 @@ public:
   */
     enum LayerInsertMode { limBelow  ///< Layer is inserted below other layer
                            ,limAbove ///< Layer is inserted above other layer
-                         };
+    };
     Q_ENUMS(LayerInsertMode)
 
     /*!
@@ -3789,7 +3825,7 @@ public:
                            ,rpQueuedRefresh   ///< Replots immediately, but queues the widget repaint, by calling QWidget::update() after the replot. This way multiple redundant widget repaints can be avoided.
                            ,rpRefreshHint     ///< Whether to use immediate or queued refresh depends on whether the plotting hint \ref QCP::phImmediateRefresh is set, see \ref setPlottingHints.
                            ,rpQueuedReplot    ///< Queues the entire replot for the next event loop iteration. This way multiple redundant replots can be avoided. The actual replot is then done with \ref rpRefreshHint priority.
-                         };
+    };
     Q_ENUMS(RefreshPriority)
 
     explicit QCustomPlot(QWidget *parent = nullptr);
@@ -4122,7 +4158,7 @@ ItemType *QCustomPlot::itemAt(const QPointF &pos, bool onlySelectable) const
 
 
 /* including file 'src/plottable1d.h'       */
-/* modified 2021-03-29T02:30:44, size 25638 */
+/* modified 2022-11-06T12:45:56, size 25638 */
 
 class QCPPlottableInterface1D
 {
@@ -4659,7 +4695,7 @@ void QCPAbstractPlottable1D<DataType>::drawPolyline(QCPPainter *painter, const Q
     // High-DPI. In High-DPI cases people must set a pen width slightly larger than 1.0 to get
     // correct DPI scaling of width, but of course with performance penalty.
     if (!painter->modes().testFlag(QCPPainter::pmVectorized) &&
-            qFuzzyCompare(painter->pen().widthF(), 1.0))
+        qFuzzyCompare(painter->pen().widthF(), 1.0))
     {
         QPen newPen = painter->pen();
         newPen.setWidth(0);
@@ -4668,9 +4704,9 @@ void QCPAbstractPlottable1D<DataType>::drawPolyline(QCPPainter *painter, const Q
 
     // if drawing solid line and not in PDF, use much faster line drawing instead of polyline:
     if (mParentPlot->plottingHints().testFlag(QCP::phFastPolylines) &&
-            painter->pen().style() == Qt::SolidLine &&
-            !painter->modes().testFlag(QCPPainter::pmVectorized) &&
-            !painter->modes().testFlag(QCPPainter::pmNoCaching))
+        painter->pen().style() == Qt::SolidLine &&
+        !painter->modes().testFlag(QCPPainter::pmVectorized) &&
+        !painter->modes().testFlag(QCPPainter::pmNoCaching))
     {
         int i = 0;
         bool lastIsNan = false;
@@ -4714,20 +4750,20 @@ void QCPAbstractPlottable1D<DataType>::drawPolyline(QCPPainter *painter, const Q
 
 
 /* including file 'src/colorgradient.h'    */
-/* modified 2021-03-29T02:30:44, size 7262 */
+/* modified 2022-11-06T12:45:56, size 7262 */
 
 class QCP_LIB_DECL QCPColorGradient
 {
     Q_GADGET
-public:
-    /*!
+        public:
+                 /*!
     Defines the color spaces in which color interpolation between gradient stops can be performed.
     
     \see setColorInterpolation
   */
-    enum ColorInterpolation { ciRGB  ///< Color channels red, green and blue are linearly interpolated
-                              ,ciHSV ///< Color channels hue, saturation and value are linearly interpolated (The hue is interpolated over the shortest angle distance)
-                            };
+                 enum ColorInterpolation { ciRGB  ///< Color channels red, green and blue are linearly interpolated
+                                           ,ciHSV ///< Color channels hue, saturation and value are linearly interpolated (The hue is interpolated over the shortest angle distance)
+                 };
     Q_ENUMS(ColorInterpolation)
 
     /*!
@@ -4740,7 +4776,7 @@ public:
                        ,nhHighestColor ///< NaN data points appear as the highest color defined in this QCPColorGradient
                        ,nhTransparent ///< NaN data points appear transparent
                        ,nhNanColor ///< NaN data points appear as the color defined with \ref setNanColor
-                     };
+    };
     Q_ENUMS(NanHandling)
 
     /*!
@@ -4759,7 +4795,7 @@ public:
                           ,gpSpectrum  ///< An approximation of the visible light spectrum (creates banding illusion but allows more precise magnitude estimates)
                           ,gpJet       ///< Hue variation similar to a spectrum, often used in numerical visualization (creates banding illusion but allows more precise magnitude estimates)
                           ,gpHues      ///< Full hue cycle, with highest and lowest color red (suitable for periodic data, such as angles and phases, see \ref setPeriodic)
-                        };
+    };
     Q_ENUMS(GradientPreset)
 
     QCPColorGradient();
@@ -4817,25 +4853,25 @@ Q_DECLARE_METATYPE(QCPColorGradient::GradientPreset)
 
 
 /* including file 'src/selectiondecorator-bracket.h' */
-/* modified 2021-03-29T02:30:44, size 4458           */
+/* modified 2022-11-06T12:45:56, size 4458           */
 
 class QCP_LIB_DECL QCPSelectionDecoratorBracket : public QCPSelectionDecorator
 {
     Q_GADGET
-public:
+        public:
 
-    /*!
+                 /*!
     Defines which shape is drawn at the boundaries of selected data ranges.
     
     Some of the bracket styles further allow specifying a height and/or width, see \ref
     setBracketHeight and \ref setBracketWidth.
   */
-    enum BracketStyle { bsSquareBracket ///< A square bracket is drawn.
-                        ,bsHalfEllipse   ///< A half ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
-                        ,bsEllipse       ///< An ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
-                        ,bsPlus         ///< A plus is drawn.
-                        ,bsUserStyle    ///< Start custom bracket styles at this index when subclassing and reimplementing \ref drawBracket.
-                      };
+                 enum BracketStyle { bsSquareBracket ///< A square bracket is drawn.
+                                     ,bsHalfEllipse   ///< A half ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
+                                     ,bsEllipse       ///< An ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
+                                     ,bsPlus         ///< A plus is drawn.
+                                     ,bsUserStyle    ///< Start custom bracket styles at this index when subclassing and reimplementing \ref drawBracket.
+                 };
     Q_ENUMS(BracketStyle)
 
     QCPSelectionDecoratorBracket();
@@ -4886,7 +4922,7 @@ Q_DECLARE_METATYPE(QCPSelectionDecoratorBracket::BracketStyle)
 
 
 /* including file 'src/layoutelements/layoutelement-axisrect.h' */
-/* modified 2021-03-29T02:30:44, size 7529                      */
+/* modified 2022-11-06T12:45:56, size 7529                      */
 
 class QCP_LIB_DECL QCPAxisRect : public QCPLayoutElement
 {
@@ -5012,7 +5048,7 @@ private:
 
 
 /* including file 'src/layoutelements/layoutelement-legend.h' */
-/* modified 2021-03-29T02:30:44, size 10425                   */
+/* modified 2022-11-06T12:45:56, size 10425                   */
 
 class QCP_LIB_DECL QCPAbstractLegendItem : public QCPLayoutElement
 {
@@ -5130,7 +5166,7 @@ public:
     enum SelectablePart { spNone        = 0x000 ///< <tt>0x000</tt> None
                           ,spLegendBox  = 0x001 ///< <tt>0x001</tt> The legend box (frame)
                           ,spItems      = 0x002 ///< <tt>0x002</tt> Legend items individually (see \ref selectedItems)
-                        };
+    };
     Q_ENUMS(SelectablePart)
     Q_FLAGS(SelectableParts)
     Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
@@ -5230,7 +5266,7 @@ Q_DECLARE_METATYPE(QCPLegend::SelectablePart)
 
 
 /* including file 'src/layoutelements/layoutelement-textelement.h' */
-/* modified 2021-03-29T02:30:44, size 5359                         */
+/* modified 2022-11-06T12:45:56, size 5359                         */
 
 class QCP_LIB_DECL QCPTextElement : public QCPLayoutElement
 {
@@ -5317,7 +5353,7 @@ private:
 
 
 /* including file 'src/layoutelements/layoutelement-colorscale.h' */
-/* modified 2021-03-29T02:30:44, size 5939                        */
+/* modified 2022-11-06T12:45:56, size 5939                        */
 
 
 class QCPColorScaleAxisRectPrivate : public QCPAxisRect
@@ -5425,7 +5461,7 @@ private:
 
 
 /* including file 'src/plottables/plottable-graph.h' */
-/* modified 2021-03-29T02:30:44, size 9316           */
+/* modified 2022-11-06T12:45:56, size 9316           */
 
 class QCP_LIB_DECL QCPGraphData
 {
@@ -5481,7 +5517,7 @@ public:
                      ,lsStepRight  ///< line is drawn as steps where the step height is the value of the right data point
                      ,lsStepCenter ///< line is drawn as steps where the step is in between two data points
                      ,lsImpulse    ///< each data point is represented by a line parallel to the value axis, which reaches from the data point to the zero-value-line
-                   };
+    };
     Q_ENUMS(LineStyle)
 
     explicit QCPGraph(QCPAxis *keyAxis, QCPAxis *valueAxis);
@@ -5498,9 +5534,15 @@ public:
     // setters:
     void setData(QSharedPointer<QCPGraphDataContainer> data);
     void setData(const QVector<double> &keys, const QVector<double> &values, bool alreadySorted=false);
+    void setLineStyle(LineStyle ls);
+    void setScatterStyle(const QCPScatterStyle &style);
+    void setScatterSkip(int skip);
+    void setChannelFillGraph(QCPGraph *targetGraph);
+    void setAdaptiveSampling(bool enabled);
+
+    // bfr --
     void setData(const std::vector<double> &keys, const std::vector<double> &values,
                  bool alreadySorted=false);
-    // bfr --
     void setData_if(const std::vector<double> &keys, const std::vector<double> &values,
                     const std::vector<bool> &selected,
                     bool alreadySorted=false);
@@ -5510,11 +5552,6 @@ public:
                          const std::vector<bool> &selected,
                          bool alreadySorted=true);
     // -----
-    void setLineStyle(LineStyle ls);
-    void setScatterStyle(const QCPScatterStyle &style);
-    void setScatterSkip(int skip);
-    void setChannelFillGraph(QCPGraph *targetGraph);
-    void setAdaptiveSampling(bool enabled);
 
     // non-property methods:
     void addData(const QVector<double> &keys, const QVector<double> &values, bool alreadySorted=false);
@@ -5536,7 +5573,6 @@ public:
     void vaddData_if_cplx(std::vector<std::complex<double>>::const_iterator data_beg, std::vector<std::complex<double>>::const_iterator data_end,
                           std::vector<bool>::const_iterator selected_beg, std::vector<bool>::const_iterator selected_end,
                           bool alreadySorted=true);
-
 
     // ----
 
@@ -5596,7 +5632,7 @@ Q_DECLARE_METATYPE(QCPGraph::LineStyle)
 
 
 /* including file 'src/plottables/plottable-curve.h' */
-/* modified 2021-03-29T02:30:44, size 7434           */
+/* modified 2022-11-06T12:45:56, size 7434           */
 
 class QCP_LIB_DECL QCPCurveData
 {
@@ -5646,7 +5682,7 @@ public:
   */
     enum LineStyle { lsNone  ///< No line is drawn between data points (e.g. only scatters)
                      ,lsLine ///< Data points are connected with a straight line
-                   };
+    };
     Q_ENUMS(LineStyle)
 
     explicit QCPCurve(QCPAxis *keyAxis, QCPAxis *valueAxis);
@@ -5711,7 +5747,7 @@ Q_DECLARE_METATYPE(QCPCurve::LineStyle)
 
 
 /* including file 'src/plottables/plottable-bars.h' */
-/* modified 2021-03-29T02:30:44, size 8955          */
+/* modified 2022-11-06T12:45:56, size 8955          */
 
 class QCP_LIB_DECL QCPBarsGroup : public QObject
 {
@@ -5730,7 +5766,7 @@ public:
     enum SpacingType { stAbsolute       ///< Bar spacing is in absolute pixels
                        ,stAxisRectRatio ///< Bar spacing is given by a fraction of the axis rect size
                        ,stPlotCoords    ///< Bar spacing is in key coordinates and thus scales with the key axis range
-                     };
+    };
     Q_ENUMS(SpacingType)
 
     explicit QCPBarsGroup(QCustomPlot *parentPlot);
@@ -5831,7 +5867,7 @@ public:
     enum WidthType { wtAbsolute       ///< Bar width is in absolute pixels
                      ,wtAxisRectRatio ///< Bar width is given by a fraction of the axis rect size
                      ,wtPlotCoords    ///< Bar width is in key coordinates and thus scales with the key axis range
-                   };
+    };
     Q_ENUMS(WidthType)
 
     explicit QCPBars(QCPAxis *keyAxis, QCPAxis *valueAxis);
@@ -5899,7 +5935,7 @@ Q_DECLARE_METATYPE(QCPBars::WidthType)
 
 
 /* including file 'src/plottables/plottable-statisticalbox.h' */
-/* modified 2021-03-29T02:30:44, size 7522                    */
+/* modified 2022-11-06T12:45:56, size 7522                    */
 
 class QCP_LIB_DECL QCPStatisticalBoxData
 {
@@ -6016,7 +6052,7 @@ protected:
 
 
 /* including file 'src/plottables/plottable-colormap.h' */
-/* modified 2021-03-29T02:30:44, size 7092              */
+/* modified 2022-11-06T12:45:56, size 7092              */
 
 class QCP_LIB_DECL QCPColorMapData
 {
@@ -6152,7 +6188,7 @@ protected:
 
 
 /* including file 'src/plottables/plottable-financial.h' */
-/* modified 2021-03-29T02:30:44, size 8644               */
+/* modified 2022-11-06T12:45:56, size 8644               */
 
 class QCP_LIB_DECL QCPFinancialData
 {
@@ -6208,7 +6244,7 @@ public:
     enum WidthType { wtAbsolute       ///< width is in absolute pixels
                      ,wtAxisRectRatio ///< width is given by a fraction of the axis rect size
                      ,wtPlotCoords    ///< width is in key coordinates and thus scales with the key axis range
-                   };
+    };
     Q_ENUMS(WidthType)
 
     /*!
@@ -6218,7 +6254,7 @@ public:
   */
     enum ChartStyle { csOhlc         ///< Open-High-Low-Close bar representation
                       ,csCandlestick  ///< Candlestick representation
-                    };
+    };
     Q_ENUMS(ChartStyle)
 
     explicit QCPFinancial(QCPAxis *keyAxis, QCPAxis *valueAxis);
@@ -6291,7 +6327,7 @@ Q_DECLARE_METATYPE(QCPFinancial::ChartStyle)
 
 
 /* including file 'src/plottables/plottable-errorbar.h' */
-/* modified 2021-03-29T02:30:44, size 7749              */
+/* modified 2022-11-06T12:45:56, size 7749              */
 
 class QCP_LIB_DECL QCPErrorBarsData
 {
@@ -6342,7 +6378,7 @@ public:
   */
     enum ErrorType { etKeyError    ///< The errors are for the key dimension (bars appear parallel to the key axis)
                      ,etValueError ///< The errors are for the value dimension (bars appear parallel to the value axis)
-                   };
+    };
     Q_ENUMS(ErrorType)
 
     explicit QCPErrorBars(QCPAxis *keyAxis, QCPAxis *valueAxis);
@@ -6358,6 +6394,10 @@ public:
     void setData(QSharedPointer<QCPErrorBarsDataContainer> data);
     void setData(const QVector<double> &error);
     void setData(const QVector<double> &errorMinus, const QVector<double> &errorPlus);
+    void setDataPlottable(QCPAbstractPlottable* plottable);
+    void setErrorType(ErrorType type);
+    void setWhiskerWidth(double pixels);
+    void setSymbolGap(double pixels);
 
     // bfr ----
 
@@ -6372,11 +6412,6 @@ public:
                   std::vector<double>::const_iterator errorPlus_begin, std::vector<double>::const_iterator errorPlus_end);
 
     // ----
-
-    void setDataPlottable(QCPAbstractPlottable* plottable);
-    void setErrorType(ErrorType type);
-    void setWhiskerWidth(double pixels);
-    void setSymbolGap(double pixels);
 
     // non-property methods:
     void addData(const QVector<double> &error);
@@ -6431,7 +6466,7 @@ protected:
 
 
 /* including file 'src/items/item-straightline.h' */
-/* modified 2021-03-29T02:30:44, size 3137        */
+/* modified 2022-11-06T12:45:56, size 3137        */
 
 class QCP_LIB_DECL QCPItemStraightLine : public QCPAbstractItem
 {
@@ -6474,7 +6509,7 @@ protected:
 
 
 /* including file 'src/items/item-line.h'  */
-/* modified 2021-03-29T02:30:44, size 3429 */
+/* modified 2022-11-06T12:45:56, size 3429 */
 
 class QCP_LIB_DECL QCPItemLine : public QCPAbstractItem
 {
@@ -6524,7 +6559,7 @@ protected:
 
 
 /* including file 'src/items/item-curve.h' */
-/* modified 2021-03-29T02:30:44, size 3401 */
+/* modified 2022-11-06T12:45:56, size 3401 */
 
 class QCP_LIB_DECL QCPItemCurve : public QCPAbstractItem
 {
@@ -6575,7 +6610,7 @@ protected:
 
 
 /* including file 'src/items/item-rect.h'  */
-/* modified 2021-03-29T02:30:44, size 3710 */
+/* modified 2022-11-06T12:45:56, size 3710 */
 
 class QCP_LIB_DECL QCPItemRect : public QCPAbstractItem
 {
@@ -6634,7 +6669,7 @@ protected:
 
 
 /* including file 'src/items/item-text.h'  */
-/* modified 2021-03-29T02:30:44, size 5576 */
+/* modified 2022-11-06T12:45:56, size 5576 */
 
 class QCP_LIB_DECL QCPItemText : public QCPAbstractItem
 {
@@ -6731,7 +6766,7 @@ protected:
 
 
 /* including file 'src/items/item-ellipse.h' */
-/* modified 2021-03-29T02:30:44, size 3890   */
+/* modified 2022-11-06T12:45:56, size 3890   */
 
 class QCP_LIB_DECL QCPItemEllipse : public QCPAbstractItem
 {
@@ -6793,7 +6828,7 @@ protected:
 
 
 /* including file 'src/items/item-pixmap.h' */
-/* modified 2021-03-29T02:30:44, size 4407  */
+/* modified 2022-11-06T12:45:56, size 4407  */
 
 class QCP_LIB_DECL QCPItemPixmap : public QCPAbstractItem
 {
@@ -6862,7 +6897,7 @@ protected:
 
 
 /* including file 'src/items/item-tracer.h' */
-/* modified 2021-03-29T02:30:44, size 4811  */
+/* modified 2022-11-06T12:45:56, size 4811  */
 
 class QCP_LIB_DECL QCPItemTracer : public QCPAbstractItem
 {
@@ -6889,7 +6924,7 @@ public:
                        ,tsCrosshair  ///< A plus shaped crosshair which spans the complete axis rect
                        ,tsCircle     ///< A circle
                        ,tsSquare     ///< A square
-                     };
+    };
     Q_ENUMS(TracerStyle)
 
     explicit QCPItemTracer(QCustomPlot *parentPlot);
@@ -6948,7 +6983,7 @@ Q_DECLARE_METATYPE(QCPItemTracer::TracerStyle)
 
 
 /* including file 'src/items/item-bracket.h' */
-/* modified 2021-03-29T02:30:44, size 3991   */
+/* modified 2022-11-06T12:45:56, size 3991   */
 
 class QCP_LIB_DECL QCPItemBracket : public QCPAbstractItem
 {
@@ -6970,7 +7005,7 @@ public:
                         ,bsRound  ///< A brace with round edges
                         ,bsCurly  ///< A curly brace
                         ,bsCalligraphic ///< A curly brace with varying stroke width giving a calligraphic impression
-                      };
+    };
     Q_ENUMS(BracketStyle)
 
     explicit QCPItemBracket(QCustomPlot *parentPlot);
@@ -7015,7 +7050,7 @@ Q_DECLARE_METATYPE(QCPItemBracket::BracketStyle)
 
 
 /* including file 'src/polar/radialaxis.h'  */
-/* modified 2021-03-29T02:30:44, size 12227 */
+/* modified 2022-11-06T12:45:56, size 12227 */
 
 
 class QCP_LIB_DECL QCPPolarAxisRadial : public QCPLayerable
@@ -7030,7 +7065,7 @@ public:
   */
     enum AngleReference { arAbsolute    ///< The axis tilt is given in absolute degrees. The zero is to the right and positive angles are measured counter-clockwise.
                           ,arAngularAxis ///< The axis tilt is measured in the angular coordinate system given by the parent angular axis.
-                        };
+    };
     Q_ENUMS(AngleReference)
     /*!
     Defines the scale of an axis.
@@ -7038,7 +7073,7 @@ public:
   */
     enum ScaleType { stLinear       ///< Linear scaling
                      ,stLogarithmic ///< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
-                   };
+    };
     Q_ENUMS(ScaleType)
     /*!
     Defines the selectable parts of an axis.
@@ -7048,14 +7083,14 @@ public:
                           ,spAxis       = 0x001  ///< The axis backbone and tick marks
                           ,spTickLabels = 0x002  ///< Tick labels (numbers) of this axis (as a whole, not individually)
                           ,spAxisLabel  = 0x004  ///< The axis label
-                        };
+    };
     Q_ENUMS(SelectablePart)
     Q_FLAGS(SelectableParts)
     Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
 
     enum LabelMode { lmUpright   ///<
                      ,lmRotated ///<
-                   };
+    };
     Q_ENUMS(LabelMode)
 
     explicit QCPPolarAxisRadial(QCPPolarAxisAngular *parent);
@@ -7267,7 +7302,7 @@ Q_DECLARE_METATYPE(QCPPolarAxisRadial::SelectablePart)
 
 
 /* including file 'src/polar/layoutelement-angularaxis.h' */
-/* modified 2021-03-29T02:30:44, size 13461               */
+/* modified 2022-11-06T12:45:56, size 13461               */
 
 class QCP_LIB_DECL QCPPolarAxisAngular : public QCPLayoutElement
 {
@@ -7284,7 +7319,7 @@ public:
                           ,spAxis       = 0x001  ///< The axis backbone and tick marks
                           ,spTickLabels = 0x002  ///< Tick labels (numbers) of this axis (as a whole, not individually)
                           ,spAxisLabel  = 0x004  ///< The axis label
-                        };
+    };
     Q_ENUMS(SelectablePart)
     Q_FLAGS(SelectableParts)
     Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
@@ -7294,7 +7329,7 @@ public:
   */
     enum LabelMode { lmUpright   ///<
                      ,lmRotated ///<
-                   };
+    };
     Q_ENUMS(LabelMode)
 
     explicit QCPPolarAxisAngular(QCustomPlot *parentPlot);
@@ -7540,7 +7575,7 @@ Q_DECLARE_METATYPE(QCPPolarAxisAngular::SelectablePart)
 
 
 /* including file 'src/polar/polargrid.h'  */
-/* modified 2021-03-29T02:30:44, size 4506 */
+/* modified 2022-11-06T12:45:56, size 4506 */
 
 class QCP_LIB_DECL QCPPolarGrid :public QCPLayerable
 {
@@ -7556,7 +7591,7 @@ public:
                     ,gtRadial = 0x02 ///<
                     ,gtAll    = 0xFF ///<
                     ,gtNone   = 0x00 ///<
-                  };
+    };
     Q_ENUMS(GridType)
     Q_FLAGS(GridTypes)
     Q_DECLARE_FLAGS(GridTypes, GridType)
@@ -7620,7 +7655,7 @@ Q_DECLARE_METATYPE(QCPPolarGrid::GridType)
 
 
 /* including file 'src/polar/polargraph.h' */
-/* modified 2021-03-29T02:30:44, size 9606 */
+/* modified 2022-11-06T12:45:56, size 9606 */
 
 
 class QCP_LIB_DECL QCPPolarLegendItem : public QCPAbstractLegendItem
@@ -7662,7 +7697,7 @@ public:
     enum LineStyle { lsNone        ///< data points are not connected with any lines (e.g. data only represented
                      ///< with symbols according to the scatter style, see \ref setScatterStyle)
                      ,lsLine       ///< data points are connected by a straight line
-                   };
+    };
     Q_ENUMS(LineStyle)
 
     QCPPolarGraph(QCPPolarAxisAngular *keyAxis, QCPPolarAxisRadial *valueAxis);

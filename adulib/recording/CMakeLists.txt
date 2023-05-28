@@ -6,11 +6,14 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 COMPONENTS Core Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets REQUIRED)
+
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
+find_package(Qt6
+    REQUIRED COMPONENTS Core Gui Widgets
+)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include)
@@ -23,15 +26,15 @@ set(HEADERS_INSTALL
   recording.h
 )
 
-# want STATIC
-add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS_INSTALL} )
+add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS_INSTALL} )
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(${PROJECT_NAME}
-PRIVATE Qt${QT_VERSION_MAJOR}::Core
-PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
 )
+
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE RECORDING_LIBRARY)
 

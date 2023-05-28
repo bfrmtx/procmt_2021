@@ -6,36 +6,21 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-# set(CMAKE_CXX_STANDARD 20)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ------------------RPATH for loading .so from ../lib ------------------------------------------
-# use, i.e. don't skip the full RPATH for the build tree
-set(CMAKE_SKIP_BUILD_RPATH FALSE)
-
-# when building, don't use the install RPATH already
-# (but later on when installing)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
-
-# below bin we have lib, so bin/lib where I put re-locatable so libs or dlls
-if (APPLE OR UNIX)
-set(CMAKE_INSTALL_RPATH "/usr/local/procmt/lib")
-endif()
-
-# add the automatically determined parts of the RPATH
-# which point to directories outside the build tree to the install RPATH
-if (APPLE OR UNIX)
- set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-endif()
-# ------------------------------------------------------------
+include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
-    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport  REQUIRED)
+    find_package(Qt6
+        REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
+        OPTIONAL_COMPONENTS PrintSupport
+    )
 ELSE()
-    find_package(QT NAMES Qt6 COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Gui Widgets Network PrintSupport  REQUIRED)
+    find_package(Qt6
+        REQUIRED COMPONENTS Core Gui Widgets Network Sql
+        OPTIONAL_COMPONENTS PrintSupport
+    )
 ENDIF()
 
 
@@ -80,7 +65,7 @@ ${CMAKE_SOURCE_DIR}/pmt_adulib/group_atsfiles
 ${CMAKE_SOURCE_DIR}/qcustomplot
 
 )
-set(PROJECT_SOURCES
+set(SOURCES
 main.cpp
 addressdialog.cpp
 qextnetworkaccessmanager.cpp
@@ -112,78 +97,60 @@ manualscalingdialog.ui
 qwebdavdialog.ui
 )
 
+include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(${PROJECT_NAME}
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(${PROJECT_NAME} SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(${PROJECT_NAME}
-            ${PROJECT_SOURCES}
-        )
-    endif()
+target_link_libraries(${PROJECT_NAME} PRIVATE
+ Qt6::Core
+ Qt6::Sql
+ Qt6::Gui
+ Qt6::Widgets
+ Qt6::Network
+ prc_com
+ prc_com_table
+ atsfile
+ atsheader
+ atmfile
+ eqdatetime
+ calibration
+ measdocxml
+ tinyxml2
+ tinyxmlwriter
+ db_sensor_query
+ sql_base_tools
+ msg_logger
+ fftreal_vector
+ firfilter
+ ats_ascii_file
+ acsp_prz
+ atsfile_collector
+ calibration
+ db_sensor_query
+ math_vector
+ mt_data
+ geocoordinates
+ gui_items
+ mc_data
+ aduxml
+ adu_json
+ phoenix_json
+ mt_site
+ plotlib
+ lineedit_file
+ group_atsfiles
+ qstring_utilities
+ qcustomplot
+ xmlcallib
+)
+
+if(TARGET Qt6::PrintSupport)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
 endif()
 
 
-target_link_libraries(${PROJECT_NAME}
-PRIVATE Qt${QT_VERSION_MAJOR}::Core
-PRIVATE Qt${QT_VERSION_MAJOR}::Sql
-PRIVATE Qt${QT_VERSION_MAJOR}::Gui
-PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-PRIVATE Qt${QT_VERSION_MAJOR}::Network
-PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
-PRIVATE prc_com
-PRIVATE prc_com_table
-PRIVATE atsfile
-PRIVATE atsheader
-PRIVATE atmfile
-PRIVATE eqdatetime
-PRIVATE calibration
-PRIVATE measdocxml
-PRIVATE tinyxml2
-PRIVATE tinyxmlwriter
-PRIVATE db_sensor_query
-PRIVATE sql_base_tools
-PRIVATE msg_logger
-PRIVATE fftreal_vector
-PRIVATE firfilter
-PRIVATE ats_ascii_file
-PRIVATE acsp_prz
-PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
-PRIVATE math_vector
-PRIVATE mt_data
-PRIVATE geocoordinates
-PRIVATE gui_items
-PRIVATE mc_data
-PRIVATE aduxml
-PRIVATE adu_json
-PRIVATE phoenix_json
-PRIVATE mt_site
-PRIVATE lineedit_file
-PRIVATE group_atsfiles
-PRIVATE qstring_utilities
-PRIVATE qcustomplot
-PRIVATE xmlcallib
-)
-
 IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
+        PRIVATE Qt6::OpenGL
     )
     IF(WIN32)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
@@ -191,17 +158,5 @@ IF(QCUSTOMPLOT_USE_OPENGL)
 ENDIF()
 
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    # for GUI
-    WIN32_EXECUTABLE TRUE
-)
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(${PROJECT_NAME})
-endif()
-
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 
