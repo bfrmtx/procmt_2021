@@ -32,6 +32,8 @@ calibration::calibration(const QFileInfo &dbname_info, const int channo, const i
 
     this->sensor_types_tables.insert("SHFT-02e", "`cal shft-02e`");
     this->sensor_types_tables.insert("SHFT-02", "`cal shft-02`");
+    this->sensor_types_tables.insert("SHFT-03e", "`cal shft-03e`");
+
 
     this->sensor_types_tables.insert("FGS-03", "`cal fgs-03`");
     this->sensor_types_tables.insert("FGS-03e", "`cal fgs-03e`");
@@ -177,14 +179,21 @@ size_t calibration::read_std_txt_file(const int &channel, const QFileInfo &qfi)
                         else {
                              this->caltime = QDateTime::fromString(strvals.at(1).trimmed() + " " + strvals.at(2).trimmed(), "yyyy-MM-dd hh:mm:ss");
                         }
+                        if (!this->caltime.isValid()) {
+                             // last shot for SHFT format
+                             this->caltime = QDateTime::fromString(strvals.at(1) + " " + strvals.at(2), "yy/MM/dd HH:mm:ss");
+                             this->caltime = this->caltime.addYears(100);
+                             if (!this->caltime.isValid()) this->caltime = QDateTime::currentDateTime();
+                        }
                         qDebug() << "stringlist"  << strvals.at(0) << strvals.at(1) + " " + strvals.at(2);
 
                         qDebug() << " getting " << strvals.at(0) << "calibrated on" << this->caltime.toString("yyyy-MM-dd HH:mm:ss");
 
                         if (!this->caltime.isValid()) {
+                             qDebug() << "cal time" << this->caltime;
                             message = "calibration time invalid, return"  + qfi.baseName();
                             emit this->tx_cal_message(this->channel, this->slot, message);
-                            return 0;
+                            //return 0;
                         }
                     }
                     else {
