@@ -44,6 +44,7 @@
 #include <atomic>
 #include <thread>
 
+
 #include "plot.h"
 #include "calib_lab.h"
 #include "atsheader.h"
@@ -58,6 +59,13 @@
 #include "GlobalIncludes.h"
 
 
+#include <QVector>
+
+
+
+#ifdef _msvc
+#define _USE_MATH_DEFINES
+#endif
 /**
  * Version Number
  */

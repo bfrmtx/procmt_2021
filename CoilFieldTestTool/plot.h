@@ -30,6 +30,8 @@
 #ifndef PLOT_H
 #define PLOT_H
 
+
+
 #include <QDialog>
 #include <QButtonGroup>
 #include <QGroupBox>
@@ -48,6 +50,12 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlRecord>
+
+template <class T>
+static inline QVector<T> fromStdVector(const std::vector<T> &vector)
+{
+    return QVector<T>(vector.begin(), vector.end());
+}
 
 typedef struct {
     QCPItemLine *hLine;
@@ -100,21 +108,21 @@ signals:
 private:
     Ui::Plot *ui;
 
-//    QVector<double> qvecRefMFS06FreqChopperOn;
-//    QVector<double> qvecRefMFS06MagChopperOn;
-//    QVector<double> qvecRefMFS06PhaseChooperOn;
+    QVector<double> qvecRefMFS06FreqChopperOn;
+    QVector<double> qvecRefMFS06MagChopperOn;
+    QVector<double> qvecRefMFS06PhaseChooperOn;
 
-//    QVector<double> qvecRefMFS06FreqChopperOff;
-//    QVector<double> qvecRefMFS06MagChopperOff;
-//    QVector<double> qvecRefMFS06PhaseChooperOff;
+    QVector<double> qvecRefMFS06FreqChopperOff;
+    QVector<double> qvecRefMFS06MagChopperOff;
+    QVector<double> qvecRefMFS06PhaseChooperOff;
 
-//    QVector<double> qvecRefMFS07FreqChopperOn;
-//    QVector<double> qvecRefMFS07MagChopperOn;
-//    QVector<double> qvecRefMFS07PhaseChooperOn;
+    QVector<double> qvecRefMFS07FreqChopperOn;
+    QVector<double> qvecRefMFS07MagChopperOn;
+    QVector<double> qvecRefMFS07PhaseChooperOn;
 
-//    QVector<double> qvecRefMFS07FreqChopperOff;
-//    QVector<double> qvecRefMFS07MagChopperOff;
-//    QVector<double> qvecRefMFS07PhaseChooperOff;
+    QVector<double> qvecRefMFS07FreqChopperOff;
+    QVector<double> qvecRefMFS07MagChopperOff;
+    QVector<double> qvecRefMFS07PhaseChooperOff;
 
     QVector<QPushButton*> qvechowCurveButtons;
     QVector<QPushButton*> qvechowPointsButtons;

@@ -23,6 +23,8 @@ ${CMAKE_SOURCE_DIR}/base/prc_com
 ${CMAKE_SOURCE_DIR}/procmt/atsfile
 ${CMAKE_SOURCE_DIR}/procmt/atsheader
 ${CMAKE_SOURCE_DIR}/procmt/atmfile
+${CMAKE_SOURCE_DIR}/procmt/acsp_prz
+${CMAKE_SOURCE_DIR}/procmt/atsfile_collector
 ${CMAKE_SOURCE_DIR}/procmt/ats_ascii_file
 ${CMAKE_SOURCE_DIR}/libqt/eqdatetime
 ${CMAKE_SOURCE_DIR}/libxml/calibration

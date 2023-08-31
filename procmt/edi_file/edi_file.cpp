@@ -37,9 +37,9 @@ edi_file::edi_file(QObject *parent): QObject(parent), QFileInfo(), prc_com(false
     this->edi_DEFINEMEAS.insert("REFELEV", 0.0);
 
 
-    this->znames_real << ">ZXXR //" << ">ZXYR //" <<  ">ZYXR //" <<  ">ZYYR //" << ">TXR.EXP //" << ">TYR.EXP //";
-    this->znames_imag << ">ZXXI //" << ">ZXYI //" <<  ">ZYXI //" <<  ">ZYYI //" << ">TXI.EXP //" << ">TYI.EXP //";
-    this->znames_var  << ">ZXX.VAR //" << ">ZXY.VAR //" << ">ZYX.VAR //" << ">ZYY.VAR //" << ">TXVAR.EXP //" << ">TYVAR.EXP //";
+    this->znames_real << ">ZXXR ROT=NONE //" << ">ZXYR ROT=NONE //" <<  ">ZYXR ROT=NONE //" <<  ">ZYYR ROT=NONE //" << ">TXR.EXP ROT=NONE //" << ">TYR.EXP ROT=NONE //";
+    this->znames_imag << ">ZXXI ROT=NONE //" << ">ZXYI ROT=NONE //" <<  ">ZYXI ROT=NONE //" <<  ">ZYYI ROT=NONE //" << ">TXI.EXP ROT=NONE //" << ">TYI.EXP ROT=NONE //";
+    this->znames_var  << ">ZXX.VAR ROT=NONE //" << ">ZXY.VAR ROT=NONE //" << ">ZYX.VAR ROT=NONE //" << ">ZYY.VAR ROT=NONE //" << ">TXVAR.EXP ROT=NONE //" << ">TYVAR.EXP ROT=NONE //";
 
     //this->tnames_real << ">TXR.EXP //" << ">TYR.EXP //";
     //this->tnames_imag << ">TXI.EXP //" << ">TYI.EXP //";
@@ -364,7 +364,7 @@ bool edi_file::write_mtsect()
 
     if (this->z.coh[xy].size() && this->z.coh[yx].size()) {
 
-        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << "  ROT=NORTH  //" << z.freqs.size() << Qt::endl;
+        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << "  ROT=NONE  //" << z.freqs.size() << Qt::endl;
         i = 0;
         for (auto &allf : this->z.coh[xy]) {
 
@@ -377,7 +377,7 @@ bool edi_file::write_mtsect()
         }
         qts << Qt::endl;
 
-        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << "  ROT=NORTH  //" << z.freqs.size() << Qt::endl;
+        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << "  ROT=NONE  //" << z.freqs.size() << Qt::endl;
         i = 0;
         for (auto &allf : this->z.coh[yx]) {
 
@@ -916,7 +916,7 @@ bool edi_file::read_mtsect()
 
 qint64 edi_file::read_a_coh_section()
 {
-    // >COH  MEAS1=1000.0001 MEAS2=1003.0001  ROT=NORTH  //42  that is mtx for example Ex vs Hy
+    // >COH  MEAS1=1000.0001 MEAS2=1003.0001  ROT=NONE  //42  that is mtx for example Ex vs Hy
     qint64 sp = this->qts.pos();
 
     QStringList strlst;

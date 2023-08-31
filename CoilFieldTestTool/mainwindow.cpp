@@ -352,9 +352,6 @@ void MainWindow::on_pbComputeTF_clicked (void)
 
             // copy processing results into local data containers for display
             auto iter = data.last()->constBegin();
-
-            QVector<double> qvt;
-
             while (iter !=  data.last()->constEnd())
             {
                 if (iter.key().contains("ampl"))
@@ -379,46 +376,18 @@ void MainWindow::on_pbComputeTF_clicked (void)
 
                 if (iter.value().cal_f.size() && iter.value().chopper == 1) {
                     qDebug() << "get chopper on >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> : " << iter.value().cal_f.size()<< iter.value().cal_f.at(0) << iter.value().cal_ampl.at(0) << iter.value().cal_phase.at(0);
-                    // Qt6
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_f) qvt.push_back(v);
-                    this->qvecCalChopperOnFreq.emplace_back(qvt);
-                    //this->qvecCalChopperOnFreq.push_back(QVector<double>::fromStdVector(iter.value().cal_f));
+                    this->qvecCalChopperOnFreq.push_back( fromStdVector(iter.value().cal_f));
+                    this->qvecCalChopperOnAmpl.push_back( fromStdVector(iter.value().cal_ampl));
+                    this->qvecCalChopperOnPhase.push_back( fromStdVector(iter.value().cal_phase));
 
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_ampl) qvt.push_back(v);
-                    this->qvecCalChopperOnFreq.emplace_back(qvt);
-                    //this->qvecCalChopperOnAmpl.push_back(QVector<double>::fromStdVector(iter.value().cal_ampl));
-
-
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_phase) qvt.push_back(v);
-                    this->qvecCalChopperOnFreq.emplace_back(qvt);
-                    // this->qvecCalChopperOnPhase.push_back(QVector<double>::fromStdVector(iter.value().cal_phase));
-                    qvt.clear();
 
                 }
 
                 if (iter.value().cal_f.size() && iter.value().chopper == 0) {
                     qDebug() << "get chopper off >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> : " << iter.value().cal_f.size() << iter.value().cal_f.at(0) << iter.value().cal_ampl.at(0) << iter.value().cal_phase.at(0);
-                    // Qt6
-
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_f) qvt.push_back(v);
-                    this->qvecCalChopperOffFreq.emplace_back(qvt);
-                    //this->qvecCalChopperOffFreq.push_back(QVector<double>::fromStdVector(iter.value().cal_f));
-
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_ampl) qvt.push_back(v);
-                    this->qvecCalChopperOffAmpl.emplace_back(qvt);
-                    //this->qvecCalChopperOffAmpl.push_back(QVector<double>::fromStdVector(iter.value().cal_ampl));
-
-
-                    qvt.clear();
-                    for (const auto &v : iter.value().cal_phase) qvt.push_back(v);
-                    this->qvecCalChopperOffPhase.emplace_back(qvt);
-                    //this->qvecCalChopperOffPhase.push_back(QVector<double>::fromStdVector(iter.value().cal_phase));
-                    qvt.clear();
+                    this->qvecCalChopperOffFreq.push_back( fromStdVector(iter.value().cal_f));
+                    this->qvecCalChopperOffAmpl.push_back( fromStdVector(iter.value().cal_ampl));
+                    this->qvecCalChopperOffPhase.push_back( fromStdVector(iter.value().cal_phase));
 
                 }
 

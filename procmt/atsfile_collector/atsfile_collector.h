@@ -38,6 +38,7 @@
 #include "atsfile.h"
 #include "ats_ascii_file.h"
 #include "vector_utils.h"
+#include "math_vector.h"
 
 
 #include <QDataStream>

@@ -825,48 +825,48 @@ bool Plot::showData (QVector<QVector<QVector<QString> > >& qvecTFHeader, QVector
 void Plot::initRefCurves(void)
 {
     // clear all arrays
-//    qvecRefMFS06FreqChopperOn.clear ();
-//    qvecRefMFS06MagChopperOn.clear ();
-//    qvecRefMFS06PhaseChooperOn.clear ();
+    qvecRefMFS06FreqChopperOn.clear ();
+    qvecRefMFS06MagChopperOn.clear ();
+    qvecRefMFS06PhaseChooperOn.clear ();
 
-//    qvecRefMFS06FreqChopperOff.clear ();
-//    qvecRefMFS06MagChopperOff.clear ();
-//    qvecRefMFS06PhaseChooperOff.clear ();
+    qvecRefMFS06FreqChopperOff.clear ();
+    qvecRefMFS06MagChopperOff.clear ();
+    qvecRefMFS06PhaseChooperOff.clear ();
 
-//    qvecRefMFS07FreqChopperOn.clear ();
-//    qvecRefMFS07MagChopperOn.clear ();
-//    qvecRefMFS07PhaseChooperOn.clear ();
+    qvecRefMFS07FreqChopperOn.clear ();
+    qvecRefMFS07MagChopperOn.clear ();
+    qvecRefMFS07PhaseChooperOn.clear ();
 
-//    qvecRefMFS07FreqChopperOff.clear ();
-//    qvecRefMFS07MagChopperOff.clear ();
-//    qvecRefMFS07PhaseChooperOff.clear ();
-
-
+    qvecRefMFS07FreqChopperOff.clear ();
+    qvecRefMFS07MagChopperOff.clear ();
+    qvecRefMFS07PhaseChooperOff.clear ();
 
 
-//    std::unique_ptr<calibration> cal07 = std::make_unique<calibration>(info_db.absoluteFilePath());
-//    cal07->sensortype = "MFS-07e";
-//    cal07->open_master_cal(this->master_cal_db);
-//    cal07->get_master_cal();
-//    qvecRefMFS07FreqChopperOn = QVector<double>::fromStdVector(cal07->f_on_master);
-//    qvecRefMFS07MagChopperOn = QVector<double>::fromStdVector(cal07->ampl_on_master);
-//    qvecRefMFS07PhaseChooperOn = QVector<double>::fromStdVector(cal07->phase_grad_on_master);
 
-//    qvecRefMFS07FreqChopperOff = QVector<double>::fromStdVector(cal07->f_off_master);
-//    qvecRefMFS07MagChopperOff = QVector<double>::fromStdVector(cal07->ampl_off_master);
-//    qvecRefMFS07PhaseChooperOff = QVector<double>::fromStdVector(cal07->phase_grad_off_master);
 
-//    std::unique_ptr<calibration> cal06 = std::make_unique<calibration>(info_db.absoluteFilePath());
-//    cal06->sensortype = "MFS-06e";
-//    cal06->open_master_cal(this->master_cal_db);
-//    cal06->get_master_cal();
-//    qvecRefMFS06FreqChopperOn = QVector<double>::fromStdVector(cal06->f_on_master);
-//    qvecRefMFS06MagChopperOn = QVector<double>::fromStdVector(cal06->ampl_on_master);
-//    qvecRefMFS06PhaseChooperOn = QVector<double>::fromStdVector(cal06->phase_grad_on_master);
+    auto cal07 = std::make_unique<calibration>(info_db);
+    cal07->sensortype = "MFS-07e";
+    cal07->open_master_cal(this->master_cal_db);
+    cal07->get_master_cal();
+    qvecRefMFS07FreqChopperOn = fromStdVector(cal07->f_on_master);
+    qvecRefMFS07MagChopperOn =  fromStdVector(cal07->ampl_on_master);
+    qvecRefMFS07PhaseChooperOn =  fromStdVector(cal07->phase_grad_on_master);
 
-//    qvecRefMFS06FreqChopperOff = QVector<double>::fromStdVector(cal06->f_off_master);
-//    qvecRefMFS06MagChopperOff = QVector<double>::fromStdVector(cal06->ampl_off_master);
-//    qvecRefMFS06PhaseChooperOff = QVector<double>::fromStdVector(cal06->phase_grad_off_master);
+    qvecRefMFS07FreqChopperOff =  fromStdVector(cal07->f_off_master);
+    qvecRefMFS07MagChopperOff =  fromStdVector(cal07->ampl_off_master);
+    qvecRefMFS07PhaseChooperOff =  fromStdVector(cal07->phase_grad_off_master);
+
+    std::unique_ptr<calibration> cal06 = std::make_unique<calibration>(info_db);
+    cal06->sensortype = "MFS-06e";
+    cal06->open_master_cal(this->master_cal_db);
+    cal06->get_master_cal();
+    qvecRefMFS06FreqChopperOn =  fromStdVector(cal06->f_on_master);
+    qvecRefMFS06MagChopperOn =  fromStdVector(cal06->ampl_on_master);
+    qvecRefMFS06PhaseChooperOn =  fromStdVector(cal06->phase_grad_on_master);
+
+    qvecRefMFS06FreqChopperOff =  fromStdVector(cal06->f_off_master);
+    qvecRefMFS06MagChopperOff =  fromStdVector(cal06->ampl_off_master);
+    qvecRefMFS06PhaseChooperOff =  fromStdVector(cal06->phase_grad_off_master);
 
 
 
@@ -909,7 +909,7 @@ void Plot::on_pbPrint_clicked (void)
 
     unsigned int Counter;
 
-    QRectF clrect;
+    QRect clrect;
 
 
     // remove cursors from plots
@@ -934,40 +934,40 @@ void Plot::on_pbPrint_clicked (void)
 
     QPrintDialog* pclPrintDialog = new QPrintDialog ();
 
-    iRetValue = pclPrintDialog->exec ();
-    if (iRetValue == 1)
-    {
-        clrect = pclPrintDialog->printer ()->pageRect(QPrinter::Millimeter);
-        iTop   = clrect.top  ();
-        iLeft  = clrect.left ();
+//    iRetValue = pclPrintDialog->exec ();
+//    if (iRetValue == 1)
+//    {
+//        clrect = pclPrintDialog->printer ()->pageRect(Unit::Millimeter);
+//        iTop   = clrect.top  ();
+//        iLeft  = clrect.left ();
 
-        iHeight = clrect.height () - 150;
-        iWidth  = clrect.width  ();
+//        iHeight = clrect.height () - 150;
+//        iWidth  = clrect.width  ();
 
-        QPainter painter;
-        painter.begin(pclPrintDialog->printer ());
-        painter.drawText   (iLeft, iTop + 20,                     "   Sensor Field Test Evaluation");
-        painter.drawPixmap (iLeft, iTop + 40,                     ui->plotMag->toPixmap (iWidth, (iHeight / 2), 1.0));
-        painter.drawPixmap (iLeft, iTop + (iHeight / 2)     + 45, ui->plotCoh->toPixmap (iWidth, (iHeight / 2), 1.0));
-        painter.drawText   (iLeft, iTop + (iHeight / 2) * 2 + 50, "   " + this->windowTitle ());
+//        QPainter painter;
+//        painter.begin(pclPrintDialog->printer ());
+//        painter.drawText   (iLeft, iTop + 20,                     "   Sensor Field Test Evaluation");
+//        painter.drawPixmap (iLeft, iTop + 40,                     ui->plotMag->toPixmap (iWidth, (iHeight / 2), 1.0));
+//        painter.drawPixmap (iLeft, iTop + (iHeight / 2)     + 45, ui->plotCoh->toPixmap (iWidth, (iHeight / 2), 1.0));
+//        painter.drawText   (iLeft, iTop + (iHeight / 2) * 2 + 50, "   " + this->windowTitle ());
 
-        pclPrintDialog->printer ()->newPage();
-        clrect = pclPrintDialog->printer ()->pageRect(QPrinter::Millimeter);
-        iTop   = clrect.top  ();
-        iLeft  = clrect.left ();
+//        pclPrintDialog->printer ()->newPage();
+//        clrect = pclPrintDialog->printer ()->pageRect();
+//        iTop   = clrect.top  ();
+//        iLeft  = clrect.left ();
 
-        iHeight = clrect.height () - 150;
-        iWidth  = clrect.width  ();
+//        iHeight = clrect.height () - 150;
+//        iWidth  = clrect.width  ();
 
-        painter.drawText   (iLeft, iTop + 20,                     "   Sensor Field Test Evaluation");
-        painter.drawPixmap (iLeft, iTop + 40,                     ui->plotNoise->toPixmap (iWidth, (iHeight / 2), 1.0));
-        painter.drawText   (iLeft, iTop + (iHeight / 2) * 2 + 50, "   " + this->windowTitle ());
+//        painter.drawText   (iLeft, iTop + 20,                     "   Sensor Field Test Evaluation");
+//        painter.drawPixmap (iLeft, iTop + 40,                     ui->plotNoise->toPixmap (iWidth, (iHeight / 2), 1.0));
+//        painter.drawText   (iLeft, iTop + (iHeight / 2) * 2 + 50, "   " + this->windowTitle ());
 
-        painter.end();
-    }
+//        painter.end();
+//    }
 
 
-    delete (pclPrintDialog);
+//    delete (pclPrintDialog);
 
 }
 

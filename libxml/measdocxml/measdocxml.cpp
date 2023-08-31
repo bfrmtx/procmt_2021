@@ -1520,9 +1520,27 @@ void measdocxml::slot_update_atswriter(const QMap<QString, QVariant> &atswriter_
 {
     std::lock_guard<std::recursive_mutex> lock(this->mutex);
 
+
     this->qfi.setFile(QDir(measdir), measdoc);
     std::cerr << "measdocxml::slot_update_atswriter: " << atswriter_section.value("ats_data_file").toString().toStdString() << "   " << qfi.absoluteFilePath().toStdString() << std::endl;
+    std::cerr << " --------------" << std::endl;
+    std::cerr << "measdocxml::slot_update_atswriter-->: " << atswriter_section.value("sensor_type").toString().toStdString() << "   " << qfi.absoluteFilePath().toStdString() << std::endl;
     qDebug() << "update writer section for channel" << channel_id;
-    this->set_channel_section("ATSWriter", atswriter_section, channel_id, true);
+    auto atsw(atswriter_section);
+    bool exchanged = false;
+    if (atsw.contains("sensor_type")) {
+        if (atsw.value("sensor_type").toString() == "SHFT03") {
+            atsw["sensor_type"] = "SHFT03e";
+            exchanged = true;
+        }
+        if (atsw.value("sensor_type").toString() == "SHFT2e") {
+            atsw["sensor_type"] = "SHFT-02e";
+            exchanged = true;
+        }
+        if (exchanged) this->set_channel_section("ATSWriter", atsw, channel_id, true);
+    }
+    if (!exchanged) this->set_channel_section("ATSWriter", atswriter_section, channel_id, true);
+
+
 
 }
