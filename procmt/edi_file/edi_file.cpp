@@ -37,13 +37,11 @@ edi_file::edi_file(QObject *parent): QObject(parent), QFileInfo(), prc_com(false
     this->edi_DEFINEMEAS.insert("REFELEV", 0.0);
 
 
-    this->znames_real << ">ZXXR ROT=NONE //" << ">ZXYR ROT=NONE //" <<  ">ZYXR ROT=NONE //" <<  ">ZYYR ROT=NONE //" << ">TXR.EXP ROT=NONE //" << ">TYR.EXP ROT=NONE //";
-    this->znames_imag << ">ZXXI ROT=NONE //" << ">ZXYI ROT=NONE //" <<  ">ZYXI ROT=NONE //" <<  ">ZYYI ROT=NONE //" << ">TXI.EXP ROT=NONE //" << ">TYI.EXP ROT=NONE //";
-    this->znames_var  << ">ZXX.VAR ROT=NONE //" << ">ZXY.VAR ROT=NONE //" << ">ZYX.VAR ROT=NONE //" << ">ZYY.VAR ROT=NONE //" << ">TXVAR.EXP ROT=NONE //" << ">TYVAR.EXP ROT=NONE //";
+    this->znames_real << ">ZXXR=ZROT //" << ">ZXYR=ZROT //" <<  ">ZYXR=ZROT //" <<  ">ZYYR=ZROT //" << ">TXR.EXP=TROT //" << ">TYR.EXP=TROT //";
+    this->znames_imag << ">ZXXI=ZROT //" << ">ZXYI=ZROT //" <<  ">ZYXI=ZROT //" <<  ">ZYYI=ZROT //" << ">TXI.EXP=TROT //" << ">TYI.EXP=TROT //";
+    this->znames_var  << ">ZXX.VAR=ZROT //" << ">ZXY.VAR=ZROT //" << ">ZYX.VAR=ZROT //" << ">ZYY.VAR=ZROT //" << ">TXVAR.EXP=TROT //" << ">TYVAR.EXP=TROT //";
 
-    //this->tnames_real << ">TXR.EXP //" << ">TYR.EXP //";
-    //this->tnames_imag << ">TXI.EXP //" << ">TYI.EXP //";
-    //this->tnames_var  << ">TXVAR.EXP //" << ">TYVAR.EXP //";
+
     // std::cerr << "edi header" << Qt::endl;
 
 }
@@ -300,6 +298,22 @@ bool edi_file::write_mtsect()
     qts << Qt::endl;
     // std::cerr << "write mtss f done" << Qt::endl;
 
+// for Geotools
+   qts << Qt::endl;
+   qts << ">ZROT //" << z.freqs.size() << Qt::endl;
+   i = 0; 
+    double x =  0.0;
+    for (auto &d : z.freqs) {
+        qts << " " << x;
+        if (i < 4) qts << " ";
+        else {
+            qts << Qt::endl;
+            i = -1;
+        }
+        ++i;
+    }
+    qts << Qt::endl;
+
 
     size_t elm;
     //xx, xy ..yy
@@ -358,13 +372,36 @@ bool edi_file::write_mtsect()
         }
         qts << Qt::endl;
 
+    // Geotools TROT in case we have tipper
+    // I assume that the complete setup was rotated - according to the electrode positions
+        if (elm == 2 && (this->z.d.size() == 6)) {
+            i = 0;
+            double x = 0.0;
+            qts << Qt::endl << ">TROT //" << z.freqs.size() << Qt::endl;
+                for (auto &d : z.freqs) {
+       
+        
+        qts << " " << x;
+        if (i < 4) qts << " ";
+        else {
+            qts << Qt::endl;
+            i = -1;
+        }
+        ++i;
+    }
+        qts << Qt::endl;
+
+}
+
+        
+
 
         // std::cerr << "write mtss var done" << Qt::endl;
     }
 
     if (this->z.coh[xy].size() && this->z.coh[yx].size()) {
 
-        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << "  ROT=NONE  //" << z.freqs.size() << Qt::endl;
+        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << " =ZROT  //" << z.freqs.size() << Qt::endl;
         i = 0;
         for (auto &allf : this->z.coh[xy]) {
 
@@ -377,7 +414,7 @@ bool edi_file::write_mtsect()
         }
         qts << Qt::endl;
 
-        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << "  ROT=NONE  //" << z.freqs.size() << Qt::endl;
+        qts << Qt::endl << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << " =ZROT  //" << z.freqs.size() << Qt::endl;
         i = 0;
         for (auto &allf : this->z.coh[yx]) {
 
@@ -916,7 +953,7 @@ bool edi_file::read_mtsect()
 
 qint64 edi_file::read_a_coh_section()
 {
-    // >COH  MEAS1=1000.0001 MEAS2=1003.0001  ROT=NONE  //42  that is mtx for example Ex vs Hy
+    // >COH  MEAS1=1000.0001 MEAS2=1003.0001 =ZROT  //42  that is mtx for example Ex vs Hy
     qint64 sp = this->qts.pos();
 
     QStringList strlst;

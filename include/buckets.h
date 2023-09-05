@@ -1160,7 +1160,7 @@ template<typename T> struct mt_data_res {
     std::vector<std::vector<statmap>> cstat_bck;    //!< gaussian statistics based on coherency
 
     double angle;                                   //!< in radians, is 0 for North Pi/4 is East
-    double angle_bck;                                   //!< in radians, is 0 for North Pi/4 is East
+    double angle_bck;                               //!< in radians, is 0 for North Pi/4 is East
 
 
     /*!

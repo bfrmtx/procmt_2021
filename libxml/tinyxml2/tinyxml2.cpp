@@ -2243,7 +2243,7 @@ XMLError XMLDocument::SaveFile( const QString filename, bool compact )
     if ( !fp ) {
         const char* str = filename.toStdString().c_str();
         SetError( XML_ERROR_FILE_NOT_FOUND, 0, "str=%s", str ? str : "<null>");
-       // SetError( XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=%s", filename ? filename : "<null>");
+        // SetError( XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=%s", filename ? filename : "<null>");
         return _errorID;
     }
     SaveFile(fp, compact);

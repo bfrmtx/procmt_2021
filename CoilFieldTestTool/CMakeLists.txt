@@ -102,14 +102,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
  db_sensor_query
  sql_base_tools
  sql_vector
-
   prc_com
   prc_com_table
   atsfile
   atsheader
   atmfile
   eqdatetime
-
   measdocxml
   tinyxml2
   tinyxmlwriter
@@ -137,8 +135,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   group_atsfiles
   qstring_utilities
   qcustomplot
-
-
 )
 
 
