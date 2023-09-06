@@ -47,6 +47,7 @@ ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 IF(WIN32)
     message ( "WINDOWS build" )
     # on WINDOWS it is easier to make STATIC libs
+    # some libs will by dynamic (dll); add PATH to the lib folder
     option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
     add_compile_definitions( _USE_MATH_DEFINES _msvc )
     IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
@@ -72,8 +73,7 @@ ENDIF()
 
 message ( "adding subdirs" )
 # the info.sql3 and others will be copied to your build dir - the software will look for SQLite databases
-# DEFINES += PMTSQLPATH=\"\\\"$${PJH}/$${OSDIR}$${CPLDIR}\\\"\"
-add_definitions(-DPMTSQLPATH="${CMAKE_INSTALL_PREFIX}")
+add_definitions(-DPMTSQLPATH="${CMAKE_INSTALL_PREFIX}/bin")
 add_definitions(-DPMTSQLPATH_UNIX="${CMAKE_INSTALL_PREFIX}/bin")
 #
 ## templates FIRST
@@ -98,20 +98,20 @@ add_subdirectory(libxml/calstat)
 add_subdirectory(libgeo/geocoordinates)
 add_subdirectory(libgeo/gmttools)
 add_subdirectory(libqt/eqdatetime)
-add_subdirectory(libqt/mest_plotlib) ## nor needed for adroid app?
+add_subdirectory(libqt/mest_plotlib)
 add_subdirectory(libqt/prc_com_table)
-add_subdirectory(libqt/static_plot) ## nor needed for adroid app?
+add_subdirectory(libqt/static_plot)
 add_subdirectory(libqt/gui_items)
 add_subdirectory(libqt/qstring_utilities)
 add_subdirectory(libqt/plotlib)
-add_subdirectory(libqt/xy_regression_plot) ## nor needed for adroid app?
+add_subdirectory(libqt/xy_regression_plot)
 add_subdirectory(libqt/xmlcallib)
-add_subdirectory(libqt/cal_stat_display_lib) ## nor needed for adroid app?
+add_subdirectory(libqt/cal_stat_display_lib)
 add_subdirectory(libqt/lineedit_file)
-add_subdirectory(libqt/gen_trf_filename) ## nor needed for adroid app
-add_subdirectory(libqt/xmlcal ) ## nor needed for adroid app
-add_subdirectory(libqt/mk_master_cal) ## nor needed for adroid app
-add_subdirectory(firfilter) ## nor needed for adroid app
+add_subdirectory(libqt/gen_trf_filename)
+add_subdirectory(libqt/xmlcal )
+add_subdirectory(libqt/mk_master_cal)
+add_subdirectory(firfilter)
 add_subdirectory(adulib/num_keypad)
 add_subdirectory(adulib/select_items_from_db_sensors)
 add_subdirectory(adulib/aduxml)
@@ -147,7 +147,7 @@ add_subdirectory(pmt_adulib/ts_tools)
 add_subdirectory(pmt_gui/ats_multi_edit)
 add_subdirectory(pmt_gui/tsplotter)
 add_subdirectory(pmt_gui/ediplotter)
-add_subdirectory(libqt/cal2sql) ## nor needed for adroid app
+add_subdirectory(libqt/cal2sql)
 IF(USE_SPECTRAL_PLOTTER_PRO)
     message ( "ADDING spectra plotter pro" )
     add_subdirectory(pmt_gui/spectra_plotter_pro)
