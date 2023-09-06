@@ -34,24 +34,24 @@ edi_file::edi_file(QObject *parent) :
   this->edi_DEFINEMEAS.insert("REFLONG", "00:00:00.00");
   this->edi_DEFINEMEAS.insert("REFELEV", 0.0);
 
-  this->znames_real << ">ZXXR=ZROT //"
-                    << ">ZXYR=ZROT //"
-                    << ">ZYXR=ZROT //"
-                    << ">ZYYR=ZROT //"
-                    << ">TXR.EXP=TROT //"
-                    << ">TYR.EXP=TROT //";
-  this->znames_imag << ">ZXXI=ZROT //"
-                    << ">ZXYI=ZROT //"
-                    << ">ZYXI=ZROT //"
-                    << ">ZYYI=ZROT //"
-                    << ">TXI.EXP=TROT //"
-                    << ">TYI.EXP=TROT //";
-  this->znames_var << ">ZXX.VAR=ZROT //"
-                   << ">ZXY.VAR=ZROT //"
-                   << ">ZYX.VAR=ZROT //"
-                   << ">ZYY.VAR=ZROT //"
-                   << ">TXVAR.EXP=TROT //"
-                   << ">TYVAR.EXP=TROT //";
+  this->znames_real << ">ZXXR ROT=ZROT //"
+                    << ">ZXYR ROT=ZROT //"
+                    << ">ZYXR ROT=ZROT //"
+                    << ">ZYYR ROT=ZROT //"
+                    << ">TXR.EXP ROT=TROT //"
+                    << ">TYR.EXP ROT=TROT //";
+  this->znames_imag << ">ZXXI ROT=ZROT //"
+                    << ">ZXYI ROT=ZROT //"
+                    << ">ZYXI ROT=ZROT //"
+                    << ">ZYYI ROT=ZROT //"
+                    << ">TXI.EXP ROT=TROT //"
+                    << ">TYI.EXP ROT=TROT //";
+  this->znames_var << ">ZXX.VAR ROT=ZROT //"
+                   << ">ZXY.VAR ROT=ZROT //"
+                   << ">ZYX.VAR ROT=ZROT //"
+                   << ">ZYY.VAR ROT=ZROT //"
+                   << ">TXVAR.EXP ROT=TROT //"
+                   << ">TYVAR.EXP ROT=TROT //";
 
   // std::cerr << "edi header" << Qt::endl;
 }
@@ -394,7 +394,7 @@ bool edi_file::write_mtsect() {
   if (this->z.coh[xy].size() && this->z.coh[yx].size()) {
 
     qts << Qt::endl
-        << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << " =ZROT  //" << z.freqs.size() << Qt::endl;
+        << ">COH  MEAS1=" << this->e_h_meas.value("EX") << " MEAS2=" << this->e_h_meas.value("HY") << "  ROT=ZROT  //" << z.freqs.size() << Qt::endl;
     i = 0;
     for (auto &allf : this->z.coh[xy]) {
 
@@ -408,7 +408,7 @@ bool edi_file::write_mtsect() {
     qts << Qt::endl;
 
     qts << Qt::endl
-        << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << " =ZROT  //" << z.freqs.size() << Qt::endl;
+        << ">COH  MEAS1=" << this->e_h_meas.value("EY") << " MEAS2=" << this->e_h_meas.value("HX") << "  ROT=ZROT  //" << z.freqs.size() << Qt::endl;
     i = 0;
     for (auto &allf : this->z.coh[yx]) {
 
@@ -910,7 +910,7 @@ bool edi_file::read_mtsect() {
 }
 
 qint64 edi_file::read_a_coh_section() {
-  // >COH  MEAS1=1000.0001 MEAS2=1003.0001 =ZROT  //42  that is mtx for example
+  // >COH  MEAS1=1000.0001 MEAS2=1003.0001  ROT=ZROT  //42  that is mtx for example
   // Ex vs Hy
   qint64 sp = this->qts.pos();
 
