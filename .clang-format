@@ -1,0 +1,12 @@
+﻿---
+BasedOnStyle: LLVM
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+BreakStringLiterals: 'false'
+ColumnLimit: 0
+IncludeBlocks: Preserve
+IndentWidth: 2
+Language: Cpp
+UseTab: Never
+
+...
