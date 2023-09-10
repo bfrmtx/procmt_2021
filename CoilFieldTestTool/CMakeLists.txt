@@ -24,8 +24,8 @@ ELSE()
 ENDIF()
 
 include_directories(
+${CMAKE_SOURCE_DIR}/include    
 ${CMAKE_INSTALL_PREFIX}/include
-${CMAKE_SOURCE_DIR}/include
 ${CMAKE_SOURCE_DIR}/fftreal
 ${CMAKE_SOURCE_DIR}/base/prc_com
 ${CMAKE_SOURCE_DIR}/libqt/prc_com_table

@@ -15,8 +15,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql REQUIRED)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
-${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include
+${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/base/prc_com
 ${CMAKE_SOURCE_DIR}/base/msg_logger
 ${CMAKE_SOURCE_DIR}/fftreal

@@ -30,141 +30,135 @@
 #ifndef EDI_FILE_H
 #define EDI_FILE_H
 
+#include "buckets.h"
+#include "eqdatetime.h"
+#include "geocoordinates.h"
+#include "msg_logger.h"
+#include "prc_com.h"
 #include <QDebug>
-#include <QObject>
-#include <QString>
 #include <QFile>
 #include <QFileInfo>
+#include <QObject>
+#include <QString>
 #include <QTextStream>
-#include "geocoordinates.h"
-#include "eqdatetime.h"
 #include <map>
 #include <memory>
 #include <procmt_alldefines.h>
-#include "prc_com.h"
-#include "buckets.h"
-#include "msg_logger.h"
 
-class edi_file: public QObject, public QFileInfo, prc_com
-{
-    Q_OBJECT
+class edi_file : public QObject, public QFileInfo, prc_com {
+  Q_OBJECT
 public:
+  explicit edi_file(QObject *parent = Q_NULLPTR);
 
+  edi_file(const edi_file &edi);
 
-    explicit edi_file(QObject *parent = Q_NULLPTR);
+  edi_file &operator=(edi_file const &rhs);
 
-    edi_file(const edi_file &edi);
+  bool test_full_tensor();  //!< has full xx...yy tensor data
+  bool test_tipper() const; //!< has tipper data
 
-    edi_file& operator = (edi_file const &rhs);
+  friend edi_file merge_edi(const edi_file &lhs, const edi_file &rhs);
+  friend std::shared_ptr<edi_file> merge_edi_sp(const std::shared_ptr<edi_file> &lhs, const std::shared_ptr<edi_file> &rhs);
 
-    bool test_full_tensor();                             //!< has full xx...yy tensor data
-    bool test_tipper() const;                            //!< has tipper data
+  ~edi_file();
 
+  prc_com edi_HEAD;
+  prc_com edi_INFO;
+  prc_com edi_DEFINEMEAS;
 
-    friend edi_file merge_edi(const edi_file& lhs, const edi_file& rhs);
-    friend std::shared_ptr<edi_file> merge_edi_sp(const std::shared_ptr<edi_file>& lhs, const std::shared_ptr<edi_file>& rhs);
+  void set_QFileInfo(const QFileInfo &qfi);
+  void set_msg_logger(std::shared_ptr<msg_logger> msg);
 
+  bool toASCII_file(const QFileInfo &qfi) const;
 
-    ~edi_file();
-
-    prc_com edi_HEAD;
-    prc_com edi_INFO;
-    prc_com edi_DEFINEMEAS;
-
-
-
-    void set_QFileInfo(const QFileInfo& qfi);
-    void set_msg_logger(std::shared_ptr<msg_logger> msg);
-
-    bool toASCII_file(const QFileInfo &qfi) const;
-
-
-    mt_data_res<std::complex<double>> z;                            //!< that is the data
-    std::vector<prc_com> in_ats_prc_coms;                           //!< meta-data, keep a copy of the input data; generated also while reading EDI
-
-
+  mt_data_res<std::complex<double>> z;  //!< that is the data
+  std::vector<prc_com> in_ats_prc_coms; //!< meta-data, keep a copy of the input data; generated also while reading EDI
 
 public slots:
 
+  void set_edi_data_z(const mt_data_res<std::complex<double>> &zin, const std::vector<prc_com> &prcs);
 
-    void set_edi_data_z(const mt_data_res<std::complex<double>>  &zin, const std::vector<prc_com> &prcs);
+  bool write();
 
-
-    bool write();
-
-    bool read();
+  bool read();
 
 signals:
 
-    void signal_actual_edifile_name(const QString edifile_name);
-    void signal_general_msg(const QString &sender, const QString &component, const QString &message);
+  void signal_actual_edifile_name(const QString edifile_name);
+  void signal_general_msg(const QString &sender, const QString &component, const QString &message);
 
 private:
+  bool write_head();
 
-    bool write_head();
+  bool write_info();
 
-    bool write_info();
+  bool write_definemeas();
 
-    bool write_definemeas();
+  bool write_e_h_meas();
 
-    bool write_e_h_meas();
+  bool write_mtsect();
 
-    bool write_mtsect();
+  bool write_spectrasect();
 
-    bool write_spectrasect();
+  bool read_head();
 
+  bool read_info();
 
-    bool read_head();
+  bool read_definemeas();
 
-    bool read_info();
+  bool read_e_h_meas();
 
-    bool read_definemeas();
+  bool read_mtsect();
 
-    bool read_e_h_meas();
+  bool read_spectrasect();
 
-    bool read_mtsect();
+  bool seek_key(const QString key, const bool b_continue = false, const bool silent = false);
 
-    bool read_spectrasect();
+  size_t read_number_block(std::vector<double> &v);
 
-    bool seek_key(const QString key, const bool b_continue = false, const bool silent = false);
+  qint64 read_a_coh_section();
 
-    size_t read_number_block(std::vector<double> &v);
+  QFile file;
+  QTextStream qts;
 
-    qint64 read_a_coh_section();
+  QString line; //!< scan and read text
+  QString qts_buf;
 
-    QFile file;
-    QTextStream qts;
+  // tipper_tensor_data t;
+  // spc_tensor_data spc;
 
-    QString line;                                       //!< scan and read text
-    QString qts_buf;
+  bool open_write();
+  bool is_open = false;
 
-    // tipper_tensor_data t;
-    // spc_tensor_data spc;
+  QMap<QString, QString> e_h_meas;
 
-    bool open_write();
-    bool is_open = false;
+  // like enum
+  QStringList znames_real;
+  QStringList znames_imag;
+  QStringList znames_var;
 
-    QMap<QString, QString> e_h_meas;
+  //    QStringList tnames_real;
+  //    QStringList tnames_imag;
+  //    QStringList tnames_var;
 
-    // like enum
-    QStringList znames_real;
-    QStringList znames_imag;
-    QStringList znames_var;
+  QStringList e_h_measids;
 
-    //    QStringList tnames_real;
-    //    QStringList tnames_imag;
-    //    QStringList tnames_var;
+  std::shared_ptr<msg_logger> msg;
 
-    QStringList e_h_measids;
-
-    std::shared_ptr<msg_logger> msg;
-
-
-
+  /*!
+   * @brief calculate the angle between two points to E direction
+   * @param pos_x1
+   * @param pos_x2
+   * @param pos_y1
+   * @param pos_y2
+   * @return ZROT or TROT angle or  DBL_MAX; for Z it will be 0; for H I take ZROT
+   */
+  double angle(const double &pos_x1, const double &pos_x2, const double &pos_y1, const double &pos_y2) const;
+  double zrot = 0.0;
+  double trot = 0.0;
 };
+edi_file merge_edi(const edi_file &lhs, const edi_file &rhs);
 
-edi_file merge_edi(const edi_file& lhs, const edi_file& rhs);
-
-std::shared_ptr<edi_file> merge_edi_sp(const std::shared_ptr<edi_file>& lhs, const std::shared_ptr<edi_file>& rhs);
+std::shared_ptr<edi_file> merge_edi_sp(const std::shared_ptr<edi_file> &lhs, const std::shared_ptr<edi_file> &rhs);
 
 #endif // EDI_FILE_H

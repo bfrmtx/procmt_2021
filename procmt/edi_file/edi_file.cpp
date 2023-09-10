@@ -130,6 +130,13 @@ void edi_file::set_edi_data_z(const mt_data_res<std::complex<double>> &zin, cons
           line.append(">EMEAS ID=10");
         }
 
+        if (prc.svalue("channel_type").startsWith("Ex", Qt::CaseInsensitive)) {
+          this->zrot = this->angle(prc.dvalue("pos_x1"), prc.dvalue("pos_x2"), prc.dvalue("pos_y1"), prc.dvalue("pos_y2"));
+          if (this->zrot == DBL_MAX) {
+            this->zrot = 0.0;
+          }
+        }
+
         // take the positon from either EMAP or local where we should have E
         if (!loops) {
 
@@ -162,6 +169,13 @@ void edi_file::set_edi_data_z(const mt_data_res<std::complex<double>> &zin, cons
           line.append(">HMEAS ID=100");
         } else {
           line.append(">HMEAS ID=10");
+        }
+
+        if (prc.svalue("channel_type").startsWith("Hx", Qt::CaseInsensitive)) {
+          this->trot = this->angle(prc.dvalue("pos_x1"), prc.dvalue("pos_x2"), prc.dvalue("pos_y1"), prc.dvalue("pos_y2"));
+          if (this->trot == DBL_MAX) {
+            this->trot = this->zrot;
+          }
         }
       }
       line.append(prc.svalue("channel_number") + ".0001 CHTYPE=");
@@ -293,9 +307,8 @@ bool edi_file::write_mtsect() {
   qts << Qt::endl;
   qts << ">ZROT //" << z.freqs.size() << Qt::endl;
   i = 0;
-  double x = 0.0;
   for (auto &d : z.freqs) {
-    qts << " " << x;
+    qts << " " << this->zrot;
     if (i < 4)
       qts << " ";
     else {
@@ -371,12 +384,11 @@ bool edi_file::write_mtsect() {
     // positions
     if (elm == 3 && (this->z.d.size() == 6)) {
       i = 0;
-      double x = 0.0;
       qts << Qt::endl
           << ">TROT //" << z.freqs.size() << Qt::endl;
       for (auto &d : z.freqs) {
 
-        qts << " " << x;
+        qts << " " << this->trot;
         if (i < 4)
           qts << " ";
         else {
@@ -1182,6 +1194,45 @@ bool edi_file::open_write() {
   }
 
   return false;
+}
+
+double edi_file::angle(const double &pos_x1, const double &pos_x2, const double &pos_y1, const double &pos_y2) const {
+
+  std::cerr << "rot edi ...................................................................." << std::endl;
+  std::cerr << pos_x1 << " " << pos_x2 << " " << pos_y1 << " " << pos_y2 << std::endl;
+  std::cerr << "rot edi ..end ::........................................." << std::endl;
+  std::cerr << std::endl;
+  if (pos_x1 == pos_x2 && pos_y1 == pos_y2)
+    return DBL_MAX;
+
+  double tx = double(pos_x2 - pos_x1);
+  double ty = double(pos_y2 - pos_y1);
+
+  // avoid calculation noise
+  if (fabs(tx) < 0.01)
+    tx = 0.0;
+  if (fabs(ty) < 0.01)
+    ty = 0.0;
+
+  if (tx == 0.0 && ty == 0.0)
+    return DBL_MAX;
+
+  // hmm hmm possible but you normally set the system N S E W
+  double angx = atan2(ty, tx) * 180.0 / M_PI;
+
+  // snap angle to 0, 90, 180, 270
+  if (angx < 1.0)
+    angx = 0.0;
+  if (angx > 89.0 && angx < 91.0)
+    angx = 90.0;
+  if (angx > 179.0 && angx < 181.0)
+    angx = 180.0;
+  if (angx > 269.0 && angx < 271.0)
+    angx = 270.0;
+  if (angx > 359.0)
+    angx = 0.0;
+
+  return angx;
 }
 
 edi_file merge_edi(const edi_file &lhs, const edi_file &rhs) {

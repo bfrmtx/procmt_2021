@@ -30,38 +30,36 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QSettings>
-#include <QUrl>
-#include <QFileInfo>
-#include <QDrag>
 #include <QDir>
 #include <QDirIterator>
-#include <QDropEvent>
-#include <QMimeData>
+#include <QDrag>
 #include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QFileInfo>
+#include <QMainWindow>
+#include <QMimeData>
+#include <QSettings>
+#include <QUrl>
+
 
 #include <atomic>
 #include <thread>
 
-
-#include "plot.h"
-#include "calib_lab.h"
-#include "atsheader.h"
 #include "atsfile.h"
+#include "atsheader.h"
+#include "calib_lab.h"
+#include "iterator_templates.h"
+#include "plot.h"
 
-
-#include "QFileDialog"
 #include "QDebug"
+#include "QFileDialog"
 #include "QMessageBox"
 #include "QProgressDialog"
 
+
 #include "GlobalIncludes.h"
 
-
 #include <QVector>
-
-
 
 #ifdef _msvc
 #define _USE_MATH_DEFINES
@@ -69,108 +67,97 @@
 /**
  * Version Number
  */
-#define C_VERSION_MAIN      0
-#define C_VERSION_SUB       1
-#define C_VERSION_CUSTOMER  100000
-#define C_VERSION_KM_MAIN    1
-#define C_VERSION_KM_SUB    "$Revision: 42 $"
+#define C_VERSION_MAIN 0
+#define C_VERSION_SUB 1
+#define C_VERSION_CUSTOMER 100000
+#define C_VERSION_KM_MAIN 1
+#define C_VERSION_KM_SUB "$Revision: 42 $"
 
-
-typedef enum
-{
-    Frequency  = 0,
-    Amplitude  = 1,
-    Phase      = 2,
-    Coherency  = 3,
-    Noise      = 4,
-    Error      = 5
+typedef enum {
+  Frequency = 0,
+  Amplitude = 1,
+  Phase = 2,
+  Coherency = 3,
+  Noise = 4,
+  Error = 5
 } t_VectorData;
 
-
-namespace Ui
-{
-    class MainWindow;
+namespace Ui {
+class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
-    public:
+public:
+  explicit MainWindow(QWidget *parent = Q_NULLPTR);
 
-        explicit MainWindow(QWidget *parent = Q_NULLPTR);
+  ~MainWindow();
 
-        ~MainWindow();
+  void processingThreadFunc(void);
 
-        void processingThreadFunc (void);
+  void dragEnterEvent(QDragEnterEvent *event);
 
-        void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
 
-        void dropEvent(QDropEvent *event);
+private slots:
+  void on_pbOpenData_clicked(void);
 
+  void on_pbCloseData_clicked(void);
 
-    private slots:
-        void on_pbOpenData_clicked (void);
+  void on_pbComputeTF_clicked(void);
 
-        void on_pbCloseData_clicked (void);
+  void on_pbShowPlot_clicked(void);
 
-        void on_pbComputeTF_clicked (void);
+  void on_cbFFTWindowLength_currentIndexChanged(const QString &arg1);
 
-        void on_pbShowPlot_clicked (void);
+  void on_cbFFT_cuts_currentIndexChanged(const QString &arg1);
 
-
-        void on_cbFFTWindowLength_currentIndexChanged(const QString &arg1);
-
-
-        void on_cbFFT_cuts_currentIndexChanged(const QString &arg1);
-
-        void on_xstddev_doubleSpinBox_valueChanged(double arg1);
+  void on_xstddev_doubleSpinBox_valueChanged(double arg1);
 
 private:
+  Ui::MainWindow *ui;
 
-        Ui::MainWindow *ui;
+  QString qstrTSSourceDir; //!< dir to open or slot
 
-        QString      qstrTSSourceDir;  //!< dir to open or slot
+  /**
+   * 1: TS index from table
+   * 2: Channel index  (Hx, Hy, Hz)
+   * 3: Header Strings (Sensor Type, Cal Frequency, ...)
+   */
+  QVector<QVector<QVector<QString>>> qvecTFHeader;
 
-        /**
-         * 1: TS index from table
-         * 2: Channel index  (Hx, Hy, Hz)
-         * 3: Header Strings (Sensor Type, Cal Frequency, ...)
-         */
-        QVector<QVector<QVector<QString> > > qvecTFHeader;
+  /**
+   * 1: TS index from table
+   * 2: Channel index (Hx, Hy, Hz)
+   * 3: TF Data (0: Frequency, 1: Magnitude, 2: Phase)
+   * 4: Data
+   */
+  QVector<QVector<QVector<QVector<double>>>> qvecTFData;
 
-        /**
-         * 1: TS index from table
-         * 2: Channel index (Hx, Hy, Hz)
-         * 3: TF Data (0: Frequency, 1: Magnitude, 2: Phase)
-         * 4: Data
-         */
-        QVector<QVector<QVector<QVector<double> > > > qvecTFData;
+  QVector<QVector<double>> qvecCalChopperOnFreq;
+  QVector<QVector<double>> qvecCalChopperOnAmpl;
+  QVector<QVector<double>> qvecCalChopperOnPhase;
 
-        QVector<QVector<double>> qvecCalChopperOnFreq;
-        QVector<QVector<double>> qvecCalChopperOnAmpl;
-        QVector<QVector<double>> qvecCalChopperOnPhase;
+  QVector<QVector<double>> qvecCalChopperOffFreq;
+  QVector<QVector<double>> qvecCalChopperOffAmpl;
+  QVector<QVector<double>> qvecCalChopperOffPhase;
 
-        QVector<QVector<double>> qvecCalChopperOffFreq;
-        QVector<QVector<double>> qvecCalChopperOffAmpl;
-        QVector<QVector<double>> qvecCalChopperOffPhase;
+  Plot *pclPlot;
 
-        Plot* pclPlot;
+  quint32 uiwsize = 0;
 
-        quint32 uiwsize = 0;
+  QString qstrLastTSDir;
 
-        QString qstrLastTSDir;
+  QString qstrVersion;
 
-        QString qstrVersion;
+  QList<std::shared_ptr<QMap<QString, parallel_test_coherency>>> data; //!< list of data, each list item == direcorty
+  std::shared_ptr<prc_com> cmdline;                                    //!< all options will be collected here
+  QList<QFileInfo> qfis;                                               //!< for example 2 * (Hx, Hy, Hz) from two runs ats files
+  QFileInfo info_db = QFileInfo("info.sql3");                          //!< database file to open
+  QFileInfo mastercal_db = QFileInfo("master_calibration.sql3");       //!< database file to open
 
-        QList<std::shared_ptr<QMap<QString, parallel_test_coherency>>> data;    //!< list of data, each list item == direcorty
-        std::shared_ptr<prc_com> cmdline;                                       //!< all options will be collected here
-        QList<QFileInfo> qfis;                                                  //!< for example 2 * (Hx, Hy, Hz) from two runs ats files
-        QFileInfo info_db = QFileInfo("info.sql3");                                                      //!< database file to open
-        QFileInfo mastercal_db = QFileInfo("master_calibration.sql3");                                                 //!< database file to open
-
-        std::atomic<bool> atomProcessingThreadRunning;
-
+  std::atomic<bool> atomProcessingThreadRunning;
 };
 
 #endif // MAINWINDOW_H
