@@ -70,7 +70,6 @@ main.cpp
 mainwindow.cpp
 plot.cpp
 GlobalIncludes.h
-iterator_templates.h
 mainwindow.h
 plot.h
 ui_mainwindow.h
@@ -121,7 +120,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   atsfile_collector
   calibration
   db_sensor_query
-  math_vector
   mt_data
   geocoordinates
   gui_items

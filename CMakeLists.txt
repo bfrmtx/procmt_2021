@@ -157,5 +157,9 @@ ELSE()
 ENDIF()
 add_subdirectory(pmt_gui/procmt_mini)
 add_subdirectory(pmt_adulib/calib_lab)
+IF (NOT WIN32)
+message ( "skipping CoilFieldTestTool for Windows" )
 add_subdirectory(CoilFieldTestTool)
+ENDIF()
+
 

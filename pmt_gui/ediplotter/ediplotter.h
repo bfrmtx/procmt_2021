@@ -73,6 +73,8 @@ public:
 
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    void open_edi_file(QString const & filename);
+
 
 signals:
     void new_edi_plot_added(QString const & name);
@@ -103,7 +105,6 @@ private slots:
     void on_action_export_ascii_triggered();
 
 private:
-    void open_edi_file(QString const & filename);
     void set_rho_range(double min, double max);
     void set_phi_range(double min, double max);
     void add_edi_data(const QString & name, mt_data_res<std::complex<double>> const & data);

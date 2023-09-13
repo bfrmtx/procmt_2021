@@ -165,6 +165,12 @@ ELSE()
 
 ENDIF()
 
+if(NOT DEFINED FILES_INSTALL)
+    file(GLOB FILES_INSTALL "*.md")
+endif()
+
+install(FILES ${FILES_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/doc)
+
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 
 

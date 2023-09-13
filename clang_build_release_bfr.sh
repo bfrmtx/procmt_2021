@@ -14,6 +14,5 @@ mkdir -p $BUILD_DIR
 cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE -DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE
 cmake --build $BUILD_DIR --parallel 8
 # in case make a single thread
-# cmake --build $BUILD_DIR
 cmake --install $BUILD_DIR
 cp $HOME'/bin/proc_mt_s/ediplotter' $INTSTALLDIR/bin

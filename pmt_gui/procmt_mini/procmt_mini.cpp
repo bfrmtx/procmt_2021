@@ -1306,6 +1306,39 @@ void procmt_mini::slot_plot()
     if (qfi.exists()) {
         procediplotter->start(procpath, site_names);
     }
+    else {
+
+#ifdef Q_OS_LINUX
+        QFileInfo qfied(fall_back_default_str("ediplotter_new"));
+        procpath =  qfied.absoluteFilePath();
+#endif
+#ifdef Q_OS_MACOS
+        QFileInfo qfied(fall_back_default_str("ediplotter_new.app"));
+        procpath =  qfied.absoluteFilePath();
+#endif
+#ifdef Q_OS_WIN
+        QFileInfo qfied(fall_back_default_str("ediplotter_new.exe"));
+        procpath =  qfied.absoluteFilePath();
+#endif
+#ifdef yasc
+        procpath = "D:/projects/Qt/metronix/ProcMT_2019_03_07/ProcMT/ediplotter_new.exe";
+#endif
+
+        qfi.setFile(procpath);
+        if (qfi.exists()) {
+            procediplotter->start(procpath, site_names);
+        }
+
+
+    }
+
+
+
+
+
+
+
+
 }
 
 void procmt_mini::slot_tsplotter(const QString &xmlfile)

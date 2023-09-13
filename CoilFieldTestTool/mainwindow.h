@@ -41,7 +41,6 @@
 #include <QSettings>
 #include <QUrl>
 
-
 #include <atomic>
 #include <thread>
 
@@ -56,14 +55,10 @@
 #include "QMessageBox"
 #include "QProgressDialog"
 
-
 #include "GlobalIncludes.h"
 
 #include <QVector>
 
-#ifdef _msvc
-#define _USE_MATH_DEFINES
-#endif
 /**
  * Version Number
  */
