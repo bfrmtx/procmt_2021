@@ -82,7 +82,7 @@ void calib_lab::run(const prc_com &cmdline_parm, const QList<QFileInfo> &qfis)
 
     }
 
-
+    std::cout << std::endl << "cut " <<  this->cmdline->dvalue("fcut_lower") << " " << this->cmdline->dvalue("fcut_lower") << std::endl;
 
 
     // do this first before we run anything

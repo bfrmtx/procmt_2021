@@ -63,10 +63,10 @@
  * Version Number
  */
 #define C_VERSION_MAIN 0
-#define C_VERSION_SUB 1
+#define C_VERSION_SUB 2
 #define C_VERSION_CUSTOMER 100000
 #define C_VERSION_KM_MAIN 1
-#define C_VERSION_KM_SUB "$Revision: 42 $"
+#define C_VERSION_KM_SUB "$Revision: 43 $"
 
 typedef enum {
   Frequency = 0,
@@ -104,11 +104,14 @@ private slots:
 
   void on_pbShowPlot_clicked(void);
 
-  void on_cbFFTWindowLength_currentIndexChanged(const QString &arg1);
+  //void on_cbFFTWindowLength_currentIndexChanged(const QString &arg1);
+  void on_cbFFTWindowLength_currentTextChanged(const QString &arg1);
 
   void on_cbFFT_cuts_currentIndexChanged(const QString &arg1);
 
-  void on_xstddev_doubleSpinBox_valueChanged(double arg1);
+  void on_xstddev_doubleSpinBox_valueChanged(const double arg1);
+
+  void on_cbCalType_currentTextChanged(const QString &arg1);
 
 private:
   Ui::MainWindow *ui;

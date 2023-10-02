@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qstrVersion += qstrTmp;
 
-    qstrTmp  = "Metronix Coil Field Test Tool - ";
+    qstrTmp  = "Metronix CoilFieldTest Tool - ";
     qstrTmp += qstrVersion;
 
     this->ui->pbSave->hide();
@@ -68,7 +68,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle (qstrTmp);
 
     QStringList fcombo;
-    fcombo << "FFT_freqs" << "auto_gen_tf_80" << "auto_gen_tf_40"  << "MT_Freqs" ;
+    //fcombo << "FFT_freqs" << "auto_gen_tf_80" << "auto_gen_tf_40"  << "MT_Freqs" ;
+    fcombo << "FFT_freqs" << "auto_gen_tf_80" << "auto_gen_tf_40";
 
     this->ui->cbFFTWindowLength->addItems(fcombo);
 
@@ -87,6 +88,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // activate the parallel test part
     this->cmdline->insert("calib_lab_run", "parallel_test");
     this->cmdline->insert_int("skip_marked_parts", 1);
+    // default
+    this->cmdline->insert_double("fcut_upper", 0.5);
+    this->cmdline->insert_double("fcut_lower", 0.01);
 
 }
 
@@ -267,6 +271,7 @@ void MainWindow::processingThreadFunc (void)
     this->cmdline->insert("calibration", this->ui->cbCalType->currentText());
 
     // result of process shall arrive in this->data.last()
+    this->cmdline->show_my_map();
     process->run(*this->cmdline, this->qfis);
 
     process.reset();
@@ -507,10 +512,15 @@ void MainWindow::on_pbShowPlot_clicked (void)
     }
 }
 
-
-void MainWindow::on_cbFFTWindowLength_currentIndexChanged(const QString &arg1)
+void MainWindow::on_cbFFTWindowLength_currentTextChanged(const QString &arg1)
+//void MainWindow::on_cbFFTWindowLength_currentIndexChanged(const QString &arg1)
 {
     this->cmdline->insert("target_frequencies", arg1);
+    std::cout << "target freqs changed " << arg1.toStdString() << std::endl;
+    if (arg1 == "MT_Freqs") {
+        this->cmdline->insert_double("fcut_upper", 0.5);
+        this->cmdline->insert_double("fcut_lower", 0.15);
+    }
 }
 
 
@@ -530,7 +540,18 @@ void MainWindow::on_cbFFT_cuts_currentIndexChanged(const QString &arg1)
     }
 }
 
-void MainWindow::on_xstddev_doubleSpinBox_valueChanged(double arg1)
+void MainWindow::on_xstddev_doubleSpinBox_valueChanged(const double arg1)
 {
     this->cmdline->insert_double("mt_site_xstddev", arg1);
+    std::cout << "stdev changed " << arg1 << std::endl;
+
 }
+
+void MainWindow::on_cbCalType_currentTextChanged(const QString &arg1)
+{
+    this->cmdline->insert("calibration", arg1);
+    std::cout << "calibration changed " << arg1.toStdString() << std::endl;
+
+
+}
+
