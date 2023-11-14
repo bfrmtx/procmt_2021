@@ -160,6 +160,8 @@ add_subdirectory(pmt_adulib/calib_lab)
 #IF (NOT WIN32)
 #message ( "skipping CoilFieldTestTool for Windows" )
 add_subdirectory(CoilFieldTestTool)
+add_subdirectory(InSituCoilCal)
+
 #ENDIF()
 
 

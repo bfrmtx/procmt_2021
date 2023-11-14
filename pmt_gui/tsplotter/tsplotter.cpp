@@ -334,8 +334,11 @@ void tsplotter::set_sample_window(qulonglong position, qlonglong window_length,
         }
     }
 
-    update_dialog();
-    update_scrollbar();
+
+    if(change_window_length || force_set_window_length) {
+     update_scrollbar();
+     update_dialog();
+    }
 }
 
 void tsplotter::add_window_length(qlonglong window_length, QString caption) {
