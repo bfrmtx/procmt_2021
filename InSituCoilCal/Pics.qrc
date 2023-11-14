@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/new/Icons">
+        <file>pics/Button_NOK.png</file>
+        <file>pics/Button_OK.png</file>
+        <file>pics/Button_StartNow.png</file>
+        <file>pics/Button_Stop.png</file>
+        <file>pics/OpenFolder.png</file>
+        <file>pics/CloseFolder.png</file>
+        <file>pics/Print.png</file>
+        <file>pics/Save.png</file>
+        <file>pics/ShowPlot.png</file>
+        <file>pics/AutoScale.png</file>
+        <file>pics/DoNotShowDataPoints.png</file>
+        <file>pics/ShowDataPoints.png</file>
+        <file>pics/DoNotShowCurve.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>
