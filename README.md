@@ -94,6 +94,15 @@ cd procmt_2021
 zsh clang_build_release.sh
 ```
 
+## Rebuild
+
+When forcing a rebuild, you simply delete the build directory and start again.
+
+```bash
+cd $HOME/build/procmt_2021
+rm -rf *
+```
+
 # License
 
 GPL v3<br>
