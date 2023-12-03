@@ -30,89 +30,74 @@
 #ifndef ATS_ASCII_FILE_H
 #define ATS_ASCII_FILE_H
 
+#include "ats_ascii_file_global.h"
+#include "eqdatetime.h"
+#include "procmt_alldefines.h"
+#include "threadbuffer.h"
+#include <QDataStream>
+#include <QDebug>
+#include <QFile>
+#include <QFileInfo>
+#include <QObject>
+#include <QString>
+#include <QTextStream>
 #include <climits>
-
 #include <vector>
 
-#include <QObject>
-#include <QDataStream>
-#include <QFileInfo>
-#include <QFile>
-#include <QTextStream>
-#include <QDebug>
-#include <QString>
-#include "eqdatetime.h"
-
-#include "procmt_alldefines.h"
-
-#include "threadbuffer.h"
-
-
-
-class ats_ascii_file  :  public QObject, public QFileInfo
-{
-        Q_OBJECT
+class ats_ascii_file : public QObject, public QFileInfo {
+  Q_OBJECT
 public:
-    ats_ascii_file(const QFileInfo &qfi,   const QString file_extension, const size_t slot, QObject *parent = Q_NULLPTR);
-    ats_ascii_file(const QString &qfi_str, const QString file_extension, const size_t slot, QObject *parent = Q_NULLPTR);
-    ~ats_ascii_file();
+  ats_ascii_file(const QFileInfo &qfi, const QString file_extension, const size_t slot, QObject *parent = Q_NULLPTR);
+  ats_ascii_file(const QString &qfi_str, const QString file_extension, const size_t slot, QObject *parent = Q_NULLPTR);
+  ~ats_ascii_file();
 
-   void set_buffer(std::shared_ptr<threadbuffer<double>> &buffer);
-   void reset_buffer();
+  void set_buffer(std::shared_ptr<threadbuffer<double>> &buffer);
+  void reset_buffer();
 
-   void set_frequencies(const std::vector<double> &f);
+  void set_frequencies(const std::vector<double> &f);
 
-   void set_eQDatetime(const eQDateTime &edt);
+  void set_eQDatetime(const eQDateTime &edt);
 
+  /*!
+   * \brief write_all_data OPEN the file moves the data into the class and writes to the disk and CLOSE
+   * \param all_ts_scaled data to be moved
+   * \return samples written
+   */
+  size_t write_all_data(const std::vector<double> &all_ts_scaled, const int signal_guess_up_to_here, const int signal_guess_is_when_finished);
 
-   /*!
-    * \brief write_all_data OPEN the file moves the data into the class and writes to the disk and CLOSE
-    * \param all_ts_scaled data to be moved
-    * \return samples written
-    */
-   size_t write_all_data(const std::vector<double> &all_ts_scaled, const int signal_guess_up_to_here, const int signal_guess_is_when_finished);
-
-   /*!
-    * \brief write thread write (checks the threadbuffer )
-    * \return
-    */
-   QTextStream::Status write();
+  /*!
+   * \brief write thread write (checks the threadbuffer )
+   * \return
+   */
+  QTextStream::Status write();
 
 public slots:
 
-    bool open();
-    void close();
-
+  bool open();
+  void close();
 
 signals:
 
-    void signal_repaint();
-    void signal_guess_100(int value_0_100);
-
+  void signal_repaint();
+  void signal_guess_100(int value_0_100);
 
 private:
+  QFile file;
+  QTextStream qts;
+  std::vector<double> ascii_data;
+  std::vector<double> freq; //!< when writing aplitude spectra we want f
+  int buffer_type = 0;      //!< which output: timeseries, spectra ...
+  std::shared_ptr<threadbuffer<double>> buffer;
+  int buffer_status = 0;
 
-    QFile       file;
-    QTextStream qts;
-    std::vector<double> ascii_data;
-    std::vector<double> freq;                                    //!< when writing aplitude spectra we want f
-    int buffer_type = 0;                                         //!< which output: timeseries, spectra ...
-    std::shared_ptr<threadbuffer<double>> buffer;
-    int buffer_status = 0;
+  size_t ats_write_counts = 0;
+  size_t max_counts = SIZE_MAX;
 
-    size_t ats_write_counts = 0;
-    size_t max_counts = SIZE_MAX;
-
-    bool last = false;                                           //!< last is a last buffer of different size that may be written outside the while loop - may not ne necessary
-    size_t slot = 0;
-    size_t add_signal_guess_100 = 0;
-    std::unique_ptr<eQDateTime> edt = nullptr;
-    quint64 starts_at = 0;
-
+  bool last = false; //!< last is a last buffer of different size that may be written outside the while loop - may not ne necessary
+  size_t slot = 0;
+  size_t add_signal_guess_100 = 0;
+  std::unique_ptr<eQDateTime> edt = nullptr;
+  quint64 starts_at = 0;
 };
-
-
-
-
 
 #endif // ATS_ASCII_FILE_H

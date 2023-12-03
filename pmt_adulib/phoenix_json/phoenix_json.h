@@ -30,30 +30,51 @@
 #ifndef PHOENIX_JSON_H
 #define PHOENIX_JSON_H
 
+#include "phoenix_json_global.h"
 #include <QObject>
+#include "phoenix_json_global.h"
 #include <QJsonDocument>
+#include "phoenix_json_global.h"
 #include <QJsonArray>
+#include "phoenix_json_global.h"
 #include <QJsonObject>
+#include "phoenix_json_global.h"
 #include <QJsonValue>
+#include "phoenix_json_global.h"
 #include <QByteArray>
+#include "phoenix_json_global.h"
 #include <QDebug>
+#include "phoenix_json_global.h"
 #include <QFile>
+#include "phoenix_json_global.h"
 #include <QFileInfo>
+#include "phoenix_json_global.h"
 #include <QTextStream>
+#include "phoenix_json_global.h"
 #include <QByteArray>
 
 
+#include "phoenix_json_global.h"
 #include <QMap>
+#include "phoenix_json_global.h"
 #include <QVariant>
 
+#include "phoenix_json_global.h"
 #include <atsfile.h>
+#include "phoenix_json_global.h"
 #include <vector>
+#include "phoenix_json_global.h"
 #include <thread>
+#include "phoenix_json_global.h"
 #include <future>
+#include "phoenix_json_global.h"
 #include <mutex>
+#include "phoenix_json_global.h"
 #include <condition_variable>
+#include "phoenix_json_global.h"
 #include <chrono>
 
+#include "phoenix_json_global.h"
 #include <calibration.h>
 
 
@@ -157,9 +178,13 @@ private:
 #ifndef CONCURRENT_QUEUE_H_
 #define CONCURRENT_QUEUE_H_
 
+#include "phoenix_json_global.h"
 #include <queue>
+#include "phoenix_json_global.h"
 #include <thread>
+#include "phoenix_json_global.h"
 #include <mutex>
+#include "phoenix_json_global.h"
 #include <condition_variable>
 
 template <typename T>
@@ -211,8 +236,11 @@ class ConcurrentQueue {
 #endif
 
 // producer-consumer.cc
+#include "phoenix_json_global.h"
 #include "concurrent-queue.h"
+#include "phoenix_json_global.h"
 #include <iostream>
+#include "phoenix_json_global.h"
 #include <thread>
 
 void produce(ConcurrentQueue<int>& q) {

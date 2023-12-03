@@ -1,0 +1,12 @@
+#ifndef ATSFILENAME_GLOBAL_H
+#define ATSFILENAME_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(ATSFILENAME_LIBRARY)
+#  define ATSFILENAME_EXPORT Q_DECL_EXPORT
+#else
+#  define ATSFILENAME_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // ATSFILENAME_GLOBAL_H

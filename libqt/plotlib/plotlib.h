@@ -30,21 +30,36 @@
 #ifndef PLOTLIB_H
 #define PLOTLIB_H
 
+#include "plotlib_global.h"
 #include <QObject>
+#include "plotlib_global.h"
 #include <QComboBox>
+#include "plotlib_global.h"
 #include <QPushButton>
+#include "plotlib_global.h"
 #include <QVBoxLayout>
+#include "plotlib_global.h"
 #include <QGroupBox>
+#include "plotlib_global.h"
 #include <QScrollArea>
+#include "plotlib_global.h"
 #include <QButtonGroup>
+#include "plotlib_global.h"
 #include <QList>
+#include "plotlib_global.h"
 #include <QSignalMapper>
+#include "plotlib_global.h"
 #include <QWidget>
+#include "plotlib_global.h"
 #include "qcustomplot.h"
+#include "plotlib_global.h"
 #include <algorithm>
+#include "plotlib_global.h"
 #include <memory>
+#include "plotlib_global.h"
 #include <cfloat>
 
+#include "plotlib_global.h"
 #include "procmt_alldefines.h"
 
 

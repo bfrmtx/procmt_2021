@@ -1,8 +1,8 @@
 #
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-project(procmt_2021 LANGUAGES CXX)
+project(procmt_2021 VERSION 2.1 LANGUAGES CXX)
 
 IF (NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
     message ("BUILD WITHOUT OpenGL               <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -23,6 +23,25 @@ ELSE()
     add_definitions(-DUSE_SPECTRAL_PLOTTER_PRO)
 
 ENDIF()
+# test packages first
+# Qt6
+find_package(Qt6
+    REQUIRED COMPONENTS Core Gui Widgets Sql Network Xml
+    OPTIONAL_COMPONENTS PrintSupport
+)
+if (NOT Qt6_FOUND) 
+    message(FATAL_ERROR "Package Qt6 required, but not found!")
+endif()
+
+# boost
+find_package(Boost REQUIRED)
+if (NOT Boost_FOUND) 
+    message(FATAL_ERROR "Package Boost required, but not found!")
+endif()
+
+
+
+
 #
 # set CMAKE_BUILD_TYPE RELEASE for CLANG
 IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )

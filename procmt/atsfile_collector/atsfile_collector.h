@@ -30,27 +30,47 @@
 #ifndef ATSFILE_COLLECTOR_H
 #define ATSFILE_COLLECTOR_H
 
+#include "atsfile_collector_global.h"
 #include "ats_ascii_file.h"
+#include "atsfile_collector_global.h"
 #include "atsfile.h"
+#include "atsfile_collector_global.h"
 #include "atsheader.h"
+#include "atsfile_collector_global.h"
 #include "buckets.h"
+#include "atsfile_collector_global.h"
 #include "iterator_templates.h"
+#include "atsfile_collector_global.h"
 #include "prc_com.h"
+#include "atsfile_collector_global.h"
 #include "procmt_alldefines.h"
+#include "atsfile_collector_global.h"
 #include "threadbuffer.h"
 
+#include "atsfile_collector_global.h"
 #include "math_vector.h"
+#include "atsfile_collector_global.h"
 #include "vector_utils.h"
 
+#include "atsfile_collector_global.h"
 #include <QDataStream>
+#include "atsfile_collector_global.h"
 #include <QDate>
+#include "atsfile_collector_global.h"
 #include <QFile>
+#include "atsfile_collector_global.h"
 #include <QFileInfo>
+#include "atsfile_collector_global.h"
 #include <QObject>
+#include "atsfile_collector_global.h"
 #include <complex>
+#include "atsfile_collector_global.h"
 #include <memory>
+#include "atsfile_collector_global.h"
 #include <queue>
+#include "atsfile_collector_global.h"
 #include <thread>
+#include "atsfile_collector_global.h"
 #include <vector>
 
 class atsfile_collector : public QObject, public prc_com {

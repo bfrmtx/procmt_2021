@@ -30,6 +30,7 @@
 #ifndef EMERALD_XTRX_H
 #define EMERALD_XTRX_H
 
+#include "emerald_xtrx_global.h"
 #include "measdocxml.h"
 
 class emerald_xtrx : public measdocxml

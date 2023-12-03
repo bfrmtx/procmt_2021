@@ -30,17 +30,29 @@
 #ifndef LINEEDIT_FILE_H
 #define LINEEDIT_FILE_H
 
+#include "lineedit_file_global.h"
 #include <QLineEdit>
+#include "lineedit_file_global.h"
 #include <QDrag>
+#include "lineedit_file_global.h"
 #include <QDropEvent>
+#include "lineedit_file_global.h"
 #include <QMimeData>
+#include "lineedit_file_global.h"
 #include <QFileInfo>
+#include "lineedit_file_global.h"
 #include <QUrl>
+#include "lineedit_file_global.h"
 #include <QDir>
+#include "lineedit_file_global.h"
 #include <QFile>
+#include "lineedit_file_global.h"
 #include <QFileInfo>
+#include "lineedit_file_global.h"
 #include <QMimeType>
+#include "lineedit_file_global.h"
 #include <QString>
+#include "lineedit_file_global.h"
 #include <QStringList>
 
 

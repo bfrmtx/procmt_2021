@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(ts_tools VERSION 0.1 LANGUAGES CXX)
+project(ts_tools VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -12,8 +12,7 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
-find_package(QT NAMES Qt6 COMPONENTS Core Sql Widgets Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Sql Widgets Network REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core Sql Widgets Network)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -60,31 +59,7 @@ mainwindow.h
 mainwindow.ui
 )
 
-
-
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(${PROJECT_NAME}
-        MANUAL_FINALIZATION
-        ${SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(${PROJECT_NAME} SHARED
-            ${SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(${PROJECT_NAME}
-            ${SOURCES}
-        )
-    endif()
-endif()
-
+include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
@@ -125,17 +100,5 @@ PRIVATE group_atsfiles
 PRIVATE qstring_utilities
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    # for GUI
-    WIN32_EXECUTABLE TRUE
-)
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(${PROJECT_NAME})
-endif()
-
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 

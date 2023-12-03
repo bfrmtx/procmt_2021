@@ -1,0 +1,12 @@
+#ifndef PHOENIX_JSON_GLOBAL_H
+#define PHOENIX_JSON_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(PHOENIX_JSON_LIBRARY)
+#  define PHOENIX_JSON_EXPORT Q_DECL_EXPORT
+#else
+#  define PHOENIX_JSON_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // PHOENIX_JSON_GLOBAL_H

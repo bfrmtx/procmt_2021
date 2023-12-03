@@ -30,36 +30,62 @@
 #ifndef MC_DATA_H
 #define MC_DATA_H
 
+#include "mc_data_global.h"
 #include <QDebug>
+#include "mc_data_global.h"
 #include <QFile>
+#include "mc_data_global.h"
 #include <QList>
+#include "mc_data_global.h"
 #include <QObject>
+#include "mc_data_global.h"
 #include <QSqlDatabase>
+#include "mc_data_global.h"
 #include <QSqlError>
+#include "mc_data_global.h"
 #include <QSqlQuery>
+#include "mc_data_global.h"
 #include <QTextStream>
+#include "mc_data_global.h"
 #include <QtSql>
 
+#include "mc_data_global.h"
 #include <list>
+#include "mc_data_global.h"
 #include <map>
+#include "mc_data_global.h"
 #include <queue>
 
+#include "mc_data_global.h"
 #include "iterator_templates.h"
+#include "mc_data_global.h"
 #include "procmt_alldefines.h"
 
+#include "mc_data_global.h"
 #include "acsp_prz.h"
+#include "mc_data_global.h"
 #include "atmfile.h"
+#include "mc_data_global.h"
 #include "ats_ascii_file.h"
+#include "mc_data_global.h"
 #include "atsfile.h"
+#include "mc_data_global.h"
 #include "atsfile_collector.h"
+#include "mc_data_global.h"
 #include "calibration.h"
+#include "mc_data_global.h"
 #include "firfilter.h"
+#include "mc_data_global.h"
 #include "measdocxml.h"
+#include "mc_data_global.h"
 #include "prc_com.h"
+#include "mc_data_global.h"
 #include "threadbuffer.h"
 // #include "acsp_lines.h"
 
+#include "mc_data_global.h"
 #include "math_vector.h"
+#include "mc_data_global.h"
 #include "msg_logger.h"
 
 /*!

@@ -30,19 +30,33 @@
 #ifndef EDI_FILE_H
 #define EDI_FILE_H
 
+#include "edi_file_global.h"
 #include "buckets.h"
+#include "edi_file_global.h"
 #include "eqdatetime.h"
+#include "edi_file_global.h"
 #include "geocoordinates.h"
+#include "edi_file_global.h"
 #include "msg_logger.h"
+#include "edi_file_global.h"
 #include "prc_com.h"
+#include "edi_file_global.h"
 #include <QDebug>
+#include "edi_file_global.h"
 #include <QFile>
+#include "edi_file_global.h"
 #include <QFileInfo>
+#include "edi_file_global.h"
 #include <QObject>
+#include "edi_file_global.h"
 #include <QString>
+#include "edi_file_global.h"
 #include <QTextStream>
+#include "edi_file_global.h"
 #include <map>
+#include "edi_file_global.h"
 #include <memory>
+#include "edi_file_global.h"
 #include <procmt_alldefines.h>
 
 class edi_file : public QObject, public QFileInfo, prc_com {

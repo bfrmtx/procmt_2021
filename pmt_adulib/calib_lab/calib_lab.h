@@ -30,92 +30,82 @@
 #ifndef CALIB_LAB_H
 #define CALIB_LAB_H
 
-#include <QObject>
+#include "calib_lab_global.h"
 #include "prc_com.h"
-#include "mc_data.h"
+#include <QObject>
+
 #include "math_vector.h"
+#include "mc_data.h"
+#include "measdocxml.h"
 #include "mt_site.h"
-#include "vector_utils.h"
+#include "parallel_test_coherency.h"
 #include "procmt_alldefines.h"
 #include "qstring_utilities.h"
-#include <iostream>
-#include <climits>
+#include "vector_utils.h"
 #include <cfloat>
+#include <climits>
+#include <iostream>
 #include <memory>
-#include "measdocxml.h"
-#include "parallel_test_coherency.h"
 
-
-
-class calib_lab : public QObject
-{
-    Q_OBJECT
+class calib_lab : public QObject {
+  Q_OBJECT
 
 public:
-    calib_lab(QObject *parent = Q_NULLPTR);
+  calib_lab(QObject *parent = Q_NULLPTR);
 
-    ~calib_lab();
+  ~calib_lab();
 
-    void set_storage(std::shared_ptr<QMap<QString, parallel_test_coherency>> data);
-
+  void set_storage(std::shared_ptr<QMap<QString, parallel_test_coherency>> data);
 
 public slots:
 
-    /*!
-     * \brief run
-     * \param cmdline_parm, ckecks for this->cmdline->svalue("calib_lab_run") == "parallel_test" or "insitu_calibration"
-     * \param qfis
-     */
-    void run(const prc_com &cmdline_parm, const QList<QFileInfo> &qfis);
+  /*!
+   * \brief run
+   * \param cmdline_parm, ckecks for this->cmdline->svalue("calib_lab_run") == "parallel_test" or "insitu_calibration"
+   * \param qfis
+   */
+  void run(const prc_com &cmdline_parm, const QList<QFileInfo> &qfis);
 
-    void write_ascii_spectra();           //!< for testing
+  void write_ascii_spectra(); //!< for testing
 
-    void slot_fde_vector_created(const QString &acsp_name, std::vector<double> &f, std::vector<double> &v, std::vector<double> &e);
-    void slot_fd_vector_created(const QString &acsp_name, std::vector<double> &f, std::vector<double> &v);
-    void slot_input_cal_used(const QString sensortype, const int sernum, const QString channel_type, const std::vector<double> &freqs, const std::vector<double> &ampls, const std::vector<double> &degs, const int chopper);
-
+  void slot_fde_vector_created(const QString &acsp_name, std::vector<double> &f, std::vector<double> &v, std::vector<double> &e);
+  void slot_fd_vector_created(const QString &acsp_name, std::vector<double> &f, std::vector<double> &v);
+  void slot_input_cal_used(const QString sensortype, const int sernum, const QString channel_type, const std::vector<double> &freqs, const std::vector<double> &ampls, const std::vector<double> &degs, const int chopper);
 
 signals:
 
-    void amplitude_spc(const QString &ac_spectra_name, std::vector<double>& amplitude, std::vector<double>& stddev);
-    void coherency(const QString &ac_spectra_name, std::vector<double>& amplitude);
-    void noise(const QString &ac_spectra_name, std::vector<double>& amplitude);
+  void amplitude_spc(const QString &ac_spectra_name, std::vector<double> &amplitude, std::vector<double> &stddev);
+  void coherency(const QString &ac_spectra_name, std::vector<double> &amplitude);
+  void noise(const QString &ac_spectra_name, std::vector<double> &amplitude);
 
-
-    void finished_amplitudes();
-    void finished_coherencies();
-
+  void finished_amplitudes();
+  void finished_coherencies();
 
 private:
+  std::shared_ptr<msg_logger> msg; //!< log messages and transport to GUI
 
-    std::shared_ptr<msg_logger> msg;                //!< log messages and transport to GUI
+  std::unique_ptr<mt_site> mtsite;                                                    //!< does the math
+  std::shared_ptr<all_spectra_collector<std::complex<double>>> all_channel_collector; //!< collects the data
 
-    std::unique_ptr<mt_site> mtsite;                //!< does the math
-    std::shared_ptr<all_spectra_collector<std::complex<double>>>  all_channel_collector; //!< collects the data
+  std::shared_ptr<prc_com> cmdline; //!< all options will be collected here
 
-    std::shared_ptr<prc_com> cmdline;               //!< all options will be collected here
+  mttype spcx = mttype::nomt;
 
-    mttype spcx = mttype::nomt;
+  void process();
 
-    void process();
+  QList<QFileInfo> qfis;    //!< all input QFileInfos for PST
+  QList<QFileInfo> qfisxml; //!< all input QFileInfos for Insitu Calibration
 
-    QList<QFileInfo> qfis;                          //!< all input QFileInfos for PST
-    QList<QFileInfo> qfisxml;                       //!< all input QFileInfos for Insitu Calibration
+  // all data at the end for transportation
+  std::shared_ptr<QMap<QString, parallel_test_coherency>> data;
 
+  double f_sample = DBL_MAX;
+  size_t wl = SIZE_MAX;
+  int chopper_status = -1;
 
-    // all data at the end for transportation
-    std::shared_ptr<QMap<QString, parallel_test_coherency>> data;
+  mutable std::mutex mutex;
 
-
-    double f_sample = DBL_MAX;
-    size_t wl = SIZE_MAX;
-    int chopper_status = -1;
-
-    mutable std::mutex mutex;
-
-
-    //bool ckeck_storage();
-
+  // bool ckeck_storage();
 };
 
 #endif // CALIB_LAB_H

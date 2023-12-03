@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(procmt_lib LANGUAGES CXX)
+project(procmt_lib VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -55,7 +55,7 @@ set(HEADERS_INSTALL
  )
 
 
-# want STATIC
+
 add_library(${PROJECT_NAME}   ${SOURCES} ${HEADERS_INSTALL} )
 
 
@@ -94,7 +94,7 @@ PRIVATE mc_data
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE PRCOMT_LIB_LIBRARY)
 
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+# for libraries
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
 
 

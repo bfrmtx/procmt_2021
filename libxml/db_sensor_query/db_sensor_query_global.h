@@ -1,0 +1,12 @@
+#ifndef DB_SENSOR_QUERY_GLOBAL_H
+#define DB_SENSOR_QUERY_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(DB_SENSOR_QUERY_LIBRARY)
+#  define DB_SENSOR_QUERY_EXPORT Q_DECL_EXPORT
+#else
+#  define DB_SENSOR_QUERY_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // DB_SENSOR_QUERY_GLOBAL_H

@@ -30,12 +30,19 @@
 #ifndef ATSFILENAME_H
 #define ATSFILENAME_H
 
+#include "atsfilename_global.h"
 #include <QObject>
+#include "atsfilename_global.h"
 #include <QFileInfo>
+#include "atsfilename_global.h"
 #include <QString>
+#include "atsfilename_global.h"
 #include <memory>
+#include "atsfilename_global.h"
 #include "prc_com.h"
+#include "atsfilename_global.h"
 #include "atsheader.h"
+#include "atsfilename_global.h"
 #include "atsheader_80_def.h"
 
 

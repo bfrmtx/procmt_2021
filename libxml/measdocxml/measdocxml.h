@@ -30,23 +30,41 @@
 #ifndef MEASDOCXML_H
 #define MEASDOCXML_H
 
+#include "measdocxml_global.h"
 #include "tinyxml2.h"
+#include "measdocxml_global.h"
 #include "iostream"
+#include "measdocxml_global.h"
 #include <QFileInfo>
+#include "measdocxml_global.h"
 #include <QFile>
+#include "measdocxml_global.h"
 #include <QDir>
+#include "measdocxml_global.h"
 #include <QDebug>
+#include "measdocxml_global.h"
 #include <QDateTime>
+#include "measdocxml_global.h"
 #include <QString>
+#include "measdocxml_global.h"
 #include <QStringList>
+#include "measdocxml_global.h"
 #include <QMap>
+#include "measdocxml_global.h"
 #include <QList>
+#include "measdocxml_global.h"
 #include <QVariant>
+#include "measdocxml_global.h"
 #include <QTextStream>
+#include "measdocxml_global.h"
 #include <QByteArray>
+#include "measdocxml_global.h"
 #include <QUrl>
+#include "measdocxml_global.h"
 #include <vector>
+#include "measdocxml_global.h"
 #include <string>
+#include "measdocxml_global.h"
 #include <mutex>
 
 

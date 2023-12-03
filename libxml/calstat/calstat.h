@@ -30,11 +30,17 @@
 #ifndef CALSTAT_H
 #define CALSTAT_H
 
+#include "calstat_global.h"
 #include <QDebug>
+#include "calstat_global.h"
 #include <QMap>
+#include "calstat_global.h"
 #include <vector>
+#include "calstat_global.h"
 #include "procmt_alldefines.h"
+#include "calstat_global.h"
 #include "math_vector.h"
+#include "calstat_global.h"
 #include "statmaps.h"
 
 class calstat {

@@ -1,0 +1,12 @@
+#ifndef LINEEDIT_FILE_GLOBAL_H
+#define LINEEDIT_FILE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(LINEEDIT_FILE_LIBRARY)
+#  define LINEEDIT_FILE_EXPORT Q_DECL_EXPORT
+#else
+#  define LINEEDIT_FILE_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // LINEEDIT_FILE_GLOBAL_H

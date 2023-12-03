@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(plotlib LANGUAGES CXX)
+project(plotlib VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -13,11 +13,9 @@ include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
-  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL PrintSupport)
 ELSE()
-  find_package(QT NAMES Qt6 COMPONENTS Widgets PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets PrintSupport)
 ENDIF()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/qcustomplot)
@@ -29,7 +27,6 @@ set(SOURCES
 set(HEADERS_INSTALL
   plotlib.h
 )
-
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
@@ -50,6 +47,6 @@ ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE PLOTLIB_LIBRARY)
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+# for libraries
 
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)

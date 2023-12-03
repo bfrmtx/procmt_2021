@@ -30,13 +30,21 @@
 #ifndef DB_SENSOR_QUERY_H
 #define DB_SENSOR_QUERY_H
 
+#include "db_sensor_query_global.h"
 #include <QDebug>
+#include "db_sensor_query_global.h"
 #include <QtSql>
+#include "db_sensor_query_global.h"
 #include <QSqlDatabase>
+#include "db_sensor_query_global.h"
 #include <QSqlQuery>
+#include "db_sensor_query_global.h"
 #include <QSqlError>
+#include "db_sensor_query_global.h"
 #include <QFileInfo>
+#include "db_sensor_query_global.h"
 #include <memory>
+#include "db_sensor_query_global.h"
 #include "msg_logger.h"
 
 /*!

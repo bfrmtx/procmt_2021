@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(prc_com_table LANGUAGES CXX)
+project(prc_com_table VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -11,8 +11,7 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
-find_package(QT NAMES Qt6 COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include {CMAKE_SOURCE_DIR}/include/base/prc_com)
@@ -32,7 +31,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE PRC_COM_TABLE_LIBRARY)
 
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+# for libraries
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
 
 

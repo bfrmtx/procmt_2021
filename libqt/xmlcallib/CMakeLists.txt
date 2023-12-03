@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(xmlcallib LANGUAGES CXX)
+project(xmlcallib VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -13,11 +13,9 @@ include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
-  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Sql PrintSupport)
 ELSE()
-  find_package(QT NAMES Qt6 COMPONENTS Widgets Sql PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets Sql PrintSupport)
 ENDIF()
 
 find_package(Boost REQUIRED)
@@ -56,7 +54,7 @@ set( HEADERS_INSTALL
   add_range_labels.h
 )
 
-# want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL} )
 
 
@@ -89,6 +87,5 @@ ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE XMLCALLIB_LIBRARY)
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+# for libraries
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)

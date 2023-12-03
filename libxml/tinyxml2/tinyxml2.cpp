@@ -1880,8 +1880,8 @@ XMLError XMLDocument::LoadFile(const QString filename) {
   Clear();
   FILE *fp = callfopen(filename, "rb");
   if (!fp) {
-    const char *str = filename.toStdString().c_str();
-    SetError(XML_ERROR_FILE_NOT_FOUND, 0, "str=%s", str ? str : "<null>");
+    // const char *str = filename.toStdString().c_str();
+    SetError(XML_ERROR_FILE_NOT_FOUND, 0, "str=%s", filename.toStdString().c_str() ? filename.toStdString().c_str() : "<null>");
     // SetError( XML_ERROR_FILE_NOT_FOUND, 0, "filename=%s", filename ? filename : "<null>");
     return _errorID;
   }
@@ -1957,8 +1957,8 @@ XMLError XMLDocument::LoadFile(FILE *fp) {
 XMLError XMLDocument::SaveFile(const QString filename, bool compact) {
   FILE *fp = callfopen(filename, "w");
   if (!fp) {
-    const char *str = filename.toStdString().c_str();
-    SetError(XML_ERROR_FILE_NOT_FOUND, 0, "str=%s", str ? str : "<null>");
+    // const char *str = filename.toStdString().c_str();
+    SetError(XML_ERROR_FILE_NOT_FOUND, 0, "str=%s", filename.toStdString().c_str() ? filename.toStdString().c_str() : "<null>");
     // SetError( XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=%s", filename ? filename : "<null>");
     return _errorID;
   }

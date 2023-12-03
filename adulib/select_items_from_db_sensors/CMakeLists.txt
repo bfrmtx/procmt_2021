@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(select_items_from_db_sensors LANGUAGES CXX)
+project(select_items_from_db_sensors VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -44,5 +44,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
  )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SELECT_ITEMS_FROM_DB_SENSORS_LIBRARY)
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+# for libraries
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)

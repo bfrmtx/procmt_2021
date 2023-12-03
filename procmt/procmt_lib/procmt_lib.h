@@ -30,26 +30,46 @@
 #ifndef PROCMT_LIB_H
 #define PROCMT_LIB_H
 
+#include "procmt_lib_global.h"
 #include "prc_com.h"
+#include "procmt_lib_global.h"
 #include <QDir>
+#include "procmt_lib_global.h"
 #include "edi_file.h"
+#include "procmt_lib_global.h"
 #include "mc_data.h"
+#include "procmt_lib_global.h"
 #include "mt_site.h"
+#include "procmt_lib_global.h"
 #include "math_vector.h"
+#include "procmt_lib_global.h"
 #include "procmt_alldefines.h"
+#include "procmt_lib_global.h"
 #include "qstring_utilities.h"
+#include "procmt_lib_global.h"
 #include <iostream>
+#include "procmt_lib_global.h"
 #include <climits>
+#include "procmt_lib_global.h"
 #include <cfloat>
+#include "procmt_lib_global.h"
 #include <memory>
+#include "procmt_lib_global.h"
 #include "msg_logger.h"
+#include "procmt_lib_global.h"
 #include "mc_data.h"
+#include "procmt_lib_global.h"
 #include "prc_com.h"
+#include "procmt_lib_global.h"
 #include "mt_site.h"
+#include "procmt_lib_global.h"
 #include <QMultiMap>
 
+#include "procmt_lib_global.h"
 #include "math_vector.h"
+#include "procmt_lib_global.h"
 #include "procmt_alldefines.h"
+#include "procmt_lib_global.h"
 #include "qstring_utilities.h"
 
 

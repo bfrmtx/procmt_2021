@@ -42,17 +42,28 @@
     #define _CAN_INT_FABS
 #endif
 
+#include "geocoordinates_global.h"
 #include <QObject>
+#include "geocoordinates_global.h"
 #include <QDebug>
+#include "geocoordinates_global.h"
 #include <QObject>
+#include "geocoordinates_global.h"
 #include <QString>
+#include "geocoordinates_global.h"
 #include <QStringList>
+#include "geocoordinates_global.h"
 #include <QHash>
 
+#include "geocoordinates_global.h"
 #include <climits>
+#include "geocoordinates_global.h"
 #include <cstdlib>
+#include "geocoordinates_global.h"
 #include <iostream>
+#include "geocoordinates_global.h"
 #include <cmath>
+#include "geocoordinates_global.h"
 #include <algorithm>
 
 template <class T, class S> void rad2grad(const T& rad, S& gr, S& mi, T& se) {

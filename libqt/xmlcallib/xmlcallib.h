@@ -30,38 +30,64 @@
 #ifndef XMLCALLIB_H
 #define XMLCALLIB_H
 
+#include "xmlcallib_global.h"
 #include <QMainWindow>
+#include "xmlcallib_global.h"
 #include <QFile>
+#include "xmlcallib_global.h"
 #include <QFileInfo>
+#include "xmlcallib_global.h"
 #include <QDrag>
+#include "xmlcallib_global.h"
 #include <QDropEvent>
+#include "xmlcallib_global.h"
 #include <QMimeData>
+#include "xmlcallib_global.h"
 #include <QDragEnterEvent>
+#include "xmlcallib_global.h"
 #include <QList>
+#include "xmlcallib_global.h"
 #include <QMap>
+#include "xmlcallib_global.h"
 #include <QSql>
+#include "xmlcallib_global.h"
 #include <QDockWidget>
+#include "xmlcallib_global.h"
 #include <QListWidget>
+#include "xmlcallib_global.h"
 #include <QVector>
 
+#include "xmlcallib_global.h"
 #include <memory>
+#include "xmlcallib_global.h"
 #include "qcustomplot.h"
 
+#include "xmlcallib_global.h"
 #include "procmt_alldefines.h"
+#include "xmlcallib_global.h"
 #include "qtx_templates.h"
 
+#include "xmlcallib_global.h"
 #include "plotlib.h"
+#include "xmlcallib_global.h"
 #include "measdocxml.h"
+#include "xmlcallib_global.h"
 #include "calibration.h"
+#include "xmlcallib_global.h"
 #include "db_sensor_query.h"
+#include "xmlcallib_global.h"
 #include "select_master_dialog.h"
+#include "xmlcallib_global.h"
 #include "manual_scales.h"
+#include "xmlcallib_global.h"
 #include "add_range_labels.h"
 
+#include "xmlcallib_global.h"
 #include <QSharedPointer>
 
 
 //tesinng
+#include "xmlcallib_global.h"
 #include "sql_vector.h"
 
 

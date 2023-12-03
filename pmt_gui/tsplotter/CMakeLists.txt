@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(tsplotter VERSION 0.1 LANGUAGES CXX)
+project(tsplotter VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -97,6 +97,7 @@ manualscalingdialog.ui
 qwebdavdialog.ui
 )
 
+# for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
 
@@ -157,6 +158,6 @@ IF(QCUSTOMPLOT_USE_OPENGL)
     ENDIF()
 ENDIF()
 
-
+# for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 

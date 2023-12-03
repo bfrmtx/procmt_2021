@@ -1,0 +1,12 @@
+#ifndef BOOST_STUDENT_GLOBAL_H
+#define BOOST_STUDENT_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(BOOST_STUDENT_LIBRARY)
+#  define BOOST_STUDENT_EXPORT Q_DECL_EXPORT
+#else
+#  define BOOST_STUDENT_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // BOOST_STUDENT_GLOBAL_H

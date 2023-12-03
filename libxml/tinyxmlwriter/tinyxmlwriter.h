@@ -30,13 +30,21 @@
 #ifndef tinyxmlwriter_H
 #define tinyxmlwriter_H
 
+#include "tinyxmlwriter_global.h"
 #include <QString>
+#include "tinyxmlwriter_global.h"
 #include <QTextStream>
+#include "tinyxmlwriter_global.h"
 #include <QVector>
+#include "tinyxmlwriter_global.h"
 #include <QMap>
+#include "tinyxmlwriter_global.h"
 #include <QVariant>
+#include "tinyxmlwriter_global.h"
 #include <iostream>
+#include "tinyxmlwriter_global.h"
 #include <QVariant>
+#include "tinyxmlwriter_global.h"
 #include <QDateTime>
 
 //!< @todo round 1.999 to 2 as option

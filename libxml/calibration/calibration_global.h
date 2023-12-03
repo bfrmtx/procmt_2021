@@ -1,0 +1,12 @@
+#ifndef CALIBRATION_GLOBAL_H
+#define CALIBRATION_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(CALIBRATION_LIBRARY)
+#  define CALIBRATION_EXPORT Q_DECL_EXPORT
+#else
+#  define CALIBRATION_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // CALIBRATION_GLOBAL_H

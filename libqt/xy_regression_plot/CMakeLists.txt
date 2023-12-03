@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(xy_regression_plot LANGUAGES CXX)
+project(xy_regression_plot VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -13,11 +13,9 @@ include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
-  find_package(QT NAMES Qt6 COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL Sql PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Sql PrintSupport)
 ELSE()
-  find_package(QT NAMES Qt6 COMPONENTS Widgets Sql PrintSupport REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql PrintSupport REQUIRED)
+  find_package(Qt6 REQUIRED COMPONENTS Widgets Sql PrintSupport)
 ENDIF()
 
 find_package(Boost REQUIRED)
@@ -42,7 +40,7 @@ set(HEADERS_INSTALL
   xy_regression_plot.h
 )
 
-# want on top CMAKELists.txt option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
+
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 
 target_link_libraries(${PROJECT_NAME}
@@ -67,6 +65,6 @@ ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE XY_REGRESSION_PLOT_LIBRARY)
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+# for libraries
 
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)

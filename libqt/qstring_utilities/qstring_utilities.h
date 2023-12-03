@@ -30,14 +30,23 @@
 #ifndef QSTRING_UTILITIES_H
 #define QSTRING_UTILITIES_H
 
+#include "qstring_utilities_global.h"
 #include <QString>
+#include "qstring_utilities_global.h"
 #include <QStringList>
+#include "qstring_utilities_global.h"
 #include <QFileInfo>
+#include "qstring_utilities_global.h"
 #include <QDir>
+#include "qstring_utilities_global.h"
 #include <QDirIterator>
+#include "qstring_utilities_global.h"
 #include <QDateTime>
+#include "qstring_utilities_global.h"
 #include <QDebug>
+#include "qstring_utilities_global.h"
 #include <QMap>
+#include "qstring_utilities_global.h"
 #include <QPair>
 
 

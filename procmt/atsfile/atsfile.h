@@ -30,28 +30,47 @@
 #ifndef ATSFILE_H
 #define ATSFILE_H
 
+#include "atsfile_global.h"
 #include "procmt_alldefines.h"
+#include "atsfile_global.h"
 #include "threadbuffer.h"
+#include "atsfile_global.h"
 #include "atsheader.h"
 
 
+#include "atsfile_global.h"
 #include <QDataStream>
+#include "atsfile_global.h"
 #include <QFile>
+#include "atsfile_global.h"
 #include <QFileInfo>
+#include "atsfile_global.h"
 #include <QtEndian>
+#include "atsfile_global.h"
 #include <QStringView>
+#include "atsfile_global.h"
 #include <QDate>
+#include "atsfile_global.h"
 #include <QObject>
+#include "atsfile_global.h"
 #include <thread>
+#include "atsfile_global.h"
 #include <algorithm>
+#include "atsfile_global.h"
 #include <queue>
 
+#include "atsfile_global.h"
 #include <atmfile.h>
+#include "atsfile_global.h"
 #include "fftreal_vector.h"
+#include "atsfile_global.h"
 #include "iterator_templates.h"
+#include "atsfile_global.h"
 #include "firfilter.h"
 
+#include "atsfile_global.h"
 #include <memory>
+#include "atsfile_global.h"
 #include <complex>
 
 

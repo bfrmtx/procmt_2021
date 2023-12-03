@@ -1,0 +1,12 @@
+#ifndef GROUP_ATSFILES_GLOBAL_H
+#define GROUP_ATSFILES_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(GROUP_ATSFILES_LIBRARY)
+#  define GROUP_ATSFILES_EXPORT Q_DECL_EXPORT
+#else
+#  define GROUP_ATSFILES_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // GROUP_ATSFILES_GLOBAL_H

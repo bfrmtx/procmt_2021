@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(procmt_mini VERSION 0.1 LANGUAGES CXX)
+project(procmt_mini VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -96,6 +96,7 @@ set(SOURCES
     dir_dialog.ui
 )
 
+# for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
 
@@ -147,8 +148,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt6::OpenGLWidgets
-        Qt6::OpenGL
+        Qt${QT_VERSION_MAJOR}::OpenGLWidgets
+        Qt${QT_VERSION_MAJOR}::OpenGL
     )
     IF(WIN32)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
@@ -171,6 +172,7 @@ endif()
 
 install(FILES ${FILES_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/doc)
 
+# for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 
 

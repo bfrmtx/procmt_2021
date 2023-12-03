@@ -31,25 +31,41 @@
 #define XY_REGRESSION_PLOT_H
 
 
+#include "xy_regression_plot_global.h"
 #include <QObject>
+#include "xy_regression_plot_global.h"
 #include <QMessageBox>
+#include "xy_regression_plot_global.h"
 #include <QMainWindow>
+#include "xy_regression_plot_global.h"
 #include <cmath>
+#include "xy_regression_plot_global.h"
 #include <random>
+#include "xy_regression_plot_global.h"
 #include <iostream>
+#include "xy_regression_plot_global.h"
 #include <iomanip>
+#include "xy_regression_plot_global.h"
 #include <vector>
+#include "xy_regression_plot_global.h"
 #include <QDebug>
+#include "xy_regression_plot_global.h"
 #include <QMap>
 
+#include "xy_regression_plot_global.h"
 #include <gui_items.h>
 
+#include "xy_regression_plot_global.h"
 #include "plotlib.h"
 
+#include "xy_regression_plot_global.h"
 #include "iterator_templates.h"
+#include "xy_regression_plot_global.h"
 #include "statmaps.h"
 
+#include "xy_regression_plot_global.h"
 #include "boost_student.h"
+#include "xy_regression_plot_global.h"
 #include "math_vector.h"
 
 class xy_regression_plot : public QMainWindow

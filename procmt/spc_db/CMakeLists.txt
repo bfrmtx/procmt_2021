@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
-project(spc_db LANGUAGES CXX)
+project(spc_db VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -31,8 +31,6 @@ set(HEADERS_INSTALL
   spc_db.h
 )
 
-qt_standard_project_setup()
-
 add_library(${PROJECT_NAME}  SHARED ${SOURCES} ${HEADERS_INSTALL} )
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -42,12 +40,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
  prc_com
  mt_data
  math_vector
-
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SPC_DB_LIBRARY)
 
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+# for libraries
+include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
 
 

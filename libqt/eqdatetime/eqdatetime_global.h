@@ -1,0 +1,12 @@
+#ifndef EQDATETIME_GLOBAL_H
+#define EQDATETIME_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(EQDATETIME_LIBRARY)
+#  define EQDATETIME_EXPORT Q_DECL_EXPORT
+#else
+#  define EQDATETIME_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // EQDATETIME_GLOBAL_H
