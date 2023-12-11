@@ -32,40 +32,25 @@
 
 #include "atsheader_global.h"
 #include "prc_com.h"
-#include "atsheader_global.h"
 #include "atsheader_80_def.h"
 
-#include "atsheader_global.h"
 #include "procmt_alldefines.h"
-#include "atsheader_global.h"
 #include <climits>
 
-#include "atsheader_global.h"
 #include <vector>
 
-#include "atsheader_global.h"
 #include <QObject>
-#include "atsheader_global.h"
 #include <QDataStream>
-#include "atsheader_global.h"
 #include <QFileInfo>
-#include "atsheader_global.h"
 #include <QtEndian>
-#include "atsheader_global.h"
 #include <QDir>
-#include "atsheader_global.h"
 #include <QDebug>
-#include "atsheader_global.h"
 #include <QString>
 
-#include "atsheader_global.h"
 #include <memory>
-#include "atsheader_global.h"
 #include "calibration.h"
-#include "atsheader_global.h"
 #include "msg_logger.h"
 
-#include "atsheader_global.h"
 #include <eqdatetime.h>
 
 

@@ -32,17 +32,11 @@
 
 #include "boost_student_global.h"
 #include <memory>
-#include "boost_student_global.h"
 #include <algorithm>
-#include "boost_student_global.h"
 #include <vector>
-#include "boost_student_global.h"
 #include <map>
-#include "boost_student_global.h"
 #include "statmaps.h"
-#include "boost_student_global.h"
 #include <QString>
-#include "boost_student_global.h"
 #include <QDebug>
 
 

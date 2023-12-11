@@ -32,10 +32,8 @@
 
 #include "group_atsfiles_global.h"
 #include "atsheader.h"
-#include "group_atsfiles_global.h"
 #include "eqdatetime.h"
 
-#include "group_atsfiles_global.h"
 #include <vector>
 
 

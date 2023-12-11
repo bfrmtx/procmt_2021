@@ -32,46 +32,27 @@
 
 #include "emerald_global.h"
 #include "procmt_alldefines.h"
-#include "emerald_global.h"
 #include "threadbuffer.h"
-#include "emerald_global.h"
 #include "atsheader.h"
-#include "emerald_global.h"
 #include "atsfile.h"
-#include "emerald_global.h"
 #include <algorithm>
 
-#include "emerald_global.h"
 #include <QDataStream>
-#include "emerald_global.h"
 #include <QTextStream>
-#include "emerald_global.h"
 #include <QFile>
-#include "emerald_global.h"
 #include <QFileInfo>
-#include "emerald_global.h"
 #include <QDate>
-#include "emerald_global.h"
 #include <QObject>
-#include "emerald_global.h"
 #include <thread>
-#include "emerald_global.h"
 #include <cfloat>
-#include "emerald_global.h"
 #include <vector>
-#include "emerald_global.h"
 #include <QPair>
-#include "emerald_global.h"
 #include <QMap>
-#include "emerald_global.h"
 #include <QVariant>
 
-#include "emerald_global.h"
 #include "vector_utils.h"
 
-#include "emerald_global.h"
 #include <string>
-#include "emerald_global.h"
 #include <iomanip>
 
 /*!

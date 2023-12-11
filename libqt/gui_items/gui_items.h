@@ -32,65 +32,37 @@
 
 #include "gui_items_global.h"
 #include <QObject>
-#include "gui_items_global.h"
 #include <QComboBox>
-#include "gui_items_global.h"
 #include <QtSql>
-#include "gui_items_global.h"
 #include <QSqlDatabase>
-#include "gui_items_global.h"
 #include <QCheckBox>
-#include "gui_items_global.h"
 #include <QSqlQuery>
-#include "gui_items_global.h"
 #include <QList>
-#include "gui_items_global.h"
 #include <QDebug>
-#include "gui_items_global.h"
 #include <QVariant>
-#include "gui_items_global.h"
 #include <QFileInfo>
-#include "gui_items_global.h"
 #include <QApplication>
-#include "gui_items_global.h"
 #include <QListWidget>
-#include "gui_items_global.h"
 #include <QSpinBox>
-#include "gui_items_global.h"
 #include <QLabel>
-#include "gui_items_global.h"
 #include <QDoubleSpinBox>
-#include "gui_items_global.h"
 #include <QRadioButton>
-#include "gui_items_global.h"
 #include <QPushButton>
-#include "gui_items_global.h"
 #include <QLayout>
-#include "gui_items_global.h"
 #include <QHBoxLayout>
-#include "gui_items_global.h"
 #include <QVBoxLayout>
-#include "gui_items_global.h"
 #include <vector>
-#include "gui_items_global.h"
 #include <cmath>
 
-#include "gui_items_global.h"
 #include <QScrollArea>
-#include "gui_items_global.h"
 #include <QVBoxLayout>
 
-#include "gui_items_global.h"
 #include <QUrl>
-#include "gui_items_global.h"
 #include <QDesktopServices>
 
-#include "gui_items_global.h"
 #include "statmaps.h"
-#include "gui_items_global.h"
 #include "qtx_templates.h"
 
-#include "gui_items_global.h"
 #include <memory>
 
 

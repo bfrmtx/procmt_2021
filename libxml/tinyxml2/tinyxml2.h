@@ -56,36 +56,23 @@ distribution.
 #if defined(ANDROID_NDK) || defined(__BORLANDC__) || defined(__QNXNTO__)
 #include "tinyxml2_global.h"
 #include <ctype.h>
-#include "tinyxml2_global.h"
 #include <limits.h>
-#include "tinyxml2_global.h"
 #include <stdio.h>
-#include "tinyxml2_global.h"
 #include <stdlib.h>
-#include "tinyxml2_global.h"
 #include <string.h>
 #if defined(__PS3__)
-#include "tinyxml2_global.h"
 #include <stddef.h>
 #endif
 #else
-#include "tinyxml2_global.h"
 #include <cctype>
-#include "tinyxml2_global.h"
 #include <climits>
-#include "tinyxml2_global.h"
 #include <cstdio>
-#include "tinyxml2_global.h"
 #include <cstdlib>
-#include "tinyxml2_global.h"
 #include <cstring>
 #endif
-#include "tinyxml2_global.h"
 #include <stdint.h>
 
-#include "tinyxml2_global.h"
 #include <QString>
-#include "tinyxml2_global.h"
 #include <memory>
 
 /*
@@ -132,14 +119,12 @@ distribution.
     __debugbreak();      \
   }
 #elif defined(ANDROID_NDK)
-#include "tinyxml2_global.h"
 #include <android/log.h>
 #define TIXMLASSERT(x)                                                                      \
   if (!(x)) {                                                                               \
     __android_log_assert("assert", "grinliz", "ASSERT in '%s' at %d.", __FILE__, __LINE__); \
   }
 #else
-#include "tinyxml2_global.h"
 #include <assert.h>
 #define TIXMLASSERT assert
 #endif

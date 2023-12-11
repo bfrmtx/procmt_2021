@@ -33,46 +33,26 @@
 
 #include "prc_com_xml_global.h"
 #include "tinyxml2.h"
-#include "prc_com_xml_global.h"
 #include "tinyxmlwriter.h"
 
-#include "prc_com_xml_global.h"
 #include <QMap>
-#include "prc_com_xml_global.h"
 #include <QFileInfo>
-#include "prc_com_xml_global.h"
 #include <QFile>
-#include "prc_com_xml_global.h"
 #include <QDir>
-#include "prc_com_xml_global.h"
 #include <QDebug>
-#include "prc_com_xml_global.h"
 #include <QDateTime>
-#include "prc_com_xml_global.h"
 #include <QString>
-#include "prc_com_xml_global.h"
 #include <QStringList>
-#include "prc_com_xml_global.h"
 #include <QMap>
-#include "prc_com_xml_global.h"
 #include <QList>
-#include "prc_com_xml_global.h"
 #include <QVariant>
-#include "prc_com_xml_global.h"
 #include <QTextStream>
-#include "prc_com_xml_global.h"
 #include <QByteArray>
-#include "prc_com_xml_global.h"
 #include <QUrl>
-#include "prc_com_xml_global.h"
 #include <vector>
-#include "prc_com_xml_global.h"
 #include <string>
-#include "prc_com_xml_global.h"
 #include <mutex>
-#include "prc_com_xml_global.h"
 #include "measdocxml.h"
-#include "prc_com_xml_global.h"
 #include <memory>
 
 /*!

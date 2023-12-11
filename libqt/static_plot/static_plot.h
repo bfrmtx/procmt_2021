@@ -33,23 +33,14 @@
 #include "static_plot_global.h"
 #include <QMainWindow>
 
-#include "static_plot_global.h"
 #include "qcustomplot.h"
-#include "static_plot_global.h"
 #include <vector>
-#include "static_plot_global.h"
 #include <complex>
-#include "static_plot_global.h"
 #include <cfloat>
-#include "static_plot_global.h"
 #include <map>
-#include "static_plot_global.h"
 #include <QString>
-#include "static_plot_global.h"
 #include <QScrollBar>
-#include "static_plot_global.h"
 #include <QWidget>
-#include "static_plot_global.h"
 #include "iterator_complex_templates.h"
 
 

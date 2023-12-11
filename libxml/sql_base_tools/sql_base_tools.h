@@ -31,21 +31,13 @@
 #define SQL_BASE_TOOLS_H
 #include "sql_base_tools_global.h"
 #include <QString>
-#include "sql_base_tools_global.h"
 #include <QStringList>
-#include "sql_base_tools_global.h"
 #include <QtSql>
-#include "sql_base_tools_global.h"
 #include <QSqlDatabase>
-#include "sql_base_tools_global.h"
 #include <QSqlQuery>
-#include "sql_base_tools_global.h"
 #include <QSqlRecord>
-#include "sql_base_tools_global.h"
 #include <QSqlError>
-#include "sql_base_tools_global.h"
 #include <QDebug>
-#include "sql_base_tools_global.h"
 #include <QVector>
 
 /*!

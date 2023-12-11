@@ -32,31 +32,20 @@
 
 #include "prc_com_global.h"
 #include <iostream>
-#include "prc_com_global.h"
 #include <QDebug>
-#include "prc_com_global.h"
 #include <QVariant>
-#include "prc_com_global.h"
 #include <QVariantList>
-#include "prc_com_global.h"
 #include <QString>
-#include "prc_com_global.h"
 #include <QStringList>
-#include "prc_com_global.h"
 #include <QMap>
-#include "prc_com_global.h"
 #include <mutex>
 
-#include "prc_com_global.h"
 #include <cfloat>
-#include "prc_com_global.h"
 #include <climits>
 #ifdef _msvc
-#include "prc_com_global.h"
 #include <limits>
 #endif
 
-#include "prc_com_global.h"
 #include "qtx_templates.h"
 
 

@@ -35,18 +35,12 @@
 
 #include "atmfile_global.h"
 #include <QObject>
-#include "atmfile_global.h"
 #include "atmheader_80_def.h"
 
-#include "atmfile_global.h"
 #include <QDebug>
-#include "atmfile_global.h"
 #include <QFile>
-#include "atmfile_global.h"
 #include <QFileInfo>
-#include "atmfile_global.h"
 #include <QDataStream>
-#include "atmfile_global.h"
 #include <QBitArray>
 
 /*!

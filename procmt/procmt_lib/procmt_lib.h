@@ -30,131 +30,90 @@
 #ifndef PROCMT_LIB_H
 #define PROCMT_LIB_H
 
-#include "procmt_lib_global.h"
-#include "prc_com.h"
-#include "procmt_lib_global.h"
-#include <QDir>
-#include "procmt_lib_global.h"
 #include "edi_file.h"
-#include "procmt_lib_global.h"
-#include "mc_data.h"
-#include "procmt_lib_global.h"
-#include "mt_site.h"
-#include "procmt_lib_global.h"
 #include "math_vector.h"
-#include "procmt_lib_global.h"
-#include "procmt_alldefines.h"
-#include "procmt_lib_global.h"
-#include "qstring_utilities.h"
-#include "procmt_lib_global.h"
-#include <iostream>
-#include "procmt_lib_global.h"
-#include <climits>
-#include "procmt_lib_global.h"
-#include <cfloat>
-#include "procmt_lib_global.h"
-#include <memory>
-#include "procmt_lib_global.h"
+#include "mc_data.h"
 #include "msg_logger.h"
-#include "procmt_lib_global.h"
-#include "mc_data.h"
-#include "procmt_lib_global.h"
-#include "prc_com.h"
-#include "procmt_lib_global.h"
 #include "mt_site.h"
-#include "procmt_lib_global.h"
-#include <QMultiMap>
-
-#include "procmt_lib_global.h"
-#include "math_vector.h"
-#include "procmt_lib_global.h"
+#include "prc_com.h"
 #include "procmt_alldefines.h"
 #include "procmt_lib_global.h"
 #include "qstring_utilities.h"
+#include <QDir>
+#include <QMultiMap>
+#include <cfloat>
+#include <climits>
+#include <iostream>
+#include <memory>
 
+class procmt_lib : public QObject, public prc_com {
 
-class procmt_lib : public QObject, public prc_com
-{
-
-    Q_OBJECT
+  Q_OBJECT
 
 public:
+  /*!
+   * \brief procmt_lib
+   * \param cmdline the commadline parameters
+   * \param msg the message logger from the parent
+   * \param mtsite the mtsite from the parent
+   * \param parent parent object
+   */
+  procmt_lib(std::shared_ptr<prc_com> cmdline, std::shared_ptr<msg_logger> msg, std::shared_ptr<mt_site> mtsite, QObject *parent);
 
-    /*!
-     * \brief procmt_lib
-     * \param cmdline the commadline parameters
-     * \param msg the message logger from the parent
-     * \param mtsite the mtsite from the parent
-     * \param parent parent object
-     */
-    procmt_lib(std::shared_ptr<prc_com> cmdline, std::shared_ptr<msg_logger> msg, std::shared_ptr<mt_site> mtsite, QObject *parent);
-
-
-    ~procmt_lib();
+  ~procmt_lib();
 
 signals:
 
+  /*!
+   * \brief signal_mtdata_finished is emitted when the run() has been finished
+   * \param message
+   */
+  void signal_mtdata_finished(const QString message);
 
-    /*!
-     * \brief signal_mtdata_finished is emitted when the run() has been finished
-     * \param message
-     */
-    void signal_mtdata_finished(const QString message);
+  /*!
+   * \brief signal_file_progess emitted for each run (set) so if you have three recordings (32k, 4k, 512) it will emit three times
+   * \param message
+   */
+  void signal_file_progess(const QString &message);
 
-    /*!
-     * \brief signal_file_progess emitted for each run (set) so if you have three recordings (32k, 4k, 512) it will emit three times
-     * \param message
-     */
-    void signal_file_progess(const QString &message);
+  void signal_update_progress_bar(const int counts);
 
-    void signal_update_progress_bar(const int counts);
-
-    void signal_get_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
-
+  void signal_get_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
 
 public slots:
 
-    void set_data(const QStringList &allmeasdocs_center, const QStringList &allmeasdocs_emap, const QStringList &allmeasdocs_rr,
-                  const mttype &my_mttype, const proc_type &myproc_type);
+  void set_data(const QStringList &allmeasdocs_center, const QStringList &allmeasdocs_emap, const QStringList &allmeasdocs_rr,
+                const mttype &my_mttype, const proc_type &myproc_type);
 
-    void slot_update_progress_bar(const int counts);
+  void slot_update_progress_bar(const int counts);
 
-    void slot_set_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
+  void slot_set_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
 
-
-    /*!
-     * \brief run after all data (cmdline and set_data) are done a thread can be started herewtih
-     */
-    void run();
+  /*!
+   * \brief run after all data (cmdline and set_data) are done a thread can be started herewtih
+   */
+  void run();
 
 private:
+  std::shared_ptr<mt_site> mtsite; //!< the final result of all processed ats data will be placed here; shared with the parent
 
-    std::shared_ptr<mt_site> mtsite;  //!< the final result of all processed ats data will be placed here; shared with the parent
+  std::unique_ptr<mc_data> mcd; //!< for getting the command line options known from mc_data
 
-    std::unique_ptr<mc_data> mcd;     //!< for getting the command line options known from mc_data
+  QList<QFileInfo> qfis_center;
+  QList<QFileInfo> qfis_emap;
+  QList<QFileInfo> qfis_rr;
 
+  int iqfis = 0;
+  int iqfis_emap = 0;
+  int iqfis_rr = 0; //!< remote reference and transmitter
 
-    QList<QFileInfo> qfis_center;
-    QList<QFileInfo> qfis_emap;
-    QList<QFileInfo> qfis_rr;
+  std::shared_ptr<msg_logger> msg = nullptr;
+  std::shared_ptr<prc_com> cmdline = nullptr;
 
-    int iqfis = 0;
-    int iqfis_emap = 0;
-    int iqfis_rr = 0;               //!< remote reference and transmitter
+  int ac1_ssp2_acssp3 = 1; //!< which spectra to open
 
-    std::shared_ptr<msg_logger> msg = nullptr;
-    std::shared_ptr<prc_com> cmdline = nullptr;
-
-    int ac1_ssp2_acssp3 = 1;        //!< which spectra to open
-
-
-    mttype my_mttype = mttype::mt;
-    proc_type myproc_type = proc_type::mt_prz;
-
-
-
-
-
+  mttype my_mttype = mttype::mt;
+  proc_type myproc_type = proc_type::mt_prz;
 };
 
 #endif // PROCMT_LIB_H

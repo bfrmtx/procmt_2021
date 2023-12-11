@@ -32,18 +32,12 @@
 
 #include "firfilter_global.h"
 #include <vector>
-#include "firfilter_global.h"
 #include <QMap>
-#include "firfilter_global.h"
 #include <QVariant>
-#include "firfilter_global.h"
 #include <QObject>
 
-#include "firfilter_global.h"
 #include "prc_com.h"
-#include "firfilter_global.h"
 #include "iterator_templates.h"
-#include "firfilter_global.h"
 #include "memory"
 
 

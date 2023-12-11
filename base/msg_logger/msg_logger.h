@@ -32,19 +32,12 @@
 
 #include "msg_logger_global.h"
 #include <QDebug>
-#include "msg_logger_global.h"
 #include <QVariant>
-#include "msg_logger_global.h"
 #include <QString>
-#include "msg_logger_global.h"
 #include <QStringList>
-#include "msg_logger_global.h"
 #include <QObject>
-#include "msg_logger_global.h"
 #include <queue>
-#include "msg_logger_global.h"
 #include <iostream>
-#include "msg_logger_global.h"
 #include <mutex>
 
 

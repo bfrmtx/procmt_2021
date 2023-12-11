@@ -32,28 +32,17 @@
 
 #include "measdoc_from_mc_data_global.h"
 #include <iostream>
-#include "measdoc_from_mc_data_global.h"
 #include <QObject>
-#include "measdoc_from_mc_data_global.h"
 #include <QDebug>
-#include "measdoc_from_mc_data_global.h"
 #include <vector>
-#include "measdoc_from_mc_data_global.h"
 #include <QDir>
-#include "measdoc_from_mc_data_global.h"
 #include <QString>
-#include "measdoc_from_mc_data_global.h"
 #include <QMap>
 
-#include "measdoc_from_mc_data_global.h"
 #include "mc_data.h"
-#include "measdoc_from_mc_data_global.h"
 #include "measdocxml.h"
-#include "measdoc_from_mc_data_global.h"
 #include "adulib.h"
-#include "measdoc_from_mc_data_global.h"
 #include "eqdatetime.h"
-#include "measdoc_from_mc_data_global.h"
 #include "calibration.h"
 
 class measdoc_from_mc_data  : public QObject

@@ -32,66 +32,38 @@
 
 #include "calibration_global.h"
 #include <QFile>
-#include "calibration_global.h"
 #include <QFileInfo>
-#include "calibration_global.h"
 #include <QString>
-#include "calibration_global.h"
 #include <QStringList>
-#include "calibration_global.h"
 #include <QtSql>
-#include "calibration_global.h"
 #include <QSqlDatabase>
-#include "calibration_global.h"
 #include <QSqlQuery>
-#include "calibration_global.h"
 #include <QSqlError>
-#include "calibration_global.h"
 #include <QDir>
-#include "calibration_global.h"
 #include <QUrl>
-#include "calibration_global.h"
 #include <QTextStream>
-#include "calibration_global.h"
 #include <QDateTime>
-#include "calibration_global.h"
 #include <QDebug>
-#include "calibration_global.h"
 #include <QMap>
 
 
-#include "calibration_global.h"
 #include <QJsonDocument>
-#include "calibration_global.h"
 #include <QJsonArray>
-#include "calibration_global.h"
 #include <QJsonObject>
-#include "calibration_global.h"
 #include <QJsonValue>
 
 
-#include "calibration_global.h"
 #include <memory>
-#include "calibration_global.h"
 #include <vector>
-#include "calibration_global.h"
 #include <complex>
-#include "calibration_global.h"
 #include <algorithm>    // std::transform
-#include "calibration_global.h"
 #include <functional>
-#include "calibration_global.h"
 #include "procmt_alldefines.h"
 
-#include "calibration_global.h"
 #include "measdocxml.h"
-#include "calibration_global.h"
 #include "sql_base_tools.h"
-#include "calibration_global.h"
 #include "db_sensor_query.h"
-#include "calibration_global.h"
 #include "tinyxmlwriter.h"
-#include "calibration_global.h"
 #include "math_vector.h"
 
 

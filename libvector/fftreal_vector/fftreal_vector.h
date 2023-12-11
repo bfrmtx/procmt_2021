@@ -32,20 +32,13 @@
 
 #include "fftreal_vector_global.h"
 #include <vector>
-#include "fftreal_vector_global.h"
 #include <complex>
 
-#include "fftreal_vector_global.h"
 #include <cmath>
-#include "fftreal_vector_global.h"
 #include "iterator_templates.h"
-#include "fftreal_vector_global.h"
 #include <memory>
-#include "fftreal_vector_global.h"
 #include "FFTReal.h"
-#include "fftreal_vector_global.h"
 #include <iostream>
-#include "fftreal_vector_global.h"
 #include <QObject>
 
 class calibration;

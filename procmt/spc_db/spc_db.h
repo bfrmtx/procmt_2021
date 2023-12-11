@@ -32,48 +32,28 @@
 
 #include "spc_db_global.h"
 #include "prc_com.h"
-#include "spc_db_global.h"
 #include "qtx_templates.h"
-#include "spc_db_global.h"
 #include "procmt_alldefines.h"
-#include "spc_db_global.h"
 #include <climits>
 
-#include "spc_db_global.h"
 #include <vector>
 
-#include "spc_db_global.h"
 #include <QObject>
-#include "spc_db_global.h"
 #include <QFileInfo>
-#include "spc_db_global.h"
 #include <QFile>
-#include "spc_db_global.h"
 #include <QDebug>
-#include "spc_db_global.h"
 #include <QString>
-#include "spc_db_global.h"
 #include <QSql>
-#include "spc_db_global.h"
 #include <QSqlDatabase>
-#include "spc_db_global.h"
 #include <QSqlQuery>
-#include "spc_db_global.h"
 #include <QSqlError>
-#include "spc_db_global.h"
 #include <QSqlRecord>
-#include "spc_db_global.h"
 #include <QMap>
-#include "spc_db_global.h"
 #include <QList>
-#include "spc_db_global.h"
 #include <QVariant>
-#include "spc_db_global.h"
 #include <unordered_map>
-#include "spc_db_global.h"
 #include <utility>
 
-#include "spc_db_global.h"
 #include "mt_data.h"
 
 class spc_db :  public QObject

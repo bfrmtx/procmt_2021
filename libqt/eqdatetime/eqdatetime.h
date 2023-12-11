@@ -32,25 +32,16 @@
 
 #include "eqdatetime_global.h"
 #include <QDateTime>
-#include "eqdatetime_global.h"
 #include <QDate>
-#include "eqdatetime_global.h"
 #include <QTime>
-#include "eqdatetime_global.h"
 #include <cmath>
-#include "eqdatetime_global.h"
 #include <cstdlib>
-#include "eqdatetime_global.h"
 #include <cmath>
-#include "eqdatetime_global.h"
 #include <cstdint>
-#include "eqdatetime_global.h"
 #include <climits>
-#include "eqdatetime_global.h"
 #include "doubles.h"
 
 
-#include "eqdatetime_global.h"
 #include <QDebug>
 #define grid_time_rr 64           //!< in order to make RR the jobs must be on a 64 s grid; if the job is downfiltered and virtual sampling is on 64s
 #define grid_time_60 60           //!< in in case to use better reading time - no rr desired of self made

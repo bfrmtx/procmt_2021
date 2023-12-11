@@ -32,25 +32,16 @@
 
 #include "cal_stat_display_lib_global.h"
 #include <QMainWindow>
-#include "cal_stat_display_lib_global.h"
 #include <QList>
-#include "cal_stat_display_lib_global.h"
 #include <vector>
-#include "cal_stat_display_lib_global.h"
 #include <memory>
-#include "cal_stat_display_lib_global.h"
 #include <QPushButton>
 
-#include "cal_stat_display_lib_global.h"
 #include "calibration.h"
-#include "cal_stat_display_lib_global.h"
 #include "calstat.h"
-#include "cal_stat_display_lib_global.h"
 #include "db_sensor_query.h"
-#include "cal_stat_display_lib_global.h"
 #include "xmlcallib.h"
 
-#include "cal_stat_display_lib_global.h"
 #include "plotlib.h"
 
 

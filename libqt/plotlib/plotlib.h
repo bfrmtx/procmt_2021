@@ -31,168 +31,135 @@
 #define PLOTLIB_H
 
 #include "plotlib_global.h"
-#include <QObject>
-#include "plotlib_global.h"
-#include <QComboBox>
-#include "plotlib_global.h"
-#include <QPushButton>
-#include "plotlib_global.h"
-#include <QVBoxLayout>
-#include "plotlib_global.h"
-#include <QGroupBox>
-#include "plotlib_global.h"
-#include <QScrollArea>
-#include "plotlib_global.h"
-#include <QButtonGroup>
-#include "plotlib_global.h"
-#include <QList>
-#include "plotlib_global.h"
-#include <QSignalMapper>
-#include "plotlib_global.h"
-#include <QWidget>
-#include "plotlib_global.h"
 #include "qcustomplot.h"
-#include "plotlib_global.h"
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QGroupBox>
+#include <QList>
+#include <QObject>
+#include <QPushButton>
+#include <QScrollArea>
+#include <QSignalMapper>
+#include <QVBoxLayout>
+#include <QWidget>
 #include <algorithm>
-#include "plotlib_global.h"
-#include <memory>
-#include "plotlib_global.h"
 #include <cfloat>
+#include <memory>
 
-#include "plotlib_global.h"
 #include "procmt_alldefines.h"
-
 
 /*!
  * \brief The plotlib class cover QCustomplot for specific plots; the plot name is covered by Qt's objectName
  */
-class plotlib : public QCustomPlot
-{
-Q_OBJECT
+class plotlib : public QCustomPlot {
+  Q_OBJECT
 public:
-    explicit plotlib(const QString &object_name = "plotlib", QWidget *parent = Q_NULLPTR);
+  explicit plotlib(const QString &object_name = "plotlib", QWidget *parent = Q_NULLPTR);
 
-    ~plotlib();
+  ~plotlib();
 
-    void set_ScaleType_log_xy(const QString leftaxislabel);
-    void set_ScaleType_log_x_lin_y(const QString leftaxislabel);
-    void set_ScaleType_xy(const QString leftaxislabel);
+  void set_ScaleType_log_xy(const QString leftaxislabel);
+  void set_ScaleType_log_x_lin_y(const QString leftaxislabel);
+  void set_ScaleType_xy(const QString leftaxislabel);
 
+  void add_right_logx_liny(const QString rightaxislabel);
 
-    void add_right_logx_liny(const QString rightaxislabel);
+  void clear_all_data();
 
-    void clear_all_data();
+  /*!
+   * \brief clear_downto clears ALL data all graphs, removes all except first (default == 1, graph 0 remains)
+   * \param i
+   */
+  void clear_downto(const int i = 1);
 
-    /*!
-     * \brief clear_downto clears ALL data all graphs, removes all except first (default == 1, graph 0 remains)
-     * \param i
-     */
-    void clear_downto(const int i = 1);
+  void add_hz_line(const double &y, const double &x_start, const double &x_stop, const QPen &pen);
 
-    void add_hz_line(const double &y, const double &x_start, const double &x_stop, const QPen &pen);
+  QSharedPointer<QCPAxisTickerLog> logTicker = Q_NULLPTR;
+  QSharedPointer<QCPAxisTickerFixed> fixedTicker = Q_NULLPTR;
 
+  QSharedPointer<QGroupBox> create_rho_ranges();
 
-    QSharedPointer<QCPAxisTickerLog> logTicker = Q_NULLPTR;
-    QSharedPointer<QCPAxisTickerFixed> fixedTicker = Q_NULLPTR;
+  QSharedPointer<QGroupBox> create_phi_ranges();
 
+  QList<QPushButton *> rho_ranges;
+  QSharedPointer<QGroupBox> rho_ranges_box = Q_NULLPTR;
+  QList<QPushButton *> phi_ranges;
+  QSharedPointer<QGroupBox> phi_ranges_box = Q_NULLPTR;
 
-    QSharedPointer<QGroupBox> create_rho_ranges();
+  QSharedPointer<QSignalMapper> signalMapper_rho_ranges = Q_NULLPTR;
+  QSharedPointer<QSignalMapper> signalMapper_phi_ranges = Q_NULLPTR;
 
-    QSharedPointer<QGroupBox> create_phi_ranges();
+  QList<QPushButton *> fon_ranges;
+  QSharedPointer<QSignalMapper> signalMapper_fon_ranges = Q_NULLPTR;
+  QSharedPointer<QScrollArea> fon_ranges_area = Q_NULLPTR;
+  QSharedPointer<QScrollArea> create_fon_ranges(std::vector<double> &vf, const int iwidth = 200);
 
-    QList<QPushButton*> rho_ranges;
-    QSharedPointer<QGroupBox> rho_ranges_box = Q_NULLPTR;
-    QList<QPushButton*> phi_ranges;
-    QSharedPointer<QGroupBox> phi_ranges_box = Q_NULLPTR;
+  QList<QPushButton *> foff_ranges;
+  QSharedPointer<QSignalMapper> signalMapper_foff_ranges = Q_NULLPTR;
+  QSharedPointer<QScrollArea> foff_ranges_area = Q_NULLPTR;
+  QSharedPointer<QScrollArea> create_foff_ranges(std::vector<double> &vf, const int iwidth = 200);
 
-    QSharedPointer<QSignalMapper> signalMapper_rho_ranges = Q_NULLPTR;
-    QSharedPointer<QSignalMapper> signalMapper_phi_ranges = Q_NULLPTR;
+  QList<QPushButton *> f_ranges;
+  QSharedPointer<QSignalMapper> signalMapper_f_ranges = Q_NULLPTR;
+  QSharedPointer<QScrollArea> f_ranges_area = Q_NULLPTR;
+  QSharedPointer<QScrollArea> create_f_ranges(std::vector<double> &vf, const int iwidth = 200);
 
+  double xmin, xmax, ymin, ymax;
 
-    QList<QPushButton*> fon_ranges;
-    QSharedPointer<QSignalMapper> signalMapper_fon_ranges = Q_NULLPTR;
-    QSharedPointer<QScrollArea> fon_ranges_area = Q_NULLPTR;
-    QSharedPointer<QScrollArea> create_fon_ranges(std::vector<double> &vf, const int iwidth = 200);
+  void xmax_xmin(const std::vector<double> &x);
+  void ymax_ymin(const std::vector<double> &y);
 
-    QList<QPushButton*> foff_ranges;
-    QSharedPointer<QSignalMapper> signalMapper_foff_ranges = Q_NULLPTR;
-    QSharedPointer<QScrollArea> foff_ranges_area = Q_NULLPTR;
-    QSharedPointer<QScrollArea> create_foff_ranges(std::vector<double> &vf, const int iwidth = 200);
+  void std_regression_plot(const QString what, const std::vector<double> &x, const std::vector<double> &y, const std::vector<bool> &selected, const bool alreadySorted = false);
+  void std_regression_plot(const QString what, const double &x, const double &y);
+  void title(const QString text);
+  void subtitle(const QString text);
 
-    QList<QPushButton*> f_ranges;
-    QSharedPointer<QSignalMapper> signalMapper_f_ranges = Q_NULLPTR;
-    QSharedPointer<QScrollArea> f_ranges_area = Q_NULLPTR;
-    QSharedPointer<QScrollArea> create_f_ranges(std::vector<double> &vf, const int iwidth = 200);
+  void set_linticks(const QString axisname, const double factors);
 
+  void set_chopper(const int chopper);
 
+  int get_chopper() const;
 
-
-
-
-
-    double xmin, xmax, ymin, ymax;
-
-    void xmax_xmin(const std::vector<double> &x);
-    void ymax_ymin(const std::vector<double> &y);
-
-    void std_regression_plot(const QString what, const std::vector<double> &x, const std::vector<double> &y, const std::vector<bool> &selected, const bool alreadySorted = false);
-    void std_regression_plot(const QString what, const double &x, const double &y);
-    void title(const QString text);
-    void subtitle(const QString text);
-
-    void set_linticks(const QString axisname, const double factors);
-
-    void set_chopper(const int chopper);
-
-    int get_chopper() const;
-
-    int chopper   = cal::chopper_undef;                 //!< plt::chopper_on, chopper_off
-    int plot_type = cal::nothing;                       //!< say later plt::amplitude, phase  and so on
-    int caltype   = cal::nothing;                       //!< say later plt::calibration, mastercal, interpolated_cal
+  int chopper = cal::chopper_undef; //!< plt::chopper_on, chopper_off
+  int plot_type = cal::nothing;     //!< say later plt::amplitude, phase  and so on
+  int caltype = cal::nothing;       //!< say later plt::calibration, mastercal, interpolated_cal
 
 public slots:
 
-    void rho_range_clicked(const QString &str);
-    void phi_range_clicked(const QString &str);
+  void rho_range_clicked(const QString &str);
+  void phi_range_clicked(const QString &str);
 
-    void f_on_range_clicked(const int &f);
-    void f_off_range_clicked(const int &f);
-    void f_range_clicked(const int &f);
+  void f_on_range_clicked(const int &f);
+  void f_off_range_clicked(const int &f);
+  void f_range_clicked(const int &f);
 
-    void rescale_xaxis(const double &xmin, const double &xmax);
+  void rescale_xaxis(const double &xmin, const double &xmax);
 
 signals:
-    void signalMapper_rho_ranges_clicked(const QString);
-    void signalMapper_phi_ranges_clicked(const QString);
+  void signalMapper_rho_ranges_clicked(const QString);
+  void signalMapper_phi_ranges_clicked(const QString);
 
-    void signalMapper_fon_ranges_clicked(const int);
-    void signalMapper_foff_ranges_clicked(const int);
-    void signalMapper_f_ranges_clicked(const int);
+  void signalMapper_fon_ranges_clicked(const int);
+  void signalMapper_foff_ranges_clicked(const int);
+  void signalMapper_f_ranges_clicked(const int);
 
+  void f_on_selected(const double f);
+  void f_off_selected(const double f);
+  void f_selected(const double f);
 
-    void f_on_selected(const double f);
-    void f_off_selected(const double f);
-    void f_selected(const double f);
-
-    void signal_x_y_pos(const double &x, const double &y);
-
+  void signal_x_y_pos(const double &x, const double &y);
 
 protected:
-    void mousePressEvent(QMouseEvent * event) override;
-   // void mouseReleaseEvent(QMouseEvent * event) override;
+  void mousePressEvent(QMouseEvent *event) override;
+  // void mouseReleaseEvent(QMouseEvent * event) override;
 
 private:
+  // needed for signal mapper
+  std::vector<double> f;
+  std::vector<double> f_on;
+  std::vector<double> f_off;
 
-    // needed for signal mapper
-    std::vector<double> f;
-    std::vector<double> f_on;
-    std::vector<double> f_off;
-
-
-
-
-    void delete_pushbuttons(QList<QPushButton*> &pbl);
-
+  void delete_pushbuttons(QList<QPushButton *> &pbl);
 };
 
 #endif // PLOTLIB_H

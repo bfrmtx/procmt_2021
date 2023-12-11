@@ -32,11 +32,8 @@
 
 #include "mestplotlib_global.h"
 #include <QMainWindow>
-#include "mestplotlib_global.h"
 #include "qcustomplot.h"
-#include "mestplotlib_global.h"
 #include <vector>
-#include "mestplotlib_global.h"
 #include "iterator_complex_templates.h"
 
 

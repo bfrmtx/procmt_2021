@@ -32,21 +32,13 @@
 
 #include "sql_vector_global.h"
 #include <QDebug>
-#include "sql_vector_global.h"
 #include <QtSql>
-#include "sql_vector_global.h"
 #include <QSqlDatabase>
-#include "sql_vector_global.h"
 #include <QSqlQuery>
-#include "sql_vector_global.h"
 #include <QSqlError>
-#include "sql_vector_global.h"
 #include <QFileInfo>
-#include "sql_vector_global.h"
 #include <memory>
-#include "sql_vector_global.h"
 #include <vector>
-#include "sql_vector_global.h"
 #include <iostream>
 
 

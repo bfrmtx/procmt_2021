@@ -33,39 +33,23 @@
 #include "csem_db_global.h"
 #include "prc_com.h"
 
-#include "csem_db_global.h"
 #include "procmt_alldefines.h"
-#include "csem_db_global.h"
 #include <climits>
 
-#include "csem_db_global.h"
 #include <vector>
 
-#include "csem_db_global.h"
 #include <QObject>
-#include "csem_db_global.h"
 #include <QFileInfo>
-#include "csem_db_global.h"
 #include <QFile>
-#include "csem_db_global.h"
 #include <QDebug>
-#include "csem_db_global.h"
 #include <QString>
-#include "csem_db_global.h"
 #include <QSql>
-#include "csem_db_global.h"
 #include <QSqlDatabase>
-#include "csem_db_global.h"
 #include <QSqlQuery>
-#include "csem_db_global.h"
 #include <QSqlError>
-#include "csem_db_global.h"
 #include <QSqlRecord>
-#include "csem_db_global.h"
 #include <QMap>
-#include "csem_db_global.h"
 #include <QList>
-#include "csem_db_global.h"
 #include <QVariant>
 
 class csem_db :  public QObject

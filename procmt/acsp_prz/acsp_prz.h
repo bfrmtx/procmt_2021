@@ -33,27 +33,16 @@
 
 #include "acsp_prz_global.h"
 #include <QObject>
-#include "acsp_prz_global.h"
 #include "procmt_alldefines.h"
-#include "acsp_prz_global.h"
 #include "buckets.h"
-#include "acsp_prz_global.h"
 #include "threadbuffer.h"
-#include "acsp_prz_global.h"
 #include "prc_com.h"
-#include "acsp_prz_global.h"
 #include "atsheader.h"
-#include "acsp_prz_global.h"
 #include "atsfile.h"
-#include "acsp_prz_global.h"
 #include "ats_ascii_file.h"
-#include "acsp_prz_global.h"
 #include "vector_utils.h"
-#include "acsp_prz_global.h"
 #include "atsfile_collector.h"
-#include "acsp_prz_global.h"
 #include <memory>
-#include "acsp_prz_global.h"
 #include <future>
 
 class acsp_prz: public QObject, public prc_com

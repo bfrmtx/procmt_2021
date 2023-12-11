@@ -32,29 +32,17 @@
 
 #include "math_vector_global.h"
 #include <QObject>
-#include "math_vector_global.h"
 #include <numeric>
-#include "math_vector_global.h"
 #include <limits>
-#include "math_vector_global.h"
 #include <cfloat>
-#include "math_vector_global.h"
 #include <cmath>
-#include "math_vector_global.h"
 #include <iostream>
-#include "math_vector_global.h"
 #include <iomanip>
-#include "math_vector_global.h"
 #include <complex>
-#include "math_vector_global.h"
 #include <algorithm>
-#include "math_vector_global.h"
 #include "iterator_templates.h"
-#include "math_vector_global.h"
 #include "statmaps.h"
-#include "math_vector_global.h"
 #include <utility>
-#include "math_vector_global.h"
 #include <QDebug>
 
 

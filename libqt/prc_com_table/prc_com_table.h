@@ -32,43 +32,26 @@
 
 #include "prc_com_table_global.h"
 #include <iostream>
-#include "prc_com_table_global.h"
 #include <QDebug>
-#include "prc_com_table_global.h"
 #include <QVariant>
-#include "prc_com_table_global.h"
 #include <QVariantList>
-#include "prc_com_table_global.h"
 #include <QString>
-#include "prc_com_table_global.h"
 #include <QStringList>
-#include "prc_com_table_global.h"
 #include <QMap>
-#include "prc_com_table_global.h"
 #include <mutex>
 
-#include "prc_com_table_global.h"
 #include <cfloat>
-#include "prc_com_table_global.h"
 #include <climits>
-#include "prc_com_table_global.h"
 #include <QFileInfo>
-#include "prc_com_table_global.h"
 #include <QFile>
-#include "prc_com_table_global.h"
 #include <QVariant>
-#include "prc_com_table_global.h"
 #include <QSharedPointer>
 
-#include "prc_com_table_global.h"
 #include <QPair>
 
-#include "prc_com_table_global.h"
 #include <QAbstractTableModel>
 
-#include "prc_com_table_global.h"
 #include "qtx_templates.h"
-#include "prc_com_table_global.h"
 #include "iterator_templates.h"
 
 class prc_com_table : public QAbstractTableModel

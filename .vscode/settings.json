@@ -79,5 +79,6 @@
   "cmake.sourceDirectory": "${workspaceFolder}",
   "cmake.buildDirectory": "${userHome}/build/${workspaceFolderBasename}/vscode",
   "cmake.installPrefix": "/usr/local/procmt",
-  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.dimInactiveRegions": false
 }
