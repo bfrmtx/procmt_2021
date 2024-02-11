@@ -44,7 +44,7 @@ enum class FieldType {
 };
 
 enum class TSPlotType {
-    UNKNOWN, HX, HY, HZ, EX, EY,
+    UNKNOWN, HX, HY, HZ, EX, EY, EZ,
 };
 
 enum class CursorMode {
@@ -134,10 +134,10 @@ private:
     void set_cursor_coords(double x, const std::vector<double> & values);
     void handle_current_interval_moved(int new_x, bool pressed);
     void handle_current_interval_dropped(double a, double b);
-    void handle_readout(int x, int y);
+    void handle_readout(const int x, const int y);
 
 signals:
-    void plot_position_changed(double key, double value);
+    void plot_position_changed(const double key, const double value, const FieldType field);
     void interval_selection_changed(int64_t begin, int64_t end);
     void interval_added(int64_t a, int64_t b);
     void interval_removed(int64_t a, int64_t b);

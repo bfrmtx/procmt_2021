@@ -242,22 +242,12 @@ inline QString qvariant_double_to_sci_str(const QVariant &in, const int precisio
  * \return
  */
 inline QFileInfo fall_back_default_str (const QString &what_to_open) {
+  if (!what_to_open.size()) return QFileInfo();
   QFileInfo qfinew;
-  if (!what_to_open.size()) return qfinew;
-
-#ifdef  QT_DEBUG
-  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
-#else
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux
-  std::cerr << qfinew.absoluteFilePath().toStdString() << std::endl;
-
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux / mac
   if (qfinew.exists()) return qfinew;
-  qfinew.setFile(QString(PMTSQLPATH_UNIX) + "/" + what_to_open); // on MacOS the SQL is not exactly where the binary is
-
-#endif
-  /// #ifdef Q_OS_MACOS Q_OS_UNIX Q_OS_WIN
-  std::cerr << qfinew.absoluteFilePath().toStdString() << std::endl;
-
+  // second try
+  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
   return qfinew;
 }
 
@@ -265,21 +255,11 @@ inline QFileInfo fall_back_default (const QFileInfo &what_to_open) {
 
   if (what_to_open.exists()) return what_to_open;
   QFileInfo qfinew;
-
-#ifdef  QT_DEBUG
-  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open.fileName());
-#else
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open.fileName());  // typical windows / linux
-  std::cerr << qfinew.absoluteFilePath().toStdString() << std::endl;
-
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open.fileName());  // typical windows / linux / mac
   if (qfinew.exists()) return qfinew;
-  qfinew.setFile(QString(PMTSQLPATH_UNIX) + "/" + what_to_open.fileName()); // on MacOS the SQL is not exactly where the binary is
-
-#endif
-  /// #ifdef Q_OS_MACOS Q_OS_UNIX Q_OS_WIN
-  std::cerr << qfinew.absoluteFilePath().toStdString() << std::endl;
-
-  return qfinew;
+  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open.fileName());
+  if (qfinew.exists()) return qfinew;
+  return QFileInfo();
 }
 
 
@@ -288,21 +268,13 @@ inline QFileInfo fall_back_default (const QFileInfo &what_to_open) {
  * \return
  */
 inline QString procmt_homepath(const QString &what_to_open) {
+  if (!what_to_open.size()) return QString();
   QFileInfo qfinew;
-#ifdef  QT_DEBUG
-  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
-  return qfinew.absoluteFilePath();
-#else
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux
-  std::cerr << qfinew.absoluteFilePath().toStdString();
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux / mac
   if (qfinew.exists()) return qfinew.absoluteFilePath();
-  qfinew.setFile(QString(PMTSQLPATH_UNIX) + "/" + what_to_open); // on MacOS the SQL is not exactly where the binary is
-
-#endif
-  /// #ifdef Q_OS_MACOS Q_OS_UNIX Q_OS_WIN
-  std::cerr << qfinew.absoluteFilePath().toStdString();
-  return qfinew.absoluteFilePath();
-
+  qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
+  if (qfinew.exists()) return qfinew.absoluteFilePath();
+  return QString();
 }
 
 #endif

@@ -252,7 +252,7 @@ void TSPlotterPlot::handle_current_interval_dropped(double a, double b) {
     }
 }
 
-void TSPlotterPlot::handle_readout(int x, int y) {
+void TSPlotterPlot::handle_readout(const int x, const int y) {
     Q_UNUSED(y);
     double xval = xAxis->pixelToCoord(x);
     std::vector<double> coords;
@@ -266,8 +266,12 @@ void TSPlotterPlot::handle_readout(int x, int y) {
             if(std::abs(p.key - xval) > std::abs(p2.key - xval)) p = p2;
         }
         coords.push_back(p.value);
+        auto field = FieldType::H;
+        if ((this->m_plot_type == TSPlotType::EX) || (this->m_plot_type == TSPlotType::EY)  || (this->m_plot_type == TSPlotType::EZ)) {
+            field = FieldType::E;
+        }
 
-        emit plot_position_changed(p.key, p.value);
+       emit plot_position_changed(p.key, p.value, field);
     }
     set_cursor_coords(p.key, coords);
 }

@@ -12,7 +12,7 @@ BUILD_DIR=$HOME'/build/'$PROJ/'build'
 #
 #
 mkdir -p $BUILD_DIR
-cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=DEBUG -DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE
+cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=DEBUG
 # make a single thread in case
 cmake --build $BUILD_DIR --parallel 8
 # install needs write access to /usr/local/procmt - im my case I simply "sudo mkdir /usr/local/procmt"

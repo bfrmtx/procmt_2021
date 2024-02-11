@@ -208,8 +208,8 @@ private slots:
 
     // **** slots statusbar **** //
     // ///////////////////////// //
-    void slot_message_frequency(double x, double y);
-    void slot_message_coordinates(double x, double y);
+    void slot_message_frequency(const double x, const double y, const FieldType field);
+    void slot_message_coordinates(const double x, const double y, const FieldType field);
     void slot_message_interval(int x, int y);
 
     // **** other **** //
@@ -254,7 +254,7 @@ private slots:
     void on_pushButton_gmaps_clicked();
 
 
-private:
+  private:
     // ofc this has to be replaced later with better structure
     QStringList                         m_webdav_files;
     QMap<QString, quint64>              m_file_sizes;

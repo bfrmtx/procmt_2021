@@ -1677,12 +1677,6 @@ void filter::build_remapper()
     }
 }
 
-
-
-
-
-
-
 void filter::on_actionHelp_triggered()
 {
 

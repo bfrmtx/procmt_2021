@@ -58,7 +58,19 @@ IF(QCUSTOMPLOT_USE_OPENGL)
 ENDIF()
 
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE QCUSTOMPLOT_LIBRARY)
+IF (QCUSTOMPLOT_USE_OPENGL)
+  message ("qcustomplot openGL")
+  target_compile_definitions(${PROJECT_NAME} PRIVATE
+    QCUSTOMPLOT_LIBRARY
+    QCUSTOMPLOT_USE_OPENGL
+)
+ELSE()
+    message ("qcustomplot default")
+  target_compile_definitions(${PROJECT_NAME} PRIVATE
+    QCUSTOMPLOT_LIBRARY
+)
+ENDIF()
+
 # for libraries
 
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)

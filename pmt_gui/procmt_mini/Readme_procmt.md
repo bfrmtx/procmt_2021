@@ -2,7 +2,7 @@
 ## procmt_mini
 
 procmt_mini is a small GUI driving the procmt kernel.
-You are reading the readme file for procmt_mini with Qt6 which has beed downloaded from the [procmt_mini repository](https://github.com/bfrmtx/procmt_2021) or from the metronix cloud [Procmt_experimental](https://cloud.geo-metronix.de/s/wiqepHdGHHpKS5M)
+You are reading the readme file for procmt_mini with Qt6 which has beed downloaded from the [procmt repository](https://github.com/bfrmtx/procmt_2021) or from the metronix cloud [Procmt_experimental](https://cloud.geo-metronix.de/s/wiqepHdGHHpKS5M)
 
 
 
@@ -12,14 +12,14 @@ Simply unzip the downloaded file.
 
 On Windows you need to set the PATH variable to the bin directory *and* the lib directory. Example:
 
-`c:\Program Files\metronix\procmt_mini\bin`
+`c:\Program Files\metronix\procmt\bin`
 
-`c:\Program Files\metronix\procmt_mini\lib`
+`c:\Program Files\metronix\procmt\lib`
 
-On Linux rpath is used to find the libraries.
+On Linux / MacOS rpath is used to find the libraries.
 
 When processing is finished, by default the "ediplotter" is called in order to display the results.
-The "old" ediplotter is NOT part of the procmt_mini package. (It does not work with Qt6). You can download it from the metronix cloud [procmt_mini](https://cloud.geo-metronix.de/s/GJaZaPprX3YmsK9). Unzip it and set the PATH variable to the directory. Example:
+The "old" ediplotter is NOT part of the procmt package. (It does not work with Qt6). You can download it from the metronix cloud [procmt_mini](https://cloud.geo-metronix.de/s/GJaZaPprX3YmsK9). Unzip it and set the PATH variable to the directory. Example:
 
 `c:\Program Files\metronix\procmt_old`
 

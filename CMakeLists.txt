@@ -10,7 +10,7 @@ ELSE()
     message ("BUILD WITH OpenGL                  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     # make it availabe in header and sources
     # this also switches OpenGL on in general
-    #ifdef QCUSTOMPLOT_USE_OPENGL
+    #ifdef QCUSTOMPLOT_USE_OPENGL checks the line below
     add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
 ENDIF()
 
@@ -89,11 +89,13 @@ ELSE()
 # set(QCUSTOMPLOT_USE_OPENGL TRUE)
     message ("starting UNIX LINUX Apple Clang build")
 ENDIF()
-
+#
 message ( "adding subdirs" )
 # the info.sql3 and others will be copied to your build dir - the software will look for SQLite databases
-add_definitions(-DPMTSQLPATH="${CMAKE_INSTALL_PREFIX}/bin")
-add_definitions(-DPMTSQLPATH_UNIX="${CMAKE_INSTALL_PREFIX}/bin")
+# for this old fashioned program, the sql databases are in the bin (executable) dir in the cpp files we add "/bin/"
+add_definitions(-DPMTSQLPATH="${CMAKE_INSTALL_PREFIX}")
+add_definitions(-DPMTSQLPATH_UNIX="${CMAKE_INSTALL_PREFIX}")
+add_definitions(-DPMTSQLPATH_APPLE="${CMAKE_INSTALL_PREFIX}")
 #
 ## templates FIRST
 add_subdirectory(include)

@@ -199,10 +199,12 @@ tsplotter::tsplotter(QWidget *parent) :
         if (!jj) {
             mw = int(rec.width());
             mh = int(rec.height());
+            if (mw > 4096) mw = 3072;
         }
         else {
             if (int(rec.width() < mw)) mw = int(rec.width());
             if (int(rec.height() < mh)) mh = int(rec.height()) ;
+            if (mw > 4096) mw = 3072;
         }
         ++jj;
 
@@ -645,6 +647,9 @@ void tsplotter::recreate_plots() {
             spc_plot = field_type_spc_plots[FieldType::E];
 
         }
+        // that leads to a performance decrease!
+        // ts_plot->setOpenGl(true, 16);
+        // spc_plot->setOpenGl(true, 16);
         ts_plot->addGraph();
         spc_plot->addGraph();
 
@@ -1148,12 +1153,12 @@ void tsplotter::on_menu_action_selections_save_triggered() {
     save_selections();
 }
 
-void tsplotter::slot_message_frequency(double x, double y) {
+void tsplotter::slot_message_frequency(const double x, const double y, const FieldType field) {
     QString str_y = QString::number(y, 'E');
     ui->statusBar->showMessage(QString(message_frequency).arg(x).arg(str_y));
 }
 
-void tsplotter::slot_message_coordinates(double x, double y) {
+void tsplotter::slot_message_coordinates(const double x, const double y, const FieldType field) {
     QString str_x = QString::number(x);
     QString str_y = QString::number(y);
     if(m_show_time) {
@@ -1162,7 +1167,11 @@ void tsplotter::slot_message_coordinates(double x, double y) {
     }
     //! @todo YASC if Cal is down and plot is Hx, Hy, Hz THIS!!!! please ui->statusBar->showMessage(QString(message_position_nT).arg(str_x).arg(str_y));
 
-    ui->statusBar->showMessage(QString(message_position).arg(str_x).arg(str_y));
+    if (m_option_calibrate && field == FieldType::H) {
+        ui->statusBar->showMessage(QString(message_position_nT).arg(str_x).arg(str_y));
+    }
+
+    else ui->statusBar->showMessage(QString(message_position).arg(str_x).arg(str_y));
 }
 
 void tsplotter::slot_message_interval(int min, int max) {
@@ -2025,4 +2034,5 @@ void tsplot::tsplotter::on_pushButton_gmaps_clicked() {
     url.setUrl("https://www.google.com/maps/search/?api=1&query=" +  QString::number(lat_rad, 'g') + "," + QString::number(lon_rad, 'g'));
     QDesktopServices::openUrl(url);
 }
+
 
