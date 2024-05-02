@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1725</width>
-    <height>1156</height>
+    <width>1128</width>
+    <height>712</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -27,7 +27,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_ats2xml">
        <attribute name="title">
@@ -166,7 +166,6 @@
            <widget class="QLineEdit" name="lineEdit">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -776,6 +775,27 @@
            </layout>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>target dir ($HOME/tscat_result ,  if left empty)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="lineedit_file" name="target_cat_dir_lineEdit"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="target_cat_dir_pushButton">
+              <property name="text">
+               <string>select</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="hzl_run">
             <item>
              <widget class="QPushButton" name="cancel_tscat_button">
@@ -971,8 +991,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1725</width>
-     <height>40</height>
+     <width>1128</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCreate_Survey">

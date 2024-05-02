@@ -84,7 +84,7 @@ public:
 
     void dropEvent(QDropEvent *event);
     void dragEnterEvent(QDragEnterEvent *event);
-    QFileInfo qfi_base, qfi_target, qfi_source;
+    QFileInfo qfi_base, qfi_target, qfi_source, qfi_target_cat;
 
 public slots:
 
@@ -143,7 +143,9 @@ private slots:
 
     void on_pushButton_convert_json_clicked();
 
-private:
+    void on_target_cat_dir_pushButton_clicked();
+
+  private:
     Ui::MainWindow *ui;
 
     void clear(const bool clear_mxcds = true);
@@ -265,6 +267,8 @@ private:
     std::vector<std::shared_ptr<atsfile>> atshx;
     std::vector<std::shared_ptr<atsfile>> atshy;
     std::vector<std::shared_ptr<atsfile>> atshz;
+
+    QString xml_filename_cat;
 
 
     std::shared_ptr<atsfile> atsex_cat;

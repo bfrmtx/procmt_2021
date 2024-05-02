@@ -672,7 +672,7 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
   }
 
   if ((pclMagPlot != Q_NULLPTR) && qvecMag.size()) {
-
+/*
     QVector<double> noise_f;
     QVector<double> noise_lev;
     this->master_calibration_db = QSqlDatabase::addDatabase("QSQLITE", "get_noise");
@@ -707,6 +707,7 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
         pclMagPlot->graph(uiGraphCount)->setBrush(Qt::NoBrush);
       }
     }
+  */
   }
 
   pclMagPlot->rescaleAxes();

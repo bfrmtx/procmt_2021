@@ -1003,7 +1003,7 @@ void mt_site::ssp_dump_stack_all_vector(const size_t &spce, bool error_bars)
 
     // check mapsize
 
-    if (qfi.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (qfi.open(QIODevice::Append | QIODevice::Text)) {
         if (error_bars) {
             for (auto &ac : this->ac_spectra) {
                 if(ac.ac_vals[spce].size()) out << ac.f << "  " << (ac.ac_vals[spce].at(g_stat::mean_x)) << "  " << (ac.ac_vals[spce].at(g_stat::stddev_x)) << Qt::endl;

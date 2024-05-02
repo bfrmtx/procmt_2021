@@ -70,7 +70,8 @@
     "typeinfo": "cpp",
     "valarray": "cpp",
     "variant": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "*.inc": "cpp"
   },
       "cmake.configureArgs": [
         "DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE"
