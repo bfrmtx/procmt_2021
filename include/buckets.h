@@ -753,9 +753,9 @@ struct mt_data_res {
     if (swap) {
       for (auto const &dat : this->d[elem]) {
         if (elem == tns::yx)
-          data.push_back(((arg(this->dat) * 180.) / M_PI) + 180.0);
+          data.push_back(((arg(dat) * 180.) / M_PI) + 180.0);
         else if (elem == tns::yy)
-          data.push_back(((arg(this->dat) * 180.) / M_PI) + 180.0);
+          data.push_back(((arg(dat) * 180.) / M_PI) + 180.0);
         else
           data.push_back((arg(dat) * 180.) / M_PI);
       }

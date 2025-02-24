@@ -27,7 +27,7 @@ adulib::adulib(qint64 grid_time, QObject *parent) :
                                              << "West"
                                              << "South";
   this->items_want_change_for_all_jobs = values_needs_mapping_channel_setting;
-  this->start_time.setTimeSpec(Qt::UTC);
+  this->start_time.setTimeZone(QTimeZone::utc());
   this->start_time.setSecsSinceEpoch(0);
   this->duration = 1;
   this->index = 0;
@@ -751,8 +751,8 @@ QMap<QString, QVariant> adulib::fetch_recording(const QFileInfo *qfi, const QUrl
     return QMap<QString, QVariant>();
   }
   this->tmp_recording = tmpmap;
-  QDateTime qdtstart(QDate::fromString(this->tmp_recording.value("start_date").toString(), "yyyy-MM-dd"), QTime::fromString(this->tmp_recording.value("start_time").toString(), "hh:mm:ss"), Qt::UTC);
-  QDateTime qdtstop(QDate::fromString(this->tmp_recording.value("stop_date").toString(), "yyyy-MM-dd"), QTime::fromString(this->tmp_recording.value("stop_time").toString(), "hh:mm:ss"), Qt::UTC);
+  QDateTime qdtstart(QDate::fromString(this->tmp_recording.value("start_date").toString(), "yyyy-MM-dd"), QTime::fromString(this->tmp_recording.value("start_time").toString(), "hh:mm:ss"), QTimeZone::utc());
+  QDateTime qdtstop(QDate::fromString(this->tmp_recording.value("stop_date").toString(), "yyyy-MM-dd"), QTime::fromString(this->tmp_recording.value("stop_time").toString(), "hh:mm:ss"), QTimeZone::utc());
   qint64 lc_duration = qdtstart.secsTo(qdtstop);
 
   this->set_start_time(qdtstart);
@@ -1029,7 +1029,7 @@ void adulib::slot_gps_status_qmap_created(const QMap<QString, QVariant> &data_ma
     this->gps_status.insert(dm.key(), dm.value());
     ++dm;
   }
-  QDateTime qdtgps(QDate::fromString(this->gps_status.value("Date").toString(), "yyyy-MM-dd"), QTime::fromString(this->gps_status.value("Time").toString(), "hh:mm:ss"), Qt::UTC);
+  QDateTime qdtgps(QDate::fromString(this->gps_status.value("Date").toString(), "yyyy-MM-dd"), QTime::fromString(this->gps_status.value("Time").toString(), "hh:mm:ss"), QTimeZone::utc());
   this->gps_status.insert("GPSDateTime", QDateTime(qdtgps));
   this->coordinates.set_lat_lon_msec(this->gps_status.value("Latitude").toInt(), this->gps_status.value("Longitude").toInt(), this->gps_status.value("Height").toDouble() / 100.);
   QString qslon;
@@ -1385,7 +1385,7 @@ QDateTime adulib::get_stop_time() const {
 
 qint64 adulib::seconds_to_midnight(const qint64 offset_seconds) const {
   QDateTime midnight;
-  midnight.setTimeSpec(Qt::UTC);
+  midnight.setTimeZone(QTimeZone::utc());
   midnight = start_time;
   midnight.setTime(QTime(0, 0, 0, 0));
   midnight = midnight.addSecs(86400 + offset_seconds);
@@ -1798,8 +1798,8 @@ QString adulib::on_build_xml(const bool set_astwriter_finhished) {
       tix.push("subjob");
 
       QDateTime next_datetime, new_start_datetime;
-      next_datetime.setTimeSpec(Qt::UTC);
-      new_start_datetime.setTimeSpec(Qt::UTC);
+      next_datetime.setTimeZone(QTimeZone::utc());
+      new_start_datetime.setTimeZone(QTimeZone::utc());
       next_datetime = this->start_time;
 
       // set the time to the full hour; that is always possible without date switching

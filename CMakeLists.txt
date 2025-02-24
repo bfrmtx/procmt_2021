@@ -33,14 +33,6 @@ if (NOT Qt6_FOUND)
     message(FATAL_ERROR "Package Qt6 required, but not found!")
 endif()
 
-# boost
-find_package(Boost REQUIRED)
-if (NOT Boost_FOUND) 
-    message(FATAL_ERROR "Package Boost required, but not found!")
-endif()
-
-
-
 
 #
 # set CMAKE_BUILD_TYPE RELEASE for CLANG
@@ -57,14 +49,20 @@ IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
     ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
         message ("release build ---------------------")
-        add_compile_options(-pthread -Wno-unused-parameter -Wno-sign-compare)
+        add_compile_options(-pthread -O2 -Wno-unused-parameter -Wno-sign-compare)
     ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
 ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
 IF(WIN32)
-    message ( "WINDOWS build" )
+    message ( "WINDOWS build, BOOST in C:/boost" )
+    # ensure that boost is found under C:\boost\boost
+    set(BOOST_ROOT "C:/boost")
+    # include <boost/math/distributions/students_t.hpp>
+    # is not found in the default include path
+    include_directories("C:/boost")
+    set(BOOST_INCLUDEDIR "C:/boost")
     # on WINDOWS it is easier to make STATIC libs
     # some libs will by dynamic (dll); add PATH to the lib folder
     option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
@@ -76,7 +74,7 @@ IF(WIN32)
     ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
         message ("release build ---------------------")
-        add_compile_options(-DNDEBUG)
+        add_compile_options(-DNDEBUG -O2 -Wno-unused-parameter -Wno-sign-compare)
     ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
 ENDIF(WIN32)
 

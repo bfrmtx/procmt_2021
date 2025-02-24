@@ -4,7 +4,7 @@ PROJ='procmt_2021'
 INTSTALLDIR='/usr/local/procmt'
 # debug here
 # put your github download here:
-SRC_DIR=$HOME'/devel/github_procmt_2021/'$PROJ
+SRC_DIR='./'
 # in my case /home/bfr/github_procmt_2021/procmt_2021 is where the CmakeLists.txt is
 # this directory will be created by cmake respectivly mkdir -p
 BUILD_DIR=$HOME'/build/'$PROJ/'build'
@@ -12,9 +12,9 @@ BUILD_DIR=$HOME'/build/'$PROJ/'build'
 #
 #
 mkdir -p $BUILD_DIR
-cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=DEBUG
+cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=DEBUG
 # make a single thread in case
-cmake --build $BUILD_DIR --parallel 8
+cmake --build $BUILD_DIR --parallel 16
 # install needs write access to /usr/local/procmt - im my case I simply "sudo mkdir /usr/local/procmt"
 # libraries and headers will go below; so you can alway "uninstall" by removing the /usr/local/procmt directory
 cmake --install $BUILD_DIR

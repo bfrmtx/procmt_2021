@@ -18,8 +18,6 @@ ELSE()
   find_package(Qt6 REQUIRED COMPONENTS Widgets Sql PrintSupport)
 ENDIF()
 
-find_package(Boost REQUIRED)
-
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include

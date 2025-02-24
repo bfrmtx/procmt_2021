@@ -19,7 +19,7 @@ ELSE()
 ENDIF()
 
 
-find_package(Boost)
+# find_package(Boost)
 
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include

@@ -71,15 +71,52 @@
     "valarray": "cpp",
     "variant": "cpp",
     "filesystem": "cpp",
-    "*.inc": "cpp"
+    "any": "cpp",
+    "hash_map": "cpp",
+    "cfenv": "cpp",
+    "charconv": "cpp",
+    "format": "cpp",
+    "shared_mutex": "cpp",
+    "span": "cpp",
+    "stdfloat": "cpp",
+    "strstream": "cpp",
+    "ranges": "cpp",
+    "coroutine": "cpp",
+    "text_encoding": "cpp",
+    "typeindex": "cpp"
   },
-      "cmake.configureArgs": [
-        "DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE"
-    ],
+  "cmake.configureSettings": {
+    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+    "CMAKE_BUILD_TYPE": "Debug",
+    "CMAKE_CXX_STANDARD": 23
+  },
   "cmake.configureOnOpen": true,
   "cmake.sourceDirectory": "${workspaceFolder}",
   "cmake.buildDirectory": "${userHome}/build/${workspaceFolderBasename}/vscode",
   "cmake.installPrefix": "/usr/local/procmt",
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-  "C_Cpp.dimInactiveRegions": false
+  "cSpell.words": [
+    "atmm",
+    "atsheader",
+    "cplx",
+    "detrend",
+    "emap",
+    "fftw",
+    "freqs",
+    "gnuplotter",
+    "gplt",
+    "innerouter",
+    "linespoints",
+    "mstr",
+    "parzen",
+    "parzening",
+    "sqlfile",
+    "submit_task",
+    "theo"
+  ],
+  "editor.fontSize": 12,
+  "C_Cpp.dimInactiveRegions": false,
+  "cSpell.enableFiletypes": [
+    "cmake"
+  ]
 }

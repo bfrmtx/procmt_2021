@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1001</width>
-    <height>777</height>
+    <height>878</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,10 +44,10 @@
          </sizepolicy>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::Shape::StyledPanel</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
+         <enum>QFrame::Shadow::Plain</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="leftMargin">
@@ -83,7 +83,7 @@
               <string>Actions</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -99,7 +99,7 @@
               <string>Plot Mode</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -154,17 +154,17 @@
               <number>0</number>
              </property>
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item row="3" column="0" colspan="3">
             <widget class="Line" name="line_actions">
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -213,7 +213,7 @@
            <item row="12" column="0">
             <spacer name="spacer_right_left">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -226,7 +226,7 @@
            <item row="22" column="1">
             <spacer name="spacer_right_bottom">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -249,10 +249,10 @@
            <item row="15" column="0" colspan="3">
             <widget class="Line" name="line_functions">
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -275,7 +275,7 @@
               <string>Functions</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -298,7 +298,7 @@
            <item row="12" column="2">
             <spacer name="spacer_right_right">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -369,10 +369,10 @@
            <item row="9" column="0" colspan="3">
             <widget class="Line" name="line_plot_mode">
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -406,10 +406,10 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::Shape::StyledPanel</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
+         <enum>QFrame::Shadow::Plain</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="leftMargin">
@@ -436,7 +436,7 @@
             <number>99</number>
            </property>
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -452,10 +452,10 @@
          </sizepolicy>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::Shape::StyledPanel</enum>
         </property>
         <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
+         <enum>QFrame::Shadow::Plain</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="leftMargin">
@@ -472,59 +472,53 @@
          </property>
          <item>
           <layout class="QGridLayout" name="gridlayout_left">
-           <item row="19" column="1">
+           <item row="14" column="1">
+            <widget class="QPushButton" name="button_scale_all">
+             <property name="text">
+              <string>all channels</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="button_display_spc">
+             <property name="text">
+              <string>SPC DATA</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="22" column="1">
+            <spacer name="spacer_left_bottom">
+             <property name="orientation">
+              <enum>Qt::Orientation::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="18" column="1">
             <widget class="QPushButton" name="button_refresh">
              <property name="text">
               <string>refresh</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QLabel" name="label_scaling">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
+           <item row="19" column="1">
+            <widget class="QPushButton" name="button_debug">
              <property name="text">
-              <string>Same Scaling:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QPushButton" name="button_scale_allEx">
-             <property name="text">
-              <string>all Ex</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <spacer name="spacer_left_right">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="8" column="1">
-            <widget class="QPushButton" name="button_scale_allE">
-             <property name="text">
-              <string>all E</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
+              <string>DEBUG_OUTPUT</string>
              </property>
             </widget>
            </item>
@@ -548,6 +542,16 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="0" colspan="3">
+            <widget class="Line" name="line_left_top">
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Plain</enum>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
            <item row="11" column="1">
             <widget class="QPushButton" name="button_scale_allHz">
              <property name="text">
@@ -568,33 +572,6 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
-            <spacer name="spacer_left_left">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="18" column="1">
-            <widget class="QPushButton" name="button_deselect_all">
-             <property name="text">
-              <string>deselect all</string>
-             </property>
-            </widget>
-           </item>
-           <item row="22" column="1">
-            <widget class="QPushButton" name="pushButton_gmaps">
-             <property name="text">
-              <string>G. Maps</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="button_display_ts">
              <property name="text">
@@ -608,10 +585,33 @@
              </property>
             </widget>
            </item>
+           <item row="7" column="0">
+            <spacer name="spacer_left_left">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="20" column="1">
-            <widget class="QPushButton" name="button_debug">
+            <widget class="QPushButton" name="pushButton_osm">
              <property name="text">
-              <string>DEBUG_OUTPUT</string>
+              <string>OSM</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QPushButton" name="button_scale_allHx">
+             <property name="text">
+              <string>all Hx</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -625,10 +625,76 @@
              </property>
             </widget>
            </item>
-           <item row="21" column="1">
-            <widget class="QPushButton" name="pushButton_osm">
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_scaling">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="text">
-              <string>OSM</string>
+              <string>Same Scaling:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QPushButton" name="button_scale_allEx">
+             <property name="text">
+              <string>all Ex</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QPushButton" name="button_scale_allH">
+             <property name="text">
+              <string>all H</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="21" column="1">
+            <widget class="QPushButton" name="pushButton_gmaps">
+             <property name="text">
+              <string>G. Maps</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <spacer name="spacer_left_right">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="17" column="1">
+            <widget class="QPushButton" name="button_deselect_all">
+             <property name="text">
+              <string>deselect all</string>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="0" colspan="3">
+            <widget class="Line" name="line_left_bottom">
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Plain</enum>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -644,87 +710,14 @@
               <string>Display Mode</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
             </widget>
            </item>
-           <item row="4" column="0" colspan="3">
-            <widget class="Line" name="line_left_top">
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="23" column="1">
-            <spacer name="spacer_left_bottom">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="button_display_spc">
+           <item row="8" column="1">
+            <widget class="QPushButton" name="button_scale_allE">
              <property name="text">
-              <string>SPC DATA</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="17" column="0" colspan="3">
-            <widget class="Line" name="line_left_bottom">
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="1">
-            <widget class="QPushButton" name="button_scale_allH">
-             <property name="text">
-              <string>all H</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="1">
-            <widget class="QPushButton" name="button_scale_allHx">
-             <property name="text">
-              <string>all Hx</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="16" column="1">
-            <widget class="QPushButton" name="button_scale_menu">
-             <property name="text">
-              <string>scale options...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="1">
-            <widget class="QPushButton" name="button_scale_all">
-             <property name="text">
-              <string>all channels</string>
+              <string>all E</string>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -788,7 +781,7 @@
      <x>0</x>
      <y>0</y>
      <width>1001</width>
-     <height>22</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -824,7 +817,7 @@
    </widget>
    <widget class="QMenu" name="menu_windowlength">
     <property name="title">
-     <string>Window Length</string>
+     <string>Window &amp;Length</string>
     </property>
    </widget>
    <widget class="QMenu" name="menu_utils">
@@ -868,7 +861,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>mouse selects</string>
+    <string>&amp;mouse selects</string>
    </property>
   </action>
   <action name="menu_action_mouse_deselects">
@@ -876,7 +869,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>mouse deselects</string>
+    <string>mouse &amp;deselects</string>
    </property>
   </action>
   <action name="menu_action_mouse_readout">
@@ -887,7 +880,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>mouse readout</string>
+    <string>mouse &amp;readout</string>
    </property>
   </action>
   <action name="menu_action_sel_common">
@@ -898,7 +891,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>common selections</string>
+    <string>&amp;common selections</string>
    </property>
   </action>
   <action name="menu_action_sel_separate">
@@ -909,27 +902,27 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>separate selections</string>
+    <string>&amp;separate selections</string>
    </property>
   </action>
   <action name="menu_action_quit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
   </action>
   <action name="menu_action_selections_open">
    <property name="text">
-    <string>Open Selection</string>
+    <string>Ope&amp;n Selection</string>
    </property>
   </action>
   <action name="menu_action_selections_save">
    <property name="text">
-    <string>Save Selections</string>
+    <string>&amp;Save Selections</string>
    </property>
   </action>
   <action name="menu_action_export_print">
    <property name="text">
-    <string>Print</string>
+    <string>&amp;Print</string>
    </property>
   </action>
   <action name="menu_action_export_svg">
@@ -939,12 +932,12 @@
   </action>
   <action name="menu_action_export_ascii">
    <property name="text">
-    <string>Export ASCII</string>
+    <string>&amp;Export ASCII</string>
    </property>
   </action>
   <action name="menu_action_export_isotime_ascii">
    <property name="text">
-    <string>Export ISOTime ASCII</string>
+    <string>Export &amp;ISOTime ASCII</string>
    </property>
   </action>
   <action name="menu_action_export_threshold_spc">
@@ -954,7 +947,7 @@
   </action>
   <action name="menu_action_goto_position">
    <property name="text">
-    <string>Goto position/time</string>
+    <string>&amp;Goto position/time</string>
    </property>
   </action>
   <action name="menu_action_show_sampleno">
@@ -962,7 +955,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>sample no.</string>
+    <string>sample &amp;no.</string>
    </property>
   </action>
   <action name="menu_action_show_time">
@@ -973,32 +966,32 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>time</string>
+    <string>&amp;time</string>
    </property>
   </action>
   <action name="actionShow_CAL">
    <property name="text">
-    <string>Show CAL</string>
+    <string>&amp;Show CAL</string>
    </property>
   </action>
   <action name="actionOpen_Files">
    <property name="text">
-    <string>Open Files</string>
+    <string>&amp;Open Files</string>
    </property>
   </action>
   <action name="actionConnect">
    <property name="text">
-    <string>Connect</string>
+    <string>&amp;Connect</string>
    </property>
   </action>
   <action name="actionadd_sys_cal">
    <property name="text">
-    <string>add System Calibration</string>
+    <string>&amp;add System Calibration</string>
    </property>
   </action>
   <action name="actionremove_System_Calibration">
    <property name="text">
-    <string>remove System Calibration</string>
+    <string>&amp;remove System Calibration</string>
    </property>
   </action>
  </widget>
@@ -1007,7 +1000,7 @@
  <connections/>
  <buttongroups>
   <buttongroup name="button_group_adding_mode"/>
-  <buttongroup name="button_group_cursor_mode"/>
   <buttongroup name="button_group_plot_mode"/>
+  <buttongroup name="button_group_cursor_mode"/>
  </buttongroups>
 </ui>

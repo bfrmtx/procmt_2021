@@ -13,7 +13,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
 
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Boost)
+# find_package(Boost)
 include_directories(${Boost_INCLUDE_DIRS})
 
 
