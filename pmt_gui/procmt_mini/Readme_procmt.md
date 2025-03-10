@@ -58,4 +58,12 @@ Experienced professionals use N-S E-W setup only. "Specialists" wait for crashes
 
 More documentation can be found in our [manuals](https://manuals.geo-metronix.de/).
 
+### 2025
+
+Digital filtering has been adjusted to the new atss standard.The filter delay is shifted by one point.
+
+So for a 71 length FIR filter at 512 Hz I shift 477 points <br>
+(old version was 476 points) <br>
+Simply filter your *source* runs again if you want to be compatible in future. 
+
 [^1]: You can open markdown files with VSCODE & preview extension in order to get a better view.

@@ -53,9 +53,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/local/procmt/bin/atsfilter",
-      "args": [
-        "/survey/Raphael/187/PST/meas_2025-01-29_15-52-00/*ats"
-      ],
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],

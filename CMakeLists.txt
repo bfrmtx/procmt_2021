@@ -56,7 +56,7 @@ ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
 IF(WIN32)
-    message ( "WINDOWS build, BOOST in C:/boost" )
+    message ( "WINDOWS build, mingw / mysys2" )
     # ensure that boost is found under C:\boost\boost
     set(BOOST_ROOT "C:/boost")
     # include <boost/math/distributions/students_t.hpp>

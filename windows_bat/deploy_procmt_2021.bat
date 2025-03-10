@@ -1,9 +1,10 @@
 rem global vars
 call "base6.bat"
 rem set vars here
-set PROJ=procmt_2021
+set PROJ=procmt
 rem finished setting vars
 call "base_dirs.bat" %PROJ%
+IF EXIST "C:\Users\ea2abc\mtxsw\install\tsmp\bin\tsmp.exe" copy "C:\Users\ea2abc\mtxsw\install\tsmp\bin\tsmp.exe"  %bindir%
 
 windeployqt.exe --libdir %libdir% --plugindir %bindir% --no-translations --compiler-runtime %bindir%
 

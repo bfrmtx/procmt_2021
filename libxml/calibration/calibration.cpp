@@ -2764,6 +2764,28 @@ void calibration::slot_gen_pure_theo_cal(std::vector<double> &psrc, const double
     }
   }
 
+  if (this->sensortype == "MFS-12e") {
+
+    for (size_t i = starts; i < stop_idx; ++i) {
+
+      f = (double(i) * (f_sample / fwl));
+
+      gen_trf_mfs12e_template(f, p1, p2, p4, im, trf);
+      if (mul_by_f) {
+        trf *= (f * mul_by);
+      } else {
+        trf *= mul_by;
+      }
+      if (invert) {
+        trf = 1.0 / trf;
+      }
+      auto ctmp = std::complex<double>(psrc[i], -1. * psrc[wlh + i]);
+      ctmp *= trf;
+      psrc[i] = ctmp.real();
+      psrc[wlh + i] = -1.0 * ctmp.imag();
+    }
+  }
+
   if (this->sensortype == "MFS-07e") {
 
     if (this->chopper == cal::chopper_on) {

@@ -95,7 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
   QDir directory(QDir::home());
   QStringList qstrlFilesInDir = directory.entryList(qstrlFiles);
   if (qstrlFilesInDir.size() > 0) {
-    QMessageBox::warning(this, "Overwrite Data", "The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat");
+    // QMessageBox::warning(this, "Overwrite Data", "The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat");
+    this->statusBar()->showMessage("The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat", 5000);
   }
 }
 
@@ -144,7 +145,12 @@ MainWindow::~MainWindow() {
   QDir directory(QDir::home());
   QStringList qstrlFilesInDir = directory.entryList(qstrlFiles);
   if (qstrlFilesInDir.size() > 0) {
-    QMessageBox::information(this, "Saved Data", "The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat");
+    //  QMessageBox *msgBox = new QMessageBox(QMessageBox::Information, "Saved Data", "The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat", QMessageBox::NoButton, this);
+    //  QTimer::singleShot(1000, msgBox, &QMessageBox::accept);
+    //  msgBox->exec();
+    //  delete msgBox;
+    // add this message to the main window status bar
+    this->statusBar()->showMessage("The following files exist in the home directory: HxHx_ampl.dat, HyHy_ampl.dat, HzHz_ampl.dat", 5000);
   }
 
   delete ui;

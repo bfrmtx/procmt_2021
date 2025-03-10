@@ -103,6 +103,14 @@ cd $HOME/build/procmt_2021
 rm -rf *
 ```
 
+# Version 2025
+
+The filter delay is shifted by one point.
+
+So for a 71 length FIR filter at 512 Hz I shift 477 points <br>
+(old version was 476 points) <br>
+Simply filter your *source* runs again if you want to be compatible in future.
+
 # License
 
 GPL v3<br>

@@ -486,8 +486,18 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
       qvecErrorBars[CHCounter]->setData(qvecError);
       qvecErrorBars[CHCounter]->setVisible(false);
 
+      // QCPAxisTickerLog shall be used for y-axis, 2025
+      pclMagPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+
       pclMagPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
       pclMagPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+      // the labels must be exponential
+      pclMagPlot->yAxis->setNumberFormat("eb");
+      pclMagPlot->yAxis->setNumberPrecision(0);
+      // we need ticks for 10-4, 10-5 ... they are not plotted for some reason
+      // pclMagPlot->yAxis->ticker()->setTickOrigin(1.0e-5);
+      pclMagPlot->yAxis->ticker()->setTickStepStrategy(QCPAxisTicker::tssReadability);
+
       pclMagPlot->update();
       pclMagPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
       pclMagPlot->rescaleAxes();
@@ -672,42 +682,42 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
   }
 
   if ((pclMagPlot != Q_NULLPTR) && qvecMag.size()) {
-/*
-    QVector<double> noise_f;
-    QVector<double> noise_lev;
-    this->master_calibration_db = QSqlDatabase::addDatabase("QSQLITE", "get_noise");
-    this->master_calibration_db.setConnectOptions("QSQLITE_OPEN_READONLY");
-    this->master_calibration_db.setDatabaseName(this->master_cal_db.absoluteFilePath());
-    if (this->master_calibration_db.open()) {
-      QSqlQuery query(this->master_calibration_db);
-      QString query_str("SELECT `f`, `MFS-06e` from 'noise_levels'");
-      if (query.exec(query_str)) {
-        while (query.next()) {
-          noise_f.push_back(query.value(0).toDouble());
-          noise_lev.push_back(query.value(1).toDouble());
+    /*
+        QVector<double> noise_f;
+        QVector<double> noise_lev;
+        this->master_calibration_db = QSqlDatabase::addDatabase("QSQLITE", "get_noise");
+        this->master_calibration_db.setConnectOptions("QSQLITE_OPEN_READONLY");
+        this->master_calibration_db.setDatabaseName(this->master_cal_db.absoluteFilePath());
+        if (this->master_calibration_db.open()) {
+          QSqlQuery query(this->master_calibration_db);
+          QString query_str("SELECT `f`, `MFS-06e` from 'noise_levels'");
+          if (query.exec(query_str)) {
+            while (query.next()) {
+              noise_f.push_back(query.value(0).toDouble());
+              noise_lev.push_back(query.value(1).toDouble());
+            }
+          }
         }
-      }
-    }
-    this->master_calibration_db.close();
+        this->master_calibration_db.close();
 
-    if ((noise_f.size()) && (noise_f.size() == noise_lev.size())) {
+        if ((noise_f.size()) && (noise_f.size() == noise_lev.size())) {
 
-      size_t chop = std::upper_bound(noise_f.begin(), noise_f.end(), minf_ampl) - noise_f.begin();
+          size_t chop = std::upper_bound(noise_f.begin(), noise_f.end(), minf_ampl) - noise_f.begin();
 
-      if (chop < noise_f.size() - 1) {
+          if (chop < noise_f.size() - 1) {
 
-        noise_f.erase(noise_f.begin(), noise_f.begin() + chop);
-        noise_lev.erase(noise_lev.begin(), noise_lev.begin() + chop);
+            noise_f.erase(noise_f.begin(), noise_f.begin() + chop);
+            noise_lev.erase(noise_lev.begin(), noise_lev.begin() + chop);
 
-        pclMagPlot->addGraph();
+            pclMagPlot->addGraph();
 
-        pclMagPlot->graph(uiGraphCount)->addData(noise_f, noise_lev);
-        pclMagPlot->graph(uiGraphCount)->setVisible(true);
-        pclMagPlot->graph(uiGraphCount)->setPen(QPen(Qt::gray));
-        pclMagPlot->graph(uiGraphCount)->setBrush(Qt::NoBrush);
-      }
-    }
-  */
+            pclMagPlot->graph(uiGraphCount)->addData(noise_f, noise_lev);
+            pclMagPlot->graph(uiGraphCount)->setVisible(true);
+            pclMagPlot->graph(uiGraphCount)->setPen(QPen(Qt::gray));
+            pclMagPlot->graph(uiGraphCount)->setBrush(Qt::NoBrush);
+          }
+        }
+      */
   }
 
   pclMagPlot->rescaleAxes();
