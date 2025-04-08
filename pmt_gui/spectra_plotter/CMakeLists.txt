@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+
 
 project(spectra_plotter VERSION 1.0 LANGUAGES CXX)
 
@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
 
 IF(QCUSTOMPLOT_USE_OPENGL)
     find_package(Qt6 REQUIRED COMPONENTS Core Sql Gui Widgets Network OpenGL PrintSupport)

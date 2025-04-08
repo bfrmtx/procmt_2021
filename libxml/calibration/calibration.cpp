@@ -1828,6 +1828,61 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       return this->f_off_theo.size();
     }
   }
+  if (this->sensortype == "MFS-12e") {
+
+    if (this->chopper == cal::chopper_on) {
+      for (auto &f : fin) {
+        this->f_on_theo.emplace_back(f);
+
+        if (f == 0.0) {
+          this->zerof(this->ampl_on_theo, this->phase_grad_on_theo, 1.0, 90);
+          this->zerof(this->ampl_on_theo_stddev, this->phase_grad_on_theo_stddev, 1.0, 90.0);
+
+        } else {
+          gen_trf_mfs12e_template(f, p1, p2, p4, im, trf);
+          this->ampl_on_theo.emplace_back(abs(trf) / f);
+          this->phase_grad_on_theo.emplace_back(std::arg(trf) * 180. / M_PI);
+
+          if (dad > 0.0001)
+            this->ampl_on_theo_stddev.emplace_back(this->ampl_on_theo.back() * dad);
+          if (dpg > 0.0001)
+            this->phase_grad_on_theo_stddev.emplace_back(dpg);
+        }
+      }
+
+      message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper on: ") +
+                QString::number(this->f_on_theo.size());
+      emit this->tx_cal_message(this->channel, this->slot, message);
+
+      return this->f_on_theo.size();
+    }
+
+    if (this->chopper == cal::chopper_off) {
+      for (auto &f : fin) {
+        this->f_off_theo.emplace_back(f);
+        if (f == 0.0) {
+          this->zerof(this->ampl_off_theo, this->phase_grad_off_theo, 1.0, 90.0);
+          this->zerof(this->ampl_off_theo_stddev, this->phase_grad_off_theo_stddev, 1.0, 90.0);
+
+        } else {
+          gen_trf_mfs12e_template(f, p1, p2, p4, im, trf);
+          this->ampl_off_theo.emplace_back(abs(trf) / f);
+          this->phase_grad_off_theo.emplace_back(std::arg(trf) * 180. / M_PI);
+
+          if (dad > 0.0001)
+            this->ampl_off_theo_stddev.emplace_back(this->ampl_off_theo.back() * dad);
+          if (dpg > 0.0001)
+            this->phase_grad_off_theo_stddev.emplace_back(dpg);
+        }
+      }
+
+      message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
+                QString::number(this->f_off_theo.size());
+      emit this->tx_cal_message(this->channel, this->slot, message);
+
+      return this->f_off_theo.size();
+    }
+  }
   if (this->sensortype == "MFS-09u") {
     if (this->chopper == cal::chopper_on) {
       for (auto &f : fin) {

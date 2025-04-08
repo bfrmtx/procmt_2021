@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+
 
 project(gmttools VERSION 0.1 LANGUAGES CXX)
 
@@ -10,7 +10,7 @@ set(CMAKE_AUTORCC ON)
 
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
 
 
 find_package(Qt6 REQUIRED COMPONENTS Core)

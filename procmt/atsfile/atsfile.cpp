@@ -1133,6 +1133,12 @@ void atsfile::read_all()
         if (this->calib != nullptr) {
           auto c = this->calib->cap.cbegin();
           auto f = this->calib->f.cbegin();
+
+          if (!this->calib->cap.size() || !this->calib->f.size()) {
+            qDebug() << "calibration data missing";
+            exit(1);
+          }
+
           for (auto &s : this->spcdata) {
             s /= (-1.0) * *c++;
             s /= 1000.;

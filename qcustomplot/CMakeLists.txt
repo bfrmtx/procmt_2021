@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.23)
-
 project(qcustomplot VERSION 2.1.1  LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,11 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
-
-
 
 IF(QCUSTOMPLOT_USE_OPENGL)
 find_package(Qt6
@@ -25,7 +19,6 @@ find_package(Qt6
 )
 ENDIF()
 
-
 set(SOURCES
   qcustomplot.cpp
 )
@@ -35,8 +28,10 @@ set(HEADERS_INSTALL
   qcustomplot.h
 )
 
-
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
+add_library(${PROJECT_NAME} SHARED
+    ${SOURCES}
+    ${HEADERS_INSTALL}
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core
@@ -56,7 +51,6 @@ IF(QCUSTOMPLOT_USE_OPENGL)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
     ENDIF()
 ENDIF()
-
 
 IF (QCUSTOMPLOT_USE_OPENGL)
   message ("qcustomplot openGL")

@@ -9,13 +9,29 @@ SRC_DIR='./'
 BUILD_DIR=$HOME'/build/'$PROJ/'build'
 # in my case /home/bfr/build/procmt_2021/build
 #
+#
+# Number of parallel jobs if you want to limit the number of threads detected by ninja
+PARALLEL_JOBS=8
+#
 mkdir -p $BUILD_DIR
 #
 # the openGL version seems to be faulty! Don't use
 #cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE -DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE
-cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE
-# make a single thread in case --parallel 8
-cmake --build $BUILD_DIR -v --parallel 16
+#
+# cmake options DO OVERRIDE the CMakeLists.txt, so -DCMAKE_CXX_STANDARD=20 will override the CMakeLists.txt
+# this as well -DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE
+#
+if ! which ninja > /dev/null; then
+  echo "using build without ninja"
+  cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE
+  cmake --build $BUILD_DIR --parallel $PARALLEL_JOBS
+else
+  echo "using build with ninja"
+  cmake -GNinja -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE
+  # if you want limit the number of threads detected by ninja
+  # cmake --build $BUILD_DIR -- -j $PARALLEL_JOBS
+  cmake --build $BUILD_DIR
+fi
 # install needs write access to /usr/local/procmt - im my case I simply "sudo mkdir /usr/local/procmt"
 # libraries and headers will go below; so you can alway "uninstall" by removing the /usr/local/procmt directory
 cmake --install $BUILD_DIR

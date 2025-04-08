@@ -17,6 +17,8 @@ On Windows you need to set the PATH variable to the bin directory *and* the lib 
 `c:\Program Files\metronix\procmt\lib`
 
 On Linux / MacOS rpath is used to find the libraries.
+When you *not want to set the path* under Windows, move all files from the bin directory to the lib directory.
+That should work as well.
 
 When processing is finished, by default the "ediplotter" is called in order to display the results.
 The "old" ediplotter is NOT part of the procmt package. (It does not work with Qt6). You can download it from the metronix cloud [procmt_mini](https://cloud.geo-metronix.de/s/GJaZaPprX3YmsK9). Unzip it and set the PATH variable to the directory. Example:

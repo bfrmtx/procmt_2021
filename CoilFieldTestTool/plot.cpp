@@ -488,6 +488,7 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
 
       // QCPAxisTickerLog shall be used for y-axis, 2025
       pclMagPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+      pclMagPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
 
       pclMagPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
       pclMagPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
@@ -523,6 +524,8 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
 
       pclCohPlot->graph(uiGraphCount)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, pclPen->color(), 10.0));
 
+      pclMagPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+
       pclCohPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
       pclCohPlot->yAxis->setScaleType(QCPAxis::stLinear);
       pclCohPlot->update();
@@ -551,6 +554,9 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
       pclNoisePlot->graph(uiGraphCount)->setBrush(QBrush(QColor(0, 255, 0, 0)));
 
       pclNoisePlot->graph(uiGraphCount)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, pclPen->color(), 10.0));
+
+      pclMagPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+      pclMagPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
 
       pclNoisePlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
       pclNoisePlot->yAxis->setScaleType(QCPAxis::stLogarithmic);

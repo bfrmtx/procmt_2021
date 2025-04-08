@@ -88,7 +88,7 @@
   "cmake.configureSettings": {
     "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
     "CMAKE_BUILD_TYPE": "Debug",
-    "CMAKE_CXX_STANDARD": 23
+    "CMAKE_CXX_STANDARD": 20
   },
   "cmake.configureOnOpen": true,
   "cmake.sourceDirectory": "${workspaceFolder}",

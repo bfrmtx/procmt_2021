@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+
 
 project(procmt_mini VERSION 1.0 LANGUAGES CXX)
 
@@ -9,12 +9,12 @@ set(CMAKE_AUTORCC ON)
 
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
 
 
 IF(QCUSTOMPLOT_USE_OPENGL)
 find_package(Qt6
-    REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL OpenGLWidgets
+    REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
     OPTIONAL_COMPONENTS PrintSupport
 )
 ELSE()
@@ -67,6 +67,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/qcustomplot
 
 )
+
+
 
 
 
@@ -146,10 +148,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     spc_db
 )
 
+if(TARGET Qt6::PrintSupport)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
+endif()
+
 IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        Qt${QT_VERSION_MAJOR}::OpenGLWidgets
-        Qt${QT_VERSION_MAJOR}::OpenGL
+        PRIVATE Qt6::OpenGL
     )
     IF(WIN32)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)

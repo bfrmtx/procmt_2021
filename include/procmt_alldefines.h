@@ -66,7 +66,7 @@ enum tns : std::size_t {
 
 enum tns_sel : std::size_t {
   xx_yy = 1,             //!< zxx and zyy components
-  xy_yx = 2,             //!< zxy and zyy components
+  xy_yx = 2,             //!< zxy and zyx components
   xx_xy_yx_yy = 3,       //!< all z components
   tx_ty = 4,             //!< tx and ty components
   xx_xy_yx_yy_tx_ty = 5, //!< complete tensor and tipper

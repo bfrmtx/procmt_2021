@@ -5,17 +5,17 @@
 
 int main(int argc, char *argv[]) {
 
-// use OpenGL
-#ifdef QCUSTOMPLOT_USE_OPENGL
-  Q_INIT_RESOURCE(default_resources);
-  QApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
-  // QApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
-  QSurfaceFormat fmt;
-  fmt.setDepthBufferSize(16);
-  fmt.setProfile(QSurfaceFormat::CoreProfile);
-  fmt.setVersion(4, 1);
-  QSurfaceFormat::setDefaultFormat(fmt);
-#endif
+  // use OpenGL
+  // #ifdef QCUSTOMPLOT_USE_OPENGL
+  //   Q_INIT_RESOURCE(default_resources);
+  //   QApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
+  //   // QApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
+  //   QSurfaceFormat fmt;
+  //   fmt.setDepthBufferSize(16);
+  //   fmt.setProfile(QSurfaceFormat::CoreProfile);
+  //   fmt.setVersion(4, 1);
+  //   QSurfaceFormat::setDefaultFormat(fmt);
+  // #endif
   QApplication a(argc, argv);
   for (auto screen : QApplication::screens()) {
     qDebug() << "device pxr: " << screen->devicePixelRatio();

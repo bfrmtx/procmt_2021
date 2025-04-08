@@ -11,8 +11,7 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_INSTALL_PREFIX": "/usr/local/procmt",
         "CMAKE_CXX_STANDARD": "20",
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_C_COMPILER": "clang"
+        "CMAKE_CXX_COMPILER": "clang++"
       }
     }
   ]

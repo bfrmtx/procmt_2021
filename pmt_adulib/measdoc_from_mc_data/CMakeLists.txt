@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+
 
 project(measdoc_from_mc_data VERSION 1.0 LANGUAGES CXX)
 
@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/out_of_tree_build.cmake)
+
 
 find_package(Qt6 REQUIRED COMPONENTS Core Sql )
 

@@ -1,8 +1,20 @@
 #
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.31)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-project(procmt_2021 VERSION 2.1 LANGUAGES CXX)
+project(procmt_2021 VERSION 3.1 LANGUAGES CXX)
+
+### Require out-of-source builds
+# I want this setting because my source directory is a rsync drive, and I I don't want
+# the builds to be synced all day long. I want to keep the source directory clean.
+file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
+if(EXISTS "${LOC_PATH}")
+    message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
+endif()
+
+message("compiler used / detected " ${CMAKE_CXX_COMPILER_ID})
+
+set(QCUSTOMPLOT_USE_OPENGL TRUE)
 
 IF (NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
     message ("BUILD WITHOUT OpenGL               <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -56,16 +68,15 @@ ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
 IF(WIN32)
-    message ( "WINDOWS build, mingw / mysys2" )
+    message ( "WINDOWS build,  msys2" )
     # ensure that boost is found under C:\boost\boost
-    set(BOOST_ROOT "C:/boost")
+    #set(BOOST_ROOT "C:/boost")
     # include <boost/math/distributions/students_t.hpp>
     # is not found in the default include path
-    include_directories("C:/boost")
-    set(BOOST_INCLUDEDIR "C:/boost")
+    #include_directories("C:/boost")
+    #set(BOOST_INCLUDEDIR "C:/boost")
     # on WINDOWS it is easier to make STATIC libs
     # some libs will by dynamic (dll); add PATH to the lib folder
-    option(BUILD_SHARED_LIBS "Build using static libraries" OFF)
     add_compile_definitions( _USE_MATH_DEFINES _msvc )
     IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
         message ("debug build ---------------------")
@@ -74,7 +85,11 @@ IF(WIN32)
     ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
         message ("release build ---------------------")
-        add_compile_options(-DNDEBUG -O2 -Wno-unused-parameter -Wno-sign-compare)
+        # with msys2 it is completely useless to use static libs - a runtime must be provided (full of bitterness)
+        # by default I install it under procmt/lib; if you don't want to us a PATH environment, you trash the lib folder into the bin folder "thank you very much, microsoft"
+        option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+        add_compile_options(-DNDEBUG -O2 -pthread -Wno-unused-parameter -Wno-sign-compare)
+        # add_compile_options(-DNDEBUG -DBUILD_SHARED_LIBS=OFF -O2 -pthread -Wno-unused-parameter -Wno-sign-compare -static-libstdc++ -static-libgcc -static)
     ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
 ENDIF(WIN32)
 
@@ -181,6 +196,5 @@ add_subdirectory(pmt_adulib/calib_lab)
 add_subdirectory(CoilFieldTestTool)
 add_subdirectory(InSituCoilCal)
 
-#ENDIF()
 
 
