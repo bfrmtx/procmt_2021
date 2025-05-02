@@ -615,14 +615,6 @@ void tsplotter::recreate_plots() {
   // eQDateTime min_stop_time(QDate(9999, 12, 12).startOfDay());
   eQDateTime min_stop_time(QDate(9999, 12, 12));
 
-  // // sort by channel name (Ex, Ey, Hx, Hy, Hz)
-  // std::sort(m_mcdata->in_atsfiles.begin(), m_mcdata->in_atsfiles.end(),
-  //           [](auto &a, auto &b) { return a->channel_type() < b->channel_type(); });
-
-  // // sort by channel number
-  // std::sort(m_mcdata->in_atsfiles.begin(), m_mcdata->in_atsfiles.end(),
-  //           [](auto &a, auto &b) { return a->value("channel_number").toInt() < b->value("channel_number").toInt(); });
-
   // there is a atsfile->get_start_sample - method (just in case we need it)
   for (auto &atsfile : m_mcdata->in_atsfiles) {
     max_start_time = std::max(max_start_time, atsfile->get_start_datetime());
@@ -1251,12 +1243,8 @@ void tsplotter::keyReleaseEvent(QKeyEvent *event) {
   } else if (event->key() == Qt::Key::Key_Right) {
     on_plot_scrollbar_valueChanged(std::min(ui->plot_scrollbar->value() + 1,
                                             ui->plot_scrollbar->maximum()));
-    // update the scrollbar
-    this->update_scrollbar();
   } else if (event->key() == Qt::Key::Key_Left) {
     on_plot_scrollbar_valueChanged(std::max(ui->plot_scrollbar->value() - 1, 0));
-    // update the scrollbar
-    this->update_scrollbar();
   } else if (event->key() == Qt::Key::Key_Space) {
     for (auto &plot : m_ui_tsplots) {
       plot->blockSignals(true);

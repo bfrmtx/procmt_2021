@@ -1,12 +1,12 @@
 #!/bin/zsh
 clear
 PROJ='procmt_2021'
-INTSTALLDIR='/usr/local/procmt'
+INTSTALLDIR='/usr/local/procmtwin64'
 # put your github download here:
 SRC_DIR='./'
 # in my case /home/bfr/github_procmt_2021/procmt_2021 is where the CmakeLists.txt is
 # this directory will be created by cmake respectivly mkdir -p
-BUILD_DIR=$HOME'/build/'$PROJ/'build'
+BUILD_DIR=$HOME'/build/'$PROJ/'buildw64'
 # in my case /home/bfr/build/procmt_2021/build
 #
 #
@@ -21,6 +21,14 @@ mkdir -p $BUILD_DIR
 # cmake options DO OVERRIDE the CMakeLists.txt, so -DCMAKE_CXX_STANDARD=20 will override the CMakeLists.txt
 # this as well -DQCUSTOMPLOT_USE_OPENGL=TRUE -DUSE_SPECTRAL_PLOTTER_PRO=TRUE
 #
+
+# ok, we want to use /usr/bin/i686-w64-mingw32-g++
+# and add 64 bit support
+# this is the default compiler for mingw64
+
+
+
+
 if ! which ninja > /dev/null; then
   echo "using build without ninja"
   cmake -S $SRC_DIR -B $BUILD_DIR -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$INTSTALLDIR -DCMAKE_BUILD_TYPE=RELEASE
@@ -38,7 +46,11 @@ fi
 cmake --install $BUILD_DIR
 # COMMENT the "old" ediplotter can't be build with Qt6; this version will call "ediplotter_new" in case "ediplotter" is missing
 #
+
+
 # detect the OS
+exit
+
 OS=$(uname -s)
 # if darwin (macOS) then do not cp ediplotter
 if [ $OS = "Darwin" ]; then

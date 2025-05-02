@@ -11,9 +11,6 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-
-
-
 IF(QCUSTOMPLOT_USE_OPENGL)
     find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL Sql PrintSupport REQUIRED)
 ELSE()

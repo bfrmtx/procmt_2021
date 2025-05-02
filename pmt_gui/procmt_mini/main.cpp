@@ -38,7 +38,9 @@ int main(int argc, char *argv[]) {
 
   procmt_mini pmtmini(cmdline, msg);
 
-  if (cmdline->contains("basedir")) {
+  if (argc == 2) {
+    pmtmini.slot_set_survey_base_dir(a.arguments().at(1));
+  } else if (cmdline->contains("basedir")) {
     if (cmdline->svalue("basedir").size()) {
       pmtmini.slot_set_survey_base_dir(cmdline->svalue("basedir"));
     }

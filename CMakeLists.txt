@@ -1,5 +1,5 @@
 #
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.24)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(procmt_2021 VERSION 3.1 LANGUAGES CXX)
@@ -14,6 +14,7 @@ endif()
 
 message("compiler used / detected " ${CMAKE_CXX_COMPILER_ID})
 
+# uncomment the line below to use OpenGL
 set(QCUSTOMPLOT_USE_OPENGL TRUE)
 
 IF (NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
@@ -51,6 +52,7 @@ endif()
 IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
 # using regular Clang or AppleClang
     message ("UNIX LINUX Apple Clang build")
+    #find_package(Boost REQUIRED)
     # on Linux and MacOS we can build shared libs for all not explicitly marked as STATIC
     option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
     IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
@@ -68,7 +70,7 @@ ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
 IF(WIN32)
-    message ( "WINDOWS build,  msys2" )
+    message ( "WINDOWS build or msys2" )
     # ensure that boost is found under C:\boost\boost
     #set(BOOST_ROOT "C:/boost")
     # include <boost/math/distributions/students_t.hpp>
@@ -77,10 +79,17 @@ IF(WIN32)
     #set(BOOST_INCLUDEDIR "C:/boost")
     # on WINDOWS it is easier to make STATIC libs
     # some libs will by dynamic (dll); add PATH to the lib folder
+
+    # need to find required package boost
+    # on windows, boost is not found by default, it should be installed in C:\boost
+    set(BOOST_ROOT "C:/boost")
+    
+    find_package(Boost REQUIRED)
+
     add_compile_definitions( _USE_MATH_DEFINES _msvc )
     IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
         message ("debug build ---------------------")
-        add_compile_options(-DDEBUG)
+        add_compile_options(-DDEBUG -g -pthread -Wno-unused-parameter -Wno-sign-compare)
         set(CMAKE_VERBOSE_MAKEFILE ON)
     ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)

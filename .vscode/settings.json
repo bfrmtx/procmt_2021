@@ -114,7 +114,7 @@
     "submit_task",
     "theo"
   ],
-  "editor.fontSize": 12,
+  "editor.fontSize": 18,
   "C_Cpp.dimInactiveRegions": false,
   "cSpell.enableFiletypes": [
     "cmake"

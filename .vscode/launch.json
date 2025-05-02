@@ -5,7 +5,9 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/local/procmt/bin/procmt_mini",
-      "args": [],
+      "args": [
+        "/survey/Northern_Mining"
+      ],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],

@@ -11,18 +11,23 @@ include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
 
 
-IF(QCUSTOMPLOT_USE_OPENGL)
-    find_package(Qt6
-        REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
-        OPTIONAL_COMPONENTS PrintSupport
-    )
-ELSE()
-    find_package(Qt6
-        REQUIRED COMPONENTS Core Gui Widgets Network Sql
-        OPTIONAL_COMPONENTS PrintSupport
-    )
-ENDIF()
+# IF(QCUSTOMPLOT_USE_OPENGL)
+#     find_package(Qt6
+#         REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
+#         OPTIONAL_COMPONENTS PrintSupport
+#     )
+# ELSE()
+#     find_package(Qt6
+#         REQUIRED COMPONENTS Core Gui Widgets Network Sql
+#         OPTIONAL_COMPONENTS PrintSupport
+#     )
+# ENDIF()
 
+IF(QCUSTOMPLOT_USE_OPENGL)
+    find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL Sql Network PrintSupport REQUIRED)
+ELSE()
+    find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql Network PrintSupport)
+ENDIF()
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -101,62 +106,71 @@ qwebdavdialog.ui
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
- Qt6::Core
- Qt6::Sql
- Qt6::Gui
- Qt6::Widgets
- Qt6::Network
- prc_com
- prc_com_table
- atsfile
- atsheader
- atmfile
- eqdatetime
- calibration
- measdocxml
- tinyxml2
- tinyxmlwriter
- db_sensor_query
- sql_base_tools
- msg_logger
- fftreal_vector
- firfilter
- ats_ascii_file
- acsp_prz
- atsfile_collector
- calibration
- db_sensor_query
- math_vector
- mt_data
- geocoordinates
- gui_items
- mc_data
- aduxml
- adu_json
- phoenix_json
- mt_site
- plotlib
- lineedit_file
- group_atsfiles
- qstring_utilities
- qcustomplot
- xmlcallib
+target_link_libraries(${PROJECT_NAME}
+PRIVATE Qt${QT_VERSION_MAJOR}::Core
+PRIVATE Qt${QT_VERSION_MAJOR}::Sql
+PRIVATE Qt${QT_VERSION_MAJOR}::Gui
+PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+PRIVATE Qt${QT_VERSION_MAJOR}::Network
+PRIVATE prc_com
+PRIVATE prc_com_table
+PRIVATE atsfile
+PRIVATE atsheader
+PRIVATE atmfile
+PRIVATE eqdatetime
+PRIVATE calibration
+PRIVATE measdocxml
+PRIVATE tinyxml2
+PRIVATE tinyxmlwriter
+PRIVATE db_sensor_query
+PRIVATE sql_base_tools
+PRIVATE msg_logger
+PRIVATE fftreal_vector
+PRIVATE firfilter
+PRIVATE ats_ascii_file
+PRIVATE acsp_prz
+PRIVATE atsfile_collector
+PRIVATE calibration
+PRIVATE db_sensor_query
+PRIVATE math_vector
+PRIVATE mt_data
+PRIVATE geocoordinates
+PRIVATE gui_items
+PRIVATE mc_data
+PRIVATE aduxml
+PRIVATE adu_json
+PRIVATE phoenix_json
+PRIVATE mt_site
+PRIVATE plotlib
+PRIVATE lineedit_file
+PRIVATE group_atsfiles
+PRIVATE qstring_utilities
+PRIVATE qcustomplot
+PRIVATE xmlcallib
 )
-
-if(TARGET Qt6::PrintSupport)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
-endif()
-
 
 IF(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt6::OpenGL
+        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )
     IF(WIN32)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
     ENDIF()
 ENDIF()
+
+# if(TARGET Qt6::PrintSupport)
+#     target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
+# endif()
+
+
+# IF(QCUSTOMPLOT_USE_OPENGL)
+#     target_link_libraries(${PROJECT_NAME}
+#         PRIVATE Qt6::OpenGL
+#     )
+#     IF(WIN32)
+#         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
+#     ENDIF()
+# ENDIF()
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
