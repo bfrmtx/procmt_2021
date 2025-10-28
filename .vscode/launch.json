@@ -6,7 +6,7 @@
       "request": "launch",
       "program": "/usr/local/procmt/bin/procmt_mini",
       "args": [
-        "/survey/Northern_Mining"
+        "/home/bfr/tmp/wil/"
       ],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",

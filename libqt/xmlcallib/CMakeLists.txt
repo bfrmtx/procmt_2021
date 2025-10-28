@@ -11,13 +11,6 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
 
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-  find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Sql PrintSupport)
-ELSE()
-  find_package(Qt6 REQUIRED COMPONENTS Widgets Sql PrintSupport)
-ENDIF()
-
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include
@@ -59,7 +52,6 @@ add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL} )
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
-PRIVATE Qt${QT_VERSION_MAJOR}::PrintSupport
 PRIVATE qcustomplot
 PRIVATE plotlib
 PRIVATE gui_items
@@ -74,16 +66,10 @@ PRIVATE sql_base_tools
 PRIVATE sql_vector
 )
 
-IF(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
-    )
-    IF(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE XMLCALLIB_LIBRARY)
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)

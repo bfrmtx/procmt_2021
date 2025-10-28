@@ -168,6 +168,7 @@ tsplotter::tsplotter(QWidget *parent) :
     m_eqdatetime_ticks(new QCPAxisTickerText()) {
   ui->setupUi(this);
   this->setLocale(QLocale::c());
+  this->setAcceptDrops(true); // Enable drag and drop events
   // ui->button_scale_menu->setVisible(false);
 
 #ifndef QT_DEBUG
@@ -387,14 +388,6 @@ void tsplotter::update_dialog() {
   m_gotodialog->set_value(qlonglong(m_current_sample_position));
   m_gotodialog->set_start_time(m_datetime_minimum);
   m_gotodialog->blockSignals(false);
-}
-
-void tsplotter::dragEnterEvent(QDragEnterEvent *event) {
-  event->acceptProposedAction();
-}
-
-void tsplotter::dragMoveEvent(QDragMoveEvent *event) {
-  event->acceptProposedAction();
 }
 
 void tsplotter::initialize_menus() {
@@ -807,33 +800,45 @@ void tsplotter::reset_frequency_vector(std::shared_ptr<atsfile> ats_file) {
                                    f.begin() + static_cast<long long>(stop_idx)};
 }
 
+void tsplotter::dragEnterEvent(QDragEnterEvent *event) {
+  event->acceptProposedAction();
+}
+
+// void tsplotter::dragMoveEvent(QDragMoveEvent *event) {
+//   event->acceptProposedAction();
+// }
+
 void tsplotter::dropEvent(QDropEvent *event) {
-  auto mime_data = event->mimeData();
-
-  if (mime_data->hasUrls()) {
-
-    this->fileinfos.clear();
-
-    // ### TODO: check url-type (bs) ### //
-    for (auto url : mime_data->urls()) {
-      QFileInfo test(QFileInfo(url.toLocalFile()));
-      if (test.isDir()) {
-        QDir dir(test.absoluteFilePath());
-        QStringList nameFilter;
-        nameFilter << "*.XML";
-        QFileInfoList lst = dir.entryInfoList(nameFilter, QDir::Files);
-        for (const auto &qfi : lst) {
-          fileinfos.push_back(qfi);
-        }
-      } else {
-        if (test.absoluteFilePath().endsWith("xml", Qt::CaseInsensitive) ||
-            test.absoluteFilePath().endsWith("ats", Qt::CaseInsensitive))
-          fileinfos.push_back(QFileInfo(url.toLocalFile()));
-      }
-    }
-
-    this->open_files();
+  // auto mime_data = event->mimeData();
+  std::cout << "tsplotter::dropEvent" << std::endl;
+  QList<QUrl> urls = event->mimeData()->urls();
+  if (urls.isEmpty()) {
+    std::cout << "tsplotter::dropEvent: no urls found" << std::endl;
+    return;
+  } else {
+    std::cout << "tsplotter::dropEvent: urls found" << std::endl;
   }
+  this->fileinfos.clear();
+
+  // ### TODO: check url-type (bs) ### //
+  for (auto url : urls) {
+    QFileInfo test(QFileInfo(url.toLocalFile()));
+    if (test.isDir()) {
+      QDir dir(test.absoluteFilePath());
+      QStringList nameFilter;
+      nameFilter << "*.XML";
+      QFileInfoList lst = dir.entryInfoList(nameFilter, QDir::Files);
+      for (const auto &qfi : lst) {
+        fileinfos.push_back(qfi);
+      }
+    } else {
+      if (test.absoluteFilePath().endsWith("xml", Qt::CaseInsensitive) ||
+          test.absoluteFilePath().endsWith("ats", Qt::CaseInsensitive))
+        fileinfos.push_back(QFileInfo(url.toLocalFile()));
+    }
+  }
+
+  this->open_files();
 }
 
 void tsplotter::open_file_list(const QList<QFileInfo> &files) {

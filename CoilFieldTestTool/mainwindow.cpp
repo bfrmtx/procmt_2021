@@ -196,8 +196,8 @@ void MainWindow::on_pbOpenData_clicked(void) {
       qstrlATSFiles.append("*.ats");
       qstrlATSFiles = qdirTSSourceDir.entryList(qstrlATSFiles);
 
-      // qDebug () << "[" << __PRETTY_FUNCTION__ << "] ATS inside:" << qstrlTSSourceDirs [uiDirCount];
-      // qDebug () << "[" << __PRETTY_FUNCTION__ << "] " << qstrlATSFiles;
+      // qDebug () << "[" << __func__ << "] ATS inside:" << qstrlTSSourceDirs [uiDirCount];
+      // qDebug () << "[" << __func__ << "] " << qstrlATSFiles;
 
       ui->tableTSFiles->insertRow(uiDirCount);
 

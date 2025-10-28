@@ -819,15 +819,18 @@ struct mt_data_res {
 
     double xerr;
     if (bsqrt) {
-      xerr = ((abs(this->d[elem][idx]) * std::sqrt(this->err[elem][idx])) / this->freqs[idx]);
+      // xerr = ((abs(this->d[elem][idx]) * std::sqrt(this->err[elem][idx])) / this->freqs[idx]);
+      xerr = std::sqrt(this->err[elem][idx]);
+
     } else {
-      xerr = ((abs(this->d[elem][idx]) * this->err[elem][idx]) / this->freqs[idx]);
+      // xerr = ((abs(this->d[elem][idx]) * this->err[elem][idx]) / this->freqs[idx]);
+      xerr = this->err[elem][idx];
     }
 
     double xrho = this->rho(elem, idx);
     // avoid plot err in log scale
     if (xerr > xrho)
-      xerr *= 0.5;
+      xerr *= 0.25;
     return xerr;
   }
 

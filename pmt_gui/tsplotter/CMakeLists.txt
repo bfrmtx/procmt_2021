@@ -9,26 +9,6 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-
-
-# IF(QCUSTOMPLOT_USE_OPENGL)
-#     find_package(Qt6
-#         REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
-#         OPTIONAL_COMPONENTS PrintSupport
-#     )
-# ELSE()
-#     find_package(Qt6
-#         REQUIRED COMPONENTS Core Gui Widgets Network Sql
-#         OPTIONAL_COMPONENTS PrintSupport
-#     )
-# ENDIF()
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL Sql Network PrintSupport REQUIRED)
-ELSE()
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql Network PrintSupport)
-ENDIF()
-
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
@@ -104,7 +84,8 @@ qwebdavdialog.ui
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
-
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core
@@ -148,29 +129,6 @@ PRIVATE qstring_utilities
 PRIVATE qcustomplot
 PRIVATE xmlcallib
 )
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
-    )
-    IF(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
-
-# if(TARGET Qt6::PrintSupport)
-#     target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
-# endif()
-
-
-# IF(QCUSTOMPLOT_USE_OPENGL)
-#     target_link_libraries(${PROJECT_NAME}
-#         PRIVATE Qt6::OpenGL
-#     )
-#     IF(WIN32)
-#         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-#     ENDIF()
-# ENDIF()
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)

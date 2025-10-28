@@ -65,52 +65,59 @@ IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
         message ("release build ---------------------")
         add_compile_options(-pthread -O2 -Wno-unused-parameter -Wno-sign-compare)
     ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+    message ("starting UNIX LINUX Apple Clang build")
 ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
 #
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
 IF(WIN32)
-    message ( "WINDOWS build or msys2" )
+    message ( "WINDOWS build, msvc or msys2" )
+    # check that a compiler is found
+    if(NOT CMAKE_CXX_COMPILER)
+        message(FATAL_ERROR "No C++ compiler found. Please set CMAKE_CXX_COMPILER to your compiler executable.")
+    endif()
     # ensure that boost is found under C:\boost\boost
-    #set(BOOST_ROOT "C:/boost")
-    # include <boost/math/distributions/students_t.hpp>
-    # is not found in the default include path
-    #include_directories("C:/boost")
-    #set(BOOST_INCLUDEDIR "C:/boost")
-    # on WINDOWS it is easier to make STATIC libs
-    # some libs will by dynamic (dll); add PATH to the lib folder
-
     # need to find required package boost
+    # include <boost/math/distributions/students_t.hpp>
     # on windows, boost is not found by default, it should be installed in C:\boost
-    set(BOOST_ROOT "C:/boost")
-    
+    set(Boost_ROOT "C:/devel/boost")
     find_package(Boost REQUIRED)
-
-    add_compile_definitions( _USE_MATH_DEFINES _msvc )
-    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-        message ("debug build ---------------------")
-        add_compile_options(-DDEBUG -g -pthread -Wno-unused-parameter -Wno-sign-compare)
-        set(CMAKE_VERBOSE_MAKEFILE ON)
-    ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-        message ("release build ---------------------")
-        # with msys2 it is completely useless to use static libs - a runtime must be provided (full of bitterness)
-        # by default I install it under procmt/lib; if you don't want to us a PATH environment, you trash the lib folder into the bin folder "thank you very much, microsoft"
-        option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
-        add_compile_options(-DNDEBUG -O2 -pthread -Wno-unused-parameter -Wno-sign-compare)
-        # add_compile_options(-DNDEBUG -DBUILD_SHARED_LIBS=OFF -O2 -pthread -Wno-unused-parameter -Wno-sign-compare -static-libstdc++ -static-libgcc -static)
-    ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+    if(MSVC)
+        # _USE_MATH_DEFINES is only needed for MSVC to expose math constants in <cmath>
+        message("Detected MSVC compiler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        # Uncomment if you need MSVC-specific defines
+        add_compile_definitions(_USE_MATH_DEFINES _msvc)
+        # my vulkan
+        set(Vulkan_INCLUDE_DIR "C:/devel/VulkanSDK/")
+        # /arch:AVX2 is supported by Intel and AMD processors that support AVX2 instructions.
+        # It is supported by MSVC on Windows for both Intel and AMD CPUs with AVX2.
+        add_compile_options(/arch:AVX2)
+        # Force static build for all libraries
+        set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static libraries" FORCE)
+        # Windows does not natively support pthreads; use -pthread only on POSIX systems.
+        # For MSVC, threading is handled by the runtime, so you do not need to add -pthread.
+        # If you need POSIX threads on Windows, you would need to use a library like pthreads-w32, but that's uncommon.
+        # Typically, do not add -pthread for MSVC.
+        add_compile_options(/EHsc)
+    elseif(MINGW)
+        message("Detected MinGW / clang compiler")
+        # Add MinGW/MSYS2 specific options here if needed
+        # we need static libs for the clang++ compiler !! shared libs are not working
+        add_compile_options(-DBUILD_SHARED_LIBS=OFF -static)
+        IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+            message ("debug build ---------------------")
+            add_compile_options(-DDEBUG -g -pthread -Wno-unused-parameter -Wno-sign-compare)
+            set(CMAKE_VERBOSE_MAKEFILE ON)
+        ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+            message ("release build ---------------------")
+            add_compile_options(-DNDEBUG -O2 -pthread -Wno-unused-parameter -Wno-sign-compare)
+        ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+    else()
+        message("Unknown Windows compiler")
+    endif()
+    message ( "starting WINDOWS build <<<<<<<<<<<<<<<<<<<<<<" )
 ENDIF(WIN32)
-
-IF (WIN32)
-    message ( "starting WINDOWS build" )
-# add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
-# set(QCUSTOMPLOT_USE_OPENGL TRUE)
-ELSE()
-# add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
-# set(QCUSTOMPLOT_USE_OPENGL TRUE)
-    message ("starting UNIX LINUX Apple Clang build")
-ENDIF()
 #
 message ( "adding subdirs" )
 # the info.sql3 and others will be copied to your build dir - the software will look for SQLite databases

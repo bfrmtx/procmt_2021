@@ -28,10 +28,18 @@ set(HEADERS_INSTALL
   qcustomplot.h
 )
 
-add_library(${PROJECT_NAME} SHARED
-    ${SOURCES}
-    ${HEADERS_INSTALL}
-)
+# MSVC can not link the DLL
+if(WIN32)
+    add_library(${PROJECT_NAME} STATIC
+        ${SOURCES}
+        ${HEADERS_INSTALL}
+    )
+else()
+    add_library(${PROJECT_NAME} SHARED
+        ${SOURCES}
+        ${HEADERS_INSTALL}
+    )
+endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core

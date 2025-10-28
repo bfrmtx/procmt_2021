@@ -558,8 +558,14 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
       pclMagPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
       pclMagPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
 
+      pclNoisePlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+      pclNoisePlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
       pclNoisePlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
       pclNoisePlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+      pclNoisePlot->yAxis->setNumberPrecision(0);
+      pclNoisePlot->yAxis->setNumberFormat("ebc");
+      pclNoisePlot->xAxis->setNumberPrecision(0);
+      pclNoisePlot->xAxis->setNumberFormat("ebc");
       pclNoisePlot->update();
       pclNoisePlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
       pclNoisePlot->rescaleAxes();

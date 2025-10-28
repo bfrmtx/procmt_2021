@@ -9,20 +9,6 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    find_package(Qt6
-        REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
-        OPTIONAL_COMPONENTS PrintSupport
-    )
-ELSE()
-    find_package(Qt6
-        REQUIRED COMPONENTS Core Gui Widgets Network Sql
-        OPTIONAL_COMPONENTS PrintSupport
-    )
-ENDIF()
-
 include_directories(
 ${CMAKE_SOURCE_DIR}/include    
 ${CMAKE_INSTALL_PREFIX}/include
@@ -135,24 +121,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   qcustomplot
 )
 
-
-
-if(TARGET Qt6::PrintSupport)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
-endif()
-
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt6::OpenGL
-    )
-    IF(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
-
-
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
+
 
 
 

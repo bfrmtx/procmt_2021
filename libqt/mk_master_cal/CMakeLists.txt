@@ -11,16 +11,6 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL Sql PrintSupport)
-ELSE()
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql PrintSupport)
-ENDIF()
-
-
-
 include_directories(
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/include
@@ -54,6 +44,8 @@ set(SOURCES
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
 
 # that is where the self compiled taglib will be
 # so that must be compiled first
@@ -77,16 +69,6 @@ PRIVATE sql_vector
 PRIVATE xmlcallib
 PRIVATE prc_com_table
 )
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-    target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
-    )
-    IF(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
-
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)

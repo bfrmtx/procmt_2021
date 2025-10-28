@@ -11,11 +11,6 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
 
-find_package(Qt6
-    REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL OpenGLWidgets
-    OPTIONAL_COMPONENTS PrintSupport
-)
-
 include_directories(
     ${CMAKE_INSTALL_PREFIX}/include
     ${CMAKE_SOURCE_DIR}/include
@@ -138,11 +133,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     qcustomplot
 )
 
-if (WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-endif()
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SPECTRA_PLOTTER_PRO_LIBRARY)
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)

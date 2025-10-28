@@ -7,23 +7,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
-
-
-IF(QCUSTOMPLOT_USE_OPENGL)
-find_package(Qt6
-    REQUIRED COMPONENTS Core Gui Widgets Network Sql OpenGL
-    OPTIONAL_COMPONENTS PrintSupport
-)
-ELSE()
-find_package(Qt6
-    REQUIRED COMPONENTS Core Gui Widgets Network Sql
-    OPTIONAL_COMPONENTS PrintSupport
-)
-ENDIF()
-
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -84,10 +68,6 @@ else ()
 message ("INCLUDING spectra_plotter -------------------------------------------------------------")
 endif()
 
-
-
-
-
 set(SOURCES
     main.cpp
     procmt_mini.cpp
@@ -100,6 +80,8 @@ set(SOURCES
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+# for qcustomplot
+include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
 
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -147,20 +129,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     prc_com_xml
     spc_db
 )
-
-if(TARGET Qt6::PrintSupport)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
-endif()
-
-IF(QCUSTOMPLOT_USE_OPENGL OR USE_SPECTRAL_PLOTTER_PRO)
-    target_link_libraries(${PROJECT_NAME} PRIVATE
-        PRIVATE Qt6::OpenGL
-    )
-    IF(WIN32)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
-
 
 IF(USE_SPECTRAL_PLOTTER_PRO)
     target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter_pro)
