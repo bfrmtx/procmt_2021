@@ -548,8 +548,7 @@ void atsheader::init_calibration(const int auto0_txt1_sql2_xml3, const bool enab
   if (this->calib != nullptr)
     this->calib.reset();
 
-  this->calib = std::make_shared<calibration>(QFileInfo(this->info_db.absoluteFilePath()), ivalue("channel_number"), this->slot,
-                                              true, this->baseName() + "_cal_query", Q_NULLPTR, this->msg);
+  this->calib = std::make_shared<calibration>(QFileInfo(this->info_db.absoluteFilePath()), ivalue("channel_number"), this->slot, true, this->baseName() + "_cal_query", Q_NULLPTR, this->msg);
   this->calib->open_master_cal(this->master_cal_db, this->baseName() + "_mastercal_query");
 
   // are we in survey dir

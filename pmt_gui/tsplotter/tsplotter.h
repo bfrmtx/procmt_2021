@@ -40,6 +40,15 @@
 #include <QTextEdit>
 #include <QUrl>
 
+// Add these Qt6 compatibility includes
+#include <QDir>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QFileInfo>
+#include <QList>
+#include <QMimeData>
+#include <QStringList>
+
 #include <memory>
 #include <vector>
 

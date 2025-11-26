@@ -27717,8 +27717,37 @@ void QCPItemLine::draw(QCPPainter *painter) {
   This is a helper function for \ref draw.
 */
 QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector2D &end, const QRect &rect) const {
-  bool containsStart = rect.contains(qRound(start.x()), qRound(start.y()));
-  bool containsEnd = rect.contains(qRound(end.x()), qRound(end.y()));
+
+  /*
+  // Check for values that are too large for qRound() to handle FIX numeric errors during debung
+    double startX = start.x();
+    double startY = start.y();
+    double endX = end.x();
+    double endY = end.y();
+
+    // Qt6 qRound() asserts if values are outside int range (~±2.1 billion)
+    const double maxIntValue = 2147483647.0;  // std::numeric_limits<int>::max()
+    const double minIntValue = -2147483648.0; // std::numeric_limits<int>::min()
+
+    bool startValid = (startX >= minIntValue && startX <= maxIntValue &&
+                       startY >= minIntValue && startY <= maxIntValue &&
+                       qIsFinite(startX) && qIsFinite(startY));
+    bool endValid = (endX >= minIntValue && endX <= maxIntValue &&
+                     endY >= minIntValue && endY <= maxIntValue &&
+                     qIsFinite(endX) && qIsFinite(endY));
+
+    bool containsStart = startValid && rect.contains(qRound(startX), qRound(startY));
+    bool containsEnd = endValid && rect.contains(qRound(endX), qRound(endY));
+
+    if (containsStart && containsEnd)
+      return {start.toPointF(), end.toPointF()};
+  */
+
+  // can't be used in debug mode, crashes on large values due to qRound() asserts
+  // bool containsStart = rect.contains(qRound(start.x()), qRound(start.y()));
+  // bool containsEnd = rect.contains(qRound(end.x()), qRound(end.y()));
+  bool containsStart = rect.contains(std::lround(start.x()), std::lround(start.y()));
+  bool containsEnd = rect.contains(std::lround(end.x()), std::lround(end.y()));
   if (containsStart && containsEnd)
     return {start.toPointF(), end.toPointF()};
 
