@@ -102,9 +102,6 @@
               <day>31</day>
              </date>
             </property>
-            <property name="timeSpec">
-             <enum>Qt::UTC</enum>
-            </property>
            </widget>
           </item>
           <item>

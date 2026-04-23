@@ -219,13 +219,19 @@ void adujoblist::init_from_files(const QFileInfo *qfiHwConfig, const QUrl *qurlH
 
   if (qfiHwConfig != nullptr) {
     QFile cptxt(qfiHwConfig->absoluteFilePath());
-    cptxt.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!cptxt.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qDebug() << "adujoblist::init_from_files -> could not open file" << qfiHwConfig->absoluteFilePath();
+      return;
+    }
     QTextStream HWConfig_stream(&cptxt);
     this->HWConfig_stream_string = HWConfig_stream.readAll();
     cptxt.close();
   } else if (qurlHwConfig != nullptr) {
     QFile cptxt(qurlHwConfig->toLocalFile());
-    cptxt.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!cptxt.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qDebug() << "adujoblist::init_from_files -> could not open file" << qurlHwConfig->toLocalFile();
+      return;
+    }
     QTextStream HWConfig_stream(&cptxt);
     this->HWConfig_stream_string = HWConfig_stream.readAll();
     cptxt.close();
@@ -236,13 +242,19 @@ void adujoblist::init_from_files(const QFileInfo *qfiHwConfig, const QUrl *qurlH
 
   if (qfiHwDatabase != nullptr) {
     QFile cptxt(qfiHwDatabase->absoluteFilePath());
-    cptxt.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!cptxt.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qDebug() << "adujoblist::init_from_files -> could not open file" << qfiHwDatabase->absoluteFilePath();
+      return;
+    }
     QTextStream HwDatabase_stream(&cptxt);
     this->HwDatabase_stream_string = HwDatabase_stream.readAll();
     cptxt.close();
   } else if (qurlHwDatabase != nullptr) {
     QFile cptxt(qurlHwDatabase->toLocalFile());
-    cptxt.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!cptxt.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      qDebug() << "adujoblist::init_from_files -> could not open file" << qurlHwDatabase->toLocalFile();
+      return;
+    }
     QTextStream HwDatabase_stream(&cptxt);
     this->HwDatabase_stream_string = HwDatabase_stream.readAll();
     cptxt.close();

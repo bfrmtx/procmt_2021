@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
   this->allsensors.emplace_back(std::make_unique<sensors_combo>(dbnms, QChar('H'), this->ui->comboBox_Hz_sensor));
   this->allsensors.back()->set_name("MFS-06e");
 
+  // Set all datetime widgets to UTC
   this->ui->dateTimeEdit_starts->setTimeZone(QTimeZone::utc());
 
   this->fcombo = std::make_unique<frequencies_combo>(dbnms, this->ui->comboBox_sample_freq);

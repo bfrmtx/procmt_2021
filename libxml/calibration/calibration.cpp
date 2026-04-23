@@ -27,6 +27,7 @@ calibration::calibration(const QFileInfo &dbname_info, const int channo, const i
   this->sensor_types_tables.insert("MFS-10e", "`cal mfs-10e`");
   this->sensor_types_tables.insert("MFS-11e", "`cal mfs-11e`");
   this->sensor_types_tables.insert("MFS-12e", "`cal mfs-12e`");
+  this->sensor_types_tables.insert("MFS-14e", "`cal mfs-14e`");
 
   this->sensor_types_tables.insert("SHFT-02e", "`cal shft-02e`");
   this->sensor_types_tables.insert("SHFT-02", "`cal shft-02`");
@@ -265,12 +266,12 @@ size_t calibration::read_std_txt_file(const int &channel, const QFileInfo &qfi) 
     emit this->tx_cal_message(this->channel, this->slot, message);
 
     if (this->sensortype.contains("MFS") && !this->f_on.size()) {
-      message = "******** sensor contains no chooper on section! CHECK " + qfi.baseName();
+      message = "******** sensor contains no chopper on section! CHECK " + qfi.baseName();
       qDebug() << message;
       emit this->tx_cal_message(this->channel, this->slot, message);
     }
     if (this->sensortype.contains("MFS") && !this->f_off.size()) {
-      message = "******** sensor contains no chooper off section! CHECK " + qfi.baseName();
+      message = "******** sensor contains no chopper off section! CHECK " + qfi.baseName();
       qDebug() << message;
       emit this->tx_cal_message(this->channel, this->slot, message);
     }
@@ -361,7 +362,11 @@ void calibration::read_measdoc(const int &channel, const cal::cal &chopper, cons
 
   if (this->f_off.size() || this->f_on.size()) {
     this->sensortype = this->calinfo.value("ci").toString();
-    this->sensortype = this->set_atsheader_sensor(this->sensortype);
+    qDebug() << "calibration::read_measdoc -> sensor type from measdoc " << this->sensortype;
+    QString sens(this->sensortype);
+    // qDebug() << sens << "ficjkjlkjlkjlkjlkjlk";
+    // this->sensortype = this->set_atsheader_sensor(sens);
+    qDebug() << "calibration::read_measdoc -> sensor type set to " << this->sensortype;
     this->sernum = this->calinfo.value("ci_serial_number").toInt();
     if (this->calinfo.value("ci_date").toDate().isValid() && this->calinfo.value("ci_time").toTime().isValid()) {
       this->caltime = QDateTime(this->calinfo.value("ci_date").toDate(), this->calinfo.value("ci_time").toTime());
@@ -1796,7 +1801,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper on: ") +
-                QString::number(this->f_on_theo.size());
+                QString::number(this->f_on_theo.size()) + " range: " + QString::number(this->f_on_theo.front()) + " - " + QString::number(this->f_on_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_on_theo.size();
@@ -1822,7 +1827,8 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
+      qDebug() << message;
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();
@@ -1851,7 +1857,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper on: ") +
-                QString::number(this->f_on_theo.size());
+                QString::number(this->f_on_theo.size()) + " range: " + QString::number(this->f_on_theo.front()) + " - " + QString::number(this->f_on_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_on_theo.size();
@@ -1877,7 +1883,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();
@@ -1905,7 +1911,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper on: ") +
-                QString::number(this->f_on_theo.size());
+                QString::number(this->f_on_theo.size()) + " range: " + QString::number(this->f_on_theo.front()) + " - " + QString::number(this->f_on_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_on_theo.size();
@@ -1931,7 +1937,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();
@@ -1959,7 +1965,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
         }
       }
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper on: ") +
-                QString::number(this->f_on_theo.size());
+                QString::number(this->f_on_theo.size()) + " range: " + QString::number(this->f_on_theo.front()) + " - " + QString::number(this->f_on_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
       return this->f_on_theo.size();
     }
@@ -1985,7 +1991,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();
@@ -2042,7 +2048,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();
@@ -2103,7 +2109,7 @@ size_t calibration::gen_theo_cal(const std::vector<double> &fin_f, const double 
       }
 
       message = "gen theo cal " + this->sensortype + " #" + QString::number(this->sernum) + " -> " + QString("chopper off: ") +
-                QString::number(this->f_off_theo.size());
+                QString::number(this->f_off_theo.size()) + " range: " + QString::number(this->f_off_theo.front()) + " - " + QString::number(this->f_off_theo.back());
       emit this->tx_cal_message(this->channel, this->slot, message);
 
       return this->f_off_theo.size();

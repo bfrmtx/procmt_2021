@@ -1,18 +1,66 @@
 {
   "configurations": [
     {
-      "name": "procmt_mini",
+      "name": "ediplotter",
       "type": "cppdbg",
       "request": "launch",
-      "program": "/usr/local/procmt/bin/procmt_mini",
-      "args": [
-        "/home/bfr/tmp/wil/"
-      ],
+      "program": "/usr/local/procmt/bin/ediplotter_new",
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "xmlcal",
+      "type": "lldb",
+      "request": "launch",
+      "program": "/usr/local/procmt/bin/xmlcal",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "procmt_mini",
+      "type": "lldb",
+      "request": "launch",
+      "program": "/usr/local/procmt/bin/procmt_mini",
+      "args": [
+        "/home/bfr/tmp/atlas/"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -28,7 +76,7 @@
     },
     {
       "name": "CoilFieldTestTool",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "/usr/local/procmt/bin/CoilFieldTestTool",
       "args": [],
@@ -36,7 +84,7 @@
       "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
-      "MIMode": "gdb",
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -52,7 +100,7 @@
     },
     {
       "name": "tsplotter",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "/usr/local/procmt/bin/tsplotter",
       "args": [],
@@ -60,7 +108,7 @@
       "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
-      "MIMode": "gdb",
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -76,7 +124,7 @@
     },
     {
       "name": "atsfilter",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
       "program": "/usr/local/procmt/bin/atsfilter",
       "args": [],
@@ -84,7 +132,7 @@
       "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
-      "MIMode": "gdb",
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

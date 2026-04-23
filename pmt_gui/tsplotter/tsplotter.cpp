@@ -1842,9 +1842,12 @@ void tsplotter::slot_network_headers_received(QVector<QPair<QString, QByteArray>
 
       {
         QFile f(new_ats_header->absoluteFilePath());
-        f.open(QFile::WriteOnly);
-        QDataStream ds(&f);
-        ds.writeRawData(header.second.data(), 1024);
+        if (f.open(QFile::WriteOnly)) {
+          QDataStream ds(&f);
+          ds.writeRawData(header.second.data(), 1024);
+        } else {
+          std::cout << "could not create local ats header file: " << new_ats_header->absoluteFilePath().toStdString() << std::endl;
+        }
       }
 
       this->fileinfos.push_back(QFileInfo(new_ats_header->absoluteFilePath()));
@@ -1874,7 +1877,10 @@ void tsplotter::slot_network_new_data_received(QVector<QPair<QString, std::vecto
 void tsplotter::append_data_to_ats_file(const QString &file_name, const std::vector<int32_t> &data) {
   // TODO: replace this with atsfile->append_int32 method
   QFile file(file_name);
-  file.open(QFile::ReadWrite);
+  if (!file.open(QFile::ReadWrite)) {
+    std::cout << "could not open file for appending: " << file_name.toStdString() << std::endl;
+    return;
+  }
   QDataStream ds(&file);
   ds.device()->seek(4);
   uint32_t test;

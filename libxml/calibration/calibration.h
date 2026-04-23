@@ -70,7 +70,7 @@ inline void gen_trf_mfs12e_template(const double &f, std::complex<double> &p1, s
                                     std::complex<double> &p4, const std::complex<double> &im, std::complex<double> &trf) {
   p1 = (f / 16.) * im; // 45 phase at 16 Hz
   p2 = (f / 9645.) * im;
-  p4 = (f / 42287.0) * im;
+  p4 = (f / 50048.0) * im;
   trf = 0.8 * ((p1 / (1. + p1)) * (1. / (1. + p2)) * (1. / (1. + p4)));
 }
 

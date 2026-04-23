@@ -408,9 +408,6 @@
             <property name="displayFormat">
              <string>yyyy-MM-dd HH:mm:ss</string>
             </property>
-            <property name="timeSpec">
-             <enum>Qt::UTC</enum>
-            </property>
            </widget>
           </item>
           <item>
@@ -424,9 +421,6 @@
            <widget class="QDateTimeEdit" name="dateTimeEdit_stops">
             <property name="displayFormat">
              <string>yyyy-MM-dd HH:mm:ss</string>
-            </property>
-            <property name="timeSpec">
-             <enum>Qt::UTC</enum>
             </property>
            </widget>
           </item>
@@ -999,9 +993,6 @@
             <property name="displayFormat">
              <string>yyyy-MM-dd HH:mm:ss</string>
             </property>
-            <property name="timeSpec">
-             <enum>Qt::UTC</enum>
-            </property>
            </widget>
           </item>
           <item>
@@ -1052,9 +1043,6 @@
             </property>
             <property name="displayFormat">
              <string>yyyy-MM-dd HH:mm:ss</string>
-            </property>
-            <property name="timeSpec">
-             <enum>Qt::UTC</enum>
             </property>
            </widget>
           </item>

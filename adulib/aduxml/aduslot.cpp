@@ -94,20 +94,20 @@ int aduslot::get_slot() const
 
 bool aduslot::append_xml_data(tinyxml2::XMLDocument &xmldoc, tinyxml2::XMLElement *jbchannel, tinyxml2::XMLElement *jbdata, const QString &what)
 {
-    const char *str;
+    std::string str;
 
     if (this->prvdata.contains(what)) {
         jbdata = xmldoc.NewElement(what.toStdString().c_str());
-        str = prvdata.value(what).toString().toStdString().c_str();
+        str = prvdata.value(what).toString().toStdString();
 
     }
     else if (this->data.contains(what)) {
         jbdata = xmldoc.NewElement(what.toStdString().c_str());
-        str = (data.value(what).toString().toStdString().c_str());
+        str = data.value(what).toString().toStdString();
     }
     else return false;
     if (!jbdata) return false;
-    jbdata->SetText(str);
+    jbdata->SetText(str.c_str());
     jbchannel->InsertEndChild(jbdata);
 
     return true;

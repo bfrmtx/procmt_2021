@@ -25,6 +25,9 @@ atsedit::atsedit(const QString &dbname, QWidget *parent) :
   NSitems << "N" << "S";
   this->ui->comboBox_EW->addItems(EWitems);
   this->ui->comboBox_NS->addItems(NSitems);
+  // Set all datetime widgets to UTC
+  this->ui->dateTimeEdit_starts->setTimeZone(QTimeZone::utc());
+  this->ui->dateTimeEdit_stops->setTimeZone(QTimeZone::utc());
   this->ui->dateTimeEdit_startsat->setTimeZone(QTimeZone::utc());
   this->ui->dateTimeEdit_stopsat->setTimeZone(QTimeZone::utc());
   this->ui->dateTimeEdit_startsat->setDateTime(QDateTime::fromString("2000-01-01 12:00:00", "yyyy-MM-dd HH:mm:ss"));

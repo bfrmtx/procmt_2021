@@ -204,12 +204,11 @@ size_t emerald::to_textfile(const QFileInfo &name_qfi) {
   float d;
 
   this->textfile.setFileName(name_qfi.absoluteFilePath());
-  this->textfile.open(QIODevice::WriteOnly | QIODevice::Text);
-
-  if (!textfile.isOpen()) {
+  if (!this->textfile.open(QIODevice::WriteOnly | QIODevice::Text)) {
     this->file.close();
     return 0;
   }
+
   QTextStream out(&this->textfile);
 
   do {
