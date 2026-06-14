@@ -1365,15 +1365,12 @@ QDataStream::Status atsfile::skip_samples_from_filter() {
   }
   // what eveer we do we have a full second
 
-  // example for 128 Hz and 32 x filter
-  // fracs = 1.8398s delay = 471 * 0.5 = 235 / 128.
-  //  2025 : changed to "-1" to get the correct delay as I use it in later versions of atss file format
+  // example for 128 Hz and 32 x filter, (471 -1) // 2 = 235 samples delay
+  // fracs = 1.8359375 = 235 / 128 .. that also can be 4.34 ... more than 1s
+  // 2025 : changed to "-1" to get the correct delay as I use it in later versions of atss file format
   double fracs = (((double)(this->firfil->uivalue("filter_length") - 1)) * 0.5) / (this->dvalue("sample_freq"));
-  double fulldelay = 0;
-  // delay can be more than 1s
-
-  // miss = 0.8398
-  double miss = modf(fracs, &fulldelay);
+  double fulldelay = 0;                  //  in the example 1s
+  double miss = modf(fracs, &fulldelay); // in the example 0.8359375
 
   //!<  @todo work around for fsample <= 1Hz use ceil like in older fast filter
   if ((this->dvalue("sample_freq") <= 1.001)) {
@@ -1382,11 +1379,11 @@ QDataStream::Status atsfile::skip_samples_from_filter() {
     this->set_key_size_t("add_secs_to_start_time", (size_t)(fulldelay) + this->sztvalue("add_secs_to_start_time"));
   }
 
-  // 20 = 128 - (128 * 0.8398)              128                      -          107.5 -> 108
+  // 21 = 128 - (128 * 0.8359375)  = 128 - 107
   size_t tmp_skip_first_samples = (size_t)(this->dvalue("sample_freq") - miss * this->dvalue("sample_freq"));
 
-  // miss is in the sub sample ?
-  if (((tmp_skip_first_samples + 1) == (size_t)(this->dvalue("sample_freq"))) || ((tmp_skip_first_samples - 1) == (size_t)(this->dvalue("sample_freq")))) {
+  // miss is in the sub sample ? // (size_t)(this->dvalue("sample_freq"))))
+  if (std::abs(tmp_skip_first_samples - int(this->dvalue("sample_freq"))) <= 1) {
     tmp_skip_first_samples = 0;
   }
 

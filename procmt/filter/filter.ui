@@ -44,7 +44,14 @@
             <item>
              <widget class="QRadioButton" name="rb_4x">
               <property name="text">
-               <string>&amp;4x</string>
+               <string>&amp;4 x</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rb_16x">
+              <property name="text">
+               <string>&amp;16 x</string>
               </property>
              </widget>
             </item>
@@ -72,7 +79,7 @@
             <item>
              <widget class="QRadioButton" name="rb_15x">
               <property name="text">
-               <string>15 x</string>
+               <string>&amp;15 x</string>
               </property>
              </widget>
             </item>
@@ -83,7 +90,7 @@
             <item>
              <widget class="QRadioButton" name="rb_32x">
               <property name="text">
-               <string>&amp;32x</string>
+               <string>&amp;32 x</string>
               </property>
              </widget>
             </item>
