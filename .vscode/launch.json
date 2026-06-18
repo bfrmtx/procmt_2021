@@ -1,6 +1,30 @@
 {
   "configurations": [
     {
+      "name": "unsplit",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/usr/local/procmt/bin/unsplit",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "/home/bfr/devel/github_procmt_2021/procmt_2021/unsplit/ts/",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
       "name": "ediplotter",
       "type": "cppdbg",
       "request": "launch",

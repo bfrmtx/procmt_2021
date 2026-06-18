@@ -39,7 +39,7 @@ ENDIF()
 # test packages first
 # Qt6
 find_package(Qt6
-    REQUIRED COMPONENTS Core Gui Widgets Sql Network Xml
+    REQUIRED COMPONENTS Concurrent Core Gui Widgets Sql Network Xml
     OPTIONAL_COMPONENTS PrintSupport
 )
 if (NOT Qt6_FOUND) 
@@ -211,6 +211,7 @@ add_subdirectory(pmt_adulib/calib_lab)
 #message ( "skipping CoilFieldTestTool for Windows" )
 add_subdirectory(CoilFieldTestTool)
 add_subdirectory(InSituCoilCal)
+add_subdirectory(unsplit)
 
 
 

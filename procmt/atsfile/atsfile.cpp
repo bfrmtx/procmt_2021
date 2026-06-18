@@ -1383,7 +1383,7 @@ QDataStream::Status atsfile::skip_samples_from_filter() {
   size_t tmp_skip_first_samples = (size_t)(this->dvalue("sample_freq") - miss * this->dvalue("sample_freq"));
 
   // miss is in the sub sample ? // (size_t)(this->dvalue("sample_freq"))))
-  if (std::abs(tmp_skip_first_samples - int(this->dvalue("sample_freq"))) <= 1) {
+  if (std::abs(int(tmp_skip_first_samples) - int(this->dvalue("sample_freq"))) <= 1) {
     tmp_skip_first_samples = 0;
   }
 
