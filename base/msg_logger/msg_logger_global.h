@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #if defined(MSG_LOGGER_LIBRARY)
-#  define MSG_LOGGER_EXPORT Q_DECL_EXPORT
+#define MSG_LOGGER_EXPORT Q_DECL_EXPORT
 #else
-#  define MSG_LOGGER_EXPORT Q_DECL_IMPORT
+#define MSG_LOGGER_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // MSG_LOGGER_GLOBAL_H

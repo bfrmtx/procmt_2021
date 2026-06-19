@@ -31,14 +31,13 @@
 #define tinyxmlwriter_H
 
 #include "tinyxmlwriter_global.h"
+#include <QDateTime>
+#include <QMap>
 #include <QString>
 #include <QTextStream>
+#include <QVariant>
 #include <QVector>
-#include <QMap>
-#include <QVariant>
 #include <iostream>
-#include <QVariant>
-#include <QDateTime>
 
 //!< @todo round 1.999 to 2 as option
 
@@ -76,245 +75,233 @@ writes a section like: <br>
 
 // #define Qt::endl '\n' << std::flush
 
-class tinyxmlwriter
-{
+class tinyxmlwriter {
 
 public:
-    tinyxmlwriter(const bool write_header = false);
+  tinyxmlwriter(const bool write_header = false);
 
-    void header();
+  void header();
 
-    tinyxmlwriter(const tinyxmlwriter &rhs);
+  tinyxmlwriter(const tinyxmlwriter &rhs);
 
-    tinyxmlwriter& operator = (const tinyxmlwriter &rhs);
+  tinyxmlwriter &operator=(const tinyxmlwriter &rhs);
 
-    ~tinyxmlwriter();
+  ~tinyxmlwriter();
 
-    QString getXmlStr() const;
+  QString getXmlStr() const;
 
-    /*!
-     * \brief indent whenever push() is called the indent increases tinyxmlwriter::stack , pop decreases the indentation
-     */
-    void indent();
-    void push( const QString& element );
-    void push ( const QString& element, const QString& attributes );
-    /*!
-     * \brief push for typical: "channel id=3"
-     * \param element like channel
-     * \param str_attribute like id
-     * \param int_value like 3
-     * \return
-     */
-    void push(const QString& element, const QString& str_attribute, const int &int_value);
+  /*!
+   * \brief indent whenever push() is called the indent increases tinyxmlwriter::stack , pop decreases the indentation
+   */
+  void indent();
+  void push(const QString &element);
+  void push(const QString &element, const QString &attributes);
+  /*!
+   * \brief push for typical: "channel id=3"
+   * \param element like channel
+   * \param str_attribute like id
+   * \param int_value like 3
+   * \return
+   */
+  void push(const QString &element, const QString &str_attribute, const int &int_value);
 
-    template<class T>  void element( const QString& element, T val );
-    void element( const QString& element, const QString& val ) ;
+  template <class T>
+  void element(const QString &element, T val);
+  void element(const QString &element, const QString &val);
 
-    template<class T>  void element( const QString& element, const QString& str_attribute, const int &int_value, T val );
-    void element( const QString& element, const QString& str_attribute, const int &int_value, const QString& val ) ;
+  template <class T>
+  void element(const QString &element, const QString &str_attribute, const int &int_value, T val);
+  void element(const QString &element, const QString &str_attribute, const int &int_value, const QString &val);
 
+  template <class T>
+  void element(const QString &element, const QString &attributes, T val);
+  void element(const QString &element, const QString &attributes, const QString &val);
 
-    template<class T>  void  element( const QString& element, const QString& attributes, T val );
-    void element( const QString& element,const QString& attributes,  const QString& val );
+  template <class T>
+  void sci_element(const QString &element, T val, const int &precision);
+  /*!
+   * \brief sci_element puts elements in scientific notation
+   * xmlwriter->sci_element ( "c2", "unit=\"V/(nT)\"", ampl_off.at(i) / 1000.  );
+   */
+  template <class T>
+  void sci_element(const QString &element, const QString &attributes, T val, const int &precision);
 
-    template<class T>  void  sci_element( const QString& element, T val, const int &precision );
-    /*!
-     * \brief sci_element puts elements in scientific notation
-     * xmlwriter->sci_element ( "c2", "unit=\"V/(nT)\"", ampl_off.at(i) / 1000.  );
-     */
-    template<class T>  void  sci_element( const QString& element, const QString& attributes, T val, const int &precision );
+  /*!
+   * \brief qv_int_element writes a QVariant as integer
+   * \param element
+   * \param val Qvariant
+   */
+  void qv_int_element(const QString &element, const QVariant &val);
 
+  /*!
+   * \brief qv_int_element writes a QVariant as integer with attributes
+   * \param element
+   * \param attributes
+   * \param val
+   */
+  void qv_int_element(const QString &element, const QString &attributes, const QVariant &val);
 
-    /*!
-     * \brief qv_int_element writes a QVariant as integer
-     * \param element
-     * \param val Qvariant
-     */
-    void qv_int_element(const QString& element, const QVariant& val);
+  /*!
+   * \brief qv_int_element writes a QVariant as unsigned integer
+   * \param element
+   * \param val Qvariant
+   */
+  void qv_uint_element(const QString &element, const QVariant &val);
 
-    /*!
-     * \brief qv_int_element writes a QVariant as integer with attributes
-     * \param element
-     * \param attributes
-     * \param val
-     */
-    void qv_int_element(const QString& element, const QString& attributes, const QVariant& val);
+  /*!
+   * \brief qv_int_element writes a QVariant as unsigned integer with attributes
+   * \param element
+   * \param attributes
+   * \param val
+   */
+  void qv_uint_element(const QString &element, const QString &attributes, const QVariant &val);
 
-    /*!
-     * \brief qv_int_element writes a QVariant as unsigned integer
-     * \param element
-     * \param val Qvariant
-     */
-    void qv_uint_element(const QString& element, const QVariant& val);
+  /*!
+   * \brief qv_double_element writes a QVariant as double
+   * \param element
+   * \param val
+   */
+  void qv_double_element(const QString &element, const QVariant &val);
 
-    /*!
-     * \brief qv_int_element writes a QVariant as unsigned integer with attributes
-     * \param element
-     * \param attributes
-     * \param val
-     */
-    void qv_uint_element(const QString& element, const QString& attributes, const QVariant& val);
+  /*!
+   * \brief qv_double_element writes a QVariant as double with attributes
+   * \param element
+   * \param attributes
+   * \param val
+   */
+  void qv_double_element(const QString &element, const QString &attributes, const QVariant &val);
 
+  /*!
+   * \brief qv_double_element writes a QVariant as string
+   * \param element
+   * \param val
+   */
+  void qv_string_element(const QString &element, const QVariant &val);
 
-    /*!
-     * \brief qv_double_element writes a QVariant as double
-     * \param element
-     * \param val
-     */
-    void qv_double_element(const QString& element, const QVariant& val);
+  /*!
+   * \brief qv_string_element writes a QVariant as string with attributes
+   * \param element
+   * \param attributes
+   * \param val
+   */
+  void qv_string_element(const QString &element, const QString &attributes, const QVariant &val);
 
-    /*!
-     * \brief qv_double_element writes a QVariant as double with attributes
-     * \param element
-     * \param attributes
-     * \param val
-     */
-    void qv_double_element(const QString& element, const QString& attributes, const QVariant& val);
+  /*!
+   * \brief time_hh_mm_ss writes hh:mm:ss from a QDateTime
+   * \param element
+   * \param datetime QDateTime
+   */
+  void time_hh_mm_ss(const QString &element, const QDateTime &datetime);
 
-    /*!
-     * \brief qv_double_element writes a QVariant as string
-     * \param element
-     * \param val
-     */
-    void qv_string_element(const QString& element, const QVariant& val);
+  /*!
+   * \brief date_yyyy_mm_dd write a yyyy-mm-dd from a QDateTime
+   * \param element
+   * \param datetime QDateTime
+   */
+  void date_yyyy_mm_dd(const QString &element, const QDateTime &datetime);
 
-    /*!
-     * \brief qv_string_element writes a QVariant as string with attributes
-     * \param element
-     * \param attributes
-     * \param val
-     */
-    void qv_string_element(const QString& element, const QString& attributes, const QVariant& val);
+  /*!
+   * \brief qv_sci_element
+   * \param element
+   * \param val
+   * \param precision
+   */
+  void qv_sci_element(const QString &element, const QVariant &val, const int &precision);
 
-    /*!
-     * \brief time_hh_mm_ss writes hh:mm:ss from a QDateTime
-     * \param element
-     * \param datetime QDateTime
-     */
-    void time_hh_mm_ss(const QString &element, const QDateTime &datetime);
+  /*!
+   * \brief qv_sci_element
+   * \param element
+   * \param attributes
+   * \param val
+   * \param precision
+   */
+  void qv_sci_element(const QString &element, const QString &attributes, const QVariant &val, const int &precision);
 
-    /*!
-     * \brief date_yyyy_mm_dd write a yyyy-mm-dd from a QDateTime
-     * \param element
-     * \param datetime QDateTime
-     */
-    void date_yyyy_mm_dd(const QString &element, const QDateTime &datetime);
+  /*!
+   * \brief comment
+   * \param comment text
+   * \param linebreak_at say -1 if all in on line; say 50 if after 50 chars the next space in text will added with line break
+   */
+  void comment(const QString &comment, const int &linebreak_at = 60);
 
-    /*!
-     * \brief qv_sci_element
-     * \param element
-     * \param val
-     * \param precision
-     */
-    void qv_sci_element(const QString& element, const QVariant& val, const int &precision );
+  /*!
+   * \brief comment_multi_line list of comments
+   * \param comment_lines List of comments to be put line by line
+   */
+  void comment_multi_line(const QStringList &comment_lines);
 
-    /*!
-     * \brief qv_sci_element
-     * \param element
-     * \param attributes
-     * \param val
-     * \param precision
-     */
-    void qv_sci_element(const QString& element, const QString& attributes, const QVariant& val, const int &precision );
+  void emptyelement(const QString &element);
+  void emptyelement(const QString &element, const QString &attributes);
 
+  /*!
+   * \brief pop closes a section
+   * \param reminder leave empty or use the value used for "push"
+   */
+  void pop(const QString &reminder = "");
+  void add_free_string(const QString &element);
+  void clear(const bool write_header_again = true);
 
-
-
-    /*!
-     * \brief comment
-     * \param comment text
-     * \param linebreak_at say -1 if all in on line; say 50 if after 50 chars the next space in text will added with line break
-     */
-    void comment(const QString &comment, const int &linebreak_at = 60 );
-
-    /*!
-     * \brief comment_multi_line list of comments
-     * \param comment_lines List of comments to be put line by line
-     */
-    void comment_multi_line(const QStringList &comment_lines);
-
-    void emptyelement( const QString &element );
-    void emptyelement( const QString &element, const QString& attributes );
-
-    /*!
-     * \brief pop closes a section
-     * \param reminder leave empty or use the value used for "push"
-     */
-    void pop(const QString &reminder = "");
-    void add_free_string( const QString& element );
-    void clear(const bool write_header_again = true);
-
-    void append(const QString &xmlsection);
-    void insert(const QString &xmlsection);
-
+  void append(const QString &xmlsection);
+  void insert(const QString &xmlsection);
 
 private:
-    QString buf;                //!< buffer for the textstream
-    QTextStream xml;            //!< contains the complete XML including indents
-    QString indentation;        //!< indent for better human reading; eg. two spaces
-    QVector<QString> stack;     //!< stack push
-
-
-
+  QString buf;            //!< buffer for the textstream
+  QTextStream xml;        //!< contains the complete XML including indents
+  QString indentation;    //!< indent for better human reading; eg. two spaces
+  QVector<QString> stack; //!< stack push
 };
 
 /*!
 write a element or data entry
 dont forget to use val.c_str() in main in case val is a STRING
 */
-template<class T>  void  tinyxmlwriter::element ( const QString& element, T val )
-{
-    indent();
-    xml << "<" << element  << ">" << val << "</" << element << ">"  << Qt::endl;
-
+template <class T>
+void tinyxmlwriter::element(const QString &element, T val) {
+  indent();
+  xml << "<" << element << ">" << val << "</" << element << ">" << Qt::endl;
 }
 
-template<class T>  void  tinyxmlwriter::element ( const QString& element, const QString& str_attribute, const int &int_value, T val )
-{
-    indent();
+template <class T>
+void tinyxmlwriter::element(const QString &element, const QString &str_attribute, const int &int_value, T val) {
+  indent();
 
-    xml << "<" << element  << " " << str_attribute << "=\"" << QString::number(int_value) << "\">" << val << "</" << element << ">"  << Qt::endl;
-
+  xml << "<" << element << " " << str_attribute << "=\"" << QString::number(int_value) << "\">" << val << "</" << element << ">" << Qt::endl;
 }
 
-template<class T>  void  tinyxmlwriter::element ( const QString& element, const QString& attributes, T val )
-{
-    indent();
-    xml << "<" << element << " " << attributes << ">" << val << "</" << element << ">"  << Qt::endl;
-
+template <class T>
+void tinyxmlwriter::element(const QString &element, const QString &attributes, T val) {
+  indent();
+  xml << "<" << element << " " << attributes << ">" << val << "</" << element << ">" << Qt::endl;
 }
 
 /*!
 write a scientific number without loss of data as ascii like 1.07980000e-01
 element shall be float or double; no ckeck here
 */
-template<class T>  void  tinyxmlwriter::sci_element ( const QString& element, T val, const int &precision )
-{
-    indent();
-    int prec = 6;
-    if (precision > 0) prec = precision;
-    xml.setRealNumberPrecision (prec);
-    xml.setRealNumberNotation (QTextStream::ScientificNotation);
-    xml << "<" << element << ">"
-        << val << "</" << element << ">"  << Qt::endl;
-
-
+template <class T>
+void tinyxmlwriter::sci_element(const QString &element, T val, const int &precision) {
+  indent();
+  int prec = 6;
+  if (precision > 0)
+    prec = precision;
+  xml.setRealNumberPrecision(prec);
+  xml.setRealNumberNotation(QTextStream::ScientificNotation);
+  xml << "<" << element << ">"
+      << val << "</" << element << ">" << Qt::endl;
 }
 
 //!< @todo do I have to unset the real number notation ?
 
-template<class T>  void  tinyxmlwriter::sci_element ( const QString& element, const QString& attributes, T val, const int &precision )
-{
-    indent();
-    int prec = 6;
-    if (precision > 0) prec = precision;
-    xml.setRealNumberPrecision (prec);
-    xml.setRealNumberNotation (QTextStream::ScientificNotation);
-    xml << "<" << element  << " " << attributes << ">"
-        << val << "</" << element  << ">"  << Qt::endl;
-
+template <class T>
+void tinyxmlwriter::sci_element(const QString &element, const QString &attributes, T val, const int &precision) {
+  indent();
+  int prec = 6;
+  if (precision > 0)
+    prec = precision;
+  xml.setRealNumberPrecision(prec);
+  xml.setRealNumberNotation(QTextStream::ScientificNotation);
+  xml << "<" << element << " " << attributes << ">"
+      << val << "</" << element << ">" << Qt::endl;
 }
-
-
 
 #endif // tinyxmlwriter_H

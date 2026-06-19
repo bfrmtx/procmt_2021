@@ -31,47 +31,44 @@
 #define ADD_RANGE_LABELS_H
 
 #include <QDialog>
-#include <cfloat>
-#include <QVector>
 #include <QSharedPointer>
+#include <QVector>
+#include <cfloat>
 #include <qcustomplot.h>
 
 namespace Ui {
 class add_range_labels;
 }
 
-class add_range_labels : public QDialog
-{
-    Q_OBJECT
+class add_range_labels : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit add_range_labels(QWidget *parent = nullptr);
-    ~add_range_labels();
+  explicit add_range_labels(QWidget *parent = nullptr);
+  ~add_range_labels();
 
-    void set_data(QCPAxis *axis, const QVector<double> dnums_labels, const QVector<QString> strnums_labels);
+  void set_data(QCPAxis *axis, const QVector<double> dnums_labels, const QVector<QString> strnums_labels);
 
 signals:
 
-    void signal_range_label_updated();
+  void signal_range_label_updated();
 
 private slots:
-    void on_spin_lower_valueChanged(double arg1);
+  void on_spin_lower_valueChanged(double arg1);
 
-    void on_spin_upper_valueChanged(double arg1);
+  void on_spin_upper_valueChanged(double arg1);
 
-    void on_buttonBox_rejected();
+  void on_buttonBox_rejected();
 
 private:
-    Ui::add_range_labels *ui;
-    QSharedPointer<QCPAxisTickerText> textTicker;
-    QCPAxis *axis;
-    QVector<double>  dnums_labels;
-    QVector<QString> strnums_labels;
+  Ui::add_range_labels *ui;
+  QSharedPointer<QCPAxisTickerText> textTicker;
+  QCPAxis *axis;
+  QVector<double> dnums_labels;
+  QVector<QString> strnums_labels;
 
-    int upper_counts = 0;
-    int lower_counts = 0;
-
-
+  int upper_counts = 0;
+  int lower_counts = 0;
 };
 
 #endif // ADD_RANGE_LABELS_H

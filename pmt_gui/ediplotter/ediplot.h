@@ -30,65 +30,63 @@
 #ifndef EDIPLOT_H
 #define EDIPLOT_H
 
-#include <qcustomplot.h>
-#include <buckets.h>
 #include <QVector>
+#include <buckets.h>
+#include <qcustomplot.h>
 
 struct PlotData {
-    mt_data_res<std::complex<double>> m_data;
-    QVector<QCPErrorBars*> m_error_bars;
-    QVector<QCPGraph*> m_graphs;
+  mt_data_res<std::complex<double>> m_data;
+  QVector<QCPErrorBars *> m_error_bars;
+  QVector<QCPGraph *> m_graphs;
 };
 
 enum class EdiPlotType {
-    rho,        //!< log f, log rho
-    phi,        //!< log f, lin phi, e.g. min max -180, 180, default 0-90
-    coh,        //!< coherency log f, lin coh - values can not exceed 0 - 1; ddisplay default 0 - 1.1 for readability
-    tip,        //!< tipper log f KÖNNEN WIR PFEILE MACHEN???
-    ai,         //!< anisotroy log f, lin ai
-    strk,       //!< strike log f lin y
-    rszs        //!< rho* - z*, log rho* as x axis, log z* as y axis (log log)
+  rho,  //!< log f, log rho
+  phi,  //!< log f, lin phi, e.g. min max -180, 180, default 0-90
+  coh,  //!< coherency log f, lin coh - values can not exceed 0 - 1; ddisplay default 0 - 1.1 for readability
+  tip,  //!< tipper log f KÖNNEN WIR PFEILE MACHEN???
+  ai,   //!< anisotroy log f, lin ai
+  strk, //!< strike log f lin y
+  rszs  //!< rho* - z*, log rho* as x axis, log z* as y axis (log log)
 };
 
 class EdiPlot : public QCustomPlot {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit EdiPlot(QWidget * parent = nullptr);
-    void add_edi_plot(QString const & name, const mt_data_res<std::complex<double> > & data, size_t index, EdiPlotType type, const QPen & pen);
-    void remove_edi_plots(QString const & name);
-    void reset_edi_data(QString const & name);
-    void set_edi_plots_visible(QString const & name, bool value);
-    void remove_all_plots();
+  explicit EdiPlot(QWidget *parent = nullptr);
+  void add_edi_plot(QString const &name, const mt_data_res<std::complex<double>> &data, size_t index, EdiPlotType type, const QPen &pen);
+  void remove_edi_plots(QString const &name);
+  void reset_edi_data(QString const &name);
+  void set_edi_plots_visible(QString const &name, bool value);
+  void remove_all_plots();
 
 signals:
-    void signal_set_x_axis_label(const QString& label_x_axis);
-    void signal_set_y_axis_label(const QString& label_y_axis);
+  void signal_set_x_axis_label(const QString &label_x_axis);
+  void signal_set_y_axis_label(const QString &label_y_axis);
 
 public slots:
-    void map_phase(bool map_phase);
-    void slot_line_for_crosshair(const int graph_number);
+  void map_phase(bool map_phase);
+  void slot_line_for_crosshair(const int graph_number);
 
 private:
-    void handle_readout(double x, double y);
-    void set_cursor_coords(double x, double y);
+  void handle_readout(double x, double y);
+  void set_cursor_coords(double x, double y);
 
 protected:
-    void mousePressEvent(QMouseEvent * event);
-    void mouseMoveEvent(QMouseEvent * event);
-    void mouseReleaseEvent(QMouseEvent * event);
+  void mousePressEvent(QMouseEvent *event);
+  void mouseMoveEvent(QMouseEvent *event);
+  void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-    QMap<QString, mt_data_res<std::complex<double>>> m_mt_data;
-    QMap<QString, QVector<QCPErrorBars*>> m_error_bars;
-    QMap<QString, QVector<QCPGraph*>> m_graphs;
-    QCPItemLine * m_vertical_line = nullptr;
-    QCPItemLine * m_horizontal_line = nullptr;
-    bool phase_is_mapped = true;
+  QMap<QString, mt_data_res<std::complex<double>>> m_mt_data;
+  QMap<QString, QVector<QCPErrorBars *>> m_error_bars;
+  QMap<QString, QVector<QCPGraph *>> m_graphs;
+  QCPItemLine *m_vertical_line = nullptr;
+  QCPItemLine *m_horizontal_line = nullptr;
+  bool phase_is_mapped = true;
 
-    int graph_number_chc = 0;           //!< which for plotting a cross hair cursor
-
-
+  int graph_number_chc = 0; //!< which for plotting a cross hair cursor
 };
 
 #endif // EDIPLOT_H

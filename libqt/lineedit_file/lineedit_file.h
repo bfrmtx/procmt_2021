@@ -31,90 +31,81 @@
 #define LINEEDIT_FILE_H
 
 #include "lineedit_file_global.h"
-#include <QLineEdit>
+#include <QDir>
 #include <QDrag>
 #include <QDropEvent>
-#include <QMimeData>
-#include <QFileInfo>
-#include <QUrl>
-#include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QLineEdit>
+#include <QMimeData>
 #include <QMimeType>
 #include <QString>
 #include <QStringList>
+#include <QUrl>
 
+class lineedit_file : public QLineEdit, public QFileInfo {
 
-
-class lineedit_file : public QLineEdit, public QFileInfo
-{
-
-    Q_OBJECT
+  Q_OBJECT
 public:
-    /*!
-     * \brief qlineedit_file MUST use set_file or set_dir later
-     * \param what 0, 1, 2 for basename, filename and absolute filepath
-     * \param parent
-     */
-    lineedit_file(QWidget *parent = Q_NULLPTR, const int what = 2);
+  /*!
+   * \brief qlineedit_file MUST use set_file or set_dir later
+   * \param what 0, 1, 2 for basename, filename and absolute filepath
+   * \param parent
+   */
+  lineedit_file(QWidget *parent = Q_NULLPTR, const int what = 2);
 
-    /*!
-     * \brief qlineedit_file constructor for a file or directory
-     * \param qfi
-     * \param
-     * \param what file_0_dir_1 sets: 0 file, 1 dir
-     * \param parent
-     */
-    lineedit_file(const QFileInfo qfi, const int file_0_dir_1 = 0, const int what = 0, QWidget *parent = Q_NULLPTR);
+  /*!
+   * \brief qlineedit_file constructor for a file or directory
+   * \param qfi
+   * \param
+   * \param what file_0_dir_1 sets: 0 file, 1 dir
+   * \param parent
+   */
+  lineedit_file(const QFileInfo qfi, const int file_0_dir_1 = 0, const int what = 0, QWidget *parent = Q_NULLPTR);
 
-    /*!
-     * \brief qlineedit_file
-     * \param dir
-     * \param what
-     * \param parent
-     */
-    lineedit_file(const QDir dir, const int what = 0,QWidget *parent = Q_NULLPTR);
+  /*!
+   * \brief qlineedit_file
+   * \param dir
+   * \param what
+   * \param parent
+   */
+  lineedit_file(const QDir dir, const int what = 0, QWidget *parent = Q_NULLPTR);
 
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
+  void set_what(const int base0_filename1_absolute2);
 
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-    void set_what(const int base0_filename1_absolute2);
+  void set_dir(const QString str, const int what = 0);
+  void set_dir(const QDir dir, const int what = 0);
 
-    void set_dir(const QString str, const int what = 0);
-    void set_dir(const QDir dir, const int what = 0);
+  void set_file(const QString str, const int what = 0);
+  void set_file(const QFileInfo qfi, const int what = 0);
 
-    void set_file(const QString str, const int what = 0);
-    void set_file(const QFileInfo qfi, const int what = 0);
-
-
-    void set_check_subdir(const QString slash_subdir);
-    void set_toplevel_dir(const QString &toplevel_dir);
-    void set_toplevel_dir(const QFileInfo &qfi_toplevel_dir);
+  void set_check_subdir(const QString slash_subdir);
+  void set_toplevel_dir(const QString &toplevel_dir);
+  void set_toplevel_dir(const QFileInfo &qfi_toplevel_dir);
 
 signals:
-   void valid_file(const bool &ok);
-   void valid_dir(const bool &ok);
-   void valid_topdir(const bool &ok);
+  void valid_file(const bool &ok);
+  void valid_dir(const bool &ok);
+  void valid_topdir(const bool &ok);
 
 public slots:
 
-    void lineedit_changed(const QString &str);
-    void clear();
-
+  void lineedit_changed(const QString &str);
+  void clear();
 
 private:
+  void set_text();
 
-   void set_text();
+  int what = 0; //!<  0 basename, 1 filename, 2 absloute
 
-   int what = 0;       //!<  0 basename, 1 filename, 2 absloute
+  QString slash_subdir;
 
-   QString slash_subdir;
+  QFileInfo qfi_topdir; //!< limit to top
 
-   QFileInfo qfi_topdir; //!< limit to top
-
-   bool clear_me = false;
-   bool reset_me = false;
-
+  bool clear_me = false;
+  bool reset_me = false;
 };
 
 #endif // LINEEDIT_FILE_H

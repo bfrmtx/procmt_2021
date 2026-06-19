@@ -30,8 +30,8 @@
 #ifndef EDI_FILE_H
 #define EDI_FILE_H
 
-#include "edi_file_global.h"
 #include "buckets.h"
+#include "edi_file_global.h"
 #include "eqdatetime.h"
 #include "geocoordinates.h"
 #include "msg_logger.h"

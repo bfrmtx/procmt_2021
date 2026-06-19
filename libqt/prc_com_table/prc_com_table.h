@@ -31,127 +31,123 @@
 #define PRC_COM_TABLE_H
 
 #include "prc_com_table_global.h"
-#include <iostream>
 #include <QDebug>
-#include <QVariant>
-#include <QVariantList>
+#include <QMap>
 #include <QString>
 #include <QStringList>
-#include <QMap>
+#include <QVariant>
+#include <QVariantList>
+#include <iostream>
 #include <mutex>
 
+#include <QFile>
+#include <QFileInfo>
+#include <QSharedPointer>
+#include <QVariant>
 #include <cfloat>
 #include <climits>
-#include <QFileInfo>
-#include <QFile>
-#include <QVariant>
-#include <QSharedPointer>
 
 #include <QPair>
 
 #include <QAbstractTableModel>
 
-#include "qtx_templates.h"
 #include "iterator_templates.h"
+#include "qtx_templates.h"
 
-class prc_com_table : public QAbstractTableModel
-{
-    Q_OBJECT
+class prc_com_table : public QAbstractTableModel {
+  Q_OBJECT
 
 public:
-    prc_com_table(QObject *parent = Q_NULLPTR);
-    ~prc_com_table();
+  prc_com_table(QObject *parent = Q_NULLPTR);
+  ~prc_com_table();
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+  int columnCount(const QModelIndex &parent = QModelIndex()) const;
+  int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
+  QVariant data(const QModelIndex &index, int role) const;
+  QVariant headerData(int section, Qt::Orientation orientation,
+                      int role = Qt::DisplayRole) const;
 
-    Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool setData(const QModelIndex &index, const QVariant &value,
-                 int role = Qt::EditRole);
+  Qt::ItemFlags flags(const QModelIndex &index) const;
+  bool setData(const QModelIndex &index, const QVariant &value,
+               int role = Qt::EditRole);
 
-    bool get_row_key_value(const QModelIndex &index, QString &key, QVariant &value) const;
-    bool set_row_key_value(const QModelIndex &index, const QVariant &value);
+  bool get_row_key_value(const QModelIndex &index, QString &key, QVariant &value) const;
+  bool set_row_key_value(const QModelIndex &index, const QVariant &value);
 
-    int set_map(const QMap<QString, QVariant> &inmap);
+  int set_map(const QMap<QString, QVariant> &inmap);
 
-    QMap<QString, QVariant> get_map() const;
+  QMap<QString, QVariant> get_map() const;
 
-    int set_includes(const QStringList &includes);
+  int set_includes(const QStringList &includes);
 
-    QStringList get_includes() const;
+  QStringList get_includes() const;
 
-    int set_excludes(const QStringList &excludes);
+  int set_excludes(const QStringList &excludes);
 
-    QStringList get_excludes() const;
+  QStringList get_excludes() const;
 
-    void clear();
+  void clear();
 
-    /*!
-     * \brief read_cvs_table reads a CSV table as columns
-     * \param qfi
-     * \return
-     */
-    int read_cvs_table(const QFileInfo &qfi, const int channel = -1, const int slot = -1);
+  /*!
+   * \brief read_cvs_table reads a CSV table as columns
+   * \param qfi
+   * \return
+   */
+  int read_cvs_table(const QFileInfo &qfi, const int channel = -1, const int slot = -1);
 
-    /*!
-     * \brief sort_csv_table sorts a CSV table by column; try double if you know the col_name contains numbers;
-     *
-     * \param col_name column name from header
-     * \param use_double try for double as sort
-     * \return
-     */
-    int sort_csv_table(const QString col_name, const bool use_double = true, const int channel = -1, const int slot = -1);
+  /*!
+   * \brief sort_csv_table sorts a CSV table by column; try double if you know the col_name contains numbers;
+   *
+   * \param col_name column name from header
+   * \param use_double try for double as sort
+   * \return
+   */
+  int sort_csv_table(const QString col_name, const bool use_double = true, const int channel = -1, const int slot = -1);
 
-    int sort_csv_table_with_chopper(const QString col_name, const QString chopper_name, const int channel = -1, const int slot = -1);
+  int sort_csv_table_with_chopper(const QString col_name, const QString chopper_name, const int channel = -1, const int slot = -1);
 
-    int remove_duplicates_from_sorted(const QString col_name, const QString qlistvariant_name = "", const bool use_double = true, const int channel = -1, const int slot = -1);
+  int remove_duplicates_from_sorted(const QString col_name, const QString qlistvariant_name = "", const bool use_double = true, const int channel = -1, const int slot = -1);
 
-    int split_chopper(const QString col_name, const QString chopper_name, const int channel = -1, const int slot = -1);
+  int split_chopper(const QString col_name, const QString chopper_name, const int channel = -1, const int slot = -1);
 
-    /*!
-     * \brief fetch_dvector_column
-     * \param colname column name of CSV
-     * \param qlistvariant_name - no name is all data (csv_data), in case you have splitted the data try csv_data_on or csv_data_off
-     * \return
-     */
-    std::vector<double> get_dvector_column(const QString colname, const QString qlistvariant_name = "", const int channel = -1, const int slot = -1) const;
+  /*!
+   * \brief fetch_dvector_column
+   * \param colname column name of CSV
+   * \param qlistvariant_name - no name is all data (csv_data), in case you have splitted the data try csv_data_on or csv_data_off
+   * \return
+   */
+  std::vector<double> get_dvector_column(const QString colname, const QString qlistvariant_name = "", const int channel = -1, const int slot = -1) const;
 
-    QList<QVariant> get_csv_column(const QString colname, const QString qlistvariant_name = "", const int channel = -1, const int slot = -1) const;
+  QList<QVariant> get_csv_column(const QString colname, const QString qlistvariant_name = "", const int channel = -1, const int slot = -1) const;
 
-    void clear_variant_lists();
+  void clear_variant_lists();
 
 signals:
 
-    void prc_com_table_message(const int &channel, const int &slot, const QString &message) const;
-
+  void prc_com_table_message(const int &channel, const int &slot, const QString &message) const;
 
 private:
+  QMap<QString, QVariant> map;
+  QMap<int, QString> header;
+  QStringList includes;
+  QStringList excludes;
 
-    QMap<QString, QVariant> map;
-    QMap<int, QString> header;
-    QStringList includes;
-    QStringList excludes;
+  QMap<QString, int> csv_header_cols;
+  QList<QSharedPointer<QList<QVariant>>> csv_data;
 
-    QMap<QString, int> csv_header_cols;
-    QList<QSharedPointer<QList<QVariant>>> csv_data;
+  // for the lovely chopper
+  QList<QSharedPointer<QList<QVariant>>> csv_data_on;
+  QList<QSharedPointer<QList<QVariant>>> csv_data_off;
 
-    // for the lovely chopper
-    QList<QSharedPointer<QList<QVariant>>> csv_data_on;
-    QList<QSharedPointer<QList<QVariant>>> csv_data_off;
+  /*!
+   * \brief clear_and_resize_llv clears and destroys "rebuildme" completely bey resettimg the pointers
+   * \param rebuildme QList<QSharedPointer<QList<QVariant>>> data to modify
+   * \param prepare_again if true we have a same size of list of pointers, column data is empty
+   */
+  void clear_and_resize_llv(QList<QSharedPointer<QList<QVariant>>> &rebuildme, bool prepare_again = true);
 
-    /*!
-     * \brief clear_and_resize_llv clears and destroys "rebuildme" completely bey resettimg the pointers
-     * \param rebuildme QList<QSharedPointer<QList<QVariant>>> data to modify
-     * \param prepare_again if true we have a same size of list of pointers, column data is empty
-     */
-    void clear_and_resize_llv(QList<QSharedPointer<QList<QVariant>>> &rebuildme, bool prepare_again = true);
-
-    void hardcopy(QList<QSharedPointer<QList<QVariant> > > &in, QList<QSharedPointer<QList<QVariant>>> &out, const bool append_to_cols_only = false);
-
+  void hardcopy(QList<QSharedPointer<QList<QVariant>>> &in, QList<QSharedPointer<QList<QVariant>>> &out, const bool append_to_cols_only = false);
 };
 
 #endif // PRC_COM_TABLE_H

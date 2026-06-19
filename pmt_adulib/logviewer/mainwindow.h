@@ -30,111 +30,107 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "qcustomplot.h"
+#include <QMainWindow>
 
-#include <QtSql>
-#include <QSqlDatabase>
 #include <QCheckBox>
-#include <QSqlQuery>
+#include <QDateTime>
 #include <QDebug>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QUrl>
-#include <QDateTime>
 #include <QVariant>
-#include <QXmlStreamReader>
-#include <memory>
 #include <QVector>
-
+#include <QXmlStreamReader>
+#include <QtSql>
+#include <memory>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+  MainWindow(QWidget *parent = nullptr);
+  ~MainWindow();
 
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
 
-    void add_gps();
-    void add_temperature();
-    void add_batt_volt();
-    void add_batt1_curr();
-    void add_batt2_curr();
+  void add_gps();
+  void add_temperature();
+  void add_batt_volt();
+  void add_batt1_curr();
+  void add_batt2_curr();
 
-    void estimate_scale();
+  void estimate_scale();
 
 private slots:
-    void on_dateTimeEdit_from_dateTimeChanged(const QDateTime &dateTime);
+  void on_dateTimeEdit_from_dateTimeChanged(const QDateTime &dateTime);
 
-    void on_dateTimeEdit_to_dateTimeChanged(const QDateTime &dateTime);
+  void on_dateTimeEdit_to_dateTimeChanged(const QDateTime &dateTime);
 
-    void on_pushButton_3_clicked();
+  void on_pushButton_3_clicked();
 
-    void on_dial_from_sliderMoved(int position);
+  void on_dial_from_sliderMoved(int position);
 
-    void on_dial_to_sliderMoved(int position);
+  void on_dial_to_sliderMoved(int position);
 
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
 
-    void create_plot();
+  void create_plot();
 
-    void reserves(const size_t size);
+  void reserves(const size_t size);
 
-    void read_message(const QSqlQuery &query);
+  void read_message(const QSqlQuery &query);
 
-    void min_max_time();
+  void min_max_time();
 
-    std::unique_ptr<QCustomPlot> customPlot;
-    QString dbname;
-    std::unique_ptr<QSqlDatabase> db = nullptr;
+  std::unique_ptr<QCustomPlot> customPlot;
+  QString dbname;
+  std::unique_ptr<QSqlDatabase> db = nullptr;
 
+  std::vector<double> num_sats_sats;
+  std::vector<double> num_sats_datetimes;
 
-    std::vector<double> num_sats_sats;
-    std::vector<double> num_sats_datetimes;
+  std::vector<double> batt1_currs;
+  std::vector<double> batt1_curr_datetimes;
 
-    std::vector<double> batt1_currs;
-    std::vector<double> batt1_curr_datetimes;
+  std::vector<double> batt2_currs;
+  std::vector<double> batt2_curr_datetimes;
 
-    std::vector<double> batt2_currs;
-    std::vector<double> batt2_curr_datetimes;
+  std::vector<double> batt_volts;
+  std::vector<double> batt_volt_datetimes;
 
-    std::vector<double> batt_volts;
-    std::vector<double> batt_volt_datetimes;
+  std::vector<double> batt_states;
+  std::vector<double> batt_state_datetimes;
 
-    std::vector<double> batt_states;
-    std::vector<double> batt_state_datetimes;
+  std::vector<double> temperatures;
+  std::vector<double> temperature_datetimes;
 
-    std::vector<double> temperatures;
-    std::vector<double> temperature_datetimes;
+  std::vector<qint64> all_datetimes;
 
-    std::vector<qint64> all_datetimes;
+  QXmlStreamReader xmlreader;
 
+  QStringList tokens;
 
-    QXmlStreamReader xmlreader;
+  QDateTime maxtime;
+  QDateTime mintime;
 
-    QStringList tokens;
+  QDateTime old_from;
+  QDateTime old_to;
 
-    QDateTime maxtime;
-    QDateTime mintime;
+  bool last30 = false;
+  int dial_from_pos = 0;
+  int dial_to_pos = 0;
 
-    QDateTime old_from;
-    QDateTime old_to;
-
-    bool last30 = false;
-    int dial_from_pos = 0;
-    int dial_to_pos = 0;
-
-    int nplot = 0;
-
+  int nplot = 0;
 };
 #endif // MAINWINDOW_H

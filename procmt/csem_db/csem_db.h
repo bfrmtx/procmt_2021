@@ -38,66 +38,63 @@
 
 #include <vector>
 
-#include <QObject>
-#include <QFileInfo>
-#include <QFile>
 #include <QDebug>
-#include <QString>
+#include <QFile>
+#include <QFileInfo>
+#include <QList>
+#include <QMap>
+#include <QObject>
 #include <QSql>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QSqlRecord>
-#include <QMap>
-#include <QList>
+#include <QString>
 #include <QVariant>
 
-class csem_db :  public QObject
-{
-    Q_OBJECT
+class csem_db : public QObject {
+  Q_OBJECT
 public:
-    csem_db(const QFileInfo qfi_base, const QString subdir_str = "csem", QObject *parent = Q_NULLPTR);
+  csem_db(const QFileInfo qfi_base, const QString subdir_str = "csem", QObject *parent = Q_NULLPTR);
 
-    ~csem_db();
+  ~csem_db();
 
-    QFileInfo create_new_db(const QString &dbname_name_only);
+  QFileInfo create_new_db(const QString &dbname_name_only);
 
-    QFileInfo filename() const;
+  QFileInfo filename() const;
 
-    QFileInfo open(const QString &dbname_name_only);
+  QFileInfo open(const QString &dbname_name_only);
 
-    void close();
+  void close();
 
-    void clear();
-    /*!
-     * \brief update_true_or_insert_false
-     * \param data
-     * \param dip1_1__dip2_2
-     * \param rowid
-     * \return
-     */
-    bool update_true_or_insert_false(const QMap<QString, QVariant> &data, const int &dip1_1__dip2_2, int &rowid) const;
+  void clear();
+  /*!
+   * \brief update_true_or_insert_false
+   * \param data
+   * \param dip1_1__dip2_2
+   * \param rowid
+   * \return
+   */
+  bool update_true_or_insert_false(const QMap<QString, QVariant> &data, const int &dip1_1__dip2_2, int &rowid) const;
 
 public slots:
 
-    int slot_insert_update(const QMap<QString, QVariant> &data, const int &dip1_1__dip2_2);
+  int slot_insert_update(const QMap<QString, QVariant> &data, const int &dip1_1__dip2_2);
 
-    int write_data_file();
+  int write_data_file();
 
 private:
+  int QMAP_to_SQL(const QMap<QString, QVariant> &data, QString &colnames, QString &colvalues);
 
-    int QMAP_to_SQL(const QMap<QString, QVariant> &data, QString &colnames, QString &colvalues);
+  bool db_has_data_keys(const QMap<QString, QVariant> &data);
 
-    bool db_has_data_keys(const QMap<QString, QVariant> &data);
-
-    QStringList tables;
-    QStringList columns;
-    QList<QMap<QString, QVariant>> dip_1, dip_2;
-    QFileInfo dbname;
-    QFileInfo qfi_base;                                             //!< survey base dir - we need to append "csem" by default
-    QSqlDatabase csemdb;
-    QDir dir;
-
+  QStringList tables;
+  QStringList columns;
+  QList<QMap<QString, QVariant>> dip_1, dip_2;
+  QFileInfo dbname;
+  QFileInfo qfi_base; //!< survey base dir - we need to append "csem" by default
+  QSqlDatabase csemdb;
+  QDir dir;
 };
 
 #endif // CSEM_DB_H

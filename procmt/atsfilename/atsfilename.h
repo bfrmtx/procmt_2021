@@ -31,112 +31,104 @@
 #define ATSFILENAME_H
 
 #include "atsfilename_global.h"
-#include <QObject>
-#include <QFileInfo>
-#include <QString>
-#include <memory>
-#include "prc_com.h"
 #include "atsheader.h"
 #include "atsheader_80_def.h"
+#include "prc_com.h"
+#include <QFileInfo>
+#include <QObject>
+#include <QString>
+#include <memory>
 
-
-class atsfilename : public QObject,  public prc_com
-{
-    Q_OBJECT
+class atsfilename : public QObject, public prc_com {
+  Q_OBJECT
 
 public:
-    atsfilename(const QFileInfo &qfi, QObject *parent = Q_NULLPTR);
+  atsfilename(const QFileInfo &qfi, QObject *parent = Q_NULLPTR);
 
-    atsfilename(QObject *parent = Q_NULLPTR);
+  atsfilename(QObject *parent = Q_NULLPTR);
 
-    void dir_split(const QFileInfo &qfidir, QFileInfo &basedir, QFileInfo &sitedir, QFileInfo &measdir);
+  void dir_split(const QFileInfo &qfidir, QFileInfo &basedir, QFileInfo &sitedir, QFileInfo &measdir);
 
-    /*!
-     * \brief init_name
-     * // metronix
-     *  008_V01_C00_R000_TEx_BL_32H.ATS
-     *  CEA nn: ns, ca, cp,
-     *  21007_20130322_nn_1024H_Ex.ats
-     *  21007_20130322_nn_1024s_Ex.ats
+  /*!
+   * \brief init_name
+   * // metronix
+   *  008_V01_C00_R000_TEx_BL_32H.ATS
+   *  CEA nn: ns, ca, cp,
+   *  21007_20130322_nn_1024H_Ex.ats
+   *  21007_20130322_nn_1024s_Ex.ats
 
-     */
+   */
 
-    /*!
-     * \brief clear_fname initializes the data
-     */
-    void clear_fname();
-    bool parse_fname(const bool read_atsheader = false);
+  /*!
+   * \brief clear_fname initializes the data
+   */
+  void clear_fname();
+  bool parse_fname(const bool read_atsheader = false);
 
+  /*!
+   * \brief inc_run increment the run number (if increment = 0)
+   * \param increment positive or negative number in case
+   * \return new run number, INT_MAX if fails
+   */
+  int inc_run(const int increment = 0);
 
-    /*!
-     * \brief inc_run increment the run number (if increment = 0)
-     * \param increment positive or negative number in case
-     * \return new run number, INT_MAX if fails
-     */
-    int inc_run(const int increment = 0);
+  void set_suffix(const QString &suffix);
 
+  QString get_filename(const QString type = "07");
 
-    void set_suffix(const QString &suffix);
+  void set_sampleFreq(const double &dsample, const bool check = true);
 
-    QString get_filename(const QString type = "07");
+  /*!
+   * \brief skip_samples_from_filter add skip_samples in that way that the filtered time series starts at a full second again
+   * example: 128Hz, 32x filter, 471 coefficients = 235 half length, we start at sample 20 (20 + 235 = 255 = 2nd second)<br>
+   * the filter is part of the class and can be accessed by this function
+   */
 
-    void set_sampleFreq(const double &dsample, const bool check = true);
-
-    /*!
-     * \brief skip_samples_from_filter add skip_samples in that way that the filtered time series starts at a full second again
-     * example: 128Hz, 32x filter, 471 coefficients = 235 half length, we start at sample 20 (20 + 235 = 255 = 2nd second)<br>
-     * the filter is part of the class and can be accessed by this function
-     */
-
-    void skip_samples_from_filter();
+  void skip_samples_from_filter();
 
 public slots:
 
-    void slot_set_atsfilename(const QString &filename);
-    void slot_set_filename_for_measdoc_from_ats(const QString &filename, const QString &start_datetime, const QString &stop_datetime, const QString &absolute_measdir);
+  void slot_set_atsfilename(const QString &filename);
+  void slot_set_filename_for_measdoc_from_ats(const QString &filename, const QString &start_datetime, const QString &stop_datetime, const QString &absolute_measdir);
 
 signals:
 
-    void signal_measdoc_name_created(const QString &measdoc_filename, const QString &measdir);
-
+  void signal_measdoc_name_created(const QString &measdoc_filename, const QString &measdir);
 
 private:
-    std::unique_ptr<atsheader> atsh;
-    int sample_freq_h;
-    int sample_freq_s;
-    QChar fill;
-    QString suffix = "ats";
+  std::unique_ptr<atsheader> atsh;
+  int sample_freq_h;
+  int sample_freq_s;
+  QChar fill;
+  QString suffix = "ats";
 
-    bool is_init = false;
+  bool is_init = false;
 
-    bool emit_extra = false;                        //!< emit some extra signals; some require math and false avoids superfluous time
+  bool emit_extra = false; //!< emit some extra signals; some require math and false avoids superfluous time
 
-    std::int16_t  siHeaderVers = 80;
-    QString t_name;
-    QFileInfo atsfile;
-    QString start_datetime;
-    QString stop_datetime;
-    QString measdoc_name;
-    QString absolute_measdir;
+  std::int16_t siHeaderVers = 80;
+  QString t_name;
+  QFileInfo atsfile;
+  QString start_datetime;
+  QString stop_datetime;
+  QString measdoc_name;
+  QString absolute_measdir;
 
+  /*!
+   * \brief channels_06_from_07 creates 06 channel names from 07 files
+   */
+  void channels_06_from_07();
 
-    /*!
-     * \brief channels_06_from_07 creates 06 channel names from 07 files
-     */
-    void channels_06_from_07();
+  /*!
+   * \brief channels_07_from_06 create channel names from 06 files
+   */
+  void channels_07_from_06();
 
-    /*!
-     * \brief channels_07_from_06 create channel names from 06 files
-     */
-    void channels_07_from_06();
+  void bandstr_06_from_samplefreq();
 
-    void bandstr_06_from_samplefreq();
+  void channel_type_07_to_06();
 
-    void channel_type_07_to_06();
-
-    void channel_type_06_to_07();
-
-
+  void channel_type_06_to_07();
 };
 
 #endif // ATSFILENAME_H

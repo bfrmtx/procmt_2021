@@ -30,21 +30,21 @@
 #ifndef QTHELPER_H
 #define QTHELPER_H
 
-#include <QKeyEvent>
 #include <QDir>
+#include <QKeyEvent>
 
 namespace qthelper {
-    int get_numeric_value_for_number_key(int qtkey);
-    bool is_functional_key(int qtkey);
+int get_numeric_value_for_number_key(int qtkey);
+bool is_functional_key(int qtkey);
 
-    /**
-     * @brief create_survey_subs
-     * replacement for pmt::create_survey_subdirs. If the base_dir does not exist it
-     * will create the folder/path to it.
-     * @param base_dir path to the target directory
-     * @return returns true if all directories were created or already existed
-     */
-    bool create_survey_subs(QDir const & base_dir);
-}
+/**
+ * @brief create_survey_subs
+ * replacement for pmt::create_survey_subdirs. If the base_dir does not exist it
+ * will create the folder/path to it.
+ * @param base_dir path to the target directory
+ * @return returns true if all directories were created or already existed
+ */
+bool create_survey_subs(QDir const &base_dir);
+} // namespace qthelper
 
 #endif // QTHELPER_H

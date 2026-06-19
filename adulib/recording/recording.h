@@ -30,82 +30,61 @@
 #ifndef RECORDING_H
 #define RECORDING_H
 
-#include <QObject>
-#include <QDebug>
 #include <QDateTime>
-#include <QTimeZone>
+#include <QDebug>
+#include <QObject>
 #include <QString>
+#include <QTimeZone>
 
-#include <QSpinBox>
-#include <QDateEdit>
-#include <QTimeEdit>
-#include <QComboBox>
-#include <QRadioButton>
-#include <QPushButton>
 #include <QCheckBox>
+#include <QComboBox>
+#include <QDateEdit>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSpinBox>
+#include <QTimeEdit>
 
-
-
-class recording : public QWidget
-{
-    Q_OBJECT
+class recording : public QWidget {
+  Q_OBJECT
 
 public:
-    recording(const qint64 sample_freq = 512, const qint64 max_sample_freq = 512, QWidget *parent = Q_NULLPTR);
+  recording(const qint64 sample_freq = 512, const qint64 max_sample_freq = 512, QWidget *parent = Q_NULLPTR);
 
+  QDateTimeEdit *starts;
+  QDateTimeEdit *stops;
+  QSpinBox *days;
+  QSpinBox *hours;
+  QSpinBox *minutes;
+  QSpinBox *seconds;
 
+  QRadioButton *qrb_64;
+  QRadioButton *qrb_60;
+  QRadioButton *qrb_1;
 
+  QPushButton *until_midnight;
 
-    QDateTimeEdit *starts;
-    QDateTimeEdit *stops;
-    QSpinBox *days;
-    QSpinBox *hours;
-    QSpinBox *minutes;
-    QSpinBox *seconds;
-
-    QRadioButton *qrb_64;
-    QRadioButton *qrb_60;
-    QRadioButton *qrb_1;
-
-    QPushButton *until_midnight;
-
-
-
-
-    qint64 duration_from_spins() const;
-    void duration_to_spins();
-
-
-
+  qint64 duration_from_spins() const;
+  void duration_to_spins();
 
 public slots:
 
-    void spins_valueChanged();
-    void grid_changed();
-    void starts_changed(QDateTime dt);
-    void stops_changed(QDateTime dt);
-    void duration_to_midnight();
-
-
+  void spins_valueChanged();
+  void grid_changed();
+  void starts_changed(QDateTime dt);
+  void stops_changed(QDateTime dt);
+  void duration_to_midnight();
 
 signals:
 
-    QDateTime actual_start_time(const QDateTime&);
-    qint64 actual_duration(const qint64&);
-    QDateTime actual_stop_time(const QDateTime&);
-
-
-
+  QDateTime actual_start_time(const QDateTime &);
+  qint64 actual_duration(const qint64 &);
+  QDateTime actual_stop_time(const QDateTime &);
 
 private:
-
-
-    qint64 duration;
-    qint64 sample_freq;     //!< works for recordings >= 1 Hz
-    qint64 max_sample_freq;
-    qint64 min_sample_freq = 1;
-
-
+  qint64 duration;
+  qint64 sample_freq; //!< works for recordings >= 1 Hz
+  qint64 max_sample_freq;
+  qint64 min_sample_freq = 1;
 };
 
 #endif // RECORDING_H

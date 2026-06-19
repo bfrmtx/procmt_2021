@@ -32,16 +32,16 @@
 
 #include <cmath>
 
-inline bool dequal_relative(const double &rhs, const double &lhs, const double maxdiff = 10E-8)
-{
+inline bool dequal_relative(const double &rhs, const double &lhs, const double maxdiff = 10E-8) {
   // difference.
   double diff = std::fabs(rhs - lhs);
   double absrhs = std::fabs(rhs);
   double abslhs = std::fabs(lhs);
   // find the largest
   double largest = (abslhs > absrhs) ? abslhs : absrhs;
-  
-  if (diff <= largest * maxdiff) return true;
+
+  if (diff <= largest * maxdiff)
+    return true;
   return false;
 }
 

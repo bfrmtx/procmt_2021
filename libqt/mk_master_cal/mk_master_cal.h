@@ -30,18 +30,17 @@
 #ifndef MK_MASTER_CAL_H
 #define MK_MASTER_CAL_H
 
-#include <QMainWindow>
-#include <QFileInfo>
 #include <QDrag>
-#include <QDropEvent>
-#include <QMimeData>
 #include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QFileInfo>
+#include <QMainWindow>
+#include <QMimeData>
 
-#include "gui_items.h"
 #include "calibration.h"
-#include "xmlcallib.h"
+#include "gui_items.h"
 #include "prc_com_table.h"
+#include "xmlcallib.h"
 
 #include "plotlib.h"
 #include "xmlcallib.h"
@@ -50,53 +49,48 @@ namespace Ui {
 class mk_master_cal;
 }
 
-class mk_master_cal : public QMainWindow
-{
-    Q_OBJECT
+class mk_master_cal : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit mk_master_cal(QWidget *parent = 0);
-    ~mk_master_cal();
+  explicit mk_master_cal(QWidget *parent = 0);
+  ~mk_master_cal();
 
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-
-
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
 
 private slots:
-    void on_sensor_box_currentTextChanged(const QString &arg1);
+  void on_sensor_box_currentTextChanged(const QString &arg1);
 
-    void rx_cal_message(const int &channel, const int &slot, const QString &message);
+  void rx_cal_message(const int &channel, const int &slot, const QString &message);
 
-    void on_pushButton_make_master_clicked();
+  void on_pushButton_make_master_clicked();
 
 private:
-    Ui::mk_master_cal *ui;
+  Ui::mk_master_cal *ui;
 
-    std::unique_ptr<sensors_combo> scbox = nullptr;
-    QFileInfo qfi_db;
+  std::unique_ptr<sensors_combo> scbox = nullptr;
+  QFileInfo qfi_db;
 
-    QFileInfo qfi_out;
+  QFileInfo qfi_out;
 
+  std::unique_ptr<calibration> extf = nullptr;
+  std::unique_ptr<calibration> inmaster = nullptr;
+  std::shared_ptr<calibration> outmaster = nullptr;
 
-    std::unique_ptr<calibration> extf = nullptr;
-    std::unique_ptr<calibration> inmaster = nullptr;
-    std::shared_ptr<calibration> outmaster = nullptr;
+  std::unique_ptr<xmlcallib> xmlcal = nullptr;
 
-    std::unique_ptr<xmlcallib> xmlcal = nullptr;
+  bool is_ready = false;
 
-    bool is_ready = false;
+  std::vector<double> outer_fon;
+  std::vector<double> outer_foff;
+  std::vector<double> inner_fon;
+  std::vector<double> inner_foff;
 
-    std::vector<double> outer_fon;
-    std::vector<double> outer_foff;
-    std::vector<double> inner_fon;
-    std::vector<double> inner_foff;
+  prc_com_table pctab;
 
-    prc_com_table pctab;
-
-    QString coilname;                       //!< real coils name like MFS-06e MFS-07e FGS-03e
-    QString message;
-
+  QString coilname; //!< real coils name like MFS-06e MFS-07e FGS-03e
+  QString message;
 };
 
 #endif // MK_MASTER_CAL_H

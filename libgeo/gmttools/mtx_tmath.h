@@ -32,37 +32,34 @@
 
 #include <cmath>
 
-
-template<typename T>
-T roundMultiple( T value, T multiple )
-{
-    if (multiple == 0) return value;
-    return static_cast<T>(round(static_cast<double>(value)/static_cast<double>(multiple))*static_cast<double>(multiple));
+template <typename T>
+T roundMultiple(T value, T multiple) {
+  if (multiple == 0)
+    return value;
+  return static_cast<T>(round(static_cast<double>(value) / static_cast<double>(multiple)) * static_cast<double>(multiple));
 }
 
-template<typename T>
-T roundCeilMultiple( T value, T multiple )
-{
-    if (multiple == 0) return value;
-    return static_cast<T>(std::ceil(static_cast<double>(value)/static_cast<double>(multiple))*static_cast<double>(multiple));
+template <typename T>
+T roundCeilMultiple(T value, T multiple) {
+  if (multiple == 0)
+    return value;
+  return static_cast<T>(std::ceil(static_cast<double>(value) / static_cast<double>(multiple)) * static_cast<double>(multiple));
 }
 
-template<typename T>
-T roundFloorMultiple( T value, T multiple )
-{
-    if (multiple == 0) return value;
-    return static_cast<T>(std::floor(static_cast<double>(value)/static_cast<double>(multiple))*static_cast<double>(multiple));
+template <typename T>
+T roundFloorMultiple(T value, T multiple) {
+  if (multiple == 0)
+    return value;
+  return static_cast<T>(std::floor(static_cast<double>(value) / static_cast<double>(multiple)) * static_cast<double>(multiple));
 }
 
-template<typename T>
-T autoMultiple(T multiple )
-{
-    if (multiple == 0) return multiple;
-    T logs = floor(log10(multiple));
+template <typename T>
+T autoMultiple(T multiple) {
+  if (multiple == 0)
+    return multiple;
+  T logs = floor(log10(multiple));
 
-
-    return pow(10, logs-1) ;
+  return pow(10, logs - 1);
 }
-
 
 #endif // MTX_TMATH_H

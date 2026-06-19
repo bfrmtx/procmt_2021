@@ -30,56 +30,53 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QDebug>
-#include <QMainWindow>
-#include <QRadioButton>
 #include <QButtonGroup>
+#include <QDebug>
 #include <QList>
+#include <QMainWindow>
+#include <QMap>
+#include <QRadioButton>
 #include <QString>
 #include <QStringList>
-#include <QMap>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+  MainWindow(QWidget *parent = nullptr);
+  ~MainWindow();
 
 private slots:
 
-    void slot_sys_changed(int id);
+  void slot_sys_changed(int id);
 
-    void on_spinBox_sens_res_valueChanged(int arg1);
+  void on_spinBox_sens_res_valueChanged(int arg1);
 
-    void on_checkBox_coil_clicked(bool checked);
+  void on_checkBox_coil_clicked(bool checked);
 
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
 
-    QButtonGroup *sys;
-    QButtonGroup *adb;
-    QButtonGroup *div;
-    QButtonGroup *gain_1;
-    QButtonGroup *dac;
-    QButtonGroup *gain_2;
-    QButtonGroup *rf;
-    QButtonGroup *filter_lf;
-    QButtonGroup *filter_hf;
+  QButtonGroup *sys;
+  QButtonGroup *adb;
+  QButtonGroup *div;
+  QButtonGroup *gain_1;
+  QButtonGroup *dac;
+  QButtonGroup *gain_2;
+  QButtonGroup *rf;
+  QButtonGroup *filter_lf;
+  QButtonGroup *filter_hf;
 
-    QList<QRadioButton *> sys_btns;
+  QList<QRadioButton *> sys_btns;
 
+  QMap<QString, int> all_btns;
 
-    QMap<QString, int> all_btns;
-
-    void set_default();
-
-
-
+  void set_default();
 };
 #endif // MAINWINDOW_H

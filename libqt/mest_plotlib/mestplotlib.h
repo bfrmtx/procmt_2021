@@ -30,37 +30,31 @@
 #ifndef MESTPLOTLIB_H
 #define MESTPLOTLIB_H
 
-#include "mestplotlib_global.h"
-#include <QMainWindow>
-#include "qcustomplot.h"
-#include <vector>
 #include "iterator_complex_templates.h"
-
+#include "mestplotlib_global.h"
+#include "qcustomplot.h"
+#include <QMainWindow>
+#include <vector>
 
 namespace Ui {
 class mest_plotlib;
 }
 
-class mest_plotlib : public QMainWindow
-{
-    Q_OBJECT
+class mest_plotlib : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit mest_plotlib(QWidget *parent = nullptr);
-    ~mest_plotlib();
+  explicit mest_plotlib(QWidget *parent = nullptr);
+  ~mest_plotlib();
 
-    void set_realpart_estimator(const std::vector<double> &mhxr, const std::vector<double> &mhyr, const std::vector<double> &d_itersr);
-    void set_imagpart_estimator(const std::vector<double> &mhxi, const std::vector<double> &mhyi, const std::vector<double> &d_itersi);
-
+  void set_realpart_estimator(const std::vector<double> &mhxr, const std::vector<double> &mhyr, const std::vector<double> &d_itersr);
+  void set_imagpart_estimator(const std::vector<double> &mhxi, const std::vector<double> &mhyi, const std::vector<double> &d_itersi);
 
 private:
-    Ui::mest_plotlib *ui;
+  Ui::mest_plotlib *ui;
 
-
-
-
-    std::unique_ptr<QCustomPlot> plot_tr = nullptr ;
-    std::unique_ptr<QCustomPlot> plot_ti = nullptr ;
+  std::unique_ptr<QCustomPlot> plot_tr = nullptr;
+  std::unique_ptr<QCustomPlot> plot_ti = nullptr;
 };
 
 #endif // MESTPLOTLIB_H

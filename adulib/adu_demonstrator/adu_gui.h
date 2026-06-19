@@ -30,12 +30,12 @@
 #ifndef ADU_GUI_H
 #define ADU_GUI_H
 
-#include <QMainWindow>
 #include <QDir>
-#include <QFileDialog>
-#include <QMessageBox>
 #include <QDrag>
 #include <QDropEvent>
+#include <QFileDialog>
+#include <QMainWindow>
+#include <QMessageBox>
 #include <QMimeData>
 #include <QSql>
 #include <QUrl>
@@ -43,139 +43,126 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
-#include <QDoubleSpinBox>
-#include <QSpinBox>
-#include <QComboBox>
-#include <QLineEdit>
 #include <QButtonGroup>
+#include <QComboBox>
+#include <QDoubleSpinBox>
+#include <QLineEdit>
 #include <QRadioButton>
+#include <QSpinBox>
 #include <QTableView>
 #include <QTableWidget>
 
-#include "adu_system_defs.h"
 #include "adu_json.h"
+#include "adu_system_defs.h"
+#include <cfloat>
+#include <climits>
 #include <memory>
 #include <vector>
-#include <climits>
-#include <cfloat>
 
 #include "recording.h"
 
-
 QT_BEGIN_NAMESPACE
-namespace Ui { class adu_gui; }
+namespace Ui {
+class adu_gui;
+}
 QT_END_NAMESPACE
 
-class adu_gui : public QMainWindow
-{
-    Q_OBJECT
+class adu_gui : public QMainWindow {
+  Q_OBJECT
 
 public:
-    adu_gui(QWidget *parent = nullptr);
-    ~adu_gui();
+  adu_gui(QWidget *parent = nullptr);
+  ~adu_gui();
 
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
 
 private slots:
 
-    void on_pb_create_bare_bone_clicked();
+  void on_pb_create_bare_bone_clicked();
 
-    void on_pb_save_JSON_clicked();
-    void on_pb_load_JSON_clicked();
+  void on_pb_save_JSON_clicked();
+  void on_pb_load_JSON_clicked();
 
-    void on_pb_load_XML_clicked();
-    void on_pb_save_XML_clicked();
+  void on_pb_load_XML_clicked();
+  void on_pb_save_XML_clicked();
 
+  void update_adu_values(const uint &varmap, const uint &channel, const QString &key, QVariant &value);
 
+  void update_adu_double_values(const double &value_dbl);
+  void update_adu_string_values(const QString &value_str);
+  void update_adu_string_values_from_idx(const int &index);
 
-    void update_adu_values(const uint& varmap, const uint& channel, const QString& key, QVariant& value);
+  void update_adu_int_values(const int &value_int);
 
-    void update_adu_double_values(const double& value_dbl);
-    void update_adu_string_values(const QString& value_str);
-    void update_adu_string_values_from_idx(const int& index);
+  void channel_type_changed(const bool &checked);
 
-    void update_adu_int_values(const int& value_int);
+  void clear_gui();
 
+  void assemble_gui(const bool is_barebone);
 
-    void channel_type_changed(const bool& checked);
+  void get_doubles_from_adu();
+  void get_strings_edit_from_adu();
 
-
-    void clear_gui();
-
-    void assemble_gui(const bool is_barebone);
-
-    void get_doubles_from_adu();
-    void get_strings_edit_from_adu();
-
-
-    void get_ints_from_adu();
-
-
-
+  void get_ints_from_adu();
 
 private:
-    Ui::adu_gui *ui;
+  Ui::adu_gui *ui;
 
-    std::unique_ptr<adu_json> adu;
+  std::unique_ptr<adu_json> adu;
 
-    /*!
-     * \brief create_double_spinbox creates atswriter++pos_x1++1  so QVariantMap_name++key++channel - that will be split later again
-     * \param channel 1
-     * \param QVariantMap_name like atswriter
-     * \param key pos_x1
-     * \param parent
-     */
-    void create_double_spinbox(const adu_defs::adu_defs varmap, const uint& channel, const QString& key, QWidget *parent = nullptr);
+  /*!
+   * \brief create_double_spinbox creates atswriter++pos_x1++1  so QVariantMap_name++key++channel - that will be split later again
+   * \param channel 1
+   * \param QVariantMap_name like atswriter
+   * \param key pos_x1
+   * \param parent
+   */
+  void create_double_spinbox(const adu_defs::adu_defs varmap, const uint &channel, const QString &key, QWidget *parent = nullptr);
 
-    void create_sensor_combo(const adu_defs::adu_defs varmap, const uint& channel, const QString& key, QWidget *parent = nullptr);
-    void create_line_edit_channel(const adu_defs::adu_defs varmap, const uint& channel, const QString& key, QWidget *parent = nullptr);
+  void create_sensor_combo(const adu_defs::adu_defs varmap, const uint &channel, const QString &key, QWidget *parent = nullptr);
+  void create_line_edit_channel(const adu_defs::adu_defs varmap, const uint &channel, const QString &key, QWidget *parent = nullptr);
 
+  QVariant get_label(const adu_defs::adu_defs varmap, const QString &key);
+  void get_sensor_types();
 
-    QVariant get_label(const adu_defs::adu_defs varmap, const QString& key);
-    void get_sensor_types();
+  std::vector<QDoubleSpinBox *> dbl_spbxs;
+  std::vector<QLabel *> dbl_spbxs_labels;
 
+  std::vector<QSpinBox *> spbxs;
+  std::vector<QLabel *> spbxs_labels;
 
-    std::vector<QDoubleSpinBox*> dbl_spbxs;
-    std::vector<QLabel*> dbl_spbxs_labels;
+  std::vector<QComboBox *> cbboxs;
+  std::vector<QLabel *> cbboxs_labels;
+  std::vector<QLineEdit *> lineetds;
 
-    std::vector<QSpinBox*> spbxs;
-    std::vector<QLabel*>   spbxs_labels;
+  std::vector<QRadioButton *> rb_click_E; //!< having a bare boe you want to set the channel type
+  std::vector<QRadioButton *> rb_click_H; //!< having a bare boe you want to set the channel type
 
-    std::vector<QComboBox*> cbboxs;
-    std::vector<QLabel*> cbboxs_labels;
-    std::vector<QLineEdit*> lineetds;
+  void set_default_ranges(const adu_defs::adu_defs varmap, const QString &token_2, double min, double max);
 
-    std::vector<QRadioButton*> rb_click_E;  //!< having a bare boe you want to set the channel type
-    std::vector<QRadioButton*> rb_click_H;   //!< having a bare boe you want to set the channel type
+  adu_row_struct adu_row;
 
-    void set_default_ranges(const adu_defs::adu_defs varmap, const QString& token_2, double min, double max);
+  std::unique_ptr<QSqlDatabase> db;
+  std::unique_ptr<QSqlQuery> query;
 
-    adu_row_struct adu_row;
+  void create_bare_bone(uint chans);
+  void gen_sensor_pos();
+  void gen_sensor_types();
+  void gen_str_results();
 
-    std::unique_ptr<QSqlDatabase> db;
-    std::unique_ptr<QSqlQuery> query;
+  QStringList E_sensors;
+  QStringList H_sensors;
+  QStringList H_sensors_atsheader;
+  QStringList E_sensors_atsheader;
 
-    void create_bare_bone(uint chans);
-    void gen_sensor_pos();
-    void gen_sensor_types();
-    void gen_str_results();
+  QStringList E_channel_types;
+  QStringList H_channel_types;
 
-    QStringList E_sensors;
-    QStringList H_sensors;
-    QStringList H_sensors_atsheader;
-    QStringList E_sensors_atsheader;
+  QList<std::unique_ptr<adu_json>> jobs;
 
-    QStringList E_channel_types;
-    QStringList H_channel_types;
+  void assemble_from_existing(const bool is_barebone = false);
 
-    QList<std::unique_ptr<adu_json>> jobs;
-
-    void assemble_from_existing(const bool is_barebone = false);
-
-    std::unique_ptr<recording> rec;
-
-
-
+  std::unique_ptr<recording> rec;
 };
 #endif // ADU_GUI_H

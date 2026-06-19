@@ -34,19 +34,19 @@
 #include <QObject>
 
 class QExtNetworkAccessManager : public QNetworkAccessManager {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    enum class Depth {
-        ZERO,
-        ONE,
-        INF
-    };
+  enum class Depth {
+    ZERO,
+    ONE,
+    INF
+  };
 
-    QNetworkReply * propfind(QNetworkRequest const & request, QByteArray const & body);
-    QNetworkReply * propfind(QNetworkRequest request, Depth depth, QByteArray const & body);
-    QNetworkReply * get(QNetworkRequest request, size_t begin, size_t end);
-    QNetworkReply * get(QNetworkRequest const & request);
+  QNetworkReply *propfind(QNetworkRequest const &request, QByteArray const &body);
+  QNetworkReply *propfind(QNetworkRequest request, Depth depth, QByteArray const &body);
+  QNetworkReply *get(QNetworkRequest request, size_t begin, size_t end);
+  QNetworkReply *get(QNetworkRequest const &request);
 };
 
 #endif // QEXTNETWORKACCESSMANAGER_H

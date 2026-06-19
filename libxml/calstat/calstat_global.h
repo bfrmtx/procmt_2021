@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #if defined(CALSTAT_LIBRARY)
-#  define CALSTAT_EXPORT Q_DECL_EXPORT
+#define CALSTAT_EXPORT Q_DECL_EXPORT
 #else
-#  define CALSTAT_EXPORT Q_DECL_IMPORT
+#define CALSTAT_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // CALSTAT_GLOBAL_H

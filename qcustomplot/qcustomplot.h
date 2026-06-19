@@ -6262,8 +6262,7 @@ Q_DECLARE_TYPEINFO(QCPErrorBarsData, Q_PRIMITIVE_TYPE);
 */
 typedef QVector<QCPErrorBarsData> QCPErrorBarsDataContainer;
 
-class QCP_LIB_DECL QCPErrorBars : public QCPAbstractPlottable,
-                                  public QCPPlottableInterface1D {
+class QCP_LIB_DECL QCPErrorBars : public QCPAbstractPlottable, public QCPPlottableInterface1D {
   Q_OBJECT
   /// \cond INCLUDE_QPROPERTIES
   Q_PROPERTY(QSharedPointer<QCPErrorBarsDataContainer> data READ data WRITE setData)

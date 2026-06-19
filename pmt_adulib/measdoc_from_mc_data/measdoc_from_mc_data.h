@@ -31,82 +31,75 @@
 #define MEASDOC_FROM_MC_DATA_H
 
 #include "measdoc_from_mc_data_global.h"
-#include <iostream>
-#include <QObject>
 #include <QDebug>
-#include <vector>
 #include <QDir>
-#include <QString>
 #include <QMap>
+#include <QObject>
+#include <QString>
+#include <iostream>
+#include <vector>
 
+#include "adulib.h"
+#include "calibration.h"
+#include "eqdatetime.h"
 #include "mc_data.h"
 #include "measdocxml.h"
-#include "adulib.h"
-#include "eqdatetime.h"
-#include "calibration.h"
 
-class measdoc_from_mc_data  : public QObject
-{
+class measdoc_from_mc_data : public QObject {
   Q_OBJECT
 
 public:
-    measdoc_from_mc_data(std::shared_ptr<mc_data> mxcd, QObject *parent = Q_NULLPTR);
-    measdoc_from_mc_data(const QList<QFileInfo> qfis, QObject *parent = Q_NULLPTR);
+  measdoc_from_mc_data(std::shared_ptr<mc_data> mxcd, QObject *parent = Q_NULLPTR);
+  measdoc_from_mc_data(const QList<QFileInfo> qfis, QObject *parent = Q_NULLPTR);
 
-    std::shared_ptr<measdocxml> make_measdoc_xml(bool &success);
+  std::shared_ptr<measdocxml> make_measdoc_xml(bool &success);
 
-
-    ~measdoc_from_mc_data();
+  ~measdoc_from_mc_data();
 
 private slots:
-    void slot_qmap_created(const QMap<QString,QVariant> &data_map);
+  void slot_qmap_created(const QMap<QString, QVariant> &data_map);
 
 private:
+  void connect_measdoc();
 
-    void connect_measdoc();
+  void get_calibration_xml();
 
-    void get_calibration_xml();
+  bool prepare_adu_from_skeleton();
 
-    bool prepare_adu_from_skeleton();
+  bool data_from_ats_files();
 
-    bool data_from_ats_files();
+  bool can_continue = false;
 
-    bool can_continue = false;
+  std::unique_ptr<adulib> adujob = nullptr;
+  std::shared_ptr<measdocxml> measdoc;
+  QFile measdocxml_xml;
+  std::shared_ptr<mc_data> mxcd;
 
-    std::unique_ptr<adulib> adujob = nullptr;
-    std::shared_ptr<measdocxml> measdoc;
-    QFile measdocxml_xml;
-    std::shared_ptr<mc_data> mxcd;
+  // for the job
 
-    // for the job
+  QString xml_cnf_basedir;
+  QString HWConfig;
+  QString HwDatabase;
+  QString HwStatus;
+  QString ChannelConfig;
+  QString outputjobsdir;
 
-    QString xml_cnf_basedir;
-    QString HWConfig;
-    QString HwDatabase;
-    QString HwStatus;
-    QString ChannelConfig;
-    QString outputjobsdir;
+  QFileInfo *qfiHWConfig = nullptr;
+  QUrl *qrlHWConfig = nullptr;
+  QByteArray *qbaHWConfig = nullptr;
 
-    QFileInfo *qfiHWConfig = nullptr;
-    QUrl *qrlHWConfig = nullptr;
-    QByteArray *qbaHWConfig = nullptr;
+  QFileInfo *qfiHwDatabase = nullptr;
+  QUrl *qrlHwDatabase = nullptr;
+  QByteArray *qbaHwDatabase = nullptr;
 
-    QFileInfo *qfiHwDatabase = nullptr;
-    QUrl *qrlHwDatabase = nullptr;
-    QByteArray *qbaHwDatabase = nullptr;
+  QFileInfo *qfiChannelConfig = nullptr;
+  QUrl *qrlChannelConfig = nullptr;
+  QByteArray *qbaChannelConfig = nullptr;
 
+  QFileInfo *qfiHwStatus;
 
-    QFileInfo *qfiChannelConfig = nullptr;
-    QUrl *qrlChannelConfig = nullptr;
-    QByteArray *qbaChannelConfig = nullptr;
-
-    QFileInfo *qfiHwStatus;
-
-    QFileInfo calibration_db;
-    std::vector<int> used_channels;
-
-
-
+  QFileInfo calibration_db;
+  std::vector<int> used_channels;
 };
 
 #endif // MEASDOC_FROM_MC_DATA_H

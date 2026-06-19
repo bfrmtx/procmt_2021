@@ -30,160 +30,147 @@
 #ifndef ADU_JSON_H
 #define ADU_JSON_H
 
-#include <QObject>
 #include <QDebug>
-#include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QObject>
 
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include <QVariant>
-#include <QMap>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QDir>
-
+#include <QMap>
+#include <QVariant>
 
 #include <QDate>
-#include <QTime>
 #include <QDateTime>
+#include <QTime>
 
 // setting up data from SQL file
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <iostream>
 #include <cfloat>
+#include <cmath>
+#include <iostream>
+#include <memory>
+#include <vector>
 
 #include "adu_system_defs.h"
 
-
-
-class adu_json  : public QObject
-{
-    Q_OBJECT
+class adu_json : public QObject {
+  Q_OBJECT
 
 public:
-    explicit adu_json(QObject *parent = nullptr);
+  explicit adu_json(QObject *parent = nullptr);
 
-    adu_json(const adu_json &rhs);
+  adu_json(const adu_json &rhs);
 
-    adu_json& operator = (const adu_json &rhs);
+  adu_json &operator=(const adu_json &rhs);
 
-    ~adu_json();
+  ~adu_json();
 
-    /*!
-     * \brief init_channels
-     * \param chans how many channels the ADU has; call directly to create an empty ADU; otherwise this is used while loading JSON and is init from meas_channels
-     * \return
-     */
-    bool init_channels(const uint& chans);
+  /*!
+   * \brief init_channels
+   * \param chans how many channels the ADU has; call directly to create an empty ADU; otherwise this is used while loading JSON and is init from meas_channels
+   * \return
+   */
+  bool init_channels(const uint &chans);
 
-    void prepare();
+  void prepare();
 
-    QByteArray toJsonByteArray(QJsonDocument::JsonFormat format = QJsonDocument::Indented);
+  QByteArray toJsonByteArray(QJsonDocument::JsonFormat format = QJsonDocument::Indented);
 
-    bool fromQBytearray(const QByteArray &json_bytes);
+  bool fromQBytearray(const QByteArray &json_bytes);
 
-    bool to_JSON_file(const QFileInfo &qfi);
+  bool to_JSON_file(const QFileInfo &qfi);
 
-    bool to_XML_file(const QFileInfo &qfi);
+  bool to_XML_file(const QFileInfo &qfi);
 
-    QByteArray toXMLByteArray();
+  QByteArray toXMLByteArray();
 
-    bool from_JSON(const QFileInfo *qfi = nullptr, const QByteArray *qba = nullptr);
+  bool from_JSON(const QFileInfo *qfi = nullptr, const QByteArray *qba = nullptr);
 
-    bool from_XML(const QFileInfo *qfi = nullptr);
+  bool from_XML(const QFileInfo *qfi = nullptr);
 
-    /*!
-     * \brief size who many channels
-     * \return channels of ADU
-     */
-    uint size() const;
+  /*!
+   * \brief size who many channels
+   * \return channels of ADU
+   */
+  uint size() const;
 
-    void clear();
+  void clear();
 
-    QVariant get_channel_value(const uint &channel, const QString &key) const;
+  QVariant get_channel_value(const uint &channel, const QString &key) const;
 
-    bool set_channel_value(const uint &channel, const QString &key, const QVariant &value);
+  bool set_channel_value(const uint &channel, const QString &key, const QVariant &value);
 
-    bool set_sensor_value(const uint &channel, const QString &key, const QVariant &value);
+  bool set_sensor_value(const uint &channel, const QString &key, const QVariant &value);
 
-    bool get_selftest_channels(QList<QStringList>& txt_values, QStringList& out_keys, QStringList& out_tooltips) const;
+  bool get_selftest_channels(QList<QStringList> &txt_values, QStringList &out_keys, QStringList &out_tooltips) const;
 
-    QStringList get_channel_node_keys(const QString xmlnode) const;
+  QStringList get_channel_node_keys(const QString xmlnode) const;
 
-    bool set_system_value(const QString &key, const QVariant &value);
+  bool set_system_value(const QString &key, const QVariant &value);
 
-    QVariant get_system_value(const QString &key) const;
+  QVariant get_system_value(const QString &key) const;
 
-    double dipole_length(const uint &channel, double &angle, bool *ok = nullptr) const;
+  double dipole_length(const uint &channel, double &angle, bool *ok = nullptr) const;
 
+  // these are needed for const inititalization of other maps
+  //
+  std::vector<QVariantMap> get_channels() const;
+  QVariantMap get_system() const;
+  std::vector<QVariantMap> get_sensors() const;
 
-    // these are needed for const inititalization of other maps
-    //
-    std::vector<QVariantMap> get_channels() const;
-    QVariantMap get_system() const;
-    std::vector<QVariantMap> get_sensors() const;
+  //    friend bool    compstartime_lt(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
+  //    friend bool    compstartime_gt(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
+  //    friend bool    compstartime_eq(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
+  //    friend int64_t stop_lhs_starts_rhs(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
 
+  // needed for my comp functions - that can be used for you local - but not remote ADU
+  QDateTime get_start_time() const;                           //!< returns UTC start time
+  QDateTime get_stop_time() const;                            //!< stop_time when loaded from files
+  QDateTime get_stop_time_calc(const int64_t duration) const; //!< stop_time is calculated from start_time, duration and sample_frequency
+  uint64_t get_samples() const;                               //!< often used - calculated
+  double get_sample_freq() const;                             //!< often used - returns the sampling frequency
 
-    //    friend bool    compstartime_lt(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
-    //    friend bool    compstartime_gt(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
-    //    friend bool    compstartime_eq(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
-    //    friend int64_t stop_lhs_starts_rhs(const std::unique_ptr<adu_json>& lhs, const std::unique_ptr<adu_json>& rhs);
+  // ------- this is the time ! ----------------- //
+  uint64_t get_duration() const;            //!< duration is the driving force; often used - returns time of job; sub second range is ignored
+  bool set_duration(const qint64 duration); //!< duration is the driving force; often used - returns time of job; sub second range is ignored
 
-
-    // needed for my comp functions - that can be used for you local - but not remote ADU
-    QDateTime get_start_time() const;           //!< returns UTC start time
-    QDateTime get_stop_time() const;            //!< stop_time when loaded from files
-    QDateTime get_stop_time_calc(const int64_t duration) const;       //!< stop_time is calculated from start_time, duration and sample_frequency
-    uint64_t get_samples() const;           //!< often used - calculated
-    double get_sample_freq() const;         //!< often used - returns the sampling frequency
-
-    // ------- this is the time ! ----------------- //
-    uint64_t get_duration() const;          //!< duration is the driving force; often used - returns time of job; sub second range is ignored
-    bool set_duration(const qint64 duration);   //!< duration is the driving force; often used - returns time of job; sub second range is ignored
-
-    void set_edit_mode(const bool on_off);
+  void set_edit_mode(const bool on_off);
 
 public slots:
 
-    void slot_sensortype_of_serial_changed(const QString& sensortype, const int& existing_sernum);
+  void slot_sensortype_of_serial_changed(const QString &sensortype, const int &existing_sernum);
 
 private:
+  std::vector<QVariantMap> channels;
+  void channels_to_json();
 
-    std::vector<QVariantMap> channels;
-    void channels_to_json();
+  std::vector<QVariantMap> sensors;
+  //    void sensors_to_json();
 
+  QVariantMap system;
+  void system_to_json();
 
-    std::vector<QVariantMap> sensors;
-    //    void sensors_to_json();
+  std::unique_ptr<QJsonObject> root_obj;
+  std::unique_ptr<QJsonDocument> json_doc;
+  QByteArray xmlqba;
 
+  qint64 duration = 0;
 
-    QVariantMap system;
-    void system_to_json();
+  bool edit_mode = false; //!< edit an existing file; values can be set which are not needed for job creation
 
-    std::unique_ptr<QJsonObject> root_obj;
-    std::unique_ptr<QJsonDocument> json_doc;
-    QByteArray xmlqba;
-
-    qint64 duration = 0;
-
-    bool edit_mode = false;                 //!< edit an existing file; values can be set which are not needed for job creation
-
-    QString GMS="8";        // 9 10
-    QString Version="2.0";  // selftest 08 / 09 / 10
-    QString Name="ADU-08e"; //
-    QString Type="1";       // egal
-
-
-
+  QString GMS = "8";        // 9 10
+  QString Version = "2.0";  // selftest 08 / 09 / 10
+  QString Name = "ADU-08e"; //
+  QString Type = "1";       // egal
 };
 
 #endif // ADU_JSON_H

@@ -31,50 +31,46 @@
 #define BOOST_STUDENT_H
 
 #include "boost_student_global.h"
-#include <memory>
-#include <algorithm>
-#include <vector>
-#include <map>
 #include "statmaps.h"
-#include <QString>
 #include <QDebug>
-
+#include <QString>
+#include <algorithm>
+#include <map>
+#include <memory>
+#include <vector>
 
 /*!
  * \brief The boost_student class covers the BOOST Student T distribution<br>
  *  the mk_regression_data math vector is "re-used" but not linked in order to keep indepency
  */
-class boost_student
-{
+class boost_student {
 
 public:
-    /*!
-     * \brief boost_student constructor
-     * \param regression_data input data from regression
-     * \param upper_quantile
-     * \param result contains the result of the Student T distribution
-     */
-    boost_student();
+  /*!
+   * \brief boost_student constructor
+   * \param regression_data input data from regression
+   * \param upper_quantile
+   * \param result contains the result of the Student T distribution
+   */
+  boost_student();
 
-    ~boost_student();
+  ~boost_student();
 
-    statmap student_t(const statmap &regression_data, const double upper_quantile);
-    double d_delta_slope;
-    double d_student_t_inv;
-    double d_upper_confidence;
-    double d_lower_confidence;
-    double d_upper_quantile;
-    bool is_ok;
-    statmap regression_result;
+  statmap student_t(const statmap &regression_data, const double upper_quantile);
+  double d_delta_slope;
+  double d_student_t_inv;
+  double d_upper_confidence;
+  double d_lower_confidence;
+  double d_upper_quantile;
+  bool is_ok;
+  statmap regression_result;
 
-    /*!
-         * \brief mk_regression_result A COPY FOM MATH_VECTOR !!
-         * \param regression_data
-         * \return a statmap with the distribution (Student T upper Quantile) depending results
-         */
-    statmap mk_regression_result(const statmap &regression_data, bool &is_ok);
-
-
+  /*!
+   * \brief mk_regression_result A COPY FOM MATH_VECTOR !!
+   * \param regression_data
+   * \return a statmap with the distribution (Student T upper Quantile) depending results
+   */
+  statmap mk_regression_result(const statmap &regression_data, bool &is_ok);
 };
 
 #endif // BOOST_STUDENT_H

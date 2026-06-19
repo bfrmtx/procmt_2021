@@ -30,28 +30,27 @@
 #ifndef PARALLEL_TEST_COHERENCY_H
 #define PARALLEL_TEST_COHERENCY_H
 
-#include <vector>
 #include <QString>
+#include <vector>
 
 struct parallel_test_coherency {
 
-    // data
-    std::vector<double> f;
-    std::vector<double> ampl;
-    std::vector<double> err;
-    std::vector<double> coh;
-    double f_sample;
-    size_t wl;
+  // data
+  std::vector<double> f;
+  std::vector<double> ampl;
+  std::vector<double> err;
+  std::vector<double> coh;
+  double f_sample;
+  size_t wl;
 
-    // cal - not inperpolated
-    int chopper = -1;  // can only be 0 or 1; -1 == undefined
-    std::vector<double> cal_f;
-    std::vector<double> cal_ampl;
-    std::vector<double> cal_phase;
-    QString sensortype;
-    int sernum = -1;
-    QString channel_type;
-
+  // cal - not inperpolated
+  int chopper = -1; // can only be 0 or 1; -1 == undefined
+  std::vector<double> cal_f;
+  std::vector<double> cal_ampl;
+  std::vector<double> cal_phase;
+  QString sensortype;
+  int sernum = -1;
+  QString channel_type;
 };
 
 #endif // PARALLEL_TEST_COHERENCY_H

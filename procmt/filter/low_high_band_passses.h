@@ -30,48 +30,44 @@
 #ifndef LOW_HIGH_BAND_PASSSES_H
 #define LOW_HIGH_BAND_PASSSES_H
 
-#include <QDialog>
+#include "gui_items.h"
 #include <QDebug>
+#include <QDialog>
 #include <QVariant>
 #include <memory>
-#include "gui_items.h"
 namespace Ui {
 class low_high_band_passses;
 }
 
-class low_high_band_passses : public QDialog
-{
-    Q_OBJECT
+class low_high_band_passses : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit low_high_band_passses(std::shared_ptr< QMap<QString, QVariant> > extrafilters_status, QWidget *parent = 0);
-    ~low_high_band_passses();
+  explicit low_high_band_passses(std::shared_ptr<QMap<QString, QVariant>> extrafilters_status, QWidget *parent = 0);
+  ~low_high_band_passses();
 
 signals:
 
-
 public slots:
 
-    void set_f_min_max_lp(const double fmin, const double fmax);
-    void set_f_min_max_hp(const double fmin, const double fmax);
-    void set_initValue_lp(const double f);
-    void set_initValue_hp(const double f);
-
+  void set_f_min_max_lp(const double fmin, const double fmax);
+  void set_f_min_max_hp(const double fmin, const double fmax);
+  void set_initValue_lp(const double f);
+  void set_initValue_hp(const double f);
 
 private slots:
 
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+  void on_buttonBox_accepted();
+  void on_buttonBox_rejected();
 
 private:
-    Ui::low_high_band_passses *ui;
+  Ui::low_high_band_passses *ui;
 
-    hz_s_spinbox *spnblowpass = Q_NULLPTR;
-    hz_s_spinbox *spnbhighpass = Q_NULLPTR;
+  hz_s_spinbox *spnblowpass = Q_NULLPTR;
+  hz_s_spinbox *spnbhighpass = Q_NULLPTR;
 
-    QString filter_name;
-    std::shared_ptr<QMap<QString, QVariant>> extrafilters_status;
-
+  QString filter_name;
+  std::shared_ptr<QMap<QString, QVariant>> extrafilters_status;
 };
 
 #endif // LOW_HIGH_BAND_PASSSES_H

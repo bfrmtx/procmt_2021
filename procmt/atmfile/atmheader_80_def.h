@@ -42,4 +42,3 @@ struct atmheader {
 };
 
 #endif // ATMHEADER_80_DEF_H
-

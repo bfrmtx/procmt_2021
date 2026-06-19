@@ -30,52 +30,52 @@
 #ifndef PROCMT_MINI_H
 #define PROCMT_MINI_H
 
-#include <QMainWindow>
-#include <QDebug>
-#include <memory>
-#include <thread>
-#include <QFileInfo>
-#include <QDir>
-#include <QUrl>
-#include <QFileDialog>
-#include <QFileSystemModel>
-#include <QTreeView>
-#include <QDialog>
-#include <QLabel>
-#include <QVariant>
-#include "gui_items.h"
-#include "qstring_utilities.h"
 #include "dir_dialog.h"
-#include "procmt_alldefines.h"
-#include "qtx_templates.h"
-#include "prc_com.h"
+#include "edi_file.h"
+#include "gui_items.h"
 #include "msg_logger.h"
 #include "mt_site.h"
-#include "edi_file.h"
+#include "prc_com.h"
+#include "procmt_alldefines.h"
 #include "procmt_lib.h"
-#include <queue>
+#include "qstring_utilities.h"
+#include "qtx_templates.h"
+#include <QDebug>
+#include <QDialog>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFileSystemModel>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMap>
+#include <QProcess>
 #include <QProgressBar>
-#include <QTableView>
 #include <QStandardItem>
 #include <QStandardItemModel>
-#include <QTableWidgetItem>
-#include <QProcess>
-#include <QVector>
-#include <QMap>
 #include <QStandardPaths>
+#include <QTableView>
+#include <QTableWidgetItem>
+#include <QTreeView>
+#include <QUrl>
+#include <QVariant>
+#include <QVector>
+#include <memory>
+#include <queue>
+#include <thread>
 
 #include "qcustomplot.h"
 
 #ifdef USE_SPECTRAL_PLOTTER_PRO
- #include "spectra_plotter_pro.h"
+#include "spectra_plotter_pro.h"
 #else
- #include "spectra_plotter.h"
+#include "spectra_plotter.h"
 #endif
 #include "lineedit_file.h"
 
-#include "static_plot.h"
-#include "spc_db.h"
 #include "prc_com_xml.h"
+#include "spc_db.h"
+#include "static_plot.h"
 
 #include <QMessageBox>
 
@@ -83,273 +83,248 @@ namespace Ui {
 class procmt_mini;
 }
 
-class procmt_mini : public QMainWindow
-{
-    Q_OBJECT
+class procmt_mini : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit procmt_mini(std::shared_ptr<prc_com> cmdline, std::shared_ptr<msg_logger> msg, QWidget *parent = Q_NULLPTR);
-    ~procmt_mini();
+  explicit procmt_mini(std::shared_ptr<prc_com> cmdline, std::shared_ptr<msg_logger> msg, QWidget *parent = Q_NULLPTR);
+  ~procmt_mini();
 
-    //void get_mt_data(std::shared_ptr<mt_site> mtsite, std::vector<std::shared_ptr<edi_file> > &edifiles);
+  // void get_mt_data(std::shared_ptr<mt_site> mtsite, std::vector<std::shared_ptr<edi_file> > &edifiles);
 
-    QFileInfo qfi_base, qfi_center, qfi_emap, qfi_rr;
+  QFileInfo qfi_base, qfi_center, qfi_emap, qfi_rr;
 
-    std::vector<std::shared_ptr<edi_file> > edifiles;
-    std::shared_ptr<mt_site> mtsite;
+  std::vector<std::shared_ptr<edi_file>> edifiles;
+  std::shared_ptr<mt_site> mtsite;
 
-    void keyPressEvent(QKeyEvent *keyevent);
+  void keyPressEvent(QKeyEvent *keyevent);
 
 signals:
 
-    //    void run_procmt_lib(const QStringList &allmeasdocs_center, const QStringList &allmeasdocs_emap, const QStringList &allmeasdocs_rr,
-    //                        const mttype &myttype, const proc_type &my_proc_type);
+  //    void run_procmt_lib(const QStringList &allmeasdocs_center, const QStringList &allmeasdocs_emap, const QStringList &allmeasdocs_rr,
+  //                        const mttype &myttype, const proc_type &my_proc_type);
 
 public slots:
-    void dir_selected(const QString &absolute_path, const int &target);
+  void dir_selected(const QString &absolute_path, const int &target);
 
-    /*!
-     * \brief slot_mtdata_finished that is the FIRST run including FFT
-     * \param message
-     */
-    void slot_mtdata_finished(const QString &message);
+  /*!
+   * \brief slot_mtdata_finished that is the FIRST run including FFT
+   * \param message
+   */
+  void slot_mtdata_finished(const QString &message);
 
-    void slot_file_progess(const QString &message);
+  void slot_file_progess(const QString &message);
 
-    void slot_change_prc_com_variant(const QString &key, const QVariant &value);
+  void slot_change_prc_com_variant(const QString &key, const QVariant &value);
 
-    void slot_set_survey_base_dir(const QString &survey_base_dir);
+  void slot_set_survey_base_dir(const QString &survey_base_dir);
 
-    /*!
-     * \brief slot_mt_site_finished for re-run etc
-     */
-    void slot_mt_site_finished();
-
-
-
+  /*!
+   * \brief slot_mt_site_finished for re-run etc
+   */
+  void slot_mt_site_finished();
 
 private slots:
 
-    // void on_dirs_base_lineEdit_textChanged(const QString &arg1);
+  // void on_dirs_base_lineEdit_textChanged(const QString &arg1);
 
-    // void on_dirs_center_lineEdit_editingFinished();
+  // void on_dirs_center_lineEdit_editingFinished();
 
-    //  void on_dirs_center_lineEdit_textChanged(const QString &arg1);
+  //  void on_dirs_center_lineEdit_textChanged(const QString &arg1);
 
-    void on_dirs_center_select_pushButton_clicked();
+  void on_dirs_center_select_pushButton_clicked();
 
+  void on_dirs_rr_select_pushButton_clicked();
 
-    void on_dirs_rr_select_pushButton_clicked();
+  void on_dirs_emap_select_pushButton_clicked();
 
-    void on_dirs_emap_select_pushButton_clicked();
+  void slot_set_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
 
-    void slot_set_max_counts_and_last(const size_t &max_counts, const size_t &last_reading);
+  void slot_update_progress_bar(const int counts);
 
-    void slot_update_progress_bar(const int counts);
+  void on_run_pushButton_clicked();
 
+  void on_pushButton_to_settings_clicked();
 
-    void on_run_pushButton_clicked();
+  void slot_plot();
 
-    void on_pushButton_to_settings_clicked();
+  void slot_tsplotter(const QString &xmlfile);
 
-    void slot_plot();
+  void slot_recalculate();
 
-    void slot_tsplotter(const QString &xmlfile);
+  void on_pushButton_recaluculate_clicked();
 
-    void slot_recalculate();
+  void slot_actual_edifile_name(const QString edifile_name);
 
-    void on_pushButton_recaluculate_clicked();
+  void slot_set_bw_prz(const QString &str_smooth_medium_sharp);
 
-    void slot_actual_edifile_name(const QString edifile_name);
+  void on_pushButton_save_spectra_clicked();
 
-    void slot_set_bw_prz(const QString& str_smooth_medium_sharp);
+  void on_pushButton_load_spectra_clicked();
 
-    void on_pushButton_save_spectra_clicked();
+  void on_dirs_base_select_pushButton_clicked();
 
-    void on_pushButton_load_spectra_clicked();
+  void on_pushButton_spectral_plotter_clicked();
 
-    void on_dirs_base_select_pushButton_clicked();
+  void on_pushButton_reset_tensor_clicked();
 
-    void on_pushButton_spectral_plotter_clicked();
+  void on_pushButton_clear_log_clicked();
 
-    void on_pushButton_reset_tensor_clicked();
+  void on_pushButton_edi_plotter_clicked();
 
-    void on_pushButton_clear_log_clicked();
+  void on_pushButton_clear_edi_clicked();
 
-    void on_pushButton_edi_plotter_clicked();
+  //  void on_dirs_emap_lineEdit_textChanged(const QString &arg1);
 
-    void on_pushButton_clear_edi_clicked();
+  //   void on_dirs_rr_lineEdit_textChanged(const QString &arg1);
 
-    //  void on_dirs_emap_lineEdit_textChanged(const QString &arg1);
+  void on_dirs_base_lineEdit_valid_dir(const bool &ok);
 
-    //   void on_dirs_rr_lineEdit_textChanged(const QString &arg1);
+  void on_dirs_emap_lineEdit_valid_dir(const bool &ok);
 
-    void on_dirs_base_lineEdit_valid_dir(const bool &ok);
+  void on_dirs_center_lineEdit_valid_dir(const bool &ok);
 
-    void on_dirs_emap_lineEdit_valid_dir(const bool &ok);
+  void on_dirs_rr_lineEdit_valid_dir(const bool &ok);
 
-    void on_dirs_center_lineEdit_valid_dir(const bool &ok);
+  void slot_add_f_button(const double &frequency); // add plots
+  void slot_frequency_button_clicked();
 
-    void on_dirs_rr_lineEdit_valid_dir(const bool &ok);
+  void slot_add_tsplotter_center_button(); // add tsplotter plots
+  void slot_add_tsplotter_center_button_clicked();
 
+  void slot_add_tsplotter_rr_button(); // add tsplotter plots
+  void slot_add_tsplotter_rr_button_clicked();
 
-    void slot_add_f_button(const double &frequency);   // add plots
-    void slot_frequency_button_clicked();
+  void slot_add_tsplotter_emap_button(); // add tsplotter plots
+  void slot_add_tsplotter_emap_button_clicked();
 
-    void slot_add_tsplotter_center_button();   // add tsplotter plots
-    void slot_add_tsplotter_center_button_clicked();
+  void on_pushButton_export_ascii_clicked();
 
-    void slot_add_tsplotter_rr_button();   // add tsplotter plots
-    void slot_add_tsplotter_rr_button_clicked();
+  void on_pushButton_clear_rr_lineEdit_clicked();
 
-    void slot_add_tsplotter_emap_button();   // add tsplotter plots
-    void slot_add_tsplotter_emap_button_clicked();
+  void on_pushButton_clear_base_lineEdit_clicked();
 
+  void on_pushButton_clear_emap_lineEdit_clicked();
 
-    void on_pushButton_export_ascii_clicked();
+  void on_pushButton_clear_center_lineEdit_clicked();
 
+  void on_skip_marked_parts_clicked();
 
-    void on_pushButton_clear_rr_lineEdit_clicked();
+  void on_pushButton_deselect_all_frequencies_clicked();
 
-    void on_pushButton_clear_base_lineEdit_clicked();
+  void on_pushButton_select_all_frequecies_clicked();
 
-    void on_pushButton_clear_emap_lineEdit_clicked();
+  void re_check_allmeasdocs(const std::vector<double> &freqs);
 
-    void on_pushButton_clear_center_lineEdit_clicked();
+  void on_actionHelp_triggered();
 
-    void on_skip_marked_parts_clicked();
+  void on_actionCreate_Survey_triggered();
 
-    void on_pushButton_deselect_all_frequencies_clicked();
+  void on_pushButton_close_all_plots_clicked();
 
-    void on_pushButton_select_all_frequecies_clicked();
+  void on_pushButton_dump_atze_clicked();
 
-    void re_check_allmeasdocs(const std::vector<double> &freqs);
+  void on_pushButton_save_processing_clicked();
 
+  void on_pushButton_load_processing_clicked();
 
-    void on_actionHelp_triggered();
+  void on_OSM_push_button_clicked();
 
-    void on_actionCreate_Survey_triggered();
-
-    void on_pushButton_close_all_plots_clicked();
-
-    void on_pushButton_dump_atze_clicked();
-
-
-    void on_pushButton_save_processing_clicked();
-
-    void on_pushButton_load_processing_clicked();
-
-    void on_OSM_push_button_clicked();
-
-    void on_GMaps_push_button_clicked();
+  void on_GMaps_push_button_clicked();
 
 private:
+  void fill_prc_com_with_base_values();
 
-    void fill_prc_com_with_base_values();
+  // void check_dirlines();
 
-    //void check_dirlines();
+  std::unique_ptr<atsheader> get_atsheader_first_xml_first_ats();
 
-    std::unique_ptr<atsheader> get_atsheader_first_xml_first_ats();
+  Ui::procmt_mini *ui;
 
+  QFileInfo check_url(const QString &instring, bool set_title = false);
 
-    Ui::procmt_mini *ui;
+  dir_dialog *dirdialog = Q_NULLPTR;
 
-    QFileInfo check_url(const QString &instring, bool set_title = false);
+  QDir basedir;
+  mutable std::recursive_mutex mutex;
 
-    dir_dialog *dirdialog = Q_NULLPTR;
+  void insert_combos();
 
-    QDir basedir;
-    mutable std::recursive_mutex mutex;
+  QString dbname;
+  // QComboBox *fbox;
+  //  std::unique_ptr<frequencies_combo>  selectfreq = nullptr;
 
-    void insert_combos();
+  // QComboBox *wbox;
+  //  std::unique_ptr<windowlength_combo>  select_wl = nullptr;
 
-    QString dbname;
-    //QComboBox *fbox;
-    // std::unique_ptr<frequencies_combo>  selectfreq = nullptr;
+  std::unique_ptr<spectra_plotter> spc_plotter = nullptr;
 
-    //QComboBox *wbox;
-    // std::unique_ptr<windowlength_combo>  select_wl = nullptr;
+  int all_ckecks = 0;
+  QVector<single_column_combo *> scc;
+  QMap<QString, int> mapscc;
 
+  QVector<prc_com_check_box *> cbp;
+  QMap<QString, int> mapscbp;
 
-     std::unique_ptr<spectra_plotter>  spc_plotter = nullptr;
+  QProgressBar *qprgb;
 
-    int all_ckecks = 0;
-    QVector<single_column_combo *> scc;
-    QMap<QString, int> mapscc;
+  QFileInfo last_spectral_dump_qfi;
 
-    QVector<prc_com_check_box *> cbp;
-    QMap<QString, int> mapscbp;
+  void evaluate_mt_type();
 
-    QProgressBar *qprgb;
+  mttype my_mttype = mttype::nomt;
+  proc_type my_proc_type = proc_type::no_mtproc;
 
-    QFileInfo last_spectral_dump_qfi;
+  QStringList allmeasdocs_center;      //!< all local station, single site
+  QStringList allmeasdocs_center_orig; //!< all local station, single site
 
+  QStringList allmeasdocs_emap; //!< all emap sites, E only taken
+  QStringList allmeasdocs_rr;   //!< all RR sites
 
+  std::shared_ptr<msg_logger> msg = nullptr;
+  std::shared_ptr<prc_com> cmdline = nullptr;
 
-    void evaluate_mt_type();
+  QString edifile_name; //!< can change from site_name to site_name_1 and so on
 
-    mttype my_mttype = mttype::nomt;
-    proc_type my_proc_type = proc_type::no_mtproc;
+  // std::shared_ptr<procmt_lib> pmt_lib = nullptr;
+  std::thread pmt_thread;
 
+  std::queue<std::shared_ptr<procmt_lib>> processing_queue;
 
+  QString message_queue_size;
+  QString message_act_queue;
+  QString messages_running;
 
-    QStringList allmeasdocs_center;                 //!< all local station, single site
-    QStringList allmeasdocs_center_orig;            //!< all local station, single site
+  QStandardItemModel *msg_model;
 
-    QStringList allmeasdocs_emap;                   //!< all emap sites, E only taken
-    QStringList allmeasdocs_rr;                     //!< all RR sites
+  checkbox_list *mt_types;
 
-    std::shared_ptr<msg_logger> msg = nullptr;
-    std::shared_ptr<prc_com> cmdline = nullptr;
+  checkbox_list *smooth_medium_sharp;
+  QCheckBox *skip_marked_parts;
 
+  size_t num_threads = 0;
 
-    QString edifile_name;                          //!< can change from site_name to site_name_1 and so on
+  QStringList site_names;
 
+  QProcess *procediplotter = Q_NULLPTR;
+  double old_parzen_radius;
 
-    //std::shared_ptr<procmt_lib> pmt_lib = nullptr;
-    std::thread pmt_thread;
+  QButtonGroup *freq_button_group;
+  std::vector<QPushButton *> frequency_buttons;
 
-    std::queue<std::shared_ptr<procmt_lib>> processing_queue;
+  std::vector<QPushButton *> tsplotter_center_buttons;
+  std::vector<QPushButton *> tsplotter_rr_buttons;
+  std::vector<QPushButton *> tsplotter_emap_buttons;
 
-    QString message_queue_size;
-    QString message_act_queue;
-    QString messages_running;
+  multi_static_plots plots_im, plots_re, plots;
 
-    QStandardItemModel *msg_model;
+  QMap<double, QString> map_sel_freqs;
 
-    checkbox_list *mt_types;
+  check_boxes_scoll_area *check_freq;
 
-    checkbox_list *smooth_medium_sharp;
-    QCheckBox *skip_marked_parts;
+  pmt_open_help pmt_help;
 
-    size_t num_threads = 0;
-
-    QStringList site_names;
-
-    QProcess *procediplotter = Q_NULLPTR;
-    double old_parzen_radius;
-
-
-    QButtonGroup *freq_button_group;
-    std::vector<QPushButton *> frequency_buttons;
-
-    std::vector<QPushButton *> tsplotter_center_buttons;
-    std::vector<QPushButton *> tsplotter_rr_buttons;
-    std::vector<QPushButton *> tsplotter_emap_buttons;
-
-
-    multi_static_plots plots_im, plots_re, plots;
-
-
-    QMap<double, QString> map_sel_freqs;
-
-    check_boxes_scoll_area* check_freq;
-
-    pmt_open_help pmt_help;
-
-    QComboBox *ftable_combo;
-
-
+  QComboBox *ftable_combo;
 };
 
 #endif // PROCMT_MINI_H

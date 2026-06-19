@@ -31,32 +31,30 @@
 #define FFTREAL_VECTOR_H
 
 #include "fftreal_vector_global.h"
-#include <vector>
 #include <complex>
+#include <vector>
 
-#include <cmath>
-#include "iterator_templates.h"
-#include <memory>
 #include "FFTReal.h"
-#include <iostream>
+#include "iterator_templates.h"
 #include <QObject>
+#include <cmath>
+#include <iostream>
+#include <memory>
 
 class calibration;
 
-
 enum fftreal_ctrl {
-    nothing = 0,
-    scale = 1,
-    detrend = 2,
-    hanning = 3,
-    detrend_hanning = 4,
-    scale_detrend_hanning = 5,
-    calibrate = 6,
-    inverse = 7,
-    inverse_after_cabibration = 8,
-    is_dc_ftt = 9
+  nothing = 0,
+  scale = 1,
+  detrend = 2,
+  hanning = 3,
+  detrend_hanning = 4,
+  scale_detrend_hanning = 5,
+  calibrate = 6,
+  inverse = 7,
+  inverse_after_cabibration = 8,
+  is_dc_ftt = 9
 };
-
 
 /*!
    \brief The fftreal_vector class is an adoption of the FFREAL for a vector it does  <br>
@@ -65,166 +63,155 @@ enum fftreal_ctrl {
    NEGATIVE inverse <br> x(k) = sum (p = 0, N-1, f(p) * exp (-j*2*pi*k*p/N)) <br>
 
  */
-class fftreal_vector : public QObject
-{
-    Q_OBJECT
+class fftreal_vector : public QObject {
+  Q_OBJECT
 
 public:
+  fftreal_vector();
 
-    fftreal_vector();
+  ~fftreal_vector();
+  /*!
+   * \brief set_buffer is the main INITIALISATION; it also RESETS the pointers of ampl and cal vectors!
+   * \param inbuf
+   * \param outbuf complex number vector; will be resized
+   * \param fcut_upper 0.0 = cut nothing, 0.05 cut the upper 5%
+   * \param fcut_lower 0.0 = cut nothing, 0.1 cuts lower 10%; USE =.0 AND ISDCFFT = TRUE for fft -> inverse fft
+   * \param freq   when f is set the DC part is skipped automatically
+   * \param bwincal respect the length of the FFT - so 1024 and 4096 should give the same result
+   * \param isdcfft keep the DC component in output - if yo create a frequency vector and use log display this will result into error log(0) -> error!
+   * \param nspc when calculate the ftt -> calib -> inverse fft complex spectra ("outbuf") my not be needed; like you do for full inverse of timeseries;
+   * \param cut_upper cut upper frequencies from output
+   * \param cut_lower cut lower frequencies from output <br>
+   * the crucial step is to force a dc ftt if needed - and that IS THE CASE if ou want to calculated the inverse
+   *
+   * Hence that always 0... < wl (ts) -> 0...< wl/2 (spc) will be processed; start & stop will be a subset defined by cut upper & lower
+   */
+  bool set_buffer(const std::vector<double> &in_out_buf, std::vector<std::complex<double>> &outbuf, const double freq = 0, const bool bwincal = true,
+                  const bool isdcfft = false, const bool nspc = false, const bool inverse_from_forward = false,
+                  const double fcut_upper = 0, const double fcut_lower = 0);
 
-    ~fftreal_vector();
-    /*!
-     * \brief set_buffer is the main INITIALISATION; it also RESETS the pointers of ampl and cal vectors!
-     * \param inbuf
-     * \param outbuf complex number vector; will be resized
-     * \param fcut_upper 0.0 = cut nothing, 0.05 cut the upper 5%
-     * \param fcut_lower 0.0 = cut nothing, 0.1 cuts lower 10%; USE =.0 AND ISDCFFT = TRUE for fft -> inverse fft
-     * \param freq   when f is set the DC part is skipped automatically
-     * \param bwincal respect the length of the FFT - so 1024 and 4096 should give the same result
-     * \param isdcfft keep the DC component in output - if yo create a frequency vector and use log display this will result into error log(0) -> error!
-     * \param nspc when calculate the ftt -> calib -> inverse fft complex spectra ("outbuf") my not be needed; like you do for full inverse of timeseries;
-     * \param cut_upper cut upper frequencies from output
-     * \param cut_lower cut lower frequencies from output <br>
-     * the crucial step is to force a dc ftt if needed - and that IS THE CASE if ou want to calculated the inverse
-     *
-     * Hence that always 0... < wl (ts) -> 0...< wl/2 (spc) will be processed; start & stop will be a subset defined by cut upper & lower
-     */
-    bool set_buffer(const std::vector<double> &in_out_buf, std::vector<std::complex<double>> &outbuf, const double freq = 0, const bool bwincal = true,
-                    const bool isdcfft = false, const bool nspc = false, const bool inverse_from_forward = false,
-                    const double fcut_upper = 0, const double fcut_lower = 0);
+  void set_amplitude_spectra(std::vector<double> &fft_amplitude);
 
+  /*!
+   * \brief set_calibration
+   * \param mulcal
+   * \return
+   */
+  bool set_calibration(std::vector<std::complex<double>> &mulcal);
 
-    void set_amplitude_spectra(std::vector<double> &fft_amplitude);
+  bool set_mtx_calibration(std::vector<std::complex<double>> &divcal);
 
-    /*!
-     * \brief set_calibration
-     * \param mulcal
-     * \return
-     */
-    bool set_calibration(std::vector<std::complex<double>> &mulcal);
+  /*!
+     \brief unset_calibration - turns off te calibration flag
+   */
+  void unset_calibration();
 
+  void set_amplitude_spectra_stacked(std::vector<double> &fft_amplitude_stacked);
 
-    bool set_mtx_calibration(std::vector<std::complex<double>> &divcal);
+  /*!
+     \brief fwd_process does the fft.
+     \param inbuf
+     \param outbuf
+     \param ctrl
+   */
+  void process(std::vector<double> &inbuf, std::vector<std::complex<double>> &outbuf, const int ctrl = fftreal_ctrl::hanning);
 
-    /*!
-       \brief unset_calibration - turns off te calibration flag
-     */
-    void unset_calibration();
+  //    /*!
+  //     * \brief set_inverse_buffer_after_forward will calculate the inverse immedeately while calling fwd_process; settings for calibration have to be set in advance.
+  //     *  hence that a inverse need a RECTANGULAR window!
+  //     * \param outbuf
+  //     * \return
+  //     */
+  //    bool set_inverse_buffer_after_forward(std::vector<double> &outbuf);
 
-    void set_amplitude_spectra_stacked(std::vector<double> &fft_amplitude_stacked);
+  //    bool unset_inverse_buffer_after_forward();
 
-    /*!
-       \brief fwd_process does the fft.
-       \param inbuf
-       \param outbuf
-       \param ctrl
-     */
-    void process(std::vector<double> &inbuf, std::vector<std::complex<double>> &outbuf, const int ctrl = fftreal_ctrl::hanning);
+  //    /*!
+  //       \brief set_inverse_buffer makes a inverse FFT after having done a calibration - in order to get calibrated time series
+  //       \param inbuf
+  //       \param outbuf
+  //       \return
+  //     */
+  //    bool set_inverse_buffer(std::vector<std::complex<double>> &in_inv_buf, std::vector<double> &outbuf);
 
-//    /*!
-//     * \brief set_inverse_buffer_after_forward will calculate the inverse immedeately while calling fwd_process; settings for calibration have to be set in advance.
-//     *  hence that a inverse need a RECTANGULAR window!
-//     * \param outbuf
-//     * \return
-//     */
-//    bool set_inverse_buffer_after_forward(std::vector<double> &outbuf);
+  /*!
+     \brief get_frequencies
+     \return list of frequencies for each point. Hence: using full FFT means that f[0] = 0 = DC part
+   */
+  std::vector<double> get_frequencies() const;
 
-//    bool unset_inverse_buffer_after_forward();
+  //    void gen_pure_theo_cal(std::vector<double> psrc, const double &f_sample, const size_t &start_idx, const size_t &stop_idx,
+  //                           const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool mul_by_f, const bool invert) const;
 
-//    /*!
-//       \brief set_inverse_buffer makes a inverse FFT after having done a calibration - in order to get calibrated time series
-//       \param inbuf
-//       \param outbuf
-//       \return
-//     */
-//    bool set_inverse_buffer(std::vector<std::complex<double>> &in_inv_buf, std::vector<double> &outbuf);
+  void set_external_calibration(const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool mul_by_f, const bool invert);
 
+  //    /*!
+  //     * \brief gen_frequencies generate a frequency vector
+  //     */
+  //    std::vector<double> gen_frequencies();
 
+  //    /*!
+  //       \brief get_frequencies_for_inverse
+  //       \return list of frequencies for each point, including ALL frequencies, and f[0] = 0 = DC part
+  //     */
+  //    std::vector<double> get_frequencies_for_inverse(const bool skip_dc) const;
 
-    /*!
-       \brief get_frequencies
-       \return list of frequencies for each point. Hence: using full FFT means that f[0] = 0 = DC part
-     */
-    std::vector<double> get_frequencies() const;
+  /*!
+     \brief next_power_of_two
+     \param n
+     \return 16 if n = 15 or 32 if in = 17 and so on
+   */
+  size_t next_power_of_two(const size_t n) const;
 
-//    void gen_pure_theo_cal(std::vector<double> psrc, const double &f_sample, const size_t &start_idx, const size_t &stop_idx,
-//                           const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool mul_by_f, const bool invert) const;
+  void get_settings(double &freq, bool &bwincal, bool &isdcfft, bool &nspc, bool &inverse_from_forward, double &fcut_upper, double &fcut_lower) const;
 
-    void set_external_calibration(const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool mul_by_f, const bool invert);
+  double get_nyquist_freq() const;
 
-//    /*!
-//     * \brief gen_frequencies generate a frequency vector
-//     */
-//    std::vector<double> gen_frequencies();
-
-//    /*!
-//       \brief get_frequencies_for_inverse
-//       \return list of frequencies for each point, including ALL frequencies, and f[0] = 0 = DC part
-//     */
-//    std::vector<double> get_frequencies_for_inverse(const bool skip_dc) const;
-
-    /*!
-       \brief next_power_of_two
-       \param n
-       \return 16 if n = 15 or 32 if in = 17 and so on
-     */
-    size_t next_power_of_two(const size_t n) const;
-
-    void get_settings(double &freq, bool &bwincal, bool &isdcfft, bool &nspc, bool &inverse_from_forward, double &fcut_upper, double &fcut_lower) const;
-
-
-    double get_nyquist_freq() const;
-
-    void set_multiply(const double &factor);
+  void set_multiply(const double &factor);
 
 signals:
 
-    void signal_gen_pure_theo_cal(std::vector<double> &psrc, const double &f_sample, const size_t &start_idx, const size_t &stop_idx,
-                                            const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool &mul_by_f, const bool &invert) const;
-
+  void signal_gen_pure_theo_cal(std::vector<double> &psrc, const double &f_sample, const size_t &start_idx, const size_t &stop_idx,
+                                const double &dc_ampl, const double &dc_phase_deg, const double &mul_by, const bool &mul_by_f, const bool &invert) const;
 
 private:
+  // forward declaration
 
-    // forward declaration
+  ffft::FFTReal<double> *fft_object = nullptr; //!< create a fftreal
 
+  size_t wl; //!< input window length
 
-    ffft::FFTReal <double> *fft_object = nullptr;           //!< create a fftreal
+  std::vector<double> psrc;                             //!< output is a half sided: pseudo real - complex; either make complex out of this or amplitudes
+  std::vector<double> *fft_amplitude_stacked = nullptr; //!< calculate the stacked amplitude spectra ( double )
+  std::vector<double> *fft_amplitude = nullptr;         //!< calculate the amplitude spectra ( double )
+  std::vector<std::complex<double>> *mulcal = nullptr;  //!< calibrate spectra spectra ( double ); we multiply in order to avoid division by ZERO here; so if you want to divide make a 1/trf !
+  std::vector<std::complex<double>> *divcal = nullptr;
+  bool has_calibration = false;      //!< want to calibrate
+  bool nspc = false;                 //!< no spectral window: don generate complex spectra - can be used for inverse fft to timeseries where you don't use the spectra itself
+  bool inverse_from_forward = false; //!< if you want calibrated time series in nT we immedeately calculate the inverse
 
-    size_t wl;                                              //!< input window length
+  bool isdcfft = false;
+  double wincal = 0.0;
+  double fwl = 0.0;                     //!< double window length
+  double f_sample = 0.0;                //!< set the sampling frequency - a frequency vector can be generated
+  size_t n = 0;                         //!< size of the complex spectra output (stop_idx - start_idx)
+  std::vector<double> *freqs = nullptr; //!< a frequency vector can be generated
 
-    std::vector<double> psrc;                               //!< output is a half sided: pseudo real - complex; either make complex out of this or amplitudes
-    std::vector<double> *fft_amplitude_stacked = nullptr;   //!< calculate the stacked amplitude spectra ( double )
-    std::vector<double> *fft_amplitude         = nullptr;   //!< calculate the amplitude spectra ( double )
-    std::vector<std::complex<double>> *mulcal  = nullptr;   //!< calibrate spectra spectra ( double ); we multiply in order to avoid division by ZERO here; so if you want to divide make a 1/trf !
-    std::vector<std::complex<double>> *divcal  = nullptr;
-    bool has_calibration = false;                           //!< want to calibrate
-    bool nspc = false;                                      //!< no spectral window: don generate complex spectra - can be used for inverse fft to timeseries where you don't use the spectra itself
-    bool inverse_from_forward = false;                      //!< if you want calibrated time series in nT we immedeately calculate the inverse
+  double multiply_by;      //!< can be used by fluxgate - if mtx the scale might be set to 1./flugate parm
+  double fcut_upper = 0.0; //!< for MT the complete spectra may not be needed; use 0.05 to cut some upper
+  double fcut_lower = 0.0; //!< for MT the complete spectra may not be needed; use 0.1 to cut 10% lower
 
-    bool isdcfft = false;
-    double wincal = 0.0;
-    double fwl = 0.0;                                       //!< double window length
-    double f_sample = 0.0;                                  //!< set the sampling frequency - a frequency vector can be generated
-    size_t n = 0;                                           //!< size of the complex spectra output (stop_idx - start_idx)
-    std::vector<double> *freqs = nullptr;                   //!< a frequency vector can be generated
+  size_t start_idx = 0; //!< start index in case we use not the full spectra
+  size_t stop_idx = 0;  //!< stop index in case we use not the full spectra
 
-    double multiply_by;                                     //!< can be used by fluxgate - if mtx the scale might be set to 1./flugate parm
-    double fcut_upper = 0.0;                                //!< for MT the complete spectra may not be needed; use 0.05 to cut some upper
-    double fcut_lower = 0.0;                                //!< for MT the complete spectra may not be needed; use 0.1 to cut 10% lower
+  size_t counter = 0; //!< count the ffts (needed for thread control)
 
-    size_t start_idx = 0;                                   //!< start index in case we use not the full spectra
-    size_t stop_idx = 0;                                    //!< stop index in case we use not the full spectra
-
-    size_t counter = 0;                                     //!< count the ffts (needed for thread control)
-
-    bool has_calibration_external = false;                  //!< control external calibration settings
-    double dc_ampl = 0.0;                                   //!< control external calibration settings
-    double dc_phase_deg = 0.0;                              //!< control external calibration settings
-    double mul_by = 0.0;                                    //!< control external calibration settings
-    bool mul_by_f = true;                                   //!< control external calibration settings
-    bool invert;                                            //!< control external calibration settings
-
+  bool has_calibration_external = false; //!< control external calibration settings
+  double dc_ampl = 0.0;                  //!< control external calibration settings
+  double dc_phase_deg = 0.0;             //!< control external calibration settings
+  double mul_by = 0.0;                   //!< control external calibration settings
+  bool mul_by_f = true;                  //!< control external calibration settings
+  bool invert;                           //!< control external calibration settings
 };
 
 #endif // FFTREAL_VECTOR_H

@@ -30,13 +30,13 @@
 #ifndef SELECT_COIL_H
 #define SELECT_COIL_H
 
-#include <QDialog>
 #include <QDebug>
-#include <QString>
-#include <QMap>
-#include <QMultiMap>
+#include <QDialog>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QMap>
+#include <QMultiMap>
+#include <QString>
 
 #include "calibration.h"
 
@@ -44,44 +44,41 @@ namespace Ui {
 class select_coil;
 }
 
-class select_coil : public QDialog
-{
-    Q_OBJECT
+class select_coil : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit select_coil(QWidget *parent = Q_NULLPTR);
-    ~select_coil();
+  explicit select_coil(QWidget *parent = Q_NULLPTR);
+  ~select_coil();
 
 public slots:
 
-    void on_Sensor_comboBox_currentTextChanged(const QString &arg1);
-    void on_Sensor_comboBox_activated(const QString &arg1);
+  void on_Sensor_comboBox_currentTextChanged(const QString &arg1);
+  void on_Sensor_comboBox_activated(const QString &arg1);
 
-    void preselect(const QString  &arg1);
+  void preselect(const QString &arg1);
 
-    void set_coils(const QStringList &coils, const QMultiMap<QString, int> &alldb);
+  void set_coils(const QStringList &coils, const QMultiMap<QString, int> &alldb);
 signals:
-    void coil_selcted(const QString &coil, const int &serno);
+  void coil_selcted(const QString &coil, const int &serno);
 
 private slots:
 
-    void on_Serial_spinBox_valueChanged(int arg1);
+  void on_Serial_spinBox_valueChanged(int arg1);
 
-    void on_select_coil_accepted();
+  void on_select_coil_accepted();
 
+  void on_listWidget_itemClicked(QListWidgetItem *item);
 
-    void on_listWidget_itemClicked(QListWidgetItem *item);
-
-    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+  void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
+  int extract_serials();
 
-    int extract_serials();
-
-    Ui::select_coil *ui;
-    QString coil;
-    int serno;
-    QMultiMap<QString, int> alldb;
+  Ui::select_coil *ui;
+  QString coil;
+  int serno;
+  QMultiMap<QString, int> alldb;
 };
 
 #endif // SELECT_COIL_H

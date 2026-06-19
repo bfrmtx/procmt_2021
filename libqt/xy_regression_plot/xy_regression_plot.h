@@ -30,18 +30,17 @@
 #ifndef XY_REGRESSION_PLOT_H
 #define XY_REGRESSION_PLOT_H
 
-
 #include "xy_regression_plot_global.h"
-#include <QObject>
-#include <QMessageBox>
-#include <QMainWindow>
-#include <cmath>
-#include <random>
-#include <iostream>
-#include <iomanip>
-#include <vector>
 #include <QDebug>
+#include <QMainWindow>
 #include <QMap>
+#include <QMessageBox>
+#include <QObject>
+#include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <random>
+#include <vector>
 
 #include <gui_items.h>
 
@@ -53,42 +52,37 @@
 #include "boost_student.h"
 #include "math_vector.h"
 
-class xy_regression_plot : public QMainWindow
-{
+class xy_regression_plot : public QMainWindow {
 
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit xy_regression_plot(QWidget *parent = Q_NULLPTR);
+  explicit xy_regression_plot(QWidget *parent = Q_NULLPTR);
 
-    void clear();
+  void clear();
 
+  void set_data(const std::vector<double> &x, const std::vector<double> &y);
 
-
-    void set_data(const std::vector<double> &x, const std::vector<double> &y);
-
-
-    std::unique_ptr<plotlib> plot_tp;
+  std::unique_ptr<plotlib> plot_tp;
 
 private:
+  std::vector<double> x;
+  std::vector<double> y;
+  std::vector<double> plot_x, plot_y;
 
-    std::vector<double> x;
-    std::vector<double> y;
-    std::vector<double> plot_x, plot_y;
+  std::unique_ptr<two_pass_linreg> tplrg;
+  std::unique_ptr<regplot_data> rgplt_data;
 
-    std::unique_ptr<two_pass_linreg> tplrg;
-    std::unique_ptr<regplot_data> rgplt_data;
+  std::unique_ptr<boost_student> stdlrg;
 
-    std::unique_ptr<boost_student> stdlrg;
+  statmap tp_regressiondata;
+  statmap tp_regressionresults;
 
-    statmap tp_regressiondata;
-    statmap tp_regressionresults;
+  double inner_min, inner_max, outer_minx, outer_maxx, outer_miny, outer_maxy;
 
-    double inner_min, inner_max, outer_minx, outer_maxx, outer_miny, outer_maxy;
-
-    std::unique_ptr<message_window> msg;
-    std::vector<bool> allselected;
-    QString note;
+  std::unique_ptr<message_window> msg;
+  std::vector<bool> allselected;
+  QString note;
 };
 
 #endif // XY_REGRESSION_PLOT_H

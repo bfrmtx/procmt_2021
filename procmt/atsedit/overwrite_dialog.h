@@ -36,17 +36,15 @@ namespace Ui {
 class overwrite_dialog;
 }
 
-class overwrite_dialog : public QDialog
-{
-    Q_OBJECT
+class overwrite_dialog : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit overwrite_dialog(QWidget *parent = 0);
-    ~overwrite_dialog();
-
+  explicit overwrite_dialog(QWidget *parent = 0);
+  ~overwrite_dialog();
 
 private:
-    Ui::overwrite_dialog *ui;
+  Ui::overwrite_dialog *ui;
 };
 
 #endif // OVERWRITE_DIALOG_H

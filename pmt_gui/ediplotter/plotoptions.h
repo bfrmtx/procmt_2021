@@ -41,29 +41,28 @@ namespace Ui {
 class PlotOptions;
 }
 
-class PlotOptions : public QWidget
-{
-    Q_OBJECT
+class PlotOptions : public QWidget {
+  Q_OBJECT
 
 public:
-    explicit PlotOptions(QWidget *parent = nullptr);
-    ~PlotOptions();
+  explicit PlotOptions(QWidget *parent = nullptr);
+  ~PlotOptions();
 
 private:
-    void remove_entry(QString const & name);
+  void remove_entry(QString const &name);
 
 public slots:
-    void slot_on_new_edi_plot(QString name);
-    void slot_on_all_edi_plots_removed();
+  void slot_on_new_edi_plot(QString name);
+  void slot_on_all_edi_plots_removed();
 
 private:
-    Ui::PlotOptions *ui;
-    QMap<QString, std::pair<QCheckBox*, QPushButton*>> m_content;
-    QSpacerItem * m_spacer = nullptr;
+  Ui::PlotOptions *ui;
+  QMap<QString, std::pair<QCheckBox *, QPushButton *>> m_content;
+  QSpacerItem *m_spacer = nullptr;
 
 signals:
-    void remove_plot(QString const & name);
-    void plot_visiblity_change(QString const & name, bool value);
+  void remove_plot(QString const &name);
+  void plot_visiblity_change(QString const &name, bool value);
 };
 
 #endif // PLOTOPTIONS_H

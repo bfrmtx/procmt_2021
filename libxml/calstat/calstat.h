@@ -31,48 +31,44 @@
 #define CALSTAT_H
 
 #include "calstat_global.h"
+#include "math_vector.h"
+#include "procmt_alldefines.h"
+#include "statmaps.h"
 #include <QDebug>
 #include <QMap>
 #include <vector>
-#include "procmt_alldefines.h"
-#include "math_vector.h"
-#include "statmaps.h"
 
 class calstat {
 
 public:
+  /*!
+   * \brief calstat initialize the class with
+   * \param f frequency you want
+   * \param chopper chopper status you want
+   * \param minmax_percentage percentage - 3 means 3% and covers 97 ... 100 .. 103 as 100
+   */
+  calstat(const double &f, const cal::cal &chopper, const double &minmax_percentage = 3);
 
-    /*!
-     * \brief calstat initialize the class with
-     * \param f frequency you want
-     * \param chopper chopper status you want
-     * \param minmax_percentage percentage - 3 means 3% and covers 97 ... 100 .. 103 as 100
-     */
-    calstat(const double &f, const cal::cal &chopper, const double &minmax_percentage = 3);
+  calstat(const calstat &rhs);
 
-    calstat(const calstat &rhs);
+  calstat &operator=(calstat const &rhs);
 
-    calstat& operator = (calstat const &rhs);
+  bool add_cal(const double &f, const int &serial, const double &ampl, const double &phz);
 
+  std::vector<double> serials_to_double() const;
 
-    bool add_cal(const double &f, const int &serial, const double &ampl, const double &phz);
+  double median_variance_ampl();
 
-    std::vector<double> serials_to_double() const;
+  double median_variance_phase();
 
-    double median_variance_ampl();
+  double f, f_min, f_max;
+  int chopper = cal::chopper_undef;
+  std::vector<double> ampls;
+  std::vector<double> phzs;
+  std::vector<int> serials;
 
-    double median_variance_phase() ;
-
-    double f, f_min, f_max;
-    int chopper = cal::chopper_undef;
-    std::vector<double> ampls;
-    std::vector<double> phzs;
-    std::vector<int> serials;
-
-    statmap variance_phzs_data;
-    statmap variance_ampls_data;
-
-
+  statmap variance_phzs_data;
+  statmap variance_ampls_data;
 };
 
 #endif // CALSTAT_H

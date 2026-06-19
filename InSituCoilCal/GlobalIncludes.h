@@ -3,6 +3,6 @@
 
 #include <QSettings>
 
-extern QSettings* pclSettings;
+extern QSettings *pclSettings;
 
 #endif // GLOBALINCLUDES_H

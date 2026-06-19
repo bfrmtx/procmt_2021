@@ -1,3 +1,3 @@
 #include "GlobalIncludes.h"
 
-QSettings* pclSettings = NULL;
+QSettings *pclSettings = NULL;

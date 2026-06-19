@@ -30,73 +30,73 @@
 #ifndef QWEBDAV_H
 #define QWEBDAV_H
 
-#include <stdint.h>
 #include <QDate>
 #include <QDateTime>
 #include <QSharedPointer>
+#include <stdint.h>
 // #include <QtXml>
 
 namespace webdav {
 enum class ContentType {
-    Unknown = 0,
-    Application = 1,
-    Httpd = 2,
-    Image = 3,
-    Text = 4,
-    Audio = 5,
-    Multipart = 6
+  Unknown = 0,
+  Application = 1,
+  Httpd = 2,
+  Image = 3,
+  Text = 4,
+  Audio = 5,
+  Multipart = 6
 };
 
 enum class ContentSubtype {
-    Unknown = 0,
-    UnixDirectory = 1,
-    OctetStream = 2,
-    PDF = 3,
-    XML = 4,
-    JSON = 5,
-    DOC = 6,
+  Unknown = 0,
+  UnixDirectory = 1,
+  OctetStream = 2,
+  PDF = 3,
+  XML = 4,
+  JSON = 5,
+  DOC = 6,
 };
 
 enum class Status {
-    Unknown = 0,
-    Ok = 200,
-    Forbidden = 403,
-    Conflict = 409,
-    FailedDependency = 422,
-    Locked = 423,
+  Unknown = 0,
+  Ok = 200,
+  Forbidden = 403,
+  Conflict = 409,
+  FailedDependency = 422,
+  Locked = 423,
 };
 
 struct Response {
-    Response() = default;
-    ~Response() = default;
-    Response(const Response &) = default;
-    Response &operator=(const Response &) = default;
+  Response() = default;
+  ~Response() = default;
+  Response(const Response &) = default;
+  Response &operator=(const Response &) = default;
 
-    int64_t                     content_length = 0;
-    QSharedPointer<QDateTime>   creation;
-    QSharedPointer<QDateTime>   last_modified;
-    QString                     eTag;
-    ContentType                 type = ContentType::Unknown;
-    ContentSubtype              subtype = ContentSubtype::Unknown;
+  int64_t content_length = 0;
+  QSharedPointer<QDateTime> creation;
+  QSharedPointer<QDateTime> last_modified;
+  QString eTag;
+  ContentType type = ContentType::Unknown;
+  ContentSubtype subtype = ContentSubtype::Unknown;
 
-    QString ref;
+  QString ref;
 
-    operator QString() const;
+  operator QString() const;
 };
 
 class WebDavResponse {
 public:
-    static WebDavResponse parseResponse(QString const & response);
-    QVector<Response> const & getResponses() const;
-    operator QString() const;
+  static WebDavResponse parseResponse(QString const &response);
+  QVector<Response> const &getResponses() const;
+  operator QString() const;
 
 private:
-    explicit WebDavResponse(QString const & response);
+  explicit WebDavResponse(QString const &response);
 
 private:
-    QVector<Response> m_responses;
+  QVector<Response> m_responses;
 };
-}
+} // namespace webdav
 
 Q_DECLARE_METATYPE(webdav::Response)
 

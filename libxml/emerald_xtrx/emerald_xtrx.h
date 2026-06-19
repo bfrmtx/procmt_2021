@@ -33,50 +33,41 @@
 #include "emerald_xtrx_global.h"
 #include "measdocxml.h"
 
-class emerald_xtrx : public measdocxml
-{
+class emerald_xtrx : public measdocxml {
   Q_OBJECT
 
-
 public:
+  emerald_xtrx(const QFileInfo *qfi = nullptr, const QUrl *qurl = nullptr, const QByteArray *qba = nullptr, QObject *parent = Q_NULLPTR);
 
-    emerald_xtrx(const QFileInfo* qfi = nullptr, const QUrl* qurl = nullptr, const QByteArray *qba = nullptr, QObject *parent = Q_NULLPTR);
+  // msvc problem
+  // emerald_xtrx(QObject *parent = Q_NULLPTR);
 
-    // msvc problem
-    //emerald_xtrx(QObject *parent = Q_NULLPTR);
+  ~emerald_xtrx();
 
-    ~emerald_xtrx();
+  void create_channel(const bool emits = true);
+  void create_emerald(const bool emits = true);
+  void create_site(const bool emits = true);
 
-    void create_channel(const bool emits = true);
-    void create_emerald(const bool emits = true);
-    void create_site(const bool emits = true);
+  // read the pseudo XML for each channel
+  void get_emerald_channel_section();
 
-
-    // read the pseudo XML for each channel
-    void get_emerald_channel_section();
-
-    // read the header and site description
-    QString get_emeral_emerald_section();
+  // read the header and site description
+  QString get_emeral_emerald_section();
 
 signals:
 
-    // for each channel
-    void signal_emerald_channel_data_qmap_created(const QMap<QString, QVariant> &data_map);
-    void signal_got_emerald_channel(const QMap<QString, QVariant> &data_map);
+  // for each channel
+  void signal_emerald_channel_data_qmap_created(const QMap<QString, QVariant> &data_map);
+  void signal_got_emerald_channel(const QMap<QString, QVariant> &data_map);
 
-    // site description
-    void signal_emerald_emerald_data_qmap_created(const QMap<QString, QVariant> &data_map);
-    void signal_got_emerald_emerald(const QMap<QString, QVariant> &data_map);
-
-
+  // site description
+  void signal_emerald_emerald_data_qmap_created(const QMap<QString, QVariant> &data_map);
+  void signal_got_emerald_emerald(const QMap<QString, QVariant> &data_map);
 
 private:
-
-    QMap<QString, QVariant> emerald_Channel_data;
-    QMap<QString, QVariant> emerald_EmeraldData_data;
-    QMap<QString, QVariant> emerald_Site_data;
-
-
+  QMap<QString, QVariant> emerald_Channel_data;
+  QMap<QString, QVariant> emerald_EmeraldData_data;
+  QMap<QString, QVariant> emerald_Site_data;
 };
 
 #endif // EMERALD_XTRX_H

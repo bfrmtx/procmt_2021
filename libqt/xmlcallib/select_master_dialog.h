@@ -30,42 +30,40 @@
 #ifndef SELECT_MASTER_DIALOG_H
 #define SELECT_MASTER_DIALOG_H
 
-#include <QDialog>
 #include "gui_items.h"
-#include <memory>
 #include <QComboBox>
 #include <QDebug>
+#include <QDialog>
 #include <QString>
+#include <memory>
 
 namespace Ui {
 class select_master_dialog;
 }
 
-class select_master_dialog : public QDialog
-{
-    Q_OBJECT
+class select_master_dialog : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit select_master_dialog(const QString& dbname, const QChar E_or_H, QWidget *parent = nullptr);
+  explicit select_master_dialog(const QString &dbname, const QChar E_or_H, QWidget *parent = nullptr);
 
+  ~select_master_dialog();
 
-    ~select_master_dialog();
-
-    QString current_master_selection() const;
+  QString current_master_selection() const;
 
 signals:
 
-    QString master_sensor_selected(const QString master_sensor);
+  QString master_sensor_selected(const QString master_sensor);
 
 private slots:
-    void on_comboBox_sensortype_currentIndexChanged(const QString &arg1);
+  void on_comboBox_sensortype_currentIndexChanged(const QString &arg1);
 
 private:
-    Ui::select_master_dialog *ui;
+  Ui::select_master_dialog *ui;
 
-    QString dbname;
+  QString dbname;
 
-    std::unique_ptr<sensors_combo> allsensors = nullptr;
+  std::unique_ptr<sensors_combo> allsensors = nullptr;
 };
 
 #endif // SELECT_MASTER_DIALOG_H

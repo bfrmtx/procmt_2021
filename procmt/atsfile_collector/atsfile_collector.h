@@ -30,9 +30,9 @@
 #ifndef ATSFILE_COLLECTOR_H
 #define ATSFILE_COLLECTOR_H
 
-#include "atsfile_collector_global.h"
 #include "ats_ascii_file.h"
 #include "atsfile.h"
+#include "atsfile_collector_global.h"
 #include "atsheader.h"
 #include "buckets.h"
 #include "iterator_templates.h"

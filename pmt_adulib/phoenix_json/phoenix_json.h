@@ -31,125 +31,104 @@
 #define PHOENIX_JSON_H
 
 #include "phoenix_json_global.h"
-#include <QObject>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QJsonValue>
 #include <QByteArray>
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QObject>
 #include <QTextStream>
-#include <QByteArray>
-
 
 #include <QMap>
 #include <QVariant>
 
 #include <atsfile.h>
-#include <vector>
-#include <thread>
+#include <chrono>
+#include <condition_variable>
 #include <future>
 #include <mutex>
-#include <condition_variable>
-#include <chrono>
+#include <thread>
+#include <vector>
 
 #include <calibration.h>
 
-
-class Phoenix_json : public QObject
-{
-    Q_OBJECT
+class Phoenix_json : public QObject {
+  Q_OBJECT
 public:
-    Phoenix_json(QObject *parent = Q_NULLPTR);
+  Phoenix_json(QObject *parent = Q_NULLPTR);
 
+  bool from_JSON_scal(const QFileInfo *qfi = nullptr);
+  bool from_JSON_rxcal(const QFileInfo *qfi = nullptr);
 
-    bool from_JSON_scal(const QFileInfo *qfi = nullptr);
-    bool from_JSON_rxcal(const QFileInfo *qfi = nullptr);
+  /*!
+   * \brief ts_header_reader reads the header of a Phoenix timeseries json file; HENCE that startim will be converted extra from string because JSON assumes double
+   * \param qfi
+   * \return
+   */
+  bool ts_header_reader(const QFileInfo &qfi, int &nerrors);
+  bool ts_block_reader(const QFileInfo &qfi, std::vector<std::shared_ptr<atsfile>> &atsfiles,
+                       const QMap<size_t, QString> &chan_str_mtx, const QMap<size_t, QString> &chan_str_phoenix);
 
+  QMap<QString, QVariant> phoenix_tags;
 
-    /*!
-     * \brief ts_header_reader reads the header of a Phoenix timeseries json file; HENCE that startim will be converted extra from string because JSON assumes double
-     * \param qfi
-     * \return
-     */
-    bool ts_header_reader(const QFileInfo &qfi, int &nerrors);
-    bool ts_block_reader(const QFileInfo &qfi, std::vector<std::shared_ptr<atsfile>> &atsfiles,
-                         const QMap<size_t, QString> &chan_str_mtx, const QMap<size_t, QString> &chan_str_phoenix);
+  QMap<QString, QVariant> phoenix_results;
 
+  int save_calfiles();
 
-    QMap<QString, QVariant> phoenix_tags;
+  /*!
+   * \brief iterate_json recursive JSON parser
+   * \param qjd
+   */
+  void iterate_json(const QJsonObject &qjd);
 
-    QMap<QString, QVariant> phoenix_results;
-
-    int save_calfiles();
-
-    /*!
-     * \brief iterate_json recursive JSON parser
-     * \param qjd
-     */
-    void iterate_json(const QJsonObject &qjd);
-
-    std::vector<std::shared_ptr<calibration>> calfiles;
+  std::vector<std::shared_ptr<calibration>> calfiles;
 
 public slots:
 
-    /*!
-     * \brief slot_sensor_changed
-     * \param sensortype like MFS-06e
-     */
-    void slot_sensortype_changed(const QString& sensortype);
-
-
+  /*!
+   * \brief slot_sensor_changed
+   * \param sensortype like MFS-06e
+   */
+  void slot_sensortype_changed(const QString &sensortype);
 
 signals:
 
-    void signal_lines_processed(QString nlines_proc);
+  void signal_lines_processed(QString nlines_proc);
 
-    void signal_sensor_changed(const QString& sensortype, const int& sernum);
+  void signal_sensor_changed(const QString &sensortype, const int &sernum);
 
 private:
+  QMap<size_t, QString> chan_str_mtx;
+  QMap<size_t, QString> chan_str_phoenix;
 
-    QMap<size_t, QString> chan_str_mtx;
-    QMap<size_t, QString> chan_str_phoenix;
+  QFileInfo info_db; //!< set during opening to get sensor types
+  QFileInfo myfile;
 
-    QFileInfo info_db;                                                  //!< set during opening to get sensor types
-    QFileInfo myfile;
+  void special_values_coils(QJsonObject::const_iterator &first);
+  void special_values_system_ts(QJsonObject::const_iterator &first);
+  void special_values_system(QJsonObject::const_iterator &first);
+  QStringList active_channel_str;
 
-    void special_values_coils(QJsonObject::const_iterator &first);
-    void special_values_system_ts(QJsonObject::const_iterator &first);
-    void special_values_system(QJsonObject::const_iterator &first);
-    QStringList active_channel_str;
+  int what = 0; // 1 ts, 2 coil, 3 system
+  int nerrors = 0;
 
+  std::vector<std::vector<double>> freqs_coil;
+  std::vector<std::vector<double>> magnitude_coil;
+  std::vector<std::vector<double>> phs_deg_coil;
 
+  std::vector<std::vector<std::vector<double>>> freqs_system;
+  std::vector<std::vector<std::vector<double>>> magnitude_system;
+  std::vector<std::vector<std::vector<double>>> phs_deg_system;
 
-    int what = 0;      // 1 ts, 2 coil, 3 system
-    int nerrors = 0;
+  std::vector<std::future<bool>> async_runs;
+  std::vector<size_t> async_has_lines;
 
-
-
-    std::vector<std::vector<double>> freqs_coil;
-    std::vector<std::vector<double>> magnitude_coil;
-    std::vector<std::vector<double>> phs_deg_coil;
-
-    std::vector<std::vector<std::vector<double>>> freqs_system;
-    std::vector<std::vector<std::vector<double>>> magnitude_system;
-    std::vector<std::vector<std::vector<double>>> phs_deg_system;
-
-
-    std::vector<std::future<bool>> async_runs;
-    std::vector<size_t> async_has_lines;
-
-    std::vector<std::future<size_t>> async_runs_lsb;
-    std::vector<std::future<QDataStream::Status>> async_runs_file_write;
-
-
-
+  std::vector<std::future<size_t>> async_runs_lsb;
+  std::vector<std::future<QDataStream::Status>> async_runs_file_write;
 };
-
-
-
 
 #endif // PHOENIX_JSON_H
 

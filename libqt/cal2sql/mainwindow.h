@@ -30,117 +30,104 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QDropEvent>
 #include <QDragEnterEvent>
-#include <QMimeData>
-#include <QListWidget>
-#include <QList>
-#include <QUrl>
+#include <QDropEvent>
 #include <QFile>
-#include <QTextStream>
-#include <memory>
-#include <vector>
 #include <QFileDialog>
+#include <QList>
+#include <QListWidget>
+#include <QMainWindow>
 #include <QMap>
+#include <QMimeData>
 #include <QMultiMap>
 #include <QTextStream>
+#include <QUrl>
+#include <memory>
+#include <vector>
 
-#include <iostream>
-#include "procmt_alldefines.h"
+#include "cal_stat_display_lib.h"
 #include "calibration.h"
+#include "calstat.h"
+#include "procmt_alldefines.h"
 #include "select_coil.h"
 #include "xmlcallib.h"
 #include "xy_regression_plot.h"
-#include "calstat.h"
-#include "cal_stat_display_lib.h"
-
-
+#include <iostream>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = Q_NULLPTR);
-    ~MainWindow();
-    void dropEvent(QDropEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
-
-
+  explicit MainWindow(QWidget *parent = Q_NULLPTR);
+  ~MainWindow();
+  void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
 
 signals:
 
-    void plot_cal(std::shared_ptr<calibration> calib, const bool nooverlay = true);
+  void plot_cal(std::shared_ptr<calibration> calib, const bool nooverlay = true);
 
 private slots:
 
-    void rx_cal_message(const int &channel, const int &slot, const QString &message);
-    void scan_db();
+  void rx_cal_message(const int &channel, const int &slot, const QString &message);
+  void scan_db();
 
-    void dlg_coil_selected(const QString &coil, const int &serno);
+  void dlg_coil_selected(const QString &coil, const int &serno);
 
-    void on_actionOpenDataBase_triggered();
+  void on_actionOpenDataBase_triggered();
 
-    void on_actionGetCalibration_triggered();
+  void on_actionGetCalibration_triggered();
 
-    void on_actionDumpAll_triggered();
+  void on_actionDumpAll_triggered();
 
-    void on_actionOpenCreate_triggered();
+  void on_actionOpenCreate_triggered();
 
-    void on_actionQuit_triggered();
+  void on_actionQuit_triggered();
 
-    void on_plot_pushButton_clicked();
+  void on_plot_pushButton_clicked();
 
-    void on_getcal_pushButton_clicked();
+  void on_getcal_pushButton_clicked();
 
-    void on_plot_append_pushButton_clicked();
+  void on_plot_append_pushButton_clicked();
 
-    void on_actionStats_triggered();
+  void on_actionStats_triggered();
 
-    void on_qlw_itemDoubleClicked(QListWidgetItem *item);
+  void on_qlw_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_actionWrite_LogFile_triggered();
+  void on_actionWrite_LogFile_triggered();
 
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
 
-    QFileInfo qfi;
+  QFileInfo qfi;
 
-    QFileInfo qfi_db;
-    QFileInfo qfi_master;
+  QFileInfo qfi_db;
+  QFileInfo qfi_master;
 
-    QFileInfo qfi_log;
-    QStringList qts_buffer;
+  QFileInfo qfi_log;
+  QStringList qts_buffer;
 
+  std::shared_ptr<calibration> cal;
+  QFileDialog *dialog;
+  QString dirname;
 
+  QString coil;
+  int serno;
 
+  select_coil *selcoil;
 
-    std::shared_ptr<calibration> cal;
-    QFileDialog *dialog;
-    QString dirname;
+  xmlcallib *callib;
+  xy_regression_plot *xy_plot;
 
+  QMultiMap<QString, int> alldb;
 
-    QString coil;
-    int serno;
+  std::unique_ptr<cal_stat_display_lib> csdpl;
 
-    select_coil *selcoil;
-
-    xmlcallib *callib;
-    xy_regression_plot *xy_plot;
-
-    QMultiMap<QString, int> alldb;
-
-    std::unique_ptr<cal_stat_display_lib> csdpl;
-
-
-
-    int mode = -1;  //!< 0 read/write,  1 create/read/write, -1 close/not open , -2 open from drag and drop
-
+  int mode = -1; //!< 0 read/write,  1 create/read/write, -1 close/not open , -2 open from drag and drop
 };
 
 #endif // MAINWINDOW_H

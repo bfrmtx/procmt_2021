@@ -27,33 +27,28 @@
 **                                                                        **
 ****************************************************************************/
 
-
 #ifndef QTX_TEMPLATES
 #define QTX_TEMPLATES
 
-#include <QVariant>
-#include <QString>
-#include <QMap>
-#include <QFileInfo>
-#include <QFileInfo>
 #include <QCoreApplication>
+#include <QFileInfo>
+#include <QMap>
+#include <QString>
+#include <QVariant>
 #include <iostream>
 
-class _freq_flip_flop
-{
+class _freq_flip_flop {
 public:
   _freq_flip_flop() {}
 
   void set_f(const double &f) {
     if (f > 0.99999) {
       this->s = 0;
-      this->f = uint (f);
-    }
-    else if ( (f > 0)  && (this->f == 0)) {
-      this->s = uint (1.0 / f);
+      this->f = uint(f);
+    } else if ((f > 0) && (this->f == 0)) {
+      this->s = uint(1.0 / f);
       this->f = 0;
-    }
-    else {
+    } else {
       this->reset();
     }
   }
@@ -62,11 +57,13 @@ public:
     if (s == 0.0) {
       this->reset();
     }
-    if (s > 10E-14) this->set_f(1.0/s);
+    if (s > 10E-14)
+      this->set_f(1.0 / s);
   }
 
   bool has_f() const {
-    if (this->s || this->f) return true;
+    if (this->s || this->f)
+      return true;
     return false;
   }
 
@@ -76,10 +73,8 @@ public:
   }
 
 private:
-
   unsigned int f = 0;
   unsigned int s = 0;
-
 };
 
 /*!
@@ -89,19 +84,22 @@ private:
  */
 inline QFileInfo next_filename(const QFileInfo &qfi) {
 
-  if (qfi.exists()) return qfi;
+  if (qfi.exists())
+    return qfi;
   QFileInfo qfinew;
   QString path = qfi.absolutePath();
   QString name = qfi.completeBaseName();
   QString ext = qfi.suffix();
   int max = 1000, i = 1;
   do {
-    if (path.size()) qfinew.setFile(path + "/" + name + "_" + QString::number(i) + "." + ext);
-    else qfinew.setFile(name + "_" + QString::number(i) + "." + ext);
-    if (!qfinew.exists()) i = max;
+    if (path.size())
+      qfinew.setFile(path + "/" + name + "_" + QString::number(i) + "." + ext);
+    else
+      qfinew.setFile(name + "_" + QString::number(i) + "." + ext);
+    if (!qfinew.exists())
+      i = max;
     ++i;
   } while (i < max);
-
 
   return qfinew;
 }
@@ -114,11 +112,13 @@ inline QFileInfo next_filename(const QFileInfo &qfi) {
  */
 inline QVariant get_native(const QVariant &in, const QVariant &native) {
 
-  if (in == native) return native;
+  if (in == native)
+    return native;
   QVariant tmp = in;
   bool ok = tmp.convert(native.metaType());
   // can not convert - keep old!
-  if (!ok) return native;
+  if (!ok)
+    return native;
   // return in converted to native type
   return tmp;
 }
@@ -135,16 +135,13 @@ inline QString intfreq2string_unit(const double &f) {
     int_f = int(f);
     unit = " Hz ";
     return QString::number(int_f) + unit;
-  }
-  else if (f < 1.0) {
-    int_f = int(1.0/f);
+  } else if (f < 1.0) {
+    int_f = int(1.0 / f);
     unit = " s ";
     return QString::number(int_f) + unit;
   }
 
   return unit;
-
-
 }
 
 inline QString doublefreq2string_unit(const double &f) {
@@ -153,15 +150,12 @@ inline QString doublefreq2string_unit(const double &f) {
   if (f >= 1.0) {
     int_f = f;
     return QString::number(int_f, 'f', 4) + " Hz ";
-  }
-  else if (f < 1.0) {
-    int_f = 1.0/f;
+  } else if (f < 1.0) {
+    int_f = 1.0 / f;
     return QString::number(int_f, 'f', 4) + " s ";
   }
 
   return QString("failed");
-
-
 }
 
 inline QString doublefreq2string_unit_measdoc(const double &f) {
@@ -171,31 +165,28 @@ inline QString doublefreq2string_unit_measdoc(const double &f) {
     int_f = int(f);
     unit = "H";
     return "_" + QString::number(int_f) + unit;
-  }
-  else if (f < 1.0) {
-    int_f = int(1.0/f);
+  } else if (f < 1.0) {
+    int_f = int(1.0 / f);
     unit = "S";
     return "_" + QString::number(int_f) + unit;
   }
 
   return unit;
-
 }
 
-//QMap<QString, QVariant> ats_filename_to_data(const QString &base_name) {
-//  QStringList items = base_name.split(("_"));
-//  QMap<QString, QVariant> map;
-//  // 071_V01_C00_R000_TEx_BL_2S
-//  if (items.size() < 7) return map;
-//  if (base_name.contains(".xml")) return map;
-//  map.insert("adu_ser", items.[0]);
-//  map.insert("file_ver", items[1].remove(0,1).toInt());
-//  map.insert("adu_chan", items[2].remove(0,1).toInt());
-//  map.insert("adu_run", items[3].remove(0,1).toInt();
-//  map.insert("adu_chantype", items[4].remove(0,1));
-//  map.insert("adu_boardtype", items[5].remove(0,1));
-//  map.insert("adu_fsample", items[6]);
-
+// QMap<QString, QVariant> ats_filename_to_data(const QString &base_name) {
+//   QStringList items = base_name.split(("_"));
+//   QMap<QString, QVariant> map;
+//   // 071_V01_C00_R000_TEx_BL_2S
+//   if (items.size() < 7) return map;
+//   if (base_name.contains(".xml")) return map;
+//   map.insert("adu_ser", items.[0]);
+//   map.insert("file_ver", items[1].remove(0,1).toInt());
+//   map.insert("adu_chan", items[2].remove(0,1).toInt());
+//   map.insert("adu_run", items[3].remove(0,1).toInt();
+//   map.insert("adu_chantype", items[4].remove(0,1));
+//   map.insert("adu_boardtype", items[5].remove(0,1));
+//   map.insert("adu_fsample", items[6]);
 
 //  return map;
 
@@ -208,12 +199,14 @@ inline QString doublefreq2string_unit_measdoc(const double &f) {
  * \param target
  * \param source
  */
-inline void copy_native(QMap<QString, QVariant> &target, const QMap<QString, QVariant> &source  ) {
+inline void copy_native(QMap<QString, QVariant> &target, const QMap<QString, QVariant> &source) {
 
   QMap<QString, QVariant>::const_iterator iter = source.constBegin();
   while (iter != source.constEnd()) {
-    if (target.contains(iter.key())) target.insert(iter.key(), get_native(iter.value(), target.value(iter.key())));
-    else target.insert(iter.key(), iter.value());
+    if (target.contains(iter.key()))
+      target.insert(iter.key(), get_native(iter.value(), target.value(iter.key())));
+    else
+      target.insert(iter.key(), iter.value());
     ++iter;
   }
 }
@@ -229,7 +222,7 @@ inline QString qvariant_double_to_sci_str(const QVariant &in, const int precisio
   QString double_str;
   // compare if we want to make a double E+NN string
   if (in.metaType().id() == QMetaType::Double) {
-    double_str = QString::number(in.toDouble(), 'E', precision );
+    double_str = QString::number(in.toDouble(), 'E', precision);
   }
 
   return double_str;
@@ -241,39 +234,46 @@ inline QString qvariant_double_to_sci_str(const QVariant &in, const int precisio
  * \param what_to_open one of the default files like info.sql3, master_calibration.sql3, procmt.sql3
  * \return
  */
-inline QFileInfo fall_back_default_str (const QString &what_to_open) {
-  if (!what_to_open.size()) return QFileInfo();
+inline QFileInfo fall_back_default_str(const QString &what_to_open) {
+  if (!what_to_open.size())
+    return QFileInfo();
   QFileInfo qfinew;
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux / mac
-  if (qfinew.exists()) return qfinew;
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open); // typical windows / linux / mac
+  if (qfinew.exists())
+    return qfinew;
   // second try
   qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
   return qfinew;
 }
 
-inline QFileInfo fall_back_default (const QFileInfo &what_to_open) {
+inline QFileInfo fall_back_default(const QFileInfo &what_to_open) {
 
-  if (what_to_open.exists()) return what_to_open;
+  if (what_to_open.exists())
+    return what_to_open;
   QFileInfo qfinew;
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open.fileName());  // typical windows / linux / mac
-  if (qfinew.exists()) return qfinew;
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open.fileName()); // typical windows / linux / mac
+  if (qfinew.exists())
+    return qfinew;
   qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open.fileName());
-  if (qfinew.exists()) return qfinew;
+  if (qfinew.exists())
+    return qfinew;
   return QFileInfo();
 }
-
 
 /*!
  * \brief procmt_homepath get the path either for application or debug
  * \return
  */
 inline QString procmt_homepath(const QString &what_to_open) {
-  if (!what_to_open.size()) return QString();
+  if (!what_to_open.size())
+    return QString();
   QFileInfo qfinew;
-  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open);  // typical windows / linux / mac
-  if (qfinew.exists()) return qfinew.absoluteFilePath();
+  qfinew.setFile(QCoreApplication::applicationDirPath() + "/" + what_to_open); // typical windows / linux / mac
+  if (qfinew.exists())
+    return qfinew.absoluteFilePath();
   qfinew.setFile(QString(PMTSQLPATH) + "/bin/" + what_to_open);
-  if (qfinew.exists()) return qfinew.absoluteFilePath();
+  if (qfinew.exists())
+    return qfinew.absoluteFilePath();
   return QString();
 }
 

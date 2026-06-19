@@ -30,45 +30,37 @@
 #ifndef STD_COLOUR_SCALE_H
 #define STD_COLOUR_SCALE_H
 
-
+#include <QDebug>
 #include <QList>
 #include <QString>
 #include <QStringList>
-#include <QDebug>
 #include <QTextStream>
 
 #include <cmath>
 #include <iostream>
 
-
-class std_colour_scale
-{
+class std_colour_scale {
 public:
-    std_colour_scale(const QString which = "", const bool extends_colour = true, const bool nodata_white = true, const bool revert = false);
+  std_colour_scale(const QString which = "", const bool extends_colour = true, const bool nodata_white = true, const bool revert = false);
 
-    int create_cpt_scale(QTextStream *qtx,  const double min, const double max, const bool contour = false, const bool log = false, bool round = false);
+  int create_cpt_scale(QTextStream *qtx, const double min, const double max, const bool contour = false, const bool log = false, bool round = false);
 
+  QList<double> vals;
+  double min;
+  double minl;
+  double max;
+  double malx;
+  QStringList rgb;
 
+  QTextStream cpttext;
+  QTextStream cpttextlog;
 
-    QList<double> vals;
-    double min;
-    double minl;
-    double max;
-    double malx;
-    QStringList rgb;
+  bool extends_colour;
+  bool nodata_white;
 
-    QTextStream cpttext;
-    QTextStream cpttextlog;
-
-    bool extends_colour;
-    bool nodata_white;
-
-    QString N;   /*! use colour for no data */
-    QString B;   /*! use colour for out of range lower */
-    QString F;   /*! use colour for out of range above */
-
-
-
+  QString N; /*! use colour for no data */
+  QString B; /*! use colour for out of range lower */
+  QString F; /*! use colour for out of range above */
 };
 
 #endif // STD_COLOUR_SCALE_H

@@ -30,25 +30,23 @@
 #ifndef SELECT_ITEMS_FROM_DB_SENSORS_H
 #define SELECT_ITEMS_FROM_DB_SENSORS_H
 
+#include <QBoxLayout>
+#include <QDebug>
 #include <QDialog>
+#include <QFileInfo>
+#include <QHBoxLayout>
+#include <QKeyEvent>
+#include <QLabel>
 #include <QMap>
 #include <QPushButton>
-#include <QString>
 #include <QSettings>
-#include <QVariant>
-#include <QKeyEvent>
-#include <QDebug>
-#include <QSettings>
-#include <QtSql>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
-#include <QBoxLayout>
-#include <QHBoxLayout>
+#include <QSqlQuery>
+#include <QString>
 #include <QVBoxLayout>
-#include <QPushButton>
-#include <QLabel>
-#include <QFileInfo>
+#include <QVariant>
+#include <QtSql>
 #include <memory>
 
 #include "db_sensor_query.h"
@@ -57,74 +55,63 @@ namespace Ui {
 class select_items_from_db_sensors;
 }
 
-
 // forward declaration
 class sens_button;
 
-class select_items_from_db_sensors : public QDialog
-{
-    Q_OBJECT
+class select_items_from_db_sensors : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit select_items_from_db_sensors(const QStringList &selections, const int &cols, QWidget *parent = Q_NULLPTR);
-    ~select_items_from_db_sensors();
+  explicit select_items_from_db_sensors(const QStringList &selections, const int &cols, QWidget *parent = Q_NULLPTR);
+  ~select_items_from_db_sensors();
 
-    void clear();
+  void clear();
 
-    QString get_selection() const;
+  QString get_selection() const;
 
 public slots:
-    void set_selection(const QString &selection);
+  void set_selection(const QString &selection);
 
-    void activate_button(const QString &button_name);
+  void activate_button(const QString &button_name);
 
 private:
+  int cols;
+  QStringList selections;
+  Ui::select_items_from_db_sensors *ui;
 
-    int cols;
-    QStringList selections;
-    Ui::select_items_from_db_sensors *ui;
+  QString selection = "empty";
 
+  QList<QHBoxLayout *> hzls;
+  QList<sens_button *> btns;
 
-    QString selection = "empty";
-
-    QList<QHBoxLayout* > hzls;
-    QList<sens_button*>  btns;
-
-    uint nlayout = 0;
-    uint nbutton = 0;
-
+  uint nlayout = 0;
+  uint nbutton = 0;
 };
 
+class sens_button : public QObject {
 
-
-class sens_button : public QObject
-{
-
-    Q_OBJECT
+  Q_OBJECT
 
 public:
+  sens_button(const uint &nbutton, const uint &nlayout, QBoxLayout *layout, const QString &label_text, select_items_from_db_sensors *gui);
 
-    sens_button(const uint &nbutton, const uint &nlayout, QBoxLayout *layout, const QString &label_text, select_items_from_db_sensors *gui);
+  select_items_from_db_sensors *gui;
+  QString label_text;
+  QBoxLayout *layout;
+  uint nlayout;
+  uint nbutton;
 
-    select_items_from_db_sensors *gui;
-    QString label_text;
-    QBoxLayout *layout;
-    uint nlayout;
-    uint nbutton;
+  QPushButton *btn;
+  QLabel *lbl;
 
-    QPushButton *btn;
-    QLabel *lbl;
-
-    ~sens_button();
-
+  ~sens_button();
 
 public slots:
-    void on_clicked();
+  void on_clicked();
 
 signals:
 
-    QString selection_done(const QString);
-
+  QString selection_done(const QString);
 };
 
 #endif // SELECT_ITEMS_FROM_DB_SENSORS_H

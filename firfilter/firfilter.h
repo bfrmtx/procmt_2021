@@ -31,80 +31,72 @@
 #define FIRFILTER_H
 
 #include "firfilter_global.h"
-#include <vector>
 #include <QMap>
-#include <QVariant>
 #include <QObject>
+#include <QVariant>
+#include <vector>
 
-#include "prc_com.h"
 #include "iterator_templates.h"
 #include "memory"
+#include "prc_com.h"
 
-
-
-class firfilter : public QObject, public prc_com
-{
-    Q_OBJECT
+class firfilter : public QObject, public prc_com {
+  Q_OBJECT
 
 public:
-    explicit firfilter(QObject *parent = 0);
+  explicit firfilter(QObject *parent = 0);
 
-    explicit firfilter(const firfilter &fil, QObject *parent = 0);
+  explicit firfilter(const firfilter &fil, QObject *parent = 0);
 
-    ~firfilter();
+  ~firfilter();
 
-    void copy_data(firfilter *fil);
+  void copy_data(firfilter *fil);
 
+  firfilter &operator=(firfilter const &fil);
 
-    firfilter& operator = (firfilter const &fil);
+  friend bool operator==(firfilter &lhs, firfilter const &rhs) {
+    return (lhs.value("filter_name") == rhs.value("filter_name"));
+  }
+  friend bool operator!=(firfilter &lhs, firfilter const &rhs) {
+    return (lhs.value("filter_name") != rhs.value("filter_name"));
+  }
 
-    friend bool operator == (firfilter &lhs, firfilter const &rhs) {
-        return (lhs.value("filter_name") == rhs.value("filter_name"));
-    }
-    friend bool operator != (firfilter &lhs, firfilter const &rhs) {
-        return (lhs.value("filter_name") != rhs.value("filter_name"));
-    }
+  void clear();
 
-    void clear();
+  void clear_coefficients();
 
-    void clear_coefficients();
+  /*!
+   * \brief fir_fold fold the data with the filter coefficients and return the result
+   * \param tsdata_in
+   * \return
+   */
+  double fir_fold(const std::vector<double> &tsdata_in);
 
-    /*!
-     * \brief fir_fold fold the data with the filter coefficients and return the result
-     * \param tsdata_in
-     * \return
-     */
-    double fir_fold(const std::vector<double> &tsdata_in);
-
-    /*!
-     * \brief set_filter parse the settings from the command line or mcd
-     * \param filter_part
-     * \return
-     */
-    bool set_firfilter(const prc_com &filter_part);
+  /*!
+   * \brief set_filter parse the settings from the command line or mcd
+   * \param filter_part
+   * \return
+   */
+  bool set_firfilter(const prc_com &filter_part);
 
 public slots:
 
-    /*!
-     * \brief generate_coefficients
-     * \param filter_name - one of the pre-defined:  mtx32 mtx8 mtx4 mtx2  mtx25 mtx10 notch highpass lowpass bandpass
-     * \param success check in case - especially when no coeff are returned
-     * \param create_coeff_vector false is you only want create and check the parameters
-     * \param sample_freq at least needed for band- and notch filters
-     * \param num_samples if samples to small we can not filter
-     * \return a FIR fil vector to be folded or zero size vector in case
-     */
+  /*!
+   * \brief generate_coefficients
+   * \param filter_name - one of the pre-defined:  mtx32 mtx8 mtx4 mtx2  mtx25 mtx10 notch highpass lowpass bandpass
+   * \param success check in case - especially when no coeff are returned
+   * \param create_coeff_vector false is you only want create and check the parameters
+   * \param sample_freq at least needed for band- and notch filters
+   * \param num_samples if samples to small we can not filter
+   * \return a FIR fil vector to be folded or zero size vector in case
+   */
 
-    std::vector<double> generate_coefficients(const QString &filter_name,  bool &success, const bool create_coeff_vector = true,
-                                              const double sample_freq = 0, const quint64 num_samples = 0);
-
-
-
+  std::vector<double> generate_coefficients(const QString &filter_name, bool &success, const bool create_coeff_vector = true,
+                                            const double sample_freq = 0, const quint64 num_samples = 0);
 
 private:
-
-    std::vector<double> coeff;
-    QStringList strs_opts;
+  std::vector<double> coeff;
+  QStringList strs_opts;
 };
 
 #endif // FIRFILTER_H

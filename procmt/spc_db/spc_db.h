@@ -30,66 +30,63 @@
 #ifndef SPC_DB_H
 #define SPC_DB_H
 
-#include "spc_db_global.h"
 #include "prc_com.h"
-#include "qtx_templates.h"
 #include "procmt_alldefines.h"
+#include "qtx_templates.h"
+#include "spc_db_global.h"
 #include <climits>
 
 #include <vector>
 
-#include <QObject>
-#include <QFileInfo>
-#include <QFile>
 #include <QDebug>
-#include <QString>
+#include <QFile>
+#include <QFileInfo>
+#include <QList>
+#include <QMap>
+#include <QObject>
 #include <QSql>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QSqlRecord>
-#include <QMap>
-#include <QList>
+#include <QString>
 #include <QVariant>
 #include <unordered_map>
 #include <utility>
 
 #include "mt_data.h"
 
-class spc_db :  public QObject
-{
-    Q_OBJECT
+class spc_db : public QObject {
+  Q_OBJECT
 public:
-    spc_db(const QFileInfo qfi_base, const QString subdir_str = "dump", QObject *parent = Q_NULLPTR);
-    spc_db(QObject *parent = Q_NULLPTR);
-    QFileInfo create_new_db(const QString &dbname_name_only, const std::vector<acsp> &ac_spectra, std::vector<prc_com> &prcs);
+  spc_db(const QFileInfo qfi_base, const QString subdir_str = "dump", QObject *parent = Q_NULLPTR);
+  spc_db(QObject *parent = Q_NULLPTR);
+  QFileInfo create_new_db(const QString &dbname_name_only, const std::vector<acsp> &ac_spectra, std::vector<prc_com> &prcs);
 
-    size_t fetch_all(const QFileInfo qfi, std::vector<acsp> &ac_spectra, std::vector<prc_com> &prcs);
+  size_t fetch_all(const QFileInfo qfi, std::vector<acsp> &ac_spectra, std::vector<prc_com> &prcs);
 
-    size_t table_names();
+  size_t table_names();
 
-    size_t row_count(const QString table_name);
+  size_t row_count(const QString table_name);
 
-    size_t ac_ssp_columns(const QString table_name, QStringList &column_names);
+  size_t ac_ssp_columns(const QString table_name, QStringList &column_names);
 
-    void clear();
+  void clear();
 
-    ~spc_db();
+  ~spc_db();
+
 private:
-
-
-    QStringList tables;
-    QList<double> freqs;
-    QStringList columns;
-    QStringList channel_tables;
-    QList<QMap<QString, QVariant>> dip_1, dip_2;
-    QFileInfo dbname;
-    QFileInfo qfi_base;                                             //!< survey base dir - we need to append "dump" by default
-    QSqlDatabase spcdb;
-    QSqlDatabase info_db;
-    QFileInfo info_filedb;
-    QDir dir;
-
+  QStringList tables;
+  QList<double> freqs;
+  QStringList columns;
+  QStringList channel_tables;
+  QList<QMap<QString, QVariant>> dip_1, dip_2;
+  QFileInfo dbname;
+  QFileInfo qfi_base; //!< survey base dir - we need to append "dump" by default
+  QSqlDatabase spcdb;
+  QSqlDatabase info_db;
+  QFileInfo info_filedb;
+  QDir dir;
 };
 
 #endif // SPC_DB_H

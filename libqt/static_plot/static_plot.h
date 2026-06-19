@@ -33,16 +33,15 @@
 #include "static_plot_global.h"
 #include <QMainWindow>
 
-#include "qcustomplot.h"
-#include <vector>
-#include <complex>
-#include <cfloat>
-#include <map>
-#include <QString>
-#include <QScrollBar>
-#include <QWidget>
 #include "iterator_complex_templates.h"
-
+#include "qcustomplot.h"
+#include <QScrollBar>
+#include <QString>
+#include <QWidget>
+#include <cfloat>
+#include <complex>
+#include <map>
+#include <vector>
 
 namespace Ui {
 class static_plot;
@@ -51,122 +50,106 @@ class static_plot;
 /*!
  * \brief The static_plot class small wrapper class to plot my ac- and single spectra
  */
-class static_plot : public QMainWindow
-{
-    Q_OBJECT
+class static_plot : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit static_plot(QWidget *parent = nullptr);
-    ~static_plot();
+  explicit static_plot(QWidget *parent = nullptr);
+  ~static_plot();
 
+  /*!
+   * \brief set_data
+   * \param plot_number 0 ...8 - protect me agains fail loops wtih 1000 plots
+   * \param x x-axis
+   * \param y y-axis
+   * \param pen take QPen(Qt::blue) or QPen(Qt::red)) and so on
+   * \param shape take QCPScatterStyle::ScatterShape::ssSquare or QCPScatterStyle::ScatterShape::ssCircle and so on
+   */
+  void set_data(const int plot_number, const std::vector<double> &x, const std::vector<double> &y, const QPen pen, const QCPScatterStyle::ScatterShape shape = QCPScatterStyle::ssCircle);
 
-    /*!
-      * \brief set_data
-      * \param plot_number 0 ...8 - protect me agains fail loops wtih 1000 plots
-      * \param x x-axis
-      * \param y y-axis
-      * \param pen take QPen(Qt::blue) or QPen(Qt::red)) and so on
-      * \param shape take QCPScatterStyle::ScatterShape::ssSquare or QCPScatterStyle::ScatterShape::ssCircle and so on
-      */
-     void set_data(const int plot_number, const std::vector<double> &x, const std::vector<double> &y, const QPen pen, const QCPScatterStyle::ScatterShape shape=QCPScatterStyle::ssCircle);
+  void set_data_complex(const int plot_number, const std::vector<double> &x, const std::vector<std::complex<double>> &y, const int real_1_imag_2_ampl_3_phase_4, const QPen pen, const QCPScatterStyle::ScatterShape shape = QCPScatterStyle::ssCircle);
 
-     void set_data_complex(const int plot_number, const std::vector<double> &x, const std::vector<std::complex<double>> &y, const int real_1_imag_2_ampl_3_phase_4, const QPen pen, const QCPScatterStyle::ScatterShape shape=QCPScatterStyle::ssCircle);
+  void set_data_ops(const int plot_number, const std::vector<double> &x, const std::vector<double> &y, const std::vector<double> &y2, int add_1_mul_2_div_3_sub_4, const QPen pen, const QCPScatterStyle::ScatterShape shape = QCPScatterStyle::ssCircle);
 
-     void set_data_ops(const int plot_number, const std::vector<double> &x, const std::vector<double> &y, const std::vector<double> &y2, int add_1_mul_2_div_3_sub_4, const QPen pen, const QCPScatterStyle::ScatterShape shape=QCPScatterStyle::ssCircle);
+  void set_data_complex_ops(const int plot_number, const std::vector<double> &x, const std::vector<std::complex<double>> &y, const std::vector<std::complex<double>> &y2, int add_1_mul_2_div_3_sub_4, const int real_1_imag_2_ampl_3_phase_4, const QPen pen, const QCPScatterStyle::ScatterShape shape = QCPScatterStyle::ssCircle);
 
-     void set_data_complex_ops(const int plot_number, const std::vector<double> &x, const std::vector<std::complex<double>> &y, const std::vector<std::complex<double>> &y2 , int add_1_mul_2_div_3_sub_4, const int real_1_imag_2_ampl_3_phase_4, const QPen pen, const QCPScatterStyle::ScatterShape shape=QCPScatterStyle::ssCircle);
-
-
-
-     void set_tile(const QString &window_title);
-     void set_x_y_label(const int plot_number, const QString &xlabel, const QString &ylabel);
+  void set_tile(const QString &window_title);
+  void set_x_y_label(const int plot_number, const QString &xlabel, const QString &ylabel);
 
 public slots:
 
-     void plot();
-     void clear();
-     void create_scrollbar();
-
+  void plot();
+  void clear();
+  void create_scrollbar();
 
 private slots:
-     void on_pushButton_reset_x_clicked();
+  void on_pushButton_reset_x_clicked();
 
-     void on_pushButton_reset_y_clicked();
+  void on_pushButton_reset_y_clicked();
 
-     void on_pushButton_reset_xy_clicked();
+  void on_pushButton_reset_xy_clicked();
 
-     void on_xmin_spin_valueChanged(double arg1);
+  void on_xmin_spin_valueChanged(double arg1);
 
-     void on_xmax_spin_valueChanged(double arg1);
+  void on_xmax_spin_valueChanged(double arg1);
 
-     void on_ymin_spin_valueChanged(double arg1);
+  void on_ymin_spin_valueChanged(double arg1);
 
-     void on_ymax_spin_valueChanged(double arg1);
+  void on_ymax_spin_valueChanged(double arg1);
 
-     void change_x_axis_and_spins(const QCPRange &newRange);
+  void change_x_axis_and_spins(const QCPRange &newRange);
 
-     void change_y_axis_and_spins(const QCPRange &newRange);
-
-
+  void change_y_axis_and_spins(const QCPRange &newRange);
 
 private:
-    Ui::static_plot *ui;
+  Ui::static_plot *ui;
 
+  size_t max_plots = 8;
+  std::vector<std::unique_ptr<QCustomPlot>> plots;
 
-    size_t max_plots = 8;
-    std::vector<std::unique_ptr<QCustomPlot>> plots;
+  QScrollBar *scrollbar = nullptr;
 
-    QScrollBar *scrollbar = nullptr;
+  std::vector<int> active_plots;
+  std::vector<double> mins_x;
+  std::vector<double> maxs_x;
+  std::vector<double> mins_y;
+  std::vector<double> maxs_y;
 
+  std::vector<double> act_mins_x;
+  std::vector<double> act_maxs_x;
+  std::vector<double> act_mins_y;
+  std::vector<double> act_maxs_y;
 
-    std::vector<int> active_plots;
-    std::vector<double> mins_x;
-    std::vector<double> maxs_x;
-    std::vector<double> mins_y;
-    std::vector<double> maxs_y;
+  void set_x_min_max(const double &xmin, const double &xmax);
 
-    std::vector<double> act_mins_x;
-    std::vector<double> act_maxs_x;
-    std::vector<double> act_mins_y;
-    std::vector<double> act_maxs_y;
-
-
-
-    void set_x_min_max(const double &xmin, const double &xmax);
-
-    void replot();
-
-
+  void replot();
 };
 
-class multi_static_plots : public QObject, public std::map<QString, std::unique_ptr<static_plot>>
-{
-    Q_OBJECT
+class multi_static_plots : public QObject, public std::map<QString, std::unique_ptr<static_plot>> {
+  Q_OBJECT
 public:
-    multi_static_plots(QObject *parent = Q_NULLPTR);
-    ~multi_static_plots();
+  multi_static_plots(QObject *parent = Q_NULLPTR);
+  ~multi_static_plots();
 
-    void insert(const QString &plotname, QWidget *where_to_add_buttons = Q_NULLPTR);
-    void clear();
+  void insert(const QString &plotname, QWidget *where_to_add_buttons = Q_NULLPTR);
+  void clear();
 
-    std::vector<QPushButton *> what_to_plot_buttons;
+  std::vector<QPushButton *> what_to_plot_buttons;
 
-    const char *prop_what_to_plot = "plotme";
+  const char *prop_what_to_plot = "plotme";
 
 signals:
 
-    void plotting(const QString &what);
+  void plotting(const QString &what);
 
 public slots:
 
-    void slot_plot_button();
-    void slot_plot(const QString &what);
-    void close();
+  void slot_plot_button();
+  void slot_plot(const QString &what);
+  void close();
 
 private:
-
-    QWidget *where_to_add_buttons = Q_NULLPTR;
-
+  QWidget *where_to_add_buttons = Q_NULLPTR;
 };
 
 #endif // STATIC_PLOT_H

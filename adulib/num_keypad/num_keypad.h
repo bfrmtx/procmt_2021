@@ -30,172 +30,155 @@
 #ifndef FREEKEYPADWINDOW_H
 #define FREEKEYPADWINDOW_H
 
+#include <QDebug>
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMap>
 #include <QPushButton>
+#include <QSettings>
 #include <QString>
-#include <QSettings>
 #include <QVariant>
-#include <QKeyEvent>
-#include <QDebug>
 #include <limits>
-#include <QSettings>
 
-
-enum num_keypad_InputMode
-{
-    UnsignedIntegerMode = 1,
-    IntegerMode   = 2,
-    UnsignedDoubleMode   =3,
-    DoubleMode = 4
+enum num_keypad_InputMode {
+  UnsignedIntegerMode = 1,
+  IntegerMode = 2,
+  UnsignedDoubleMode = 3,
+  DoubleMode = 4
 };
 
 namespace Ui {
 class num_keypadgui;
 }
 
-
 /*!
  * \brief The num_keypad class a gui keypad; hence that this keypad works with numbers and not with strings
  */
-class num_keypad : public QDialog
-{
-    Q_OBJECT
+class num_keypad : public QDialog {
+  Q_OBJECT
 public:
+  explicit num_keypad(QString title, num_keypad_InputMode ipt = num_keypad_InputMode::DoubleMode, QWidget *parent = Q_NULLPTR);
 
+  /** \brief Handler for keyboard input.
+   * Allows to use keyboard instead of buttons
+   * \param event Qt Keyboard event
+   */
+  void keyPressEvent(QKeyEvent *event);
 
+  /** \brief Access input value as int.
+   * \return Converted value
+   */
 
-    explicit num_keypad( QString title, num_keypad_InputMode ipt = num_keypad_InputMode::DoubleMode, QWidget *parent = Q_NULLPTR);
+  /** \brief Access input value.
+   * \return Current input string
+   */
+  QString toText() const;
 
-    /** \brief Handler for keyboard input.
-     * Allows to use keyboard instead of buttons
-     * \param event Qt Keyboard event
-     */
-    void keyPressEvent(QKeyEvent *event);
+  /*!
+   * \brief toUint
+   * \return last succsessful conversion to uint
+   */
+  uint toUint() const;
+  double toDouble() const;
+  int toInt() const;
+  QVariant value() const;
 
-    /** \brief Access input value as int.
-     * \return Converted value
-     */
+  // inline void setTitle( const QString& newTitle ) { ui.titleLabel->setText( newTitle ); }
 
-    /** \brief Access input value.
-     * \return Current input string
-     */
-    QString    toText() const;
+  void setInitialValue(const QVariant &value);
+  void setMaxMinValue(const QVariant &max, const QVariant &min);
+  void setClearOnFirstKey();
 
-    /*!
-     * \brief toUint
-     * \return last succsessful conversion to uint
-     */
-    uint       toUint() const;
-    double     toDouble() const;
-    int        toInt() const;
-    QVariant   value() const;
-
-    //inline void setTitle( const QString& newTitle ) { ui.titleLabel->setText( newTitle ); }
-
-    void setInitialValue(const QVariant &value );
-    void setMaxMinValue( const QVariant &max, const QVariant &min );
-    void setClearOnFirstKey();
-
-    virtual ~num_keypad();
+  virtual ~num_keypad();
 
 private slots:
-    /** \brief Handler for button clicks.
-     * The calling button is decode in the handler
-     */
-    void buttonClicked();
+  /** \brief Handler for button clicks.
+   * The calling button is decode in the handler
+   */
+  void buttonClicked();
 
-    void on_valueLine_textChanged(const QString &arg1);
+  void on_valueLine_textChanged(const QString &arg1);
 
-    void on_num_keypadgui_accepted();
+  void on_num_keypadgui_accepted();
 
 protected:
+  virtual void closeEvent(QCloseEvent *);
+  virtual void showEvent(QShowEvent *);
 
-    virtual void closeEvent( QCloseEvent *);
-    virtual void showEvent ( QShowEvent * );
+  /** \brief Enables the given set of buttons.
+   * \param buttons String with chars to enable
+   */
+  void enableButtons(const QString buttons);
 
-    /** \brief Enables the given set of buttons.
-     * \param buttons String with chars to enable
-     */
-    void enableButtons(const QString buttons);
+  /** \brief Process all input  (Buttons and keys).
+   * \param key Key triggered
+   */
+  void keyPress(const QChar key);
 
-    /** \brief Process all input  (Buttons and keys).
-     * \param key Key triggered
-     */
-    void keyPress(const QChar key);
+  /** \brief Internal helper: map a button to a certain key.
+   */
+  void mapButton(QPushButton *button, const QChar c);
 
-    /** \brief Internal helper: map a button to a certain key.
-     */
-    void mapButton(QPushButton* button, const QChar c);
+  QMap<QPushButton *, QChar> qmButtons;
+  QString qstrInput;
+  QString qstrInput_tmp;
 
+  QString qstrLegalKeys;
+  bool mSignedValuesAllowed;
 
-    QMap<QPushButton*,QChar>    qmButtons;
-    QString             qstrInput;
-    QString             qstrInput_tmp;
+  bool convok = false;
+  bool wait_for_next_char = false;
 
-    QString             qstrLegalKeys;
-    bool                mSignedValuesAllowed;
+  bool clear_onfirstkey = false;
 
+  QVariant keypad_value; //!< this is the master
+  QVariant keypad_value_tmp;
+  QVariant keypad_value_string;
+  QVariant min;
+  QVariant max;
 
-    bool convok = false;
-    bool wait_for_next_char = false;
-
-    bool clear_onfirstkey = false;
-
-    QVariant keypad_value;                 //!< this is the master
-    QVariant keypad_value_tmp;
-    QVariant keypad_value_string;
-    QVariant min;
-    QVariant max;
-
-    num_keypad_InputMode InputMode;
-
+  num_keypad_InputMode InputMode;
 
 private:
-    Ui::num_keypadgui *ui;
+  Ui::num_keypadgui *ui;
 
-    QString valids_dbl =  QString("0123456789.-");
-    QString valids_udbl = QString("0123456789.");
-    QString valids_int =  QString("0123456789-");
-    QString valids_uint = QString("0123456789");
-    QChar minus = QChar('-');
-    QChar dot = QChar('.');
-    QChar comma = QChar(',');
+  QString valids_dbl = QString("0123456789.-");
+  QString valids_udbl = QString("0123456789.");
+  QString valids_int = QString("0123456789-");
+  QString valids_uint = QString("0123456789");
+  QChar minus = QChar('-');
+  QChar dot = QChar('.');
+  QChar comma = QChar(',');
 
-    void clear(const bool clear_max_min = false);
+  void clear(const bool clear_max_min = false);
 
-    /*!
-     * \brief contains_valid_char test if we want this character at all
-     * \param lastchar
-     * \return false in case we dont want it for the number string
-     */
-    bool contains_valid_char(const QChar &lastchar, const QString &input_line) const;
+  /*!
+   * \brief contains_valid_char test if we want this character at all
+   * \param lastchar
+   * \return false in case we dont want it for the number string
+   */
+  bool contains_valid_char(const QChar &lastchar, const QString &input_line) const;
 
-    /*!
-     * \brief convert_to_number convertes to  keypad_value; checks also min max
-     * \return true or false; sets also keypad_value_tmp = keypad_value if true or set wait_next_char
-     */
-    bool convert_to_number(const QString &input_line);
+  /*!
+   * \brief convert_to_number convertes to  keypad_value; checks also min max
+   * \return true or false; sets also keypad_value_tmp = keypad_value if true or set wait_next_char
+   */
+  bool convert_to_number(const QString &input_line);
 
+  /*!
+   * \brief QVariant_to_double_with_dot : QVariant to String can not create 1. or 2. it make 1 or only; set the text in keypad
+   * \param input_line input line with a dot on case
+   * \param can_be_valid means that the previous check was negative and the last character has to be removed
+   * \return
+   */
+  QString QVariant_to_double_with_dot(const QString &input_line, const bool &can_be_valid);
 
-    /*!
-     * \brief QVariant_to_double_with_dot : QVariant to String can not create 1. or 2. it make 1 or only; set the text in keypad
-     * \param input_line input line with a dot on case
-     * \param can_be_valid means that the previous check was negative and the last character has to be removed
-     * \return
-     */
-    QString QVariant_to_double_with_dot(const QString &input_line, const bool &can_be_valid);
-
-
-    /*!
-     * \brief number_string_check checks if a string can be converted in to (u)int and (u)double
-     * \param input_str
-     * \return input_str or last valid str
-     */
-    bool number_string_check(const QString &input_str);
-
-
-
+  /*!
+   * \brief number_string_check checks if a string can be converted in to (u)int and (u)double
+   * \param input_str
+   * \return input_str or last valid str
+   */
+  bool number_string_check(const QString &input_str);
 };
 
 #endif // FREEKEYPADWINDOW_H

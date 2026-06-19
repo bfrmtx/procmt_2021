@@ -30,32 +30,31 @@
 #ifndef XMLREADER_H
 #define XMLREADER_H
 
-#include <QXmlStreamReader>
 #include <QFile>
 #include <QFileInfo>
+#include <QXmlStreamReader>
 
 #include "namespace.h"
 
 TS_NAMESPACE_BEGIN
 
 struct measurement_output_channel {
-    std::string id = "";
-    std::string channeltype = "";
-    std::string filename = "";
-    long long samplecount = 0;
-    double frequency = 0;
+  std::string id = "";
+  std::string channeltype = "";
+  std::string filename = "";
+  long long samplecount = 0;
+  double frequency = 0;
 };
 
 struct measurement_xml_data {
-    std::vector<measurement_output_channel> channel_data;
-    std::string filepath = "";
+  std::vector<measurement_output_channel> channel_data;
+  std::string filepath = "";
 };
 
-measurement_xml_data read_xml_file(QString const & filename);
+measurement_xml_data read_xml_file(QString const &filename);
 
 TS_NAMESPACE_END
 
-std::ostream & operator<<(std::ostream & os, const TS_NAMESPACE_NAME::measurement_output_channel & data);
-
+std::ostream &operator<<(std::ostream &os, const TS_NAMESPACE_NAME::measurement_output_channel &data);
 
 #endif // XMLREADER_H

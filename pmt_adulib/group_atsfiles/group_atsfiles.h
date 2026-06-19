@@ -30,23 +30,21 @@
 #ifndef GROUP_ATSFILES_H
 #define GROUP_ATSFILES_H
 
-#include "group_atsfiles_global.h"
 #include "atsheader.h"
 #include "eqdatetime.h"
+#include "group_atsfiles_global.h"
 
 #include <vector>
 
-
-class group_atsfiles
-{
+class group_atsfiles {
 public:
-    group_atsfiles(const QList<QFileInfo> &atsh_qfi);
-    ~group_atsfiles();
+  group_atsfiles(const QList<QFileInfo> &atsh_qfi);
+  ~group_atsfiles();
 
-    QList<QList<QFileInfo>> same_recordings();
+  QList<QList<QFileInfo>> same_recordings();
 
 private:
-    QList<std::shared_ptr<atsheader>> qlatsh;
+  QList<std::shared_ptr<atsheader>> qlatsh;
 };
 
 #endif // GROUP_ATSFILES_H

@@ -4,7 +4,6 @@
 #include "plotdata.h"
 #include "qcustomplot.h"
 
-
 // stl-includes
 #include <complex>
 #include <set>
@@ -12,13 +11,11 @@
 #include <unordered_set>
 #include <vector>
 
-
 // qt-includes
 #include <QColor>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPainter>
-
 
 enum class SelectionAction {
   REMOVED_SELECTION,

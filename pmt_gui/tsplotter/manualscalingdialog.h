@@ -36,16 +36,15 @@ namespace Ui {
 class ManualScalingDialog;
 }
 
-class ManualScalingDialog : public QDialog
-{
-    Q_OBJECT
+class ManualScalingDialog : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit ManualScalingDialog(QWidget *parent = nullptr);
-    ~ManualScalingDialog();
+  explicit ManualScalingDialog(QWidget *parent = nullptr);
+  ~ManualScalingDialog();
 
 private:
-    Ui::ManualScalingDialog *ui;
+  Ui::ManualScalingDialog *ui;
 };
 
 #endif // MANUALSCALINGDIALOG_H

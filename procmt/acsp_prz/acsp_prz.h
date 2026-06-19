@@ -30,74 +30,63 @@
 #ifndef ACSP_PRZ_H
 #define ACSP_PRZ_H
 
-
 #include "acsp_prz_global.h"
-#include <QObject>
-#include "procmt_alldefines.h"
-#include "buckets.h"
-#include "threadbuffer.h"
-#include "prc_com.h"
-#include "atsheader.h"
-#include "atsfile.h"
 #include "ats_ascii_file.h"
-#include "vector_utils.h"
+#include "atsfile.h"
 #include "atsfile_collector.h"
-#include <memory>
+#include "atsheader.h"
+#include "buckets.h"
+#include "prc_com.h"
+#include "procmt_alldefines.h"
+#include "threadbuffer.h"
+#include "vector_utils.h"
+#include <QObject>
 #include <future>
+#include <memory>
 
-class acsp_prz: public QObject, public prc_com
-{
+class acsp_prz : public QObject, public prc_com {
 
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    acsp_prz(std::shared_ptr<all_spectra_collector<std::complex<double>>>  &all_acspc_collector, QObject *parent = Q_NULLPTR);
+  acsp_prz(std::shared_ptr<all_spectra_collector<std::complex<double>>> &all_acspc_collector, QObject *parent = Q_NULLPTR);
 
-    ~acsp_prz();
-    void acsp(const size_t le_max_enum_spectra = SIZE_MAX);
+  ~acsp_prz();
+  void acsp(const size_t le_max_enum_spectra = SIZE_MAX);
 
-    bool set_frequencies_and_target_indices(const std::vector<double> &fft, const std::vector<double> &ft_target, const std::vector<size_t> &selindices, const std::vector<size_t> &selindices_sizes);
+  bool set_frequencies_and_target_indices(const std::vector<double> &fft, const std::vector<double> &ft_target, const std::vector<size_t> &selindices, const std::vector<size_t> &selindices_sizes);
 
+  std::vector<std::shared_ptr<atsfile_collector>> out_atsfile_collectors; //!< contains channel_single_spc_collector_buff as spc
 
-    std::vector<std::shared_ptr<atsfile_collector>> out_atsfile_collectors; //!< contains channel_single_spc_collector_buff as spc
+  std::vector<std::vector<std::complex<double>>> data;
+  std::vector<std::vector<std::vector<std::complex<double>>>> in;
 
-    std::vector<std::vector<std::complex<double>>> data;
-    std::vector<std::vector<std::vector<std::complex<double>>>> in;
-
-    bool set_parzen_vectors(std::shared_ptr<std::vector<std::vector<double>>> parzen_vectors_sptr, const std::vector<double> &f, const std::vector<double> &ft);
+  bool set_parzen_vectors(std::shared_ptr<std::vector<std::vector<double>>> parzen_vectors_sptr, const std::vector<double> &f, const std::vector<double> &ft);
 
 public slots:
 
-
-    void set_data_flush_out_atsfile_collectors(std::vector<std::shared_ptr<atsfile_collector>> &out_atsfile_collectors);
+  void set_data_flush_out_atsfile_collectors(std::vector<std::shared_ptr<atsfile_collector>> &out_atsfile_collectors);
 
 private:
+  void fold_prz(const size_t lhs, const size_t rhs, const size_t ac_pos);
 
-    void fold_prz(const size_t lhs, const size_t rhs, const size_t ac_pos);
+  void fold_lines(const size_t lhs, const size_t rhs, const size_t ac_pos);
 
-    void fold_lines(const size_t lhs, const size_t rhs, const size_t ac_pos);
+  void fold_lines_tilt(const size_t lhs, const size_t rhs, const size_t ac_pos);
 
-    void fold_lines_tilt(const size_t lhs, const size_t rhs, const size_t ac_pos);
+  void tilt_e_lines(const size_t idx);
 
+  std::shared_ptr<std::vector<std::vector<double>>> parzen_vectors_sptr = nullptr; //!< already generated parzen vectors from mc_data
+  std::vector<double> freqs;
+  std::vector<size_t> indices;
+  std::vector<size_t> selindices_sizes;
 
-    void tilt_e_lines(const size_t idx);
+  std::vector<double> target_freqs;
+  bool select_from_target_freqs = false; //!< discrete frequencies like CSAMT or without parzening
 
+  std::shared_ptr<all_spectra_collector<std::complex<double>>> all_acspc_collector; //!< store the result outside!
 
-    std::shared_ptr<std::vector<std::vector<double>>> parzen_vectors_sptr = nullptr; //!< already generated parzen vectors from mc_data
-    std::vector<double> freqs;
-    std::vector<size_t> indices;
-    std::vector<size_t> selindices_sizes;
-
-
-    std::vector<double> target_freqs;
-    bool select_from_target_freqs = false;              //!< discrete frequencies like CSAMT or without parzening
-
-    std::shared_ptr<all_spectra_collector<std::complex<double>>>  all_acspc_collector; //!< store the result outside!
-
-    int take_prz_lines_csamt = 0;                       //!< 0 nothing, 1 parzen, 2 lines, 3 csamt
-
-
-
+  int take_prz_lines_csamt = 0; //!< 0 nothing, 1 parzen, 2 lines, 3 csamt
 };
 
 #endif // ACSP_PRZ_H

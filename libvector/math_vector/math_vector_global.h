@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #if defined(MATH_VECTOR_LIBRARY)
-#  define MATH_VECTOR_EXPORT Q_DECL_EXPORT
+#define MATH_VECTOR_EXPORT Q_DECL_EXPORT
 #else
-#  define MATH_VECTOR_EXPORT Q_DECL_IMPORT
+#define MATH_VECTOR_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // MATH_VECTOR_GLOBAL_H

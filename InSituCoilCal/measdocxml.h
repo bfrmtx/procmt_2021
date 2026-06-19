@@ -3,22 +3,20 @@
 
 #include "QString"
 
-class MeasDocXml
-{
-    public:
-        MeasDocXml(const QString qstrTargetFileName);
+class MeasDocXml {
+public:
+  MeasDocXml(const QString qstrTargetFileName);
 
-        bool isOpen (void) const;
+  bool isOpen(void) const;
 
-        double getCalFreq (void) const;
+  double getCalFreq(void) const;
 
-    private:
-        bool bIsOpen;
+private:
+  bool bIsOpen;
 
-        QString qstrTargetFile;
+  QString qstrTargetFile;
 
-        QString qstrXML;
-
+  QString qstrXML;
 };
 
 #endif // MEASDOCXML_H

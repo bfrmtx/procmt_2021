@@ -18,35 +18,34 @@
 
 // Dependency:
 #include "../glm.hpp"
-#include "../gtc/type_precision.hpp"
 #include "../gtc/quaternion.hpp"
+#include "../gtc/type_precision.hpp"
 #include "../gtx/dual_quaternion.hpp"
-#include <string>
 #include <cmath>
+#include <string>
 
 #ifndef GLM_ENABLE_EXPERIMENTAL
-#	error "GLM: GLM_GTX_string_cast is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
+#error "GLM: GLM_GTX_string_cast is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if(GLM_COMPILER & GLM_COMPILER_CUDA)
-#	error "GLM_GTX_string_cast is not supported on CUDA compiler"
+#if (GLM_COMPILER & GLM_COMPILER_CUDA)
+#error "GLM_GTX_string_cast is not supported on CUDA compiler"
 #endif
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
-#	pragma message("GLM: GLM_GTX_string_cast extension included")
+#pragma message("GLM: GLM_GTX_string_cast extension included")
 #endif
 
-namespace glm
-{
-	/// @addtogroup gtx_string_cast
-	/// @{
+namespace glm {
+/// @addtogroup gtx_string_cast
+/// @{
 
-	/// Create a string from a GLM vector or matrix typed variable.
-	/// @see gtx_string_cast extension.
-	template<typename genType>
-	GLM_FUNC_DECL std::string to_string(genType const& x);
+/// Create a string from a GLM vector or matrix typed variable.
+/// @see gtx_string_cast extension.
+template <typename genType>
+GLM_FUNC_DECL std::string to_string(genType const &x);
 
-	/// @}
-}//namespace glm
+/// @}
+} // namespace glm
 
 #include "string_cast.inl"

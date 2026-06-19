@@ -30,35 +30,34 @@
 #ifndef SQL_BASE_TOOLS_H
 #define SQL_BASE_TOOLS_H
 #include "sql_base_tools_global.h"
-#include <QString>
-#include <QStringList>
-#include <QtSql>
+#include <QDebug>
 #include <QSqlDatabase>
+#include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QSqlError>
-#include <QDebug>
+#include <QString>
+#include <QStringList>
 #include <QVector>
+#include <QtSql>
 
 /*!
  * \brief The sql_base_tools class SQL queries for re-use in other libs - SQL DB must be already opened
  */
-class sql_base_tools
-{
+class sql_base_tools {
 
 public:
-    sql_base_tools();
-    /*!
-     * \brief copy_complete_table copy a complete table from indb and create complete in outdb
-     * \param indb
-     * \param in_table_name
-     * \param outdb
-     * \param out_table_name
-     * \param message - error or empty string in case of success
-     * \return
-     */
-    int copy_complete_table(QSqlDatabase &indb, const QString &in_table_name, QSqlDatabase &outdb,
-                            const QString &out_table_name, QString &message);
+  sql_base_tools();
+  /*!
+   * \brief copy_complete_table copy a complete table from indb and create complete in outdb
+   * \param indb
+   * \param in_table_name
+   * \param outdb
+   * \param out_table_name
+   * \param message - error or empty string in case of success
+   * \return
+   */
+  int copy_complete_table(QSqlDatabase &indb, const QString &in_table_name, QSqlDatabase &outdb,
+                          const QString &out_table_name, QString &message);
 };
 
 #endif // SQL_BASE_TOOLS_H
@@ -85,4 +84,3 @@ Output with QVector will very similar to table. Each iteration means each row wi
 ("1", "Name2", "1000")
 ("2", "Name3", "2000")
 */
-

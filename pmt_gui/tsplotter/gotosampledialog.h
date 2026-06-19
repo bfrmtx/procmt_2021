@@ -41,45 +41,44 @@ class GotoSampleDialog;
 }
 
 class LineEditNumber : public QLineEdit {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit LineEditNumber(QWidget * parent);
+  explicit LineEditNumber(QWidget *parent);
 
 protected:
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
+  void keyPressEvent(QKeyEvent *event);
+  void keyReleaseEvent(QKeyEvent *event);
 
 private slots:
-    void slot_on_text_changed(QString const & new_text);
-
+  void slot_on_text_changed(QString const &new_text);
 };
 
 class GotoSampleDialog : public QDialog {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    void set_start_time(eQDateTime time) { m_start_time = time; }
-    void set_min_max(qlonglong min, qlonglong max);
-    void set_value(qlonglong value);
-    explicit GotoSampleDialog(QWidget *parent = nullptr);
-    ~GotoSampleDialog();
+  void set_start_time(eQDateTime time) { m_start_time = time; }
+  void set_min_max(qlonglong min, qlonglong max);
+  void set_value(qlonglong value);
+  explicit GotoSampleDialog(QWidget *parent = nullptr);
+  ~GotoSampleDialog();
 
 private:
-    Ui::GotoSampleDialog * ui;
-    qlonglong m_min_val = std::numeric_limits<qlonglong>::min();
-    qlonglong m_max_val = std::numeric_limits<qlonglong>::max();
-    qlonglong m_current = 0;
-    eQDateTime m_start_time;
+  Ui::GotoSampleDialog *ui;
+  qlonglong m_min_val = std::numeric_limits<qlonglong>::min();
+  qlonglong m_max_val = std::numeric_limits<qlonglong>::max();
+  qlonglong m_current = 0;
+  eQDateTime m_start_time;
 
 private slots:
-    void on_button_min_clicked();
-    void on_button_max_clicked();
+  void on_button_min_clicked();
+  void on_button_max_clicked();
 
-    void on_time_dateTimeChanged(const QDateTime &dateTime);
+  void on_time_dateTimeChanged(const QDateTime &dateTime);
 
 signals:
-    void value_changed(qlonglong value);
+  void value_changed(qlonglong value);
 };
 
 #endif // GOTOSAMPLEDIALOG_H

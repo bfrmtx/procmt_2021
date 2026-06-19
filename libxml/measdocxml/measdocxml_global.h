@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #if defined(MEASDOCXML_LIBRARY)
-#  define MEASDOCXML_EXPORT Q_DECL_EXPORT
+#define MEASDOCXML_EXPORT Q_DECL_EXPORT
 #else
-#  define MEASDOCXML_EXPORT Q_DECL_IMPORT
+#define MEASDOCXML_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // MEASDOCXML_GLOBAL_H

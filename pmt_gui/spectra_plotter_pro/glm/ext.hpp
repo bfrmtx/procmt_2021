@@ -9,9 +9,9 @@
 #include "glm.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_MESSAGE_EXT_INCLUDED_DISPLAYED)
-#	define GLM_MESSAGE_EXT_INCLUDED_DISPLAYED
-#	pragma message("GLM: All extensions included (not recommended)")
-#endif//GLM_MESSAGES
+#define GLM_MESSAGE_EXT_INCLUDED_DISPLAYED
+#pragma message("GLM: All extensions included (not recommended)")
+#endif // GLM_MESSAGES
 
 #include "./ext/vec1.hpp"
 #include "./ext/vector_relational.hpp"
@@ -31,13 +31,13 @@
 #include "./gtc/random.hpp"
 #include "./gtc/reciprocal.hpp"
 #include "./gtc/round.hpp"
-//#include "./gtc/type_aligned.hpp"
+// #include "./gtc/type_aligned.hpp"
 #include "./gtc/type_precision.hpp"
 #include "./gtc/type_ptr.hpp"
 #include "./gtc/ulp.hpp"
 #include "./gtc/vec1.hpp"
 #if GLM_HAS_ALIGNED_TYPE
-#	include "./gtc/type_aligned.hpp"
+#include "./gtc/type_aligned.hpp"
 #endif
 
 #ifdef GLM_ENABLE_EXPERIMENTAL
@@ -83,7 +83,7 @@
 #include "./gtx/spline.hpp"
 #include "./gtx/std_based_type.hpp"
 #if !(GLM_COMPILER & GLM_COMPILER_CUDA)
-#	include "./gtx/string_cast.hpp"
+#include "./gtx/string_cast.hpp"
 #endif
 #include "./gtx/transform.hpp"
 #include "./gtx/transform2.hpp"
@@ -93,10 +93,10 @@
 #include "./gtx/wrap.hpp"
 
 #if GLM_HAS_TEMPLATE_ALIASES
-#	include "./gtx/scalar_multiplication.hpp"
+#include "./gtx/scalar_multiplication.hpp"
 #endif
 
 #if GLM_HAS_RANGE_FOR
-#	include "./gtx/range.hpp"
+#include "./gtx/range.hpp"
 #endif
-#endif//GLM_ENABLE_EXPERIMENTAL
+#endif // GLM_ENABLE_EXPERIMENTAL

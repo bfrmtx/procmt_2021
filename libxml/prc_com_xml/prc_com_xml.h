@@ -30,90 +30,80 @@
 #ifndef PRC_COM_XML_H
 #define PRC_COM_XML_H
 
-
 #include "prc_com_xml_global.h"
 #include "tinyxml2.h"
 #include "tinyxmlwriter.h"
 
-#include <QMap>
-#include <QFileInfo>
-#include <QFile>
-#include <QDir>
-#include <QDebug>
+#include "measdocxml.h"
+#include <QByteArray>
 #include <QDateTime>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QList>
+#include <QMap>
 #include <QString>
 #include <QStringList>
-#include <QMap>
-#include <QList>
-#include <QVariant>
 #include <QTextStream>
-#include <QByteArray>
 #include <QUrl>
-#include <vector>
-#include <string>
-#include <mutex>
-#include "measdocxml.h"
+#include <QVariant>
 #include <memory>
+#include <mutex>
+#include <string>
+#include <vector>
 
 /*!
  * \brief The prc_com_xml class read/writes QMAP<QString, QVariant> as XML
  */
 
-class prc_com_xml  : public QObject
-{
+class prc_com_xml : public QObject {
   Q_OBJECT
 
-
 public:
-    // prc_com_xml(const QFileInfo* qfi = nullptr, const QUrl* qurl = nullptr, const QByteArray *qba = nullptr, QObject *parent = Q_NULLPTR);
-    prc_com_xml(QObject *parent = Q_NULLPTR);
+  // prc_com_xml(const QFileInfo* qfi = nullptr, const QUrl* qurl = nullptr, const QByteArray *qba = nullptr, QObject *parent = Q_NULLPTR);
+  prc_com_xml(QObject *parent = Q_NULLPTR);
 
-    bool open(const QFileInfo* qfi = nullptr, const QUrl* qurl = nullptr, const QByteArray *qba = nullptr);
+  bool open(const QFileInfo *qfi = nullptr, const QUrl *qurl = nullptr, const QByteArray *qba = nullptr);
 
-    QMap<QString, QVariant> read(const QString &topnode, const QString &node);
+  QMap<QString, QVariant> read(const QString &topnode, const QString &node);
 
-    /*!
-     * \brief read_existing reads a given qmap and tries to convert to native types while reading
-     * \param topnode e.g. procmt_processing
-     * \param node e.g. proc
-     * \param map e.g. cmdline
-     */
-    void read_existing(const QString &topnode, const QString &node, QMap<QString, QVariant> &map);
+  /*!
+   * \brief read_existing reads a given qmap and tries to convert to native types while reading
+   * \param topnode e.g. procmt_processing
+   * \param node e.g. proc
+   * \param map e.g. cmdline
+   */
+  void read_existing(const QString &topnode, const QString &node, QMap<QString, QVariant> &map);
 
-    bool create(const QString root_node, const QFileInfo* qfi = nullptr, const QUrl* qurl = nullptr, const QByteArray *qba = nullptr);
+  bool create(const QString root_node, const QFileInfo *qfi = nullptr, const QUrl *qurl = nullptr, const QByteArray *qba = nullptr);
 
-    int add_main(const QString node_name, const QMap<QString, QVariant> &map);
+  int add_main(const QString node_name, const QMap<QString, QVariant> &map);
 
-    int add_sub(const QString node_name, const QMap<QString, QVariant> &map);
+  int add_sub(const QString node_name, const QMap<QString, QVariant> &map);
 
-    bool close_and_write();
-
-
+  bool close_and_write();
 
 protected:
+  // QVariant get_native(const QVariant &in, const QVariant &native);
 
-    //QVariant get_native(const QVariant &in, const QVariant &native);
+  void clear();
 
-    void clear();
+  QFileInfo qfi;
 
-    QFileInfo qfi;
+  tinyxmlwriter tix; //!< main document
+  tinyxmlwriter tixsub;
 
+  std::unique_ptr<measdocxml> mdxml;
 
-    tinyxmlwriter tix;              //!< main document
-    tinyxmlwriter tixsub;
+  QString main_node;
+  QString root_node;
 
-    std::unique_ptr<measdocxml> mdxml;
+  void write_map(tinyxmlwriter &tixml, const QMap<QString, QVariant> &map);
 
-    QString main_node;
-    QString root_node;
-
-    void write_map(tinyxmlwriter &tixml, const QMap<QString, QVariant> &map);
-
-
-//    this->empty_calibration();
-//    tix.insert(this->xcal.getXmlStr());
-//    xcal.clear(false);
-
+  //    this->empty_calibration();
+  //    tix.insert(this->xcal.getXmlStr());
+  //    xcal.clear(false);
 };
 
 #endif // PRC_COM_XML_H

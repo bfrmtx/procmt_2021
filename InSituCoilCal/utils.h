@@ -18,13 +18,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-
 // includes
-#include <qthread.h>
-#include <QDebug>
 #include "mainwindow.h"
-
-
+#include <QDebug>
+#include <qthread.h>
 
 /**
  * \brief This function is used to check a polarisation angle for its valid value.
@@ -39,8 +36,7 @@
  * \date 21.05.2012
  * \author MWI
  */
-extern QString checkPolarisationAngle (const QString& qstrAngle);
-
+extern QString checkPolarisationAngle(const QString &qstrAngle);
 
 /**
  * \brief This function is used to normalise a string.
@@ -56,8 +52,7 @@ extern QString checkPolarisationAngle (const QString& qstrAngle);
  * \date 05.07.2012
  * \author MWI
  */
-extern bool normaliseString (const QString qstrInputString, QString& qstrOutputString);
-
+extern bool normaliseString(const QString qstrInputString, QString &qstrOutputString);
 
 /**
  * \brief This function is used to check a Date as String for correctness.
@@ -72,8 +67,7 @@ extern bool normaliseString (const QString qstrInputString, QString& qstrOutputS
  * \date 06.07.2012
  * \author MWI
  */
-extern bool checkDateString (const QString qstrInputString, QString& qstrOutputString);
-
+extern bool checkDateString(const QString qstrInputString, QString &qstrOutputString);
 
 /**
  * \brief This function is used compute the cycle time in seconds from "Cycle" and "Granularity" values.
@@ -87,18 +81,15 @@ extern bool checkDateString (const QString qstrInputString, QString& qstrOutputS
  * \date 25.03.2014
  * \author MWI
  */
-extern int getCycleTimeSeconds (const unsigned int uiCycle, const QString& qstrGranularity);
-
+extern int getCycleTimeSeconds(const unsigned int uiCycle, const QString &qstrGranularity);
 
 extern double getRandomNumber(const unsigned int uiMax);
 
+extern QString getFormatedDouble(const double dValue);
 
-extern QString getFormatedDouble (const double dValue);
+extern bool dumpTextFile(const QString qstrTargetFileName, const QVector<double> qvecData);
 
-extern bool dumpTextFile (const QString qstrTargetFileName, const QVector<double> qvecData);
-
-extern bool dumpTextFile (const QString qstrTargetFileName, const QVector<double> qvecIndex, const QVector<double> qvecData);
-
+extern bool dumpTextFile(const QString qstrTargetFileName, const QVector<double> qvecIndex, const QVector<double> qvecData);
 
 /**
  * \class Timer
@@ -111,56 +102,49 @@ extern bool dumpTextFile (const QString qstrTargetFileName, const QVector<double
  * \date 21.05.2012
  * \author MWI
  */
-class Timer : public QThread
-{
-    public:
+class Timer : public QThread {
+public:
+  /**
+   * \brief pauses the calling thread for n seconds
+   *
+   * -
+   *
+   * @param[in] const unsigned long& ulSecs = seconds to sleep
+   *
+   * \date 21.05.2012
+   * \author MWI
+   */
+  static void sleep(const unsigned long &ulSecs) {
+    QThread::sleep(ulSecs);
+  }
 
-        /**
-         * \brief pauses the calling thread for n seconds
-         *
-         * -
-         *
-         * @param[in] const unsigned long& ulSecs = seconds to sleep
-         *
-         * \date 21.05.2012
-         * \author MWI
-         */
-        static void sleep(const unsigned long& ulSecs)
-        {
-            QThread::sleep(ulSecs);
-        }
+  /**
+   * \brief pauses the calling thread for n milli seconds
+   *
+   * -
+   *
+   * @param[in] const unsigned long& ulMSecs = milli seconds to sleep
+   *
+   * \date 21.05.2012
+   * \author MWI
+   */
+  static void msleep(const unsigned long &ulMSecs) {
+    QThread::msleep(ulMSecs);
+  }
 
-        /**
-         * \brief pauses the calling thread for n milli seconds
-         *
-         * -
-         *
-         * @param[in] const unsigned long& ulMSecs = milli seconds to sleep
-         *
-         * \date 21.05.2012
-         * \author MWI
-         */
-        static void msleep(const unsigned long& ulMSecs)
-        {
-            QThread::msleep(ulMSecs);
-        }
-
-        /**
-         * \brief pauses the calling thread for n micro seconds
-         *
-         * -
-         *
-         * @param[in] const unsigned long& ulUSecs = micro seconds to sleep
-         *
-         * \date 21.05.2012
-         * \author MWI
-         */
-        static void usleep(const unsigned long& ulUSecs)
-        {
-            QThread::usleep(ulUSecs);
-        }
+  /**
+   * \brief pauses the calling thread for n micro seconds
+   *
+   * -
+   *
+   * @param[in] const unsigned long& ulUSecs = micro seconds to sleep
+   *
+   * \date 21.05.2012
+   * \author MWI
+   */
+  static void usleep(const unsigned long &ulUSecs) {
+    QThread::usleep(ulUSecs);
+  }
 };
-
-
 
 #endif // UTILS_H

@@ -30,85 +30,78 @@
 #ifndef TSDATA_HEADER_H
 #define TSDATA_HEADER_H
 
-#include <QObject>
+#include "atsfile.h"
+#include "prc_com.h"
+#include "qtx_templates.h"
+#include "vector_utils.h"
+#include <QDateTime>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <prc_com.h>
+#include <QList>
+#include <QObject>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
-#include <QDateTime>
-#include <QList>
-#include "atsfile.h"
-#include "qtx_templates.h"
-#include "prc_com.h"
 #include <cmath>
-#include "vector_utils.h"
-
+#include <prc_com.h>
 
 ///@todo we need the chopper setting isn't it?
 
-
-class tsdata_header : public QObject, public QFileInfo, public prc_com
-{
-    Q_OBJECT
+class tsdata_header : public QObject, public QFileInfo, public prc_com {
+  Q_OBJECT
 public:
-    explicit tsdata_header(const QFileInfo &qfi, QObject *parent = 0);
+  explicit tsdata_header(const QFileInfo &qfi, QObject *parent = 0);
 
-    // use set file from QFileinfo here
-    explicit tsdata_header();
+  // use set file from QFileinfo here
+  explicit tsdata_header();
 
-    ~tsdata_header();
+  ~tsdata_header();
 
-    bool open();
+  bool open();
 
-    size_t read();
+  size_t read();
 
-    bool guess_values();
+  bool guess_values();
 
-    int create_global_header();
+  int create_global_header();
 
-    quint64 create_ats_files();
+  quint64 create_ats_files();
 
 signals:
 
 public slots:
 
 private:
+  QFile file;
+  bool isok = false;
 
-    QFile file;
-    bool isok = false;
+  QMap<QString, QVariant> global_header;
+  // QList<prc_com> headers;
 
-    QMap<QString, QVariant> global_header;
-    //QList<prc_com> headers;
+  // list of files
+  // let the files send the maps
+  // scan the maps and convert native
+  // translate
+  // update the headers
+  // open write the headers
+  // read the columns
+  // check
+  // append write the ats file
 
-    // list of files
-    // let the files send the maps
-    // scan the maps and convert native
-    // translate
-    // update the headers
-    // open write the headers
-    // read the columns
-    // check
-    // append write the ats file
+  QMap<QString, QString> translator;
 
+  std::vector<double> x, y, a, b, c;
+  std::vector<bool> bx, by, ba, bb, bc;
+  double gt_not_number = 1.0E+31;
+  double gt_number_replace = 1.0;
+  size_t size_hint = 1048576;
+  QTextStream qts;
 
-    QMap<QString, QString> translator;
-
-    std::vector<double> x, y, a, b, c;
-    std::vector<bool> bx, by, ba, bb, bc;
-    double gt_not_number = 1.0E+31;
-    double gt_number_replace = 1.0;
-    size_t size_hint = 1048576;
-    QTextStream qts;
-
-    QDateTime start_time, stop_time;
-    size_t nsamples;
-    double sample_freq;
-    double mina, minb, minc, minx, miny;
-    double maxa, maxb, maxc, maxx, maxy;
-
-
+  QDateTime start_time, stop_time;
+  size_t nsamples;
+  double sample_freq;
+  double mina, minb, minc, minx, miny;
+  double maxa, maxb, maxc, maxx, maxy;
 };
 
 #endif // TSDATA_HEADER_H

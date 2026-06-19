@@ -30,47 +30,46 @@
 #ifndef MANUAL_SCALES_H
 #define MANUAL_SCALES_H
 
-#include <QDialog>
 #include "qcustomplot.h"
+#include <QDialog>
 #include <cfloat>
 
 namespace Ui {
 class manual_scales;
 }
 
-class manual_scales : public QDialog
-{
-    Q_OBJECT
+class manual_scales : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit manual_scales(QWidget *parent = nullptr);
-    ~manual_scales();
+  explicit manual_scales(QWidget *parent = nullptr);
+  ~manual_scales();
 
-    void set_data(QCPRange &ampl, QCPRange &phz, QCPRange &freq);
+  void set_data(QCPRange &ampl, QCPRange &phz, QCPRange &freq);
 signals:
 
-    void ayrange_changed(QCPRange range);
-    void pyrange_changed(QCPRange range);
-    void xrange_changed(QCPRange range);
+  void ayrange_changed(QCPRange range);
+  void pyrange_changed(QCPRange range);
+  void xrange_changed(QCPRange range);
 
 private slots:
-    void on_a_min_valueChanged(double arg1);
+  void on_a_min_valueChanged(double arg1);
 
-    void on_a_max_valueChanged(double arg1);
+  void on_a_max_valueChanged(double arg1);
 
-    void on_phz_min_valueChanged(double arg1);
+  void on_phz_min_valueChanged(double arg1);
 
-    void on_phz_max_valueChanged(double arg1);
+  void on_phz_max_valueChanged(double arg1);
 
-    void on_f_min_valueChanged(double arg1);
+  void on_f_min_valueChanged(double arg1);
 
-    void on_f_max_valueChanged(double arg1);
+  void on_f_max_valueChanged(double arg1);
 
 private:
-    Ui::manual_scales *ui;
-    QCPRange ampl;
-    QCPRange phz;
-    QCPRange freq;
+  Ui::manual_scales *ui;
+  QCPRange ampl;
+  QCPRange phz;
+  QCPRange freq;
 };
 
 #endif // MANUAL_SCALES_H

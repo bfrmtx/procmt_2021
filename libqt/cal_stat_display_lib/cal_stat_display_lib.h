@@ -31,11 +31,11 @@
 #define CAL_STAT_DISPLAY_LIB_H
 
 #include "cal_stat_display_lib_global.h"
-#include <QMainWindow>
 #include <QList>
-#include <vector>
-#include <memory>
+#include <QMainWindow>
 #include <QPushButton>
+#include <memory>
+#include <vector>
 
 #include "calibration.h"
 #include "calstat.h"
@@ -44,72 +44,60 @@
 
 #include "plotlib.h"
 
-
 namespace Ui {
 class cal_stat_display_lib;
 }
 
-class cal_stat_display_lib : public QMainWindow
-{
-    Q_OBJECT
+class cal_stat_display_lib : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit cal_stat_display_lib(const QFileInfo &info_db, const QFileInfo &master_cal_db, QWidget *parent = Q_NULLPTR);
+  explicit cal_stat_display_lib(const QFileInfo &info_db, const QFileInfo &master_cal_db, QWidget *parent = Q_NULLPTR);
 
-    ~cal_stat_display_lib();
+  ~cal_stat_display_lib();
 
-    int set_calstat(const QList<calstat> &in);
+  int set_calstat(const QList<calstat> &in);
 
-    std::unique_ptr<calibration> sumcal;
-
+  std::unique_ptr<calibration> sumcal;
 
 private slots:
 
-    void slot_plot(const double &f);
+  void slot_plot(const double &f);
 
-   // void slot_plot_off(const double &f);
+  // void slot_plot_off(const double &f);
 
-    void xrange_changed(const QCPRange &newRange);
+  void xrange_changed(const QCPRange &newRange);
 
-    void on_chopper_chk_clicked(bool checked);
+  void on_chopper_chk_clicked(bool checked);
 
-    void on_pushButton_rescale_clicked();
+  void on_pushButton_rescale_clicked();
 
 private:
-    Ui::cal_stat_display_lib *ui;
+  Ui::cal_stat_display_lib *ui;
 
-    double f_tmp;
+  double f_tmp;
 
+  int count_me = 0;
+  int chopper = 1;
 
+  QSizeF wsize;
 
-    int count_me = 0;
-    int chopper = 1;
+  //    QList<calstat> ons;
+  //    QList<calstat> offs;
 
-    QSizeF wsize;
+  std::vector<std::unique_ptr<plotlib>> plots;
+  plotlib *anyplot = nullptr;
 
-//    QList<calstat> ons;
-//    QList<calstat> offs;
+  std::vector<calstat> calstats;
 
-    std::vector<std::unique_ptr<plotlib>> plots;
-    plotlib *anyplot = nullptr;
+  //    std::shared_ptr<plotlib> amp_plt_on;
+  //    std::shared_ptr<plotlib> phz_plt_on;
 
-    std::vector<calstat> calstats;
+  //    std::shared_ptr<plotlib> amp_plt_off;
+  //    std::shared_ptr<plotlib> phz_plt_off;
 
-//    std::shared_ptr<plotlib> amp_plt_on;
-//    std::shared_ptr<plotlib> phz_plt_on;
-
-//    std::shared_ptr<plotlib> amp_plt_off;
-//    std::shared_ptr<plotlib> phz_plt_off;
-
-
-//
-    std::vector<calstat>::const_iterator citb, cite;
-
-
-
-
-
-
+  //
+  std::vector<calstat>::const_iterator citb, cite;
 };
 
 #endif // CAL_STAT_DISPLAY_LIB_H

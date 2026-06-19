@@ -31,30 +31,26 @@
 #define CHECK_XML_FILE_H
 
 #include <QDebug>
-#include <QFileInfo>
-#include <QFile>
 #include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 
-
-class check_xml_file : public QFileInfo
-{
+class check_xml_file : public QFileInfo {
 
 public:
-    check_xml_file(const QString &filename);
-    check_xml_file(const QDir &dir, const QString &filename);
-    check_xml_file(const QFileInfo &qfi);
-    ~check_xml_file();
+  check_xml_file(const QString &filename);
+  check_xml_file(const QDir &dir, const QString &filename);
+  check_xml_file(const QFileInfo &qfi);
+  ~check_xml_file();
 
-    bool open();
+  bool open();
 
-    QString first_root();
-
+  QString first_root();
 
 private:
-    QFile file;
-    QTextStream qts;
-
+  QFile file;
+  QTextStream qts;
 };
 
 #endif // CHECK_XML_FILE_H

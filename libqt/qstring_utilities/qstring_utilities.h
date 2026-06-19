@@ -31,16 +31,15 @@
 #define QSTRING_UTILITIES_H
 
 #include "qstring_utilities_global.h"
-#include <QString>
-#include <QStringList>
-#include <QFileInfo>
-#include <QDir>
-#include <QDirIterator>
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
 #include <QMap>
 #include <QPair>
-
+#include <QString>
+#include <QStringList>
 
 /*!
  * \brief round_digits
@@ -69,11 +68,9 @@ int xml_measdoc_overlap_time(QStringList &local, QStringList &remote, QList<qint
 
 QPair<double, QString> xml_measdoc_to_f_s(const QString &measdoc);
 
-QMap <QString, QVariant> atsfilename_values(const QString &filename);
+QMap<QString, QVariant> atsfilename_values(const QString &filename);
 
-QMap <QString, QVariant> atsfilename_site_survey(const QString &absloute_filename);
-
-
+QMap<QString, QVariant> atsfilename_site_survey(const QString &absloute_filename);
 
 void xml_measdoc_to_start_stop(const QString &measdoc, QDateTime &start, QDateTime &stop, QString &fstr);
 

@@ -30,275 +30,249 @@
 #ifndef MT_GENSIGN_H
 #define MT_GENSIGN_H
 
+#include <QAbstractSpinBox>
+#include <QCheckBox>
+#include <QComboBox>
 #include <QDebug>
+#include <QDoubleSpinBox>
 #include <QFileInfo>
 #include <QList>
-#include <QString>
-#include <QMap>
 #include <QListWidget>
-#include <QComboBox>
 #include <QMainWindow>
+#include <QMap>
 #include <QPushButton>
-#include <QDoubleSpinBox>
-#include <QCheckBox>
 #include <QSignalMapper>
-#include <QAbstractSpinBox>
+#include <QString>
+#include <QStringList>
 #include <QWidget>
 #include <memory>
 #include <mutex>
-#include <vector>
-#include <QStringList>
-#include <thread>
 #include <queue>
+#include <thread>
+#include <vector>
 
-
-#include "atsheader.h"
 #include "atsfile.h"
-#include "mc_data.h"
+#include "atsheader.h"
 #include "eqdatetime.h"
+#include "mc_data.h"
 
+#include "adujoblist.h"
 #include "adulib.h"
 #include "adutable.h"
-#include "adujoblist.h"
 
-#include "gui_items.h"
 #include "calibration.h"
+#include "gui_items.h"
 
 #include <iostream>
 #include <random>
 
 class mt_gensign;
 
-class generator : public QObject
-{
-    Q_OBJECT
+class generator : public QObject {
+  Q_OBJECT
 public:
-    generator(const size_t &slices, const size_t &slice, mt_gensign *master);
+  generator(const size_t &slices, const size_t &slice, mt_gensign *master);
 
-    void set_threadbuffer(std::shared_ptr<threadbuffer<double> > &buffer);
-    virtual ~generator();
+  void set_threadbuffer(std::shared_ptr<threadbuffer<double>> &buffer);
+  virtual ~generator();
 
-    std::vector<double> v;
-    std::vector<double> v2;
-    size_t slices;
-    std::shared_ptr<threadbuffer<double>> buffer;
+  std::vector<double> v;
+  std::vector<double> v2;
+  size_t slices;
+  std::shared_ptr<threadbuffer<double>> buffer;
 
-    // that is coming as input
-    std::shared_ptr<threadbuffer<double>> unique_noise_buffer_1;
-    std::shared_ptr<threadbuffer<double>> unique_noise_buffer_2;
+  // that is coming as input
+  std::shared_ptr<threadbuffer<double>> unique_noise_buffer_1;
+  std::shared_ptr<threadbuffer<double>> unique_noise_buffer_2;
 
-    int noise_1_status;
-    int noise_2_status;
+  int noise_1_status;
+  int noise_2_status;
 
-    void linear();
+  void linear();
 
-    void sawtooth();
+  void sawtooth();
 
-    void rect();
+  void rect();
 
-    void mt19937noise();
+  void mt19937noise();
 
-    void mt_noise_coils();
+  void mt_noise_coils();
 
-    void seed();
+  void seed();
 
-    void sine();
+  void sine();
 
+  double linear_mV = 100.0;
 
-    double linear_mV = 100.0;
+  double lower = -50.0;
+  double upper = 50.0;
 
-    double lower = -50.0;
-    double upper = 50.0;
+  double f_sample = 1024.0;
 
-    double f_sample = 1024.0;
+  QString function_name = "straight_100_mV";
 
+  mt_gensign *master;
 
+  size_t channel_type = SIZE_MAX;
 
-    QString function_name = "straight_100_mV";
-
-    mt_gensign *master;
-
-    size_t channel_type = SIZE_MAX;
-
-    int channel_no = 99;
-
+  int channel_no = 99;
 
 public slots:
 
-    void slot_set_function(const QString &function_name);
+  void slot_set_function(const QString &function_name);
 
-    void slot_set_slices(const int slices);
-    void slot_set_slice_wl(const int slice);
+  void slot_set_slices(const int slices);
+  void slot_set_slice_wl(const int slice);
 
-    void slot_set_sines(const double &f_sample, const std::vector<double> &fsine_f, std::vector<double> &fsine_a, std::vector<double> &fsine_p);
+  void slot_set_sines(const double &f_sample, const std::vector<double> &fsine_f, std::vector<double> &fsine_a, std::vector<double> &fsine_p);
 
 private:
-    std::vector<double> coil_mixer;
-    std::vector<double> fgs_mixer;
-    std::vector<double> fsine_f;
-    std::vector<double> fsine_a;
-    std::vector<double> fsine_p;
-
-
+  std::vector<double> coil_mixer;
+  std::vector<double> fgs_mixer;
+  std::vector<double> fsine_f;
+  std::vector<double> fsine_a;
+  std::vector<double> fsine_p;
 };
-
 
 namespace Ui {
 class mt_gensign;
 }
 
-class mt_gensign : public QMainWindow
-{
-    Q_OBJECT
+class mt_gensign : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit mt_gensign(QWidget *parent = Q_NULLPTR);
-    ~mt_gensign();
-
+  explicit mt_gensign(QWidget *parent = Q_NULLPTR);
+  ~mt_gensign();
 
 private slots:
 
+  void on_start_datetime_dateTimeChanged(const QDateTime &dateTime);
 
-    void on_start_datetime_dateTimeChanged(const QDateTime &dateTime);
+  void on_select_sample_feq_currentIndexChanged(int index);
 
+  void sensor_changed(const int);
 
-    void on_select_sample_feq_currentIndexChanged(int index);
+  void on_run_pushButton_clicked();
 
+  void on_slices_valueChanged(int arg1);
 
-    void sensor_changed(const int);
+  void on_select_slice_length_currentIndexChanged(int index);
 
-    void on_run_pushButton_clicked();
+  void on_fsine_f1_valueChanged(double arg1);
 
-    void on_slices_valueChanged(int arg1);
+  void on_fsine_a1_valueChanged(double arg1);
 
-    void on_select_slice_length_currentIndexChanged(int index);
+  void on_fsine_p1_valueChanged(double arg1);
 
-    void on_fsine_f1_valueChanged(double arg1);
+  void on_fsine_f2_valueChanged(double arg1);
 
-    void on_fsine_a1_valueChanged(double arg1);
+  void on_fsine_a2_valueChanged(double arg1);
 
-    void on_fsine_p1_valueChanged(double arg1);
+  void on_fsine_p2_valueChanged(double arg1);
 
-    void on_fsine_f2_valueChanged(double arg1);
+  void on_fsine_f3_valueChanged(double arg1);
 
-    void on_fsine_a2_valueChanged(double arg1);
+  void on_fsine_a3_valueChanged(double arg1);
 
-    void on_fsine_p2_valueChanged(double arg1);
+  void on_fsine_p3_valueChanged(double arg1);
 
-    void on_fsine_f3_valueChanged(double arg1);
+  void on_fsine_f4_valueChanged(double arg1);
 
-    void on_fsine_a3_valueChanged(double arg1);
+  void on_fsine_a4_valueChanged(double arg1);
 
-    void on_fsine_p3_valueChanged(double arg1);
+  void on_fsine_p4_valueChanged(double arg1);
 
-    void on_fsine_f4_valueChanged(double arg1);
-
-    void on_fsine_a4_valueChanged(double arg1);
-
-    void on_fsine_p4_valueChanged(double arg1);
-
-    void on_checkBox_use_seconds_stateChanged(int arg1);
+  void on_checkBox_use_seconds_stateChanged(int arg1);
 
 private:
+  void clear();
 
-    void clear();
+  void seed_two_noise_src();
 
-    void seed_two_noise_src();
+  void create_unique_seed(bool createme = true);
 
-    void create_unique_seed(bool createme = true);
+  void create_xml();
 
-    void create_xml();
+  Ui::mt_gensign *ui;
 
-    Ui::mt_gensign *ui;
+  QFileInfo qfi_db;
 
-    QFileInfo qfi_db;
+  checkbox_list *check_list_waves;
 
+  QList<QPushButton *> qpbl;
+  QMap<QString, QDoubleSpinBox *> qdspins;
 
-    checkbox_list *check_list_waves;
+  QString outdir; //!< ouptud data
 
-    QList<QPushButton *> qpbl;
-    QMap<QString, QDoubleSpinBox *> qdspins;
+  // QSignalMapper *mapper;
+  // #include "boost/generator_iterator.hpp"
 
-    QString outdir;                           //!< ouptud data
+  std::unique_ptr<frequencies_combo> selectfreq = nullptr;
+  // std::unique_ptr<windowlength_combo> selectwindow = nullptr;
+  std::unique_ptr<single_column_combo> selectwindow = nullptr;
 
-    //QSignalMapper *mapper;
-    //#include "boost/generator_iterator.hpp"
+  std::vector<std::shared_ptr<atsfile>> atsfiles;
 
+  std::vector<std::shared_ptr<generator>> generators;
 
+  std::vector<std::shared_ptr<threadbuffer<double>>> buffers;
 
-    std::unique_ptr<frequencies_combo>  selectfreq = nullptr;
-    //std::unique_ptr<windowlength_combo> selectwindow = nullptr;
-    std::unique_ptr<single_column_combo> selectwindow = nullptr;
+  std::vector<std::thread> writerthreads;
+  std::vector<std::thread> generatorthreads;
 
-    std::vector<std::shared_ptr<atsfile>> atsfiles;
+  std::vector<std::thread> uni_seed_threads;
 
+  std::unique_ptr<adulib> adujob;
 
-    std::vector<std::shared_ptr<generator>> generators;
+  size_t wl = 1024;
+  size_t slices = 64;
+  double f_sample = 1024.0;
+  bool is_init = false;
 
-    std::vector<std::shared_ptr<threadbuffer<double>> > buffers;
+  const size_t channels = 5;
 
-    std::vector<std::thread>   writerthreads;
-    std::vector<std::thread>   generatorthreads;
+  // generate uniform noise for all channels
+  std::vector<double> noise_1;
+  std::vector<double> noise_2;
+  std::vector<std::shared_ptr<threadbuffer<double>>> unique_noise_buffer_1;
+  std::vector<std::shared_ptr<threadbuffer<double>>> unique_noise_buffer_2;
+  std::vector<std::vector<double>> noise_copy_1;
+  std::vector<std::vector<double>> noise_copy_2;
 
-    std::vector<std::thread> uni_seed_threads;
+  std::vector<double> fsine_f;
+  std::vector<double> fsine_a;
+  std::vector<double> fsine_p;
 
-    std::unique_ptr<adulib> adujob;
+  QString basedir;
+  QString HWConfig;
+  QString HwDatabase;
+  QString HwStatus;
+  QString ChannelConfig;
+  QString outputjobsdir;
 
+  QFileInfo *qfiHWConfig = nullptr;
+  QUrl *qrlHWConfig = nullptr;
+  QByteArray *qbaHWConfig = nullptr;
 
-    size_t wl = 1024;
-    size_t slices = 64;
-    double f_sample = 1024.0;
-    bool is_init = false;
+  QFileInfo *qfiHwDatabase = nullptr;
+  QUrl *qrlHwDatabase = nullptr;
+  QByteArray *qbaHwDatabase = nullptr;
 
-    const size_t channels = 5;
+  QFileInfo *qfiChannelConfig = nullptr;
+  QUrl *qrlChannelConfig = nullptr;
+  QByteArray *qbaChannelConfig = nullptr;
 
-    // generate uniform noise for all channels
-    std::vector<double> noise_1;
-    std::vector<double> noise_2;
-    std::vector<std::shared_ptr<threadbuffer<double>>> unique_noise_buffer_1;
-    std::vector<std::shared_ptr<threadbuffer<double>>> unique_noise_buffer_2;
-    std::vector<std::vector<double>> noise_copy_1;
-    std::vector<std::vector<double>> noise_copy_2;
+  QFileInfo *qfiHwStatus;
 
-    std::vector<double> fsine_f;
-    std::vector<double> fsine_a;
-    std::vector<double> fsine_p;
+  eQDateTime eqdt_start;
 
+  QList<QComboBox *> ch_combos;
+  std::vector<std::unique_ptr<sensors_combo>> scboxes;
 
-    QString basedir;
-    QString HWConfig;
-    QString HwDatabase;
-    QString HwStatus;
-    QString ChannelConfig;
-    QString outputjobsdir;
-
-    QFileInfo *qfiHWConfig = nullptr;
-    QUrl *qrlHWConfig = nullptr;
-    QByteArray *qbaHWConfig = nullptr;
-
-    QFileInfo *qfiHwDatabase = nullptr;
-    QUrl *qrlHwDatabase = nullptr;
-    QByteArray *qbaHwDatabase = nullptr;
-
-
-    QFileInfo *qfiChannelConfig = nullptr;
-    QUrl *qrlChannelConfig = nullptr;
-    QByteArray *qbaChannelConfig = nullptr;
-
-    QFileInfo *qfiHwStatus;
-
-    eQDateTime eqdt_start;
-
-    QList<QComboBox *> ch_combos;
-    std::vector<std::unique_ptr<sensors_combo>> scboxes;
-
-    QStringList cht;
-    QDir setsm;
-    QString deldir_string;
-
-
-
+  QStringList cht;
+  QDir setsm;
+  QString deldir_string;
 };
-
 
 #endif // MT_GENSIGN_H

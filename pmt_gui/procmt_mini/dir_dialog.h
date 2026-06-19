@@ -31,39 +31,37 @@
 #define DIR_DIALOG_H
 
 #include <QDialog>
-#include <QTreeView>
-#include <QHeaderView>
-#include <QFileInfo>
-#include <QModelIndex>
-#include <QFileSystemModel>
 #include <QDir>
+#include <QFileInfo>
+#include <QFileSystemModel>
+#include <QHeaderView>
+#include <QModelIndex>
 #include <QPushButton>
+#include <QTreeView>
 
 namespace Ui {
 class dir_dialog;
 }
 
-class dir_dialog : public QDialog
-{
-    Q_OBJECT
+class dir_dialog : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit dir_dialog(QWidget *parent, const QString &absolute_path, int target);
-    ~dir_dialog();
-
+  explicit dir_dialog(QWidget *parent, const QString &absolute_path, int target);
+  ~dir_dialog();
 
 signals:
 
-    void selected_dir(const QString &absolute_path, const int &target);
+  void selected_dir(const QString &absolute_path, const int &target);
 
 private slots:
-    void on_dir_treeView_clicked(const QModelIndex &index);
+  void on_dir_treeView_clicked(const QModelIndex &index);
 
 private:
-    Ui::dir_dialog *ui;
-    QFileSystemModel *qfsi  = Q_NULLPTR;
-    QDir dir;
-    int target = -1;
+  Ui::dir_dialog *ui;
+  QFileSystemModel *qfsi = Q_NULLPTR;
+  QDir dir;
+  int target = -1;
 };
 
 #endif // DIR_DIALOG_H

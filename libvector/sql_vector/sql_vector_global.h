@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #if defined(SQL_VECTOR_LIBRARY)
-#  define SQL_VECTOR_EXPORT Q_DECL_EXPORT
+#define SQL_VECTOR_EXPORT Q_DECL_EXPORT
 #else
-#  define SQL_VECTOR_EXPORT Q_DECL_IMPORT
+#define SQL_VECTOR_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // SQL_VECTOR_GLOBAL_H

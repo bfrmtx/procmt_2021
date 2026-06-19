@@ -30,109 +30,106 @@
 #ifndef EDIPLOTTER_H
 #define EDIPLOTTER_H
 
-#include <QMainWindow>
-#include <QDropEvent>
-#include <QMimeData>
 #include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QMainWindow>
+#include <QMimeData>
 
+#include <QDockWidget>
 #include <QFileInfo>
 #include <QListWidget>
-#include <QDockWidget>
 
 #include <qcustomplot.h>
 
-#include <memory>
+#include "buckets.h"
 #include "edi_file.h"
 #include "msg_logger.h"
 #include "plotoptions.h"
-#include "buckets.h"
+#include <memory>
 
 namespace Ui {
 class ediplotter;
 }
 
 enum class EdiPlotterOpenMode {
-    ADD,
-    OVERLAY,
-    REPLACE
+  ADD,
+  OVERLAY,
+  REPLACE
 };
 
-class ediplotter : public QMainWindow
-{
-    Q_OBJECT
+class ediplotter : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit ediplotter(QWidget *parent = nullptr);
-    ~ediplotter();
+  explicit ediplotter(QWidget *parent = nullptr);
+  ~ediplotter();
 
-    /*!
-     * \brief set_msg_logger fetch messages from reading EDI files and show on demand
-     * \param msg
-     */
-    void set_msg_logger(std::shared_ptr<msg_logger> msg);
+  /*!
+   * \brief set_msg_logger fetch messages from reading EDI files and show on demand
+   * \param msg
+   */
+  void set_msg_logger(std::shared_ptr<msg_logger> msg);
 
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-    void open_edi_file(QString const & filename);
-
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
+  void open_edi_file(QString const &filename);
 
 signals:
-    void new_edi_plot_added(QString const & name);
-    void all_edi_files_removed();
-    void map_phase(const bool phase_is_mapped);
+  void new_edi_plot_added(QString const &name);
+  void all_edi_files_removed();
+  void map_phase(const bool phase_is_mapped);
 
 public slots:
-    void slot_set_x_axis_label(const QString& label_x_axis);
-    void slot_set_y_axis_label(const QString& label_y_axis);
-
+  void slot_set_x_axis_label(const QString &label_x_axis);
+  void slot_set_y_axis_label(const QString &label_y_axis);
 
 private slots:
-    void phi_button_clicked();
-    void rho_button_clicked();
+  void phi_button_clicked();
+  void rho_button_clicked();
 
-    void on_button_group_open_mode_buttonClicked(QAbstractButton * button);
+  void on_button_group_open_mode_buttonClicked(QAbstractButton *button);
 
-    void on_action_quit_triggered();
-    void on_action_open_triggered();
+  void on_action_quit_triggered();
+  void on_action_open_triggered();
 
-    void on_button_rho_fit_clicked();
-    void on_button_phi_fit_clicked();
+  void on_button_rho_fit_clicked();
+  void on_button_phi_fit_clicked();
 
-    void on_button_actions_toggle_map_phase_clicked(bool checked);
+  void on_button_actions_toggle_map_phase_clicked(bool checked);
 
-    void on_dial_active_plot_valueChanged(int value);
+  void on_dial_active_plot_valueChanged(int value);
 
-    void on_action_export_ascii_triggered();
-
-private:
-    void set_rho_range(double min, double max);
-    void set_phi_range(double min, double max);
-    void add_edi_data(const QString & name, mt_data_res<std::complex<double>> const & data);
-    void add_coh_plot(QString const & name, mt_data_res<std::complex<double>> const & data);
-    void add_anisotropy_plot(QString const & name, mt_data_res<std::complex<double>> const & data);
-    void add_tipper_plot(QString const & name, mt_data_res<std::complex<double>> const & data);
-    void add_strike_plot(QString const & name, mt_data_res<std::complex<double>> const & data);
-    void remove_edi_file(QString const & name);
-    void remove_all_edi_files();
-    void change_edi_visibility(QString const & name, bool value);
+  void on_action_export_ascii_triggered();
 
 private:
-    Ui::ediplotter *ui;
+  void set_rho_range(double min, double max);
+  void set_phi_range(double min, double max);
+  void add_edi_data(const QString &name, mt_data_res<std::complex<double>> const &data);
+  void add_coh_plot(QString const &name, mt_data_res<std::complex<double>> const &data);
+  void add_anisotropy_plot(QString const &name, mt_data_res<std::complex<double>> const &data);
+  void add_tipper_plot(QString const &name, mt_data_res<std::complex<double>> const &data);
+  void add_strike_plot(QString const &name, mt_data_res<std::complex<double>> const &data);
+  void remove_edi_file(QString const &name);
+  void remove_all_edi_files();
+  void change_edi_visibility(QString const &name, bool value);
 
-    QMap<QString, edi_file *> m_edi_files;
+private:
+  Ui::ediplotter *ui;
 
-    std::shared_ptr<msg_logger> msg;
+  QMap<QString, edi_file *> m_edi_files;
 
-    QDockWidget *qdw;                       //!< show messages on demand
-    QListWidget *qlw;                       //!< show messages on demand, strings here
+  std::shared_ptr<msg_logger> msg;
 
-    QHash<QString, QVector<QCPGraph*>> m_graphs;
+  QDockWidget *qdw; //!< show messages on demand
+  QListWidget *qlw; //!< show messages on demand, strings here
 
-    bool m_sidemenu_visible = false;
+  QHash<QString, QVector<QCPGraph *>> m_graphs;
 
-    bool phase_is_mapped = true;
+  bool m_sidemenu_visible = false;
 
-    EdiPlotterOpenMode m_open_mode = EdiPlotterOpenMode::OVERLAY;
+  bool phase_is_mapped = true;
+
+  EdiPlotterOpenMode m_open_mode = EdiPlotterOpenMode::OVERLAY;
 };
 
 #endif // EDIPLOTTER_H
