@@ -486,7 +486,8 @@ void mt_gensign::clear() {
 
   for (size_t ki = 0; ki < this->channels; ++ki) {
     QFileInfo qfi("test.ats");
-    this->atsfiles.emplace_back(std::make_shared<atsfile>(qfi, 1, 80, 1, this->f_sample, 1, ki, cht.at(ki), "L"));
+    const int channel_number = static_cast<int>(ki);
+    this->atsfiles.emplace_back(std::make_shared<atsfile>(qfi, 1, 80, 1, this->f_sample, 1, channel_number, cht.at(ki), "L"));
   }
   i = 0;
   for (auto &file : this->atsfiles) {

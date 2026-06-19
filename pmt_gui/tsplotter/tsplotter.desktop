@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/tsplotter %F
+Icon=/usr/local/procmt/share/desktop/tsplotter.svg
+Name=tsplotter
+StartupNotify=true
+Terminal=false
+Type=Application

@@ -49,6 +49,9 @@ if(APPLE)
         )
 endif()
 
+install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
+install(DIRECTORY icons/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
+
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include)
 

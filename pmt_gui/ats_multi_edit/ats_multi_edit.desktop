@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/ats_multi_edit %F
+Icon=/usr/local/procmt/share/desktop/ats_multi_edit.svg
+Name=ats_multi_edit
+StartupNotify=true
+Terminal=false
+Type=Application

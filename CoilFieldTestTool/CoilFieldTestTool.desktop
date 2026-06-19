@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/CoilFieldTestTool %F
+Icon=/usr/local/procmt/share/desktop/CoilFieldTestTool.svg
+Name=CoilFieldTestTool
+StartupNotify=true
+Terminal=false
+Type=Application

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/xmlcal %F
+Icon=/usr/local/procmt/share/desktop/xmlcal.svg
+Name=xmlcal
+StartupNotify=true
+Terminal=false
+Type=Application

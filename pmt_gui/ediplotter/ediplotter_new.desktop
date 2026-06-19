@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/ediplotter_new %F
+Icon=/usr/local/procmt/share/desktop/ediplotter.svg
+Name=ediplotter_new
+StartupNotify=true
+Terminal=false
+Type=Application

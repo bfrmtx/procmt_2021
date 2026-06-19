@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/procmt_mini %F
+Icon=/usr/local/procmt/share/desktop/procmt_mini.svg
+Name=procmt_mini
+StartupNotify=true
+Terminal=false
+Type=Application

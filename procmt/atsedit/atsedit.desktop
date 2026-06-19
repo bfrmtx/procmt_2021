@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/atsedit %F
+Icon=/usr/local/procmt/share/desktop/atsedit.svg
+Name=atsedit
+StartupNotify=true
+Terminal=false
+Type=Application

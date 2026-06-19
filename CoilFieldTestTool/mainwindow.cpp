@@ -281,7 +281,7 @@ void MainWindow::on_pbComputeTF_clicked(void) {
   unsigned int uiTSSetCounter;
   unsigned int uiCHCounter;
   unsigned int uiSetIndex;
-  unsigned int uiProgress;
+  unsigned int uiProgress = 0;
 
   QString qstrTemp1;
   QStringList qstrlATSFiles;

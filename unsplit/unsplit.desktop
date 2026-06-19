@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/unsplit %F
+Icon=/usr/local/procmt/share/desktop/unsplit.svg
+Name=unsplit
+StartupNotify=true
+Terminal=false
+Type=Application

@@ -65,6 +65,9 @@ if(APPLE)
     )
 endif()
 
+install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
+install(DIRECTORY icons/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
+
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
 PRIVATE Qt${QT_VERSION_MAJOR}::Sql
