@@ -46,11 +46,24 @@ set(SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
 )
 
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+
+if(WIN32)
+    target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
+endif()
+
+if(APPLE)
+    target_sources(${PROJECT_NAME} PRIVATE icons/ats_multi_edit.icns)
+    set_source_files_properties(icons/ats_multi_edit.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        MACOSX_BUNDLE_ICON_FILE ats_multi_edit.icns
+    )
+endif()
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets

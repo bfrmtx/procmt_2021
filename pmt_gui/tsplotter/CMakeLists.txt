@@ -80,10 +80,24 @@ addressdialog.ui
 gotosampledialog.ui
 manualscalingdialog.ui
 qwebdavdialog.ui
+resources.qrc
 )
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+
+if(WIN32)
+	target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
+endif()
+
+if(APPLE)
+	target_sources(${PROJECT_NAME} PRIVATE icons/tsplotter.icns)
+	set_source_files_properties(icons/tsplotter.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+	set_target_properties(${PROJECT_NAME} PROPERTIES
+		MACOSX_BUNDLE_ICON_FILE tsplotter.icns
+	)
+endif()
+
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
 

@@ -62,9 +62,22 @@ ui_mainwindow.h
 ui_plot.h
 myapp.rc
 Pics.qrc
+resources.qrc
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+
+if(WIN32)
+  target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
+endif()
+
+if(APPLE)
+  target_sources(${PROJECT_NAME} PRIVATE icons/CoilFieldTestTool.icns)
+  set_source_files_properties(icons/CoilFieldTestTool.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    MACOSX_BUNDLE_ICON_FILE CoilFieldTestTool.icns
+  )
+endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
  Qt6::Core

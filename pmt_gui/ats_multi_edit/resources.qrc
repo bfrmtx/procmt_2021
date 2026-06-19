@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file alias="ats_multi_edit.png">icons/ats_multi_edit.png</file>
+  </qresource>
+</RCC>

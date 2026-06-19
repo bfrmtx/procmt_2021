@@ -3,5 +3,6 @@
         <file alias="folder.png">res/img/folder.png</file>
         <file alias="generic.png">res/img/generic.png</file>
         <file alias="web.png">res/img/web.png</file>
+        <file alias="tsplotter.png">icons/tsplotter.png</file>
     </qresource>
 </RCC>

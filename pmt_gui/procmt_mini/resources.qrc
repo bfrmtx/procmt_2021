@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file alias="procmt_mini.png">icons/procmt_mini.png</file>
+  </qresource>
+</RCC>

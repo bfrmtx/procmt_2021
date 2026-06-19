@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file alias="xmlcal.png">icons/xmlcal.png</file>
+  </qresource>
+</RCC>

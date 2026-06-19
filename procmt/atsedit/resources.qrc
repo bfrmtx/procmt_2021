@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file alias="atsedit.png">icons/atsedit.png</file>
+  </qresource>
+</RCC>

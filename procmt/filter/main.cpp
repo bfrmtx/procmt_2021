@@ -1,8 +1,13 @@
 #include "filter.h"
 #include <QApplication>
+#include <QIcon>
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
+  a.setDesktopFileName("atsfilter");
+  QGuiApplication::setDesktopFileName("atsfilter");
+  a.setWindowIcon(QIcon(":/icons/atsfilter.png"));
+
   filter w;
 
   std::shared_ptr<prc_com> cmdline = std::make_shared<prc_com>(false);

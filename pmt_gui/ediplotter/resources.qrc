@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file alias="ediplotter.png">icons/ediplotter.png</file>
+  </qresource>
+</RCC>

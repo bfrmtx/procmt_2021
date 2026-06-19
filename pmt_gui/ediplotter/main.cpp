@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QEvent>
 #include <QFileOpenEvent>
+#include <QIcon>
 #include <QTimer>
 
 class EdiFileOpenEventHandler : public QObject {
@@ -63,6 +64,10 @@ private:
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
+  a.setDesktopFileName("ediplotter_new");
+  QGuiApplication::setDesktopFileName("ediplotter_new");
+  a.setWindowIcon(QIcon(":/icons/ediplotter.png"));
+
   std::shared_ptr<msg_logger> msg = std::make_shared<msg_logger>();
 
   QStringList allarguments = a.arguments();

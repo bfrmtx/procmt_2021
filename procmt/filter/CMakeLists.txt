@@ -53,10 +53,23 @@ low_high_band_passses.cpp
 low_high_band_passses.h
 low_high_band_passses.ui
 main.cpp
+resources.qrc
 )
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+
+if(WIN32)
+    target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
+endif()
+
+if(APPLE)
+    target_sources(${PROJECT_NAME} PRIVATE icons/atsfilter.icns)
+    set_source_files_properties(icons/atsfilter.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        MACOSX_BUNDLE_ICON_FILE atsfilter.icns
+    )
+endif()
 
 target_link_libraries(${PROJECT_NAME}
 PRIVATE Qt${QT_VERSION_MAJOR}::Core

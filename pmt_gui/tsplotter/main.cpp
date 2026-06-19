@@ -4,6 +4,7 @@
 #include <QEvent>
 #include <QFileInfo>
 #include <QFileOpenEvent>
+#include <QIcon>
 #include <QStringList>
 #include <QTimer>
 
@@ -64,6 +65,10 @@ private:
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
+  a.setDesktopFileName("tsplotter");
+  QGuiApplication::setDesktopFileName("tsplotter");
+  a.setWindowIcon(QIcon(":/icons/tsplotter.png"));
+
   TS_NAMESPACE_NAME::tsplotter *tsplot = new TS_NAMESPACE_NAME::tsplotter();
 
   QStringList allarguments = a.arguments();

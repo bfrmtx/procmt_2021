@@ -31,10 +31,23 @@ ${CMAKE_SOURCE_DIR}/libqt/xmlcallib
 
 set(SOURCES
         main.cpp
+                resources.qrc
 )
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+
+if(WIN32)
+        target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
+endif()
+
+if(APPLE)
+        target_sources(${PROJECT_NAME} PRIVATE icons/xmlcal.icns)
+        set_source_files_properties(icons/xmlcal.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+        set_target_properties(${PROJECT_NAME} PROPERTIES
+                MACOSX_BUNDLE_ICON_FILE xmlcal.icns
+        )
+endif()
 
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include)

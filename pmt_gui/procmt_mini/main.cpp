@@ -1,6 +1,7 @@
 #include "procmt_mini.h"
 // #include "procmt_lib.h"
 #include <QApplication>
+#include <QIcon>
 #include <QStringList>
 
 int main(int argc, char *argv[]) {
@@ -17,6 +18,10 @@ int main(int argc, char *argv[]) {
   //   QSurfaceFormat::setDefaultFormat(fmt);
   // #endif
   QApplication a(argc, argv);
+  a.setDesktopFileName("procmt_mini");
+  QGuiApplication::setDesktopFileName("procmt_mini");
+  a.setWindowIcon(QIcon(":/icons/procmt_mini.png"));
+
   for (auto screen : QApplication::screens()) {
     qDebug() << "device pxr: " << screen->devicePixelRatio();
   }
