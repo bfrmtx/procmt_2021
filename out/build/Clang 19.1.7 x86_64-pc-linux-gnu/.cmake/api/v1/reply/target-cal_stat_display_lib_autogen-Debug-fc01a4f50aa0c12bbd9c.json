@@ -1,0 +1,92 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"libqt/cal_stat_display_lib/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "cal_stat_display_lib_autogen_timestamp_deps::@5bf04c0be6c789daeb6a"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "cal_stat_display_lib_autogen::@5bf04c0be6c789daeb6a",
+	"isGeneratorProvided" : true,
+	"name" : "cal_stat_display_lib_autogen",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "cal_stat_display_lib_autogen_timestamp_deps::@5bf04c0be6c789daeb6a"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "libqt/cal_stat_display_lib",
+		"source" : "libqt/cal_stat_display_lib"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/cal_stat_display_lib/CMakeFiles/cal_stat_display_lib_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/cal_stat_display_lib/CMakeFiles/cal_stat_display_lib_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/cal_stat_display_lib/cal_stat_display_lib_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

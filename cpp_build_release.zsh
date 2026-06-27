@@ -47,6 +47,9 @@ if [ $OS = "Darwin" ]; then
   exit 0
 fi
 # if not macOS then copy old ediplotter ediplotter
-echo "try to copy ediplotter"
-cp $HOME'/bin/proc_mt_s/ediplotter' $INTSTALLDIR/bin
+if [ -f $HOME'/bin/proc_mt_s/ediplotter' ]; then
+  echo "try to copy ediplotter"
+  cp $HOME'/bin/proc_mt_s/ediplotter' $INTSTALLDIR/bin
+
+fi
 echo "done"

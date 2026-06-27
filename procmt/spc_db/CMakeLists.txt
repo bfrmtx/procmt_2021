@@ -1,5 +1,3 @@
-
-
 project(spc_db VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6
     REQUIRED COMPONENTS Core Sql
@@ -46,5 +43,3 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE SPC_DB_LIBRARY)
 
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
-
-

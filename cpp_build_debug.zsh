@@ -19,4 +19,9 @@ cmake --build $BUILD_DIR --parallel 16
 # libraries and headers will go below; so you can alway "uninstall" by removing the /usr/local/procmt directory
 cmake --install $BUILD_DIR
 # COMMENT this line out - the "old" ediplotter can't be build with Qt6; this version will call "ediplotter_new" in case "ediplotter" is missing
-cp $HOME'/bin/proc_mt_s/ediplotter' $INTSTALLDIR/bin
+# if not macOS then copy old ediplotter ediplotter
+if [ -f $HOME'/bin/proc_mt_s/ediplotter' ]; then
+  echo "try to copy ediplotter"
+  cp $HOME'/bin/proc_mt_s/ediplotter' $INTSTALLDIR/bin
+fi
+echo "done"

@@ -1,4 +1,3 @@
- 
 # ------------------RPATH for loading .so from ../lib ------------------------------------------
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -13,7 +12,18 @@ set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 # which point to directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+if(APPLE)
+    # 1. Look in the local application bundle first (if any items exist there)
+    # 2. Look in your shared central installation path
+    set(CMAKE_INSTALL_RPATH "@executable_path/../Frameworks;/usr/local/procmt/lib")
 
+    # Force macOS to build bundles using standard RPATH resolution
+    set(CMAKE_MACOSX_RPATH TRUE)
+elseif(UNIX AND NOT APPLE)
+    # 1. Look relative to the binary location (standard Linux behavior)
+    # 2. Look in your shared central installation path
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib;/usr/local/procmt/lib")
+endif()
 
 # the RPATH to be used when installing, but only if it's not a system directory
 #list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
@@ -24,7 +34,9 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 # that is where the self compiled executable will be
 # so that must be compiled first
 include_directories(${CMAKE_SOURCE_DIR}/include)
-link_directories(${CMAKE_INSTALL_PREFIX}/lib)
+if(EXISTS "${CMAKE_INSTALL_PREFIX}/lib")
+    link_directories(${CMAKE_INSTALL_PREFIX}/lib)
+endif()
 
 # ------------------------------------------------------------
 

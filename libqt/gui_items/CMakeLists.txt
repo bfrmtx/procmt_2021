@@ -1,5 +1,3 @@
-
-
 project(gui_items VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,10 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
-
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
 include_directories(${CMAKE_INSTALL_PREFIX}/include ${CMAKE_SOURCE_DIR}/include )
@@ -22,8 +17,6 @@ set(SOURCES
 set(HEADERS_INSTALL
   gui_items.h
 )
-
-
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS_INSTALL})
 

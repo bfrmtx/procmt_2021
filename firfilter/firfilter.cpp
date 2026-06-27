@@ -42,7 +42,7 @@ void firfilter::clear() {
   insert("upper_freq", (double)0.0);
   insert("lower_freq", (double)0.0);
 
-  strs_opts << "mtx32" << "mtx16" << "mtx8" << "mtx4" << "mtx2" << "mtx25" << "mtx10" << "mtx15" << "notch" << "highpass" << "lowpass" << "bandpass";
+  strs_opts << "mtx32" << "mtx16" << "mtx16_2s" << "mtx8" << "mtx4" << "mtx2" << "mtx25" << "mtx10" << "mtx15" << "notch" << "highpass" << "lowpass" << "bandpass";
   if (this->coeff.size())
     this->coeff.clear();
 }
@@ -580,7 +580,7 @@ std::vector<double> firfilter::generate_coefficients(const QString &filter_name,
     }
   }
 
-  if (0 == filter_name.compare("mtx16")) {
+  if (0 == filter_name.compare("mtx16") || 0 == filter_name.compare("mtx16_2s")) {
 
     insert("filter_name", filter_name);
     insert("filter_type", QString("decimation"));
@@ -951,6 +951,103 @@ std::vector<double> firfilter::generate_coefficients(const QString &filter_name,
       coeff[i++] = 5.3452596349293630e-09;
       coeff[i++] = 2.4255038123193060e-09;
       coeff[i++] = 8.6066944562275500e-10;
+    }
+  }
+
+  if (0 == filter_name.compare("mtx4")) {
+
+    insert("filter_name", filter_name);
+    insert("filter_type", QString("decimation"));
+    insert("filter_long_description", QString("metronix 4x decimation FIR with Remez"));
+    insert("filter_category", QString("FIR"));
+    insert("filter_move", (quint64)4);
+
+    insert("filter_length", (quint64)71);
+    insert("filter_outputs", (quint64)1);
+
+    if ((this->quint64value("filter_length") > this->quint64value("num_samples")) && this->quint64value("num_samples")) {
+      success = false;
+      if (create_coeff_vector)
+        return this->coeff;
+
+    } else
+      success = true;
+
+    if (create_coeff_vector) {
+      coeff.reserve(71);
+      coeff.resize(71);
+      i = 0;
+      coeff[i++] = 6.854913864E-6;
+      coeff[i++] = 2.933716833E-5;
+      coeff[i++] = 8.267682092E-5;
+      coeff[i++] = 1.822009396E-4;
+      coeff[i++] = 3.346982688E-4;
+      coeff[i++] = 5.253549867E-4;
+      coeff[i++] = 7.050447753E-4;
+      coeff[i++] = 7.848495715E-4;
+      coeff[i++] = 6.456473839E-4;
+      coeff[i++] = 1.680573886E-4;
+      coeff[i++] = -7.184734519E-4;
+      coeff[i++] = -1.978042517E-3;
+      coeff[i++] = -3.421991913E-3;
+      coeff[i++] = -4.698704960E-3;
+      coeff[i++] = -5.340810348E-3;
+      coeff[i++] = -4.877338474E-3;
+      coeff[i++] = -2.996021341E-3;
+      coeff[i++] = 2.840936053E-4;
+      coeff[i++] = 4.488289189E-3;
+      coeff[i++] = 8.671796886E-3;
+      coeff[i++] = 1.155862537E-2;
+      coeff[i++] = 1.183726918E-2;
+      coeff[i++] = 8.564797604E-3;
+      coeff[i++] = 1.581379992E-3;
+      coeff[i++] = -8.191622918E-3;
+      coeff[i++] = -1.869064668E-2;
+      coeff[i++] = -2.696017386E-2;
+      coeff[i++] = -2.970906692E-2;
+      coeff[i++] = -2.407566432E-2;
+      coeff[i++] = -8.426506187E-3;
+      coeff[i++] = 1.702308969E-2;
+      coeff[i++] = 4.995732286E-2;
+      coeff[i++] = 8.618845263E-2;
+      coeff[i++] = 1.203573989E-1;
+      coeff[i++] = 1.469705098E-1;
+      coeff[i++] = 1.615376929E-1;
+      coeff[i++] = 1.615376929E-1;
+      coeff[i++] = 1.469705098E-1;
+      coeff[i++] = 1.203573989E-1;
+      coeff[i++] = 8.618845263E-2;
+      coeff[i++] = 4.995732286E-2;
+      coeff[i++] = 1.702308969E-2;
+      coeff[i++] = -8.426506187E-3;
+      coeff[i++] = -2.407566432E-2;
+      coeff[i++] = -2.970906692E-2;
+      coeff[i++] = -2.696017386E-2;
+      coeff[i++] = -1.869064668E-2;
+      coeff[i++] = -8.191622918E-3;
+      coeff[i++] = 1.581379992E-3;
+      coeff[i++] = 8.564797604E-3;
+      coeff[i++] = 1.183726918E-2;
+      coeff[i++] = 1.155862537E-2;
+      coeff[i++] = 8.671796886E-3;
+      coeff[i++] = 4.488289189E-3;
+      coeff[i++] = 2.840936053E-4;
+      coeff[i++] = -2.996021341E-3;
+      coeff[i++] = -4.877338474E-3;
+      coeff[i++] = -5.340810348E-3;
+      coeff[i++] = -4.698704960E-3;
+      coeff[i++] = -3.421991913E-3;
+      coeff[i++] = -1.978042517E-3;
+      coeff[i++] = -7.184734519E-4;
+      coeff[i++] = 1.680573886E-4;
+      coeff[i++] = 6.456473839E-4;
+      coeff[i++] = 7.848495715E-4;
+      coeff[i++] = 7.050447753E-4;
+      coeff[i++] = 5.253549867E-4;
+      coeff[i++] = 3.346982688E-4;
+      coeff[i++] = 1.822009396E-4;
+      coeff[i++] = 8.267682092E-5;
+      coeff[i++] = 2.933716833E-5;
     }
   }
 

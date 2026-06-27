@@ -1,0 +1,1291 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "pmt_gui/spectra_plotter/libspectra_plotter.so"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"install",
+			"include",
+			"target_link_libraries",
+			"set_property",
+			"find_package",
+			"__find_dependency_common",
+			"find_dependency",
+			"_qt_internal_find_third_party_dependencies",
+			"set_target_properties",
+			"add_definitions",
+			"target_compile_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"pmt_gui/spectra_plotter/CMakeLists.txt",
+			"cmake/lib.cmake",
+			"cmake/qcustomplot_use.cmake",
+			"/usr/share/cmake/Modules/FindOpenGL.cmake",
+			"/usr/lib/cmake/Qt6/FindWrapOpenGL.cmake",
+			"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+			"/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake",
+			"/usr/lib/cmake/Qt6/Qt6Config.cmake",
+			"CMakeLists.txt",
+			"cmake/rpath.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 103,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 67,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 105,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 6
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 6,
+				"parent" : 7
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 7
+			},
+			{
+				"file" : 10
+			},
+			{
+				"command" : 5,
+				"file" : 10,
+				"line" : 45,
+				"parent" : 10
+			},
+			{
+				"file" : 9,
+				"parent" : 11
+			},
+			{
+				"command" : 5,
+				"file" : 9,
+				"line" : 263,
+				"parent" : 12
+			},
+			{
+				"file" : 8,
+				"parent" : 13
+			},
+			{
+				"command" : 2,
+				"file" : 8,
+				"line" : 50,
+				"parent" : 14
+			},
+			{
+				"file" : 7,
+				"parent" : 15
+			},
+			{
+				"command" : 8,
+				"file" : 7,
+				"line" : 37,
+				"parent" : 16
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 36,
+				"parent" : 17
+			},
+			{
+				"command" : 6,
+				"file" : 5,
+				"line" : 125,
+				"parent" : 18
+			},
+			{
+				"command" : 5,
+				"file" : 5,
+				"line" : 93,
+				"parent" : 19
+			},
+			{
+				"file" : 4,
+				"parent" : 20
+			},
+			{
+				"command" : 5,
+				"file" : 4,
+				"line" : 13,
+				"parent" : 21
+			},
+			{
+				"file" : 3,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 837,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 3,
+				"line" : 835,
+				"parent" : 23
+			},
+			{
+				"command" : 10,
+				"file" : 10,
+				"line" : 134,
+				"parent" : 10
+			},
+			{
+				"command" : 10,
+				"file" : 10,
+				"line" : 136,
+				"parent" : 10
+			},
+			{
+				"command" : 10,
+				"file" : 10,
+				"line" : 135,
+				"parent" : 10
+			},
+			{
+				"command" : 10,
+				"file" : 10,
+				"line" : 31,
+				"parent" : 10
+			},
+			{
+				"command" : 11,
+				"file" : 0,
+				"line" : 101,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"file" : 11,
+				"parent" : 31
+			},
+			{
+				"command" : 12,
+				"file" : 11,
+				"line" : 36,
+				"parent" : 32
+			},
+			{
+				"command" : 12,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"compileDependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Gui::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Network::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "Qt6::OpenGL::@ba8c298939db04354665"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "Qt6::PrintSupport::@6890427a1f51a3e7e1df"
+		}
+	],
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fPIC"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-fno-direct-access-external-data"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 26,
+					"define" : "PMTSQLPATH=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 27,
+					"define" : "PMTSQLPATH_APPLE=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 28,
+					"define" : "PMTSQLPATH_UNIX=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 29,
+					"define" : "QCUSTOMPLOT_USE_OPENGL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "QT_OPENGL_LIB"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "QT_PRINTSUPPORT_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_SQL_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_WIDGETS_LIB"
+				},
+				{
+					"backtrace" : 30,
+					"define" : "SPECTRA_PLOTTER_LIBRARY"
+				},
+				{
+					"define" : "spectra_plotter_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter"
+				},
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/pmt_gui/spectra_plotter"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/include"
+				},
+				{
+					"backtrace" : 33,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/include"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/include"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/qcustomplot"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/fftreal"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/base/prc_com"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/prc_com_table"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsfile"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsheader"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atmfile"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/eqdatetime"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/gui_items"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/calibration"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/measdocxml"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/tinyxml2"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/tinyxmlwriter"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/sql_base_tools"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/base/msg_logger"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libvector/fftreal_vector"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/firfilter"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/ats_ascii_file"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/acsp_prz"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsfile_collector"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/db_sensor_query"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libvector/math_vector"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/edi_file"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mt_data"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mc_data"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mt_site"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/adulib/aduxml"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libgeo/geocoordinates"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtCore"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/lib/qt6/mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtSql"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtGui"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtWidgets"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtNetwork"
+				},
+				{
+					"backtrace" : 8,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtOpenGL"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtPrintSupport"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					5
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				3,
+				5,
+				7,
+				10
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"id" : "spectra_plotter_autogen_timestamp_deps::@ba8c298939db04354665"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "spectra_plotter_autogen::@ba8c298939db04354665"
+		}
+	],
+	"id" : "spectra_plotter::@ba8c298939db04354665",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/lib"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu"
+		}
+	},
+	"interfaceCompileDependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		}
+	],
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		}
+	],
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-shared",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/prc_com_table:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/gui_items:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mc_data:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/adulib/aduxml:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mt_site:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/qcustomplot:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/acsp_prz:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfile_collector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/ats_ascii_file:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfile:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atmfile:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/fftreal_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/firfilter:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsheader:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/base/prc_com:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/eqdatetime:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/calibration:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/measdocxml:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/tinyxml2:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/tinyxmlwriter:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/db_sensor_query:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/sql_base_tools:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/base/msg_logger:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/sql_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/math_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mt_data:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libgeo/geocoordinates:\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libqt/prc_com_table/libprc_com_table.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libqt/gui_items/libgui_items.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/mc_data/libmc_data.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../adulib/aduxml/libaduxml.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/mt_site/libmt_site.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../qcustomplot/libqcustomplot.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "/usr/lib/libQt6OpenGL.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "/usr/lib/libQt6PrintSupport.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Network.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/acsp_prz/libacsp_prz.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/atsfile_collector/libatsfile_collector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/ats_ascii_file/libats_ascii_file.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/atsfile/libatsfile.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/atmfile/libatmfile.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libvector/fftreal_vector/libfftreal_vector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../firfilter/libfirfilter.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/atsheader/libatsheader.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../base/prc_com/libprc_com.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libqt/eqdatetime/libeqdatetime.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/calibration/libcalibration.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/measdocxml/libmeasdocxml.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/tinyxml2/libtinyxml2.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/tinyxmlwriter/libtinyxmlwriter.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/db_sensor_query/libdb_sensor_query.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libxml/sql_base_tools/libsql_base_tools.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../base/msg_logger/libmsg_logger.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Sql.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libvector/math_vector/libmath_vector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../procmt/mt_data/libmt_data.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../libgeo/geocoordinates/libgeocoordinates.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Widgets.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Gui.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 24,
+				"fragment" : "/usr/lib/libGLX.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/usr/lib/libOpenGL.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Core.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-rpath-link,\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/sql_vector\"",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Gui::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Network::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "Qt6::OpenGL::@ba8c298939db04354665"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "Qt6::PrintSupport::@6890427a1f51a3e7e1df"
+		}
+	],
+	"name" : "spectra_plotter",
+	"nameOnDisk" : "libspectra_plotter.so",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "spectra_plotter_autogen_timestamp_deps::@ba8c298939db04354665"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "spectra_plotter_autogen::@ba8c298939db04354665"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "pmt_gui/spectra_plotter",
+		"source" : "pmt_gui/spectra_plotter"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files\\Generated",
+			"sourceIndexes" : 
+			[
+				0,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				5,
+				7,
+				10
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				2,
+				4,
+				6,
+				8
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				9,
+				11
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				15
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_gui/spectra_plotter/graph_selector.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/graph_selector.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_gui/spectra_plotter/plotdata.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/plotdata.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_gui/spectra_plotter/plotwidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/plotwidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_gui/spectra_plotter/progressdialog.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/progressdialog.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/progressdialog.ui",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_gui/spectra_plotter/spectra_plotter.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "pmt_gui/spectra_plotter/spectra_plotter.ui",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/include/ui_progressdialog.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/include/ui_spectra_plotter.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/timestamp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_gui/spectra_plotter/spectra_plotter_autogen/timestamp.rule",
+			"sourceGroupIndex" : 4
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

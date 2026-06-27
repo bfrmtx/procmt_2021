@@ -1,5 +1,3 @@
-
-
 project(InsituCoilCal VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -10,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
 include_directories(
-${CMAKE_SOURCE_DIR}/include    
+${CMAKE_SOURCE_DIR}/include
 ${CMAKE_INSTALL_PREFIX}/include
 ${CMAKE_SOURCE_DIR}/fftreal
 ${CMAKE_SOURCE_DIR}/base/prc_com
@@ -93,44 +91,30 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
  db_sensor_query
  sql_base_tools
  sql_vector
-  prc_com
-  prc_com_table
-  atsfile
-  atsheader
-  atmfile
-  eqdatetime
-  measdocxml
-  tinyxml2
-  tinyxmlwriter
-  db_sensor_query
-  sql_base_tools
-  msg_logger
-  fftreal_vector
-  firfilter
-  ats_ascii_file
-  acsp_prz
-  atsfile_collector
-  calibration
-  db_sensor_query
-  mt_data
-  geocoordinates
-  gui_items
-  mc_data
-  aduxml
-  adu_json
-  phoenix_json
-  mt_site
-  edi_file
-  lineedit_file
-  group_atsfiles
-  qstring_utilities
-  qcustomplot
+ prc_com_table
+ atsfile
+ atsheader
+ atmfile
+ eqdatetime
+ tinyxmlwriter
+ msg_logger
+ fftreal_vector
+ firfilter
+ ats_ascii_file
+ acsp_prz
+ geocoordinates
+ gui_items
+ mc_data
+ aduxml
+ adu_json
+ phoenix_json
+ edi_file
+ lineedit_file
+ group_atsfiles
+ qstring_utilities
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
-
-
-

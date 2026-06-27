@@ -1,0 +1,659 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "libqt/mest_plotlib/libmestplotlib.so"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"install",
+			"include",
+			"target_link_libraries",
+			"set_target_properties",
+			"find_package",
+			"set_property",
+			"__find_dependency_common",
+			"find_dependency",
+			"_qt_internal_find_third_party_dependencies",
+			"target_compile_definitions",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"libqt/mest_plotlib/CMakeLists.txt",
+			"cmake/lib.cmake",
+			"cmake/qcustomplot_use.cmake",
+			"/usr/lib/cmake/Qt6Widgets/Qt6WidgetsTargets.cmake",
+			"/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake",
+			"/usr/lib/cmake/Qt6/Qt6Config.cmake",
+			"CMakeLists.txt",
+			"/usr/share/cmake/Modules/FindOpenGL.cmake",
+			"/usr/lib/cmake/Qt6/FindWrapOpenGL.cmake",
+			"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+			"/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake",
+			"cmake/rpath.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 25,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 35,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 6
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 6,
+				"parent" : 7
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 7
+			},
+			{
+				"file" : 6
+			},
+			{
+				"command" : 5,
+				"file" : 6,
+				"line" : 45,
+				"parent" : 10
+			},
+			{
+				"file" : 5,
+				"parent" : 11
+			},
+			{
+				"command" : 5,
+				"file" : 5,
+				"line" : 263,
+				"parent" : 12
+			},
+			{
+				"file" : 4,
+				"parent" : 13
+			},
+			{
+				"command" : 2,
+				"file" : 4,
+				"line" : 65,
+				"parent" : 14
+			},
+			{
+				"file" : 3,
+				"parent" : 15
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 70,
+				"parent" : 16
+			},
+			{
+				"command" : 5,
+				"file" : 5,
+				"line" : 263,
+				"parent" : 12
+			},
+			{
+				"file" : 12,
+				"parent" : 18
+			},
+			{
+				"command" : 2,
+				"file" : 12,
+				"line" : 50,
+				"parent" : 19
+			},
+			{
+				"file" : 11,
+				"parent" : 20
+			},
+			{
+				"command" : 9,
+				"file" : 11,
+				"line" : 37,
+				"parent" : 21
+			},
+			{
+				"command" : 8,
+				"file" : 10,
+				"line" : 36,
+				"parent" : 22
+			},
+			{
+				"command" : 7,
+				"file" : 9,
+				"line" : 125,
+				"parent" : 23
+			},
+			{
+				"command" : 5,
+				"file" : 9,
+				"line" : 93,
+				"parent" : 24
+			},
+			{
+				"file" : 8,
+				"parent" : 25
+			},
+			{
+				"command" : 5,
+				"file" : 8,
+				"line" : 13,
+				"parent" : 26
+			},
+			{
+				"file" : 7,
+				"parent" : 27
+			},
+			{
+				"command" : 6,
+				"file" : 7,
+				"line" : 837,
+				"parent" : 28
+			},
+			{
+				"command" : 4,
+				"file" : 7,
+				"line" : 835,
+				"parent" : 28
+			},
+			{
+				"command" : 10,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"command" : 11,
+				"file" : 6,
+				"line" : 134,
+				"parent" : 10
+			},
+			{
+				"command" : 11,
+				"file" : 6,
+				"line" : 136,
+				"parent" : 10
+			},
+			{
+				"command" : 11,
+				"file" : 6,
+				"line" : 135,
+				"parent" : 10
+			},
+			{
+				"command" : 11,
+				"file" : 6,
+				"line" : 31,
+				"parent" : 10
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"file" : 13,
+				"parent" : 36
+			},
+			{
+				"command" : 12,
+				"file" : 13,
+				"line" : 36,
+				"parent" : 37
+			},
+			{
+				"command" : 12,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"compileDependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "Qt6::OpenGL::@0d0f633528323a443a80"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "Qt6::PrintSupport::@6890427a1f51a3e7e1df"
+		}
+	],
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fPIC"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-fno-direct-access-external-data"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 31,
+					"define" : "MESTPLOTLIB_LIBRARY"
+				},
+				{
+					"backtrace" : 32,
+					"define" : "PMTSQLPATH=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 33,
+					"define" : "PMTSQLPATH_APPLE=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 34,
+					"define" : "PMTSQLPATH_UNIX=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 35,
+					"define" : "QCUSTOMPLOT_USE_OPENGL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "QT_OPENGL_LIB"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "QT_PRINTSUPPORT_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_WIDGETS_LIB"
+				},
+				{
+					"define" : "mestplotlib_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib"
+				},
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/mest_plotlib"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib/mestplotlib_autogen/include"
+				},
+				{
+					"backtrace" : 38,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/qcustomplot"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtWidgets"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtCore"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/lib/qt6/mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtGui"
+				},
+				{
+					"backtrace" : 8,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtOpenGL"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtPrintSupport"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					5
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"id" : "mestplotlib_autogen_timestamp_deps::@0d0f633528323a443a80"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "mestplotlib_autogen::@0d0f633528323a443a80"
+		}
+	],
+	"id" : "mestplotlib::@0d0f633528323a443a80",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/lib"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu"
+		}
+	},
+	"interfaceCompileDependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		}
+	],
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		}
+	],
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-shared",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/qcustomplot:\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../qcustomplot/libqcustomplot.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "/usr/lib/libQt6OpenGL.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "/usr/lib/libQt6PrintSupport.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "/usr/lib/libQt6Widgets.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 17,
+				"fragment" : "/usr/lib/libQt6Gui.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 29,
+				"fragment" : "/usr/lib/libGLX.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/usr/lib/libOpenGL.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 17,
+				"fragment" : "/usr/lib/libQt6Core.so.6.11.1",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "qcustomplot::@82c41707adc1c3375302"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "Qt6::OpenGL::@0d0f633528323a443a80"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "Qt6::PrintSupport::@6890427a1f51a3e7e1df"
+		}
+	],
+	"name" : "mestplotlib",
+	"nameOnDisk" : "libmestplotlib.so",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "mestplotlib_autogen_timestamp_deps::@0d0f633528323a443a80"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "mestplotlib_autogen::@0d0f633528323a443a80"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "libqt/mest_plotlib",
+		"source" : "libqt/mest_plotlib"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files\\Generated",
+			"sourceIndexes" : 
+			[
+				0,
+				4,
+				5
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				3
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				6
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib/mestplotlib_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "libqt/mest_plotlib/mestplotlib.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "libqt/mest_plotlib/mestplotlib.ui",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "libqt/mest_plotlib/mestplotlib.h",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib/mestplotlib_autogen/include/ui_mestplotlib.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib/mestplotlib_autogen/timestamp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/mest_plotlib/mestplotlib_autogen/timestamp.rule",
+			"sourceGroupIndex" : 4
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

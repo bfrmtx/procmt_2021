@@ -7,17 +7,17 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-IF(QCUSTOMPLOT_USE_OPENGL)
+if(QCUSTOMPLOT_USE_OPENGL)
 find_package(Qt6
     REQUIRED COMPONENTS Core Gui Widgets OpenGL
     OPTIONAL_COMPONENTS PrintSupport
 )
-ELSE()
+else()
 find_package(Qt6
     REQUIRED COMPONENTS Core Gui Widgets
     OPTIONAL_COMPONENTS PrintSupport
 )
-ENDIF()
+endif()
 
 set(SOURCES
   qcustomplot.cpp
@@ -51,27 +51,27 @@ if(TARGET Qt6::PrintSupport)
     target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
 endif()
 
-IF(QCUSTOMPLOT_USE_OPENGL)
+if(QCUSTOMPLOT_USE_OPENGL)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE Qt${QT_VERSION_MAJOR}::OpenGL
     )
-    IF(WIN32)
+    if(WIN32)
         target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL32)
-    ENDIF()
-ENDIF()
+    endif()
+endif()
 
-IF (QCUSTOMPLOT_USE_OPENGL)
+if(QCUSTOMPLOT_USE_OPENGL)
   message ("qcustomplot openGL")
   target_compile_definitions(${PROJECT_NAME} PRIVATE
     QCUSTOMPLOT_LIBRARY
     QCUSTOMPLOT_USE_OPENGL
 )
-ELSE()
+else()
     message ("qcustomplot default")
   target_compile_definitions(${PROJECT_NAME} PRIVATE
     QCUSTOMPLOT_LIBRARY
 )
-ENDIF()
+endif()
 
 # for libraries
 

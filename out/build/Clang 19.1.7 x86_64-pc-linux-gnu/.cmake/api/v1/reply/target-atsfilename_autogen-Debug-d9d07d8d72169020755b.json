@@ -1,0 +1,92 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"procmt/atsfilename/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "atsfilename_autogen_timestamp_deps::@94f8eb87fab7a0272078"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "atsfilename_autogen::@94f8eb87fab7a0272078",
+	"isGeneratorProvided" : true,
+	"name" : "atsfilename_autogen",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "atsfilename_autogen_timestamp_deps::@94f8eb87fab7a0272078"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "procmt/atsfilename",
+		"source" : "procmt/atsfilename"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfilename/CMakeFiles/atsfilename_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfilename/CMakeFiles/atsfilename_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfilename/atsfilename_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

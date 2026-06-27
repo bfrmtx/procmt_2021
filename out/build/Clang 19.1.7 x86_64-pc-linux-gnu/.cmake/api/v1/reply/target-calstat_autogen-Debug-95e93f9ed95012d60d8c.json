@@ -1,0 +1,92 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"libxml/calstat/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "calstat_autogen_timestamp_deps::@ab1eece9f8fd7b892dcf"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "calstat_autogen::@ab1eece9f8fd7b892dcf",
+	"isGeneratorProvided" : true,
+	"name" : "calstat_autogen",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "calstat_autogen_timestamp_deps::@ab1eece9f8fd7b892dcf"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "libxml/calstat",
+		"source" : "libxml/calstat"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/calstat/CMakeFiles/calstat_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/calstat/CMakeFiles/calstat_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/calstat/calstat_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

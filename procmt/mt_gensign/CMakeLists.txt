@@ -1,5 +1,3 @@
-
-
 project(mt_gensign VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -9,11 +7,9 @@ set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
-
 find_package(Qt6
     REQUIRED COMPONENTS Core Widgets Sql
 )
-
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -43,7 +39,6 @@ ${CMAKE_SOURCE_DIR}/procmt/edi_file
 ${CMAKE_SOURCE_DIR}/procmt/mt_data
 ${CMAKE_SOURCE_DIR}/procmt/mc_data
 ${CMAKE_SOURCE_DIR}/adulib/aduxml
-
 
 )
 set(SOURCES
@@ -77,8 +72,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -89,4 +82,3 @@ PRIVATE aduxml
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-

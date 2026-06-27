@@ -1,5 +1,3 @@
-
-
 project(atmfile LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,9 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6 REQUIRED COMPONENTS Core )
 
@@ -34,5 +30,3 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ATMFILE_LIBRARY)
 
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
-
-

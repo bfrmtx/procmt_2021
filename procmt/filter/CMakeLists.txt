@@ -1,5 +1,3 @@
-
-
 project(atsfilter VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6
     REQUIRED COMPONENTS Core Widgets Sql
@@ -43,7 +40,6 @@ ${CMAKE_SOURCE_DIR}/procmt/mt_data
 ${CMAKE_SOURCE_DIR}/procmt/mc_data
 ${CMAKE_SOURCE_DIR}/adulib/aduxml
 
-
 )
 set(SOURCES
 filter.cpp
@@ -58,17 +54,14 @@ resources.qrc
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 if(WIN32)
     target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
 endif()
 
 if(APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE icons/atsfilter.icns)
-    set_source_files_properties(icons/atsfilter.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        MACOSX_BUNDLE_ICON_FILE atsfilter.icns
-    )
+    configure_macos_app_icon(${PROJECT_NAME} icons/atsfilter.png)
 endif()
 
 install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
@@ -95,8 +88,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -107,4 +98,3 @@ PRIVATE aduxml
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-

@@ -1,5 +1,3 @@
-
-
 project(procmt_mini VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -52,10 +50,6 @@ include_directories(
 
 )
 
-
-
-
-
 if(USE_SPECTRAL_PLOTTER_PRO)
     include_directories(
         ${CMAKE_SOURCE_DIR}/pmt_gui/spectra_plotter_pro
@@ -81,17 +75,14 @@ set(SOURCES
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 if(WIN32)
     target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
 endif()
 
 if(APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE icons/procmt_mini.icns)
-    set_source_files_properties(icons/procmt_mini.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        MACOSX_BUNDLE_ICON_FILE procmt_mini.icns
-    )
+    configure_macos_app_icon(${PROJECT_NAME} icons/procmt_mini.png)
 endif()
 
 install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
@@ -99,7 +90,6 @@ install(DIRECTORY icons/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
 
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
-
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core
@@ -127,8 +117,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ats_ascii_file
     acsp_prz
     atsfile_collector
-    calibration
-    db_sensor_query
     math_vector
     mt_data
     geocoordinates
@@ -147,14 +135,14 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     spc_db
 )
 
-IF(USE_SPECTRAL_PLOTTER_PRO)
+if(USE_SPECTRAL_PLOTTER_PRO)
     target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter_pro)
     message ("LINKING   spectra_plotter_pro for OpenGL +++++++++++++++++++++++++++++++++++++++++++++++")
-ELSE()
+else()
     target_link_libraries(${PROJECT_NAME} PRIVATE spectra_plotter)
     message ("LINKING   spectra_plotter -------------------------------------------------------------")
 
-ENDIF()
+endif()
 
 if(NOT DEFINED FILES_INSTALL)
     file(GLOB FILES_INSTALL "*.md")
@@ -164,6 +152,3 @@ install(FILES ${FILES_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/doc)
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-
-
-

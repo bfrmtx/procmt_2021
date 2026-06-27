@@ -1,5 +1,3 @@
-
-
 project(adu_demonstrator VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,14 +5,11 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6
     REQUIRED COMPONENTS Core Gui Widgets Sql Network
 )
-
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -33,7 +28,6 @@ main.cpp
 
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
 
-
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -44,8 +38,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     recording
 )
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-
-
-

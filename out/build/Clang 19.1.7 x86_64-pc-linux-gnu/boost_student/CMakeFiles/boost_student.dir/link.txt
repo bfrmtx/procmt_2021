@@ -1,0 +1,1 @@
+/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/boost_student.dir/link.d -Wl,-soname,libboost_student.so -o libboost_student.so CMakeFiles/boost_student.dir/boost_student_autogen/mocs_compilation.cpp.o CMakeFiles/boost_student.dir/boost_student.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Core.so.6.11.1

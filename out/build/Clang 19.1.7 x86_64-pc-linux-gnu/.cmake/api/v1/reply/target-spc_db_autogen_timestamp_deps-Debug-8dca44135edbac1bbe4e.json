@@ -1,0 +1,86 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"procmt/spc_db/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "spc_db_autogen_timestamp_deps::@3f5767ae17aff23d09ad",
+	"isGeneratorProvided" : true,
+	"name" : "spc_db_autogen_timestamp_deps",
+	"orderDependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "procmt/spc_db",
+		"source" : "procmt/spc_db"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

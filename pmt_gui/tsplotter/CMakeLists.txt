@@ -1,5 +1,3 @@
-
-
 project(tsplotter VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -85,17 +83,14 @@ resources.qrc
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 if(WIN32)
 	target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
 endif()
 
 if(APPLE)
-	target_sources(${PROJECT_NAME} PRIVATE icons/tsplotter.icns)
-	set_source_files_properties(icons/tsplotter.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-	set_target_properties(${PROJECT_NAME} PROPERTIES
-		MACOSX_BUNDLE_ICON_FILE tsplotter.icns
-	)
+	configure_macos_app_icon(${PROJECT_NAME} icons/tsplotter.png)
 endif()
 
 install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
@@ -128,8 +123,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -149,4 +142,3 @@ PRIVATE xmlcallib
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-

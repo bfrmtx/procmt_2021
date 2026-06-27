@@ -1,4 +1,3 @@
-
 # Ensure .lib file is generated for DLL on Windows
 # @todo: This is not needed anymore with CMake 3.13 and above
 # See https://cmake.org/cmake/help/latest/prop_tgt/WINDOWS_EXPORT_ALL_SYMBOLS.html
@@ -14,10 +13,8 @@ install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}  # Runtime binaries
 )
 
-
-IF(NOT HEADERS_INSTALL )
+if(NOT HEADERS_INSTALL)
 message ("no headers to install")
-ELSE()
+else()
 install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR})
-ENDIF()
-
+endif()

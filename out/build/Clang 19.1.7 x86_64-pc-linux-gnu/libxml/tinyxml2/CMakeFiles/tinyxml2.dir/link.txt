@@ -1,0 +1,1 @@
+/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/tinyxml2.dir/link.d -Wl,-soname,libtinyxml2.so -o libtinyxml2.so CMakeFiles/tinyxml2.dir/tinyxml2_autogen/mocs_compilation.cpp.o CMakeFiles/tinyxml2.dir/tinyxml2.cpp.o  -Wl,-rpath,::::::::::::::::::::::::::::::::::::

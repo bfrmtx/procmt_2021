@@ -11,6 +11,51 @@ QString const suff_anisotropy = "_anys";
 QString const suff_coherance = "_coh";
 
 namespace {
+QString rho_button_style(const QString &rgb) {
+#ifdef Q_OS_MACOS
+  return QStringLiteral(
+             "QPushButton { "
+             "background-color: %1; "
+             "border: 1px solid palette(mid); "
+             "border-radius: 6px; "
+             "padding: 4px 10px; "
+             "min-height: 24px; "
+             "} "
+             "QPushButton:pressed { "
+             "background-color: %1; "
+             "padding-top: 5px; "
+             "padding-bottom: 3px; "
+             "}")
+      .arg(rgb);
+#else
+  return QStringLiteral("* { background-color: %1 }").arg(rgb);
+#endif
+}
+
+QString phi_button_style() {
+#ifdef Q_OS_MACOS
+  return QStringLiteral(
+      "QPushButton { "
+      "background-color: palette(button); "
+      "border: 1px solid palette(mid); "
+      "border-radius: 6px; "
+      "padding: 4px 10px; "
+      "min-height: 24px; "
+      "} "
+      "QPushButton:pressed { "
+      "padding-top: 5px; "
+      "padding-bottom: 3px; "
+      "} "
+      "QPushButton:checked { "
+      "background-color: palette(highlight); "
+      "color: palette(highlighted-text); "
+      "border: 1px solid palette(dark); "
+      "}");
+#else
+  return QString();
+#endif
+}
+
 bool has_coherency_data(const mt_data_res<std::complex<double>> &data) {
   if (data.freqs.empty()) {
     return false;
@@ -43,22 +88,31 @@ ediplotter::ediplotter(QWidget *parent) :
   this->setAcceptDrops(true);
 
   // take colors from old ediplotter - avoid questions
-  this->ui->button_rho_1->setStyleSheet("* { background-color: rgb(255,125,100) }");
-  this->ui->button_rho_2->setStyleSheet("* { background-color: rgb(255,125,100) }");
+  this->ui->button_rho_1->setStyleSheet(rho_button_style("rgb(255,125,100)"));
+  this->ui->button_rho_2->setStyleSheet(rho_button_style("rgb(255,125,100)"));
 
-  this->ui->button_rho_3->setStyleSheet("* { background-color: rgb(112,136,26) }");
-  this->ui->button_rho_4->setStyleSheet("* { background-color: rgb(112,136,26) }");
-  this->ui->button_rho_5->setStyleSheet("* { background-color: rgb(112,136,26) }");
+  this->ui->button_rho_3->setStyleSheet(rho_button_style("rgb(112,136,26)"));
+  this->ui->button_rho_4->setStyleSheet(rho_button_style("rgb(112,136,26)"));
+  this->ui->button_rho_5->setStyleSheet(rho_button_style("rgb(112,136,26)"));
 
-  this->ui->button_rho_6->setStyleSheet("* { background-color: rgb(194,187,87) }");
-  this->ui->button_rho_7->setStyleSheet("* { background-color: rgb(194,187,87) }");
-  this->ui->button_rho_8->setStyleSheet("* { background-color: rgb(194,187,87) }");
+  this->ui->button_rho_6->setStyleSheet(rho_button_style("rgb(194,187,87)"));
+  this->ui->button_rho_7->setStyleSheet(rho_button_style("rgb(194,187,87)"));
+  this->ui->button_rho_8->setStyleSheet(rho_button_style("rgb(194,187,87)"));
 
-  this->ui->button_rho_9->setStyleSheet("* { background-color: rgb(126,175,194) }");
-  this->ui->button_rho_10->setStyleSheet("* { background-color: rgb(126,175,194) }");
-  this->ui->button_rho_11->setStyleSheet("* { background-color: rgb(126,175,194) }");
+  this->ui->button_rho_9->setStyleSheet(rho_button_style("rgb(126,175,194)"));
+  this->ui->button_rho_10->setStyleSheet(rho_button_style("rgb(126,175,194)"));
+  this->ui->button_rho_11->setStyleSheet(rho_button_style("rgb(126,175,194)"));
 
-  this->ui->button_rho_12->setStyleSheet("* { background-color: rgb(25,96,210) }");
+  this->ui->button_rho_12->setStyleSheet(rho_button_style("rgb(25,96,210)"));
+
+  this->ui->button_phi_1->setStyleSheet(phi_button_style());
+  this->ui->button_phi_2->setStyleSheet(phi_button_style());
+  this->ui->button_phi_3->setStyleSheet(phi_button_style());
+  this->ui->button_phi_4->setStyleSheet(phi_button_style());
+  this->ui->button_phi_5->setStyleSheet(phi_button_style());
+  this->ui->button_phi_6->setStyleSheet(phi_button_style());
+  this->ui->button_phi_7->setStyleSheet(phi_button_style());
+  this->ui->button_phi_fit->setStyleSheet(phi_button_style());
 
   this->ui->dial_active_plot->setNotchTarget(3.7);
   this->ui->dial_active_plot->setNotchesVisible(true);

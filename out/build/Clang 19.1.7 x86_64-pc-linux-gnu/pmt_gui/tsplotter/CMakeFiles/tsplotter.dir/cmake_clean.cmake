@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/tsplotter.dir/link.d"
+  "CMakeFiles/tsplotter_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/tsplotter_autogen.dir/ParseCache.txt"
+  "tsplotter_autogen"
+  "CMakeFiles/tsplotter.dir/addressdialog.cpp.o"
+  "CMakeFiles/tsplotter.dir/addressdialog.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/gotosampledialog.cpp.o"
+  "CMakeFiles/tsplotter.dir/gotosampledialog.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/main.cpp.o"
+  "CMakeFiles/tsplotter.dir/main.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/manualscalingdialog.cpp.o"
+  "CMakeFiles/tsplotter.dir/manualscalingdialog.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/plot.cpp.o"
+  "CMakeFiles/tsplotter.dir/plot.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/qextnetworkaccessmanager.cpp.o"
+  "CMakeFiles/tsplotter.dir/qextnetworkaccessmanager.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/qthelper.cpp.o"
+  "CMakeFiles/tsplotter.dir/qthelper.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/qwebdav.cpp.o"
+  "CMakeFiles/tsplotter.dir/qwebdav.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/qwebdavdialog.cpp.o"
+  "CMakeFiles/tsplotter.dir/qwebdavdialog.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/tsnetworkhandler.cpp.o"
+  "CMakeFiles/tsplotter.dir/tsnetworkhandler.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/tsplotter.cpp.o"
+  "CMakeFiles/tsplotter.dir/tsplotter.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/tsplotter_autogen/EWIEGA46WW/qrc_resources.cpp.o"
+  "CMakeFiles/tsplotter.dir/tsplotter_autogen/EWIEGA46WW/qrc_resources.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/tsplotter_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/tsplotter.dir/tsplotter_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/tsplotter.dir/xmlreader.cpp.o"
+  "CMakeFiles/tsplotter.dir/xmlreader.cpp.o.d"
+  "tsplotter"
+  "tsplotter.pdb"
+  "tsplotter_autogen/EWIEGA46WW/qrc_resources.cpp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/tsplotter.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,110 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"libxml/calibration/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "calibration_autogen_timestamp_deps::@a0758e5992c0ef5137ee",
+	"isGeneratorProvided" : true,
+	"name" : "calibration_autogen_timestamp_deps",
+	"orderDependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "libxml/calibration",
+		"source" : "libxml/calibration"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

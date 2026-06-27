@@ -1,5 +1,3 @@
-
-
 project(spectra_plotter VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,9 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 #top tree dir is CMAKE_SOURCE_DIR
 include_directories(
@@ -66,7 +62,6 @@ set(HEADERS_INSTALL
     spectra_plotter.h
 )
 
-
 add_library(${PROJECT_NAME}   ${SOURCES} )
 
 target_link_libraries(${PROJECT_NAME}
@@ -93,8 +88,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -105,10 +98,8 @@ PRIVATE mt_site
 PRIVATE qcustomplot
 )
 
-
 target_compile_definitions(${PROJECT_NAME} PRIVATE SPECTRA_PLOTTER_LIBRARY)
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
-

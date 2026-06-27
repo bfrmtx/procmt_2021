@@ -95,8 +95,16 @@ QDomElement atsWriterConfiguration(QDomDocument &document) {
   element = childElement(element, QStringLiteral("output"));
   element = childElement(element, QStringLiteral("ProcessingTree"));
   element = childElement(element, QStringLiteral("output"));
-  element = childElement(element, QStringLiteral("ATSWriter"));
-  return childElement(element, QStringLiteral("configuration"));
+  if (element.isNull()) {
+    return QDomElement();
+  }
+
+  const QDomNodeList atsWriterNodes = element.elementsByTagName(QStringLiteral("ATSWriter"));
+  if (atsWriterNodes.isEmpty()) {
+    return QDomElement();
+  }
+
+  return childElement(atsWriterNodes.at(0).toElement(), QStringLiteral("configuration"));
 }
 
 QHash<QString, QDomElement> channelsById(QDomElement configuration) {

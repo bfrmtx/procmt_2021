@@ -1,12 +1,9 @@
-
-
 project(logviewer VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
@@ -38,5 +35,3 @@ PRIVATE qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
-
-

@@ -4,6 +4,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(procmt_2021 VERSION 3.1 LANGUAGES CXX)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "/usr/local/procmt" CACHE PATH "Install path prefix" FORCE)
+endif()
+
 ### Require out-of-source builds
 # I want this setting because my source directory is a rsync drive, and I I don't want
 # the builds to be synced all day long. I want to keep the source directory clean.
@@ -17,71 +21,78 @@ message("compiler used / detected " ${CMAKE_CXX_COMPILER_ID})
 # uncomment the line below to use OpenGL
 set(QCUSTOMPLOT_USE_OPENGL TRUE)
 
-IF (NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
+if(NOT DEFINED QCUSTOMPLOT_USE_OPENGL)
     message ("BUILD WITHOUT OpenGL               <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-ELSE()
+else()
     message ("BUILD WITH OpenGL                  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     # make it availabe in header and sources
     # this also switches OpenGL on in general
     #ifdef QCUSTOMPLOT_USE_OPENGL checks the line below
     add_definitions(-DQCUSTOMPLOT_USE_OPENGL)
-ENDIF()
+endif()
 
-IF (NOT DEFINED USE_SPECTRAL_PLOTTER_PRO)
+if(NOT DEFINED USE_SPECTRAL_PLOTTER_PRO)
     message ("BUILD WITHOUT SPECTRAL_PLOTTER_PRO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-ELSE()
+else()
     message ("BUILD WITH SPECTRAL_PLOTTER_PRO    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     # make it availabe in header and sources
     #ifdef USE_SPECTRAL_PLOTTER_PRO
     add_definitions(-DUSE_SPECTRAL_PLOTTER_PRO)
 
-ENDIF()
+endif()
 # test packages first
 # Qt6
 find_package(Qt6
     REQUIRED COMPONENTS Concurrent Core Gui Widgets Sql Network Xml
     OPTIONAL_COMPONENTS PrintSupport
 )
-if (NOT Qt6_FOUND) 
+if (NOT Qt6_FOUND)
     message(FATAL_ERROR "Package Qt6 required, but not found!")
 endif()
 
+# Use CMake's platform-aware thread abstraction instead of raw -pthread flags.
+find_package(Threads REQUIRED)
+link_libraries(Threads::Threads)
 
 #
-# set CMAKE_BUILD_TYPE RELEASE for CLANG
-IF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32 )
-# using regular Clang or AppleClang
-    message ("UNIX LINUX Apple Clang build")
+# Compiler / build-type flags for non-Windows toolchains (Linux + macOS).
+# Matches Clang, AppleClang (both report "...Clang") and GNU (g++).
+if(NOT WIN32 AND (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU"))
+    message ("UNIX / Linux / macOS build (${CMAKE_CXX_COMPILER_ID})")
     #find_package(Boost REQUIRED)
-    # on Linux and MacOS we can build shared libs for all not explicitly marked as STATIC
+    # on Linux and macOS we can build shared libs for all not explicitly marked as STATIC
     option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
-    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    if(CMAKE_BUILD_TYPE MATCHES DEBUG)
         message ("debug build ---------------------")
-        #add_compile_options(-pthread -ggdb3 -O0 -Wsign-compare -Wall -Wextra -Werror -pedantic)
-        add_compile_options(-glldb -fstandalone-debug -O0 -pthread -Wno-unused-parameter -Wno-sign-compare)
+        if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            # -glldb / -fstandalone-debug are Clang/LLDB specific
+            add_compile_options(-glldb -fstandalone-debug -O0 -Wno-unused-parameter -Wno-sign-compare)
+        else()
+            # GNU g++
+            add_compile_options(-ggdb3 -O0 -Wno-unused-parameter -Wno-sign-compare)
+        endif()
         set(CMAKE_VERBOSE_MAKEFILE ON)
-    ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+    endif()
+    if(CMAKE_BUILD_TYPE MATCHES RELEASE)
         message ("release build ---------------------")
-        add_compile_options(-pthread -march=native -O2 -DNDEBUG -Wno-unused-parameter -Wno-sign-compare)
-    ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
-    message ("starting UNIX LINUX Apple Clang build")
-ENDIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT WIN32)
+        add_compile_options(-march=native -O2 -DNDEBUG -Wno-unused-parameter -Wno-sign-compare)
+    endif()
+    message ("starting UNIX / Linux / macOS build")
+endif()
 #
 #
 # set CMAKE_BUILD_TYPE RELEASE for g++ on mingw WINDOWS
-IF(WIN32)
+if(WIN32)
     message ( "WINDOWS build, msvc or msys2" )
     # check that a compiler is found
     if(NOT CMAKE_CXX_COMPILER)
         message(FATAL_ERROR "No C++ compiler found. Please set CMAKE_CXX_COMPILER to your compiler executable.")
     endif()
-    # ensure that boost is found under C:\boost\boost
-    # need to find required package boost
-    # include <boost/math/distributions/students_t.hpp>
-    # on windows, boost is not found by default, it should be installed in C:\boost
+    # This tree only uses Boost headers, so avoid find_package(Boost) because
+    # CMake CMP0167 removed the legacy FindBoost module.
+    # Keep Boost_ROOT as an optional hint for Windows include paths.
     set(Boost_ROOT "C:/devel/boost")
-    find_package(Boost REQUIRED)
+    set(Boost_INCLUDE_DIRS "${Boost_ROOT}")
     if(MSVC)
         # _USE_MATH_DEFINES is only needed for MSVC to expose math constants in <cmath>
         message("Detected MSVC compiler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -94,30 +105,28 @@ IF(WIN32)
         add_compile_options(/arch:AVX2)
         # Force static build for all libraries
         set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static libraries" FORCE)
-        # Windows does not natively support pthreads; use -pthread only on POSIX systems.
-        # For MSVC, threading is handled by the runtime, so you do not need to add -pthread.
-        # If you need POSIX threads on Windows, you would need to use a library like pthreads-w32, but that's uncommon.
-        # Typically, do not add -pthread for MSVC.
+        # Thread support is provided through CMake's Threads::Threads target.
+        # MSVC uses native Win32 threading underneath std::thread.
         add_compile_options(/EHsc)
     elseif(MINGW)
         message("Detected MinGW / clang compiler")
         # Add MinGW/MSYS2 specific options here if needed
         # we need static libs for the clang++ compiler !! shared libs are not working
         add_compile_options(-DBUILD_SHARED_LIBS=OFF -static)
-        IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        if(CMAKE_BUILD_TYPE MATCHES DEBUG)
             message ("debug build ---------------------")
-            add_compile_options(-DDEBUG -g -pthread -Wno-unused-parameter -Wno-sign-compare)
+            add_compile_options(-DDEBUG -g -Wno-unused-parameter -Wno-sign-compare)
             set(CMAKE_VERBOSE_MAKEFILE ON)
-        ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-        IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+        endif()
+        if(CMAKE_BUILD_TYPE MATCHES RELEASE)
             message ("release build ---------------------")
-            add_compile_options(-DNDEBUG -O2 -pthread -march=x86-64-v3 -Wno-unused-parameter -Wno-sign-compare)
-        ENDIF(CMAKE_BUILD_TYPE MATCHES RELEASE)
+            add_compile_options(-DNDEBUG -O2 -march=x86-64-v3 -Wno-unused-parameter -Wno-sign-compare)
+        endif()
     else()
         message("Unknown Windows compiler")
     endif()
     message ( "starting WINDOWS build <<<<<<<<<<<<<<<<<<<<<<" )
-ENDIF(WIN32)
+endif()
 #
 message ( "adding subdirs" )
 # the info.sql3 and others will be copied to your build dir - the software will look for SQLite databases
@@ -198,20 +207,16 @@ add_subdirectory(pmt_gui/ats_multi_edit)
 add_subdirectory(pmt_gui/tsplotter)
 add_subdirectory(pmt_gui/ediplotter)
 add_subdirectory(libqt/cal2sql)
-IF(USE_SPECTRAL_PLOTTER_PRO)
+if(USE_SPECTRAL_PLOTTER_PRO)
     message ( "ADDING spectra plotter pro" )
     add_subdirectory(pmt_gui/spectra_plotter_pro)
-ELSE()
+else()
     message ( "ADDING spectra plotter standard" )
     add_subdirectory(pmt_gui/spectra_plotter)
-ENDIF()
+endif()
 add_subdirectory(pmt_gui/procmt_mini)
 add_subdirectory(pmt_adulib/calib_lab)
-#IF (NOT WIN32)
-#message ( "skipping CoilFieldTestTool for Windows" )
 add_subdirectory(CoilFieldTestTool)
 add_subdirectory(InSituCoilCal)
 add_subdirectory(unsplit)
-
-
-
+add_subdirectory(tsmp)

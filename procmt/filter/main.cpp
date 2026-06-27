@@ -42,7 +42,9 @@ int main(int argc, char *argv[]) {
     }
     w.set_xmlfiles(qxml);
 
-    w.set_decimation_filter(cmdline->svalue("filter"));
+    if (cmdline->contains("filter") && (cmdline->svalue("filter") != "0x")) {
+      w.set_decimation_filter(cmdline->svalue("filter"));
+    }
     w.show();
 
   } else if (a.arguments().size() > 2) {

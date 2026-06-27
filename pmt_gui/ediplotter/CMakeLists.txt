@@ -1,12 +1,9 @@
-
-
 project(ediplotter_new VERSION 0.8 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
@@ -67,17 +64,14 @@ resources.qrc
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 if(WIN32)
 	target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
 endif()
 
 if(APPLE)
-	target_sources(${PROJECT_NAME} PRIVATE icons/ediplotter.icns)
-	set_source_files_properties(icons/ediplotter.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-	set_target_properties(${PROJECT_NAME} PROPERTIES
-		MACOSX_BUNDLE_ICON_FILE ediplotter.icns
-	)
+	configure_macos_app_icon(${PROJECT_NAME} icons/ediplotter.png)
 endif()
 
 install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
@@ -107,8 +101,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -129,5 +121,3 @@ PRIVATE qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
 # for qcustomplot
 include(${CMAKE_SOURCE_DIR}/cmake/qcustomplot_use.cmake)
-
-

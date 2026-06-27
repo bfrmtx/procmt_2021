@@ -56,6 +56,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QRadioButton" name="rb_16x_2s">
+              <property name="text">
+               <string>16x 2s (== 4x x 4x)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QRadioButton" name="rb_2x">
               <property name="text">
                <string>&amp;2 x</string>

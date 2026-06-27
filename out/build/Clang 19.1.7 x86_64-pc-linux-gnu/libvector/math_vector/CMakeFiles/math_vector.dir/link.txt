@@ -1,0 +1,1 @@
+/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/math_vector.dir/link.d -Wl,-soname,libmath_vector.so -o libmath_vector.so CMakeFiles/math_vector.dir/math_vector_autogen/mocs_compilation.cpp.o CMakeFiles/math_vector.dir/math_vector.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Core.so.6.11.1

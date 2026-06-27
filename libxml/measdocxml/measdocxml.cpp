@@ -1488,4 +1488,34 @@ void measdocxml::slot_update_atswriter(const QMap<QString, QVariant> &atswriter_
   }
   if (!exchanged)
     this->set_channel_section("ATSWriter", atswriter_section, channel_id, true);
+
+  // Keep calibration metadata in sync when sensor serial is changed in ATS/ATSWriter.
+  if (atsw.contains("sensor_sernum")) {
+    QString topnode = "calibration_sensors";
+    if (this->goto_sub_section(topnode, "channel", 1) == 1) {
+      bool ok = false;
+      int serial = atsw.value("sensor_sernum").toInt(&ok);
+      if (ok) {
+        tinyxml2::XMLElement *xmlelementtop = this->subsection;
+        while (xmlelementtop) {
+          int id = -1;
+          xmlelementtop->QueryIntAttribute("id", &id);
+          if (id == channel_id) {
+            tinyxml2::XMLElement *xmlelement = xmlelementtop->FirstChildElement("calibration");
+            while (xmlelement) {
+              tinyxml2::XMLElement *xmlelement_ci = xmlelement->FirstChildElement("calibrated_item");
+              if (xmlelement_ci) {
+                QMap<QString, QVariant> calitem;
+                calitem.insert("ci_serial_number", serial);
+                this->set_siblings_data(xmlelement_ci->FirstChildElement(), calitem);
+              }
+              xmlelement = xmlelement->NextSiblingElement("calibration");
+            }
+            break;
+          }
+          xmlelementtop = xmlelementtop->NextSiblingElement();
+        }
+      }
+    }
+  }
 }

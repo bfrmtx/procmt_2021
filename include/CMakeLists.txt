@@ -1,4 +1,3 @@
-
 project(mt_base VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -9,4 +8,4 @@ install(FILES ${HEADERS_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 set(DB_INSTALL info.sql3  master_calibration.sql3  procmt.sql3 )
 install(FILES ${DB_INSTALL} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
-file(COPY 5chanEHnoise DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+install(DIRECTORY 5chanEHnoise DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

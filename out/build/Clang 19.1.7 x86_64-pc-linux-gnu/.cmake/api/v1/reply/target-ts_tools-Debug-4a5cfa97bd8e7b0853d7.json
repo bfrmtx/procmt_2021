@@ -1,0 +1,1296 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "pmt_adulib/ts_tools/ts_tools"
+		}
+	],
+	"backtrace" : 6,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"_qt_internal_create_executable",
+			"qt6_add_executable",
+			"qt_add_executable",
+			"include",
+			"install",
+			"target_link_libraries",
+			"set_target_properties",
+			"find_package",
+			"set_property",
+			"__find_dependency_common",
+			"find_dependency",
+			"_qt_internal_find_third_party_dependencies",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"/usr/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
+			"cmake/qt_gui_1.cmake",
+			"pmt_adulib/ts_tools/CMakeLists.txt",
+			"cmake/qt_gui_2.cmake",
+			"/usr/lib/cmake/Qt6Widgets/Qt6WidgetsTargets.cmake",
+			"/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake",
+			"/usr/lib/cmake/Qt6/Qt6Config.cmake",
+			"CMakeLists.txt",
+			"/usr/share/cmake/Modules/FindOpenGL.cmake",
+			"/usr/lib/cmake/Qt6/FindWrapOpenGL.cmake",
+			"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+			"/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake",
+			"/usr/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake",
+			"cmake/rpath.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 58,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 2,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 1033,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 687,
+				"parent" : 4
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 766,
+				"parent" : 5
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 97,
+				"parent" : 0
+			},
+			{
+				"file" : 3,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 17,
+				"parent" : 8
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 60,
+				"parent" : 0
+			},
+			{
+				"file" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 7,
+				"line" : 45,
+				"parent" : 11
+			},
+			{
+				"file" : 6,
+				"parent" : 12
+			},
+			{
+				"command" : 8,
+				"file" : 6,
+				"line" : 263,
+				"parent" : 13
+			},
+			{
+				"file" : 5,
+				"parent" : 14
+			},
+			{
+				"command" : 4,
+				"file" : 5,
+				"line" : 65,
+				"parent" : 15
+			},
+			{
+				"file" : 4,
+				"parent" : 16
+			},
+			{
+				"command" : 7,
+				"file" : 4,
+				"line" : 70,
+				"parent" : 17
+			},
+			{
+				"command" : 8,
+				"file" : 6,
+				"line" : 263,
+				"parent" : 13
+			},
+			{
+				"file" : 13,
+				"parent" : 19
+			},
+			{
+				"command" : 4,
+				"file" : 13,
+				"line" : 50,
+				"parent" : 20
+			},
+			{
+				"file" : 12,
+				"parent" : 21
+			},
+			{
+				"command" : 12,
+				"file" : 12,
+				"line" : 37,
+				"parent" : 22
+			},
+			{
+				"command" : 11,
+				"file" : 11,
+				"line" : 36,
+				"parent" : 23
+			},
+			{
+				"command" : 10,
+				"file" : 10,
+				"line" : 125,
+				"parent" : 24
+			},
+			{
+				"command" : 8,
+				"file" : 10,
+				"line" : 93,
+				"parent" : 25
+			},
+			{
+				"file" : 9,
+				"parent" : 26
+			},
+			{
+				"command" : 8,
+				"file" : 9,
+				"line" : 13,
+				"parent" : 27
+			},
+			{
+				"file" : 8,
+				"parent" : 28
+			},
+			{
+				"command" : 9,
+				"file" : 8,
+				"line" : 837,
+				"parent" : 29
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 835,
+				"parent" : 29
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 688,
+				"parent" : 4
+			},
+			{
+				"command" : 13,
+				"file" : 7,
+				"line" : 134,
+				"parent" : 11
+			},
+			{
+				"command" : 13,
+				"file" : 7,
+				"line" : 136,
+				"parent" : 11
+			},
+			{
+				"command" : 13,
+				"file" : 7,
+				"line" : 135,
+				"parent" : 11
+			},
+			{
+				"command" : 13,
+				"file" : 7,
+				"line" : 31,
+				"parent" : 11
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"file" : 14,
+				"parent" : 37
+			},
+			{
+				"command" : 14,
+				"file" : 14,
+				"line" : 36,
+				"parent" : 38
+			},
+			{
+				"command" : 14,
+				"file" : 2,
+				"line" : 15,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"compileDependencies" : 
+	[
+		{
+			"backtrace" : 6,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 32,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Network::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "adu_json::@076b6d3d16537f0e3210"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "phoenix_json::@0c8213a491a9f5f69b4a"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "lineedit_file::@d3427fbf143fd2ba5ed0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "group_atsfiles::@ee5416a0c866726db4fb"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "qstring_utilities::@d066acf78071d0acaa28"
+		}
+	],
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20"
+				},
+				{
+					"backtrace" : 32,
+					"fragment" : "-fno-direct-access-external-data"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 33,
+					"define" : "PMTSQLPATH=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 34,
+					"define" : "PMTSQLPATH_APPLE=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 35,
+					"define" : "PMTSQLPATH_UNIX=\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu\""
+				},
+				{
+					"backtrace" : 36,
+					"define" : "QCUSTOMPLOT_USE_OPENGL"
+				},
+				{
+					"backtrace" : 32,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_SQL_LIB"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "QT_WIDGETS_LIB"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools"
+				},
+				{
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/pmt_adulib/ts_tools"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools/ts_tools_autogen/include"
+				},
+				{
+					"backtrace" : 39,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/include"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/include"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/fftreal"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/base/prc_com"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/prc_com_table"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsfile"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsheader"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atmfile"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/eqdatetime"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/gui_items"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/lineedit_file"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libqt/qstring_utilities"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/calibration"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/measdocxml"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/tinyxml2"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/tinyxmlwriter"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/sql_base_tools"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/base/msg_logger"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libvector/fftreal_vector"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/firfilter"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/ats_ascii_file"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/acsp_prz"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/atsfile_collector"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libxml/db_sensor_query"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libvector/math_vector"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/edi_file"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mt_data"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mc_data"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/procmt/mt_site"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/adulib/aduxml"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/adulib/phoenix_json"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/adulib/adu_json"
+				},
+				{
+					"backtrace" : 40,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/pmt_adulib/group_atsfiles"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/libgeo/geocoordinates"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/pmt_adulib/phoenix_json"
+				},
+				{
+					"backtrace" : 32,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtCore"
+				},
+				{
+					"backtrace" : 32,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6"
+				},
+				{
+					"backtrace" : 32,
+					"isSystem" : true,
+					"path" : "/usr/lib/qt6/mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 10,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtSql"
+				},
+				{
+					"backtrace" : 10,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtWidgets"
+				},
+				{
+					"backtrace" : 10,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtGui"
+				},
+				{
+					"backtrace" : 10,
+					"isSystem" : true,
+					"path" : "/usr/include/qt6/QtNetwork"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					32,
+					32
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 10,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "qstring_utilities::@d066acf78071d0acaa28"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "lineedit_file::@d3427fbf143fd2ba5ed0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "adu_json::@076b6d3d16537f0e3210"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "group_atsfiles::@ee5416a0c866726db4fb"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "phoenix_json::@0c8213a491a9f5f69b4a"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "ts_tools_autogen::@368bf884ed60448efbd7"
+		},
+		{
+			"id" : "ts_tools_autogen_timestamp_deps::@368bf884ed60448efbd7"
+		}
+	],
+	"id" : "ts_tools::@368bf884ed60448efbd7",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 9,
+				"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu/bin"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/home/bfr/devel/github_procmt_2021/procmt_2021/out/install/Clang 19.1.7 x86_64-pc-linux-gnu"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/prc_com_table:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/gui_items:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mc_data:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/adulib/aduxml:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/adulib/adu_json:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/phoenix_json:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mt_site:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/group_atsfiles:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/qstring_utilities:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/acsp_prz:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfile_collector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/ats_ascii_file:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsfile:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atmfile:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/fftreal_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/firfilter:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/mt_data:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/procmt/atsheader:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/base/prc_com:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/base/msg_logger:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/sql_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libqt/eqdatetime:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/calibration:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/math_vector:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/measdocxml:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/tinyxml2:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/tinyxmlwriter:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/db_sensor_query:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libxml/sql_base_tools:/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libgeo/geocoordinates:\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libqt/prc_com_table/libprc_com_table.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libqt/gui_items/libgui_items.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/mc_data/libmc_data.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../adulib/aduxml/libaduxml.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../adulib/adu_json/libadu_json.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../phoenix_json/libphoenix_json.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/mt_site/libmt_site.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libqt/lineedit_file/liblineedit_file.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../group_atsfiles/libgroup_atsfiles.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libqt/qstring_utilities/libqstring_utilities.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/usr/lib/libQt6Network.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/acsp_prz/libacsp_prz.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/atsfile_collector/libatsfile_collector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/ats_ascii_file/libats_ascii_file.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/atsfile/libatsfile.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/atmfile/libatmfile.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libvector/fftreal_vector/libfftreal_vector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../firfilter/libfirfilter.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/mt_data/libmt_data.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/usr/lib/libQt6Widgets.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 18,
+				"fragment" : "/usr/lib/libQt6Gui.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/usr/lib/libGLX.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "/usr/lib/libOpenGL.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../procmt/atsheader/libatsheader.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../base/prc_com/libprc_com.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../base/msg_logger/libmsg_logger.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libqt/eqdatetime/libeqdatetime.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/calibration/libcalibration.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libvector/math_vector/libmath_vector.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/measdocxml/libmeasdocxml.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/tinyxml2/libtinyxml2.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/tinyxmlwriter/libtinyxmlwriter.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/db_sensor_query/libdb_sensor_query.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libxml/sql_base_tools/libsql_base_tools.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/usr/lib/libQt6Sql.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "../../libgeo/geocoordinates/libgeocoordinates.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 32,
+				"fragment" : "/usr/lib/libQt6Core.so.6.11.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-rpath-link,\"/home/bfr/devel/github_procmt_2021/procmt_2021/out/build/Clang 19.1.7 x86_64-pc-linux-gnu/libvector/sql_vector\"",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 6,
+			"id" : "Threads::Threads::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 32,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Core::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Sql::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Widgets::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "Qt6::Network::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "prc_com::@7cf6a24d270cf9473c63"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "prc_com_table::@f3f2e4fb34c7b45f2bfc"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile::@a7e9c61c944b5eb54b36"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsheader::@0ff521fa8203822cc036"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atmfile::@ad81945420c0655621c0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "eqdatetime::@f2f8df46a79dd3fb6381"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "calibration::@a0758e5992c0ef5137ee"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "measdocxml::@d2e409a6149ec60f58c7"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxml2::@fd33d5252182c82c1cc6"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "tinyxmlwriter::@3a9619530055366b0de5"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "db_sensor_query::@33caec7a70c99f5ff175"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "sql_base_tools::@a3099025b9c7cbe96e3d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "msg_logger::@29ac4ba5b78067816cc8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "fftreal_vector::@b873eb8ff92ada1ae863"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "firfilter::@221f5d3a9c0181ba2c8e"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "ats_ascii_file::@47245ad97120ec138aa8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "acsp_prz::@bfc534485892fd43925d"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "atsfile_collector::@7f93482d4d58cc537882"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "math_vector::@ef508786f25b8806a445"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_data::@9f542b745f3054f61bd3"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "geocoordinates::@e3b1fe7cb060fdbe02a8"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "gui_items::@e774ec7ff1314ff14f13"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mc_data::@f76d4a1a163c29511f59"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "aduxml::@06217348c1fc31d41571"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "adu_json::@076b6d3d16537f0e3210"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "phoenix_json::@0c8213a491a9f5f69b4a"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "mt_site::@8c6048c76be09ebc982f"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "lineedit_file::@d3427fbf143fd2ba5ed0"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "group_atsfiles::@ee5416a0c866726db4fb"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "qstring_utilities::@d066acf78071d0acaa28"
+		}
+	],
+	"name" : "ts_tools",
+	"nameOnDisk" : "ts_tools",
+	"orderDependencies" : 
+	[
+		{
+			"id" : "Qt6::moc::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Qt6::uic::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "ts_tools_autogen::@368bf884ed60448efbd7"
+		},
+		{
+			"id" : "ts_tools_autogen_timestamp_deps::@368bf884ed60448efbd7"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "pmt_adulib/ts_tools",
+		"source" : "pmt_adulib/ts_tools"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files\\Generated",
+			"sourceIndexes" : 
+			[
+				0,
+				5,
+				6
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				3
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				4
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				7
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools/ts_tools_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 6,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_adulib/ts_tools/main.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 6,
+			"compileGroupIndex" : 0,
+			"path" : "pmt_adulib/ts_tools/mainwindow.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 6,
+			"path" : "pmt_adulib/ts_tools/mainwindow.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 6,
+			"path" : "pmt_adulib/ts_tools/mainwindow.ui",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools/ts_tools_autogen/include/ui_mainwindow.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools/ts_tools_autogen/timestamp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/Clang 19.1.7 x86_64-pc-linux-gnu/pmt_adulib/ts_tools/ts_tools_autogen/timestamp.rule",
+			"sourceGroupIndex" : 4
+		}
+	],
+	"type" : "EXECUTABLE"
+}

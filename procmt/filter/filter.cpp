@@ -146,7 +146,7 @@ void filter::set_xmlfiles(const QList<QFileInfo> &qxml) {
 }
 
 void filter::set_decimation_filter(const QString &str_x) {
-  if (!str_x.size())
+  if (!str_x.size() || (str_x == "0x"))
     return;
   this->uncheck_btns();
   std::cout << "filter decimation choosen " << str_x.toStdString() << std::endl;
@@ -155,6 +155,8 @@ void filter::set_decimation_filter(const QString &str_x) {
     this->ui->rb_4x->setChecked(true);
   else if (str_x == "16x")
     this->ui->rb_16x->setChecked(true);
+  else if (str_x == "16x 2s" || str_x == "16x2s")
+    this->ui->rb_16x_2s->setChecked(true);
   else if (str_x == "2x")
     this->ui->rb_2x->setChecked(true);
   else if (str_x == "8x")
@@ -217,6 +219,7 @@ void filter::set_notch_filter(const QString &str_x) {
 void filter::uncheck_btns() {
   this->ui->rb_4x->setChecked(false);
   this->ui->rb_16x->setChecked(false);
+  this->ui->rb_16x_2s->setChecked(false);
   this->ui->rb_2x->setChecked(false);
   this->ui->rb_8x->setChecked(false);
   this->ui->rb_10x->setChecked(false);
@@ -334,6 +337,13 @@ void filter::on_runbuton_clicked() {
     cmdline->insert("ats", "ts");               // wants ats timeseries
     cmdline->insert("task", "filter");          // want to filter
     cmdline->insert("filter_name", "mtx16");    // with this filter
+    cmdline->insert("upper_freq", double(0.0)); // filter tuning
+    cmdline->insert("lower_freq", double(0.0)); // filter tuning
+    cmdline->insert("ats_scale", "none");       // filter does not want to scale
+  } else if (this->ui->rb_16x_2s->isChecked()) {
+    cmdline->insert("ats", "ts");               // wants ats timeseries
+    cmdline->insert("task", "filter");          // want to filter
+    cmdline->insert("filter_name", "mtx16_2s"); // with this filter
     cmdline->insert("upper_freq", double(0.0)); // filter tuning
     cmdline->insert("lower_freq", double(0.0)); // filter tuning
     cmdline->insert("ats_scale", "none");       // filter does not want to scale
@@ -956,6 +966,8 @@ void filter::slot_single_sub_fir_filter() {
     if (this->ui->rb_4x->isChecked())
       fct = 4.0;
     if (this->ui->rb_16x->isChecked())
+      fct = 16.0;
+    if (this->ui->rb_16x_2s->isChecked())
       fct = 16.0;
     if (this->ui->rb_2x->isChecked())
       fct = 2.0;

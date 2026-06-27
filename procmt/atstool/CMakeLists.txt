@@ -1,5 +1,3 @@
-
-
 project(atstool VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6
     REQUIRED COMPONENTS Core Sql Widgets
@@ -75,8 +72,6 @@ PRIVATE firfilter
 PRIVATE ats_ascii_file
 PRIVATE acsp_prz
 PRIVATE atsfile_collector
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE mt_data
 PRIVATE geocoordinates
@@ -90,6 +85,3 @@ PRIVATE qstring_utilities
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-
-
-

@@ -7,6 +7,7 @@ set(CMAKE_AUTORCC ON)
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
 
 qt_standard_project_setup()
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 qt_add_executable(${PROJECT_NAME}
     main.cpp
@@ -23,13 +24,11 @@ if(WIN32)
 endif()
 
 if(APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE icons/unsplit.icns)
-    set_source_files_properties(icons/unsplit.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    configure_macos_app_icon(${PROJECT_NAME} icons/unsplit.png)
     set_target_properties(${PROJECT_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
         MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-        MACOSX_BUNDLE_ICON_FILE unsplit.icns
     )
 endif()
 
@@ -45,7 +44,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 include(GNUInstallDirs)
-
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)

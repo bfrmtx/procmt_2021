@@ -1390,6 +1390,12 @@ QDataStream::Status atsfile::skip_samples_from_filter() {
   if (tmp_skip_first_samples)
     this->set_key_size_t("add_secs_to_start_time", 1 + this->sztvalue("add_secs_to_start_time"));
 
+  // mtx16_2s behaves like mtx16 but shifts one additional second at start.
+  if (this->firfil->svalue("filter_name") == "mtx16_2s") {
+    tmp_skip_first_samples += size_t(this->dvalue("sample_freq"));
+    this->set_key_size_t("add_secs_to_start_time", 1 + this->sztvalue("add_secs_to_start_time"));
+  }
+
   // store for later usage
   // this->skip_first_samples_read += tmp_skip_first_samples;
 

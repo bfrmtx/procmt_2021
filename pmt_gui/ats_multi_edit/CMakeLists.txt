@@ -1,5 +1,3 @@
-
-
 project(ats_multi_edit VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,9 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6 REQUIRED COMPONENTS Core Sql Gui Widgets Network)
 
@@ -49,20 +45,16 @@ set(SOURCES
     resources.qrc
 )
 
-
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_1.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/macos_app_icon.cmake)
 
 if(WIN32)
     target_sources(${PROJECT_NAME} PRIVATE app_icon.rc)
 endif()
 
 if(APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE icons/ats_multi_edit.icns)
-    set_source_files_properties(icons/ats_multi_edit.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        MACOSX_BUNDLE_ICON_FILE ats_multi_edit.icns
-    )
+    configure_macos_app_icon(${PROJECT_NAME} icons/ats_multi_edit.png)
 endif()
 
 install(FILES ${PROJECT_NAME}.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/desktop)
@@ -86,8 +78,6 @@ PRIVATE db_sensor_query
 PRIVATE sql_base_tools
 PRIVATE msg_logger
 PRIVATE ats_ascii_file
-PRIVATE calibration
-PRIVATE db_sensor_query
 PRIVATE math_vector
 PRIVATE geocoordinates
 PRIVATE qstring_utilities
@@ -95,4 +85,3 @@ PRIVATE qstring_utilities
 
 # for executables
 include(${CMAKE_SOURCE_DIR}/cmake/qt_gui_2.cmake)
-

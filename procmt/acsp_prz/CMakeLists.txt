@@ -1,5 +1,3 @@
-
-
 project(acsp_prz LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -7,9 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6 REQUIRED COMPONENTS Core Sql )
 
@@ -43,7 +39,6 @@ set(HEADERS_INSTALL
   acsp_prz.h
 )
 
-
 add_library(${PROJECT_NAME}   ${SOURCES} ${HEADERS_INSTALL} )
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -70,5 +65,3 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ACSP_PRZ_LIBRARY)
 
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
-
-

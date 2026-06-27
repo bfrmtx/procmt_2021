@@ -1,0 +1,1 @@
+/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/tinyxmlwriter.dir/link.d -Wl,-soname,libtinyxmlwriter.so -o libtinyxmlwriter.so CMakeFiles/tinyxmlwriter.dir/tinyxmlwriter_autogen/mocs_compilation.cpp.o CMakeFiles/tinyxmlwriter.dir/tinyxmlwriter.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Core.so.6.11.1

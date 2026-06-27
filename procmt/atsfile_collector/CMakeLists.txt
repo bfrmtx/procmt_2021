@@ -1,5 +1,3 @@
-
-
 project(atsfile_collector VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include(${CMAKE_SOURCE_DIR}/cmake/rpath.cmake)
-
 
 find_package(Qt6 REQUIRED COMPONENTS Core Sql )
 
@@ -30,7 +27,6 @@ ${CMAKE_SOURCE_DIR}/procmt/atsfile
 ${CMAKE_SOURCE_DIR}/firfilter
 ${CMAKE_SOURCE_DIR}/libvector/fftreal_vector
 ${CMAKE_SOURCE_DIR}/procmt/ats_ascii_file
-
 
 )
 
@@ -68,5 +64,3 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ATSFILE_COLLECTOR_LIBRARY)
 
 # for libraries
 include(${CMAKE_SOURCE_DIR}/cmake/lib.cmake)
-
-

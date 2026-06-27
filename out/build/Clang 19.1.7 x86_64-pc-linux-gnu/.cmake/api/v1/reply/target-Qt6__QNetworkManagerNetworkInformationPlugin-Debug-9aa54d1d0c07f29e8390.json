@@ -1,0 +1,115 @@
+{
+	"abstract" : true,
+	"artifacts" : 
+	[
+		{
+			"path" : "/usr/lib/qt6/plugins/networkinformation/libqnetworkmanager.so"
+		}
+	],
+	"backtrace" : 12,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"__qt_internal_include_plugin_packages",
+			"find_package"
+		],
+		"files" : 
+		[
+			"/usr/lib/cmake/Qt6Network/Qt6QNetworkManagerNetworkInformationPluginTargets.cmake",
+			"/usr/lib/cmake/Qt6Network/Qt6QNetworkManagerNetworkInformationPluginConfig.cmake",
+			"/usr/lib/cmake/Qt6/QtPublicPluginHelpers.cmake",
+			"/usr/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake",
+			"/usr/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake",
+			"/usr/lib/cmake/Qt6/Qt6Config.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 6
+			},
+			{
+				"command" : 3,
+				"file" : 6,
+				"line" : 45,
+				"parent" : 0
+			},
+			{
+				"file" : 5,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 5,
+				"line" : 263,
+				"parent" : 2
+			},
+			{
+				"file" : 4,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 4,
+				"line" : 206,
+				"parent" : 4
+			},
+			{
+				"file" : 3,
+				"parent" : 5
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 13,
+				"parent" : 6
+			},
+			{
+				"command" : 1,
+				"file" : 2,
+				"line" : 515,
+				"parent" : 7
+			},
+			{
+				"file" : 1,
+				"parent" : 8
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 56,
+				"parent" : 9
+			},
+			{
+				"file" : 0,
+				"parent" : 10
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 68,
+				"parent" : 11
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"id" : "Qt6::QNetworkManagerNetworkInformationPlugin::@6890427a1f51a3e7e1df",
+	"imported" : true,
+	"local" : true,
+	"name" : "Qt6::QNetworkManagerNetworkInformationPlugin",
+	"nameOnDisk" : "libqnetworkmanager.so",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sources" : [],
+	"type" : "MODULE_LIBRARY"
+}
