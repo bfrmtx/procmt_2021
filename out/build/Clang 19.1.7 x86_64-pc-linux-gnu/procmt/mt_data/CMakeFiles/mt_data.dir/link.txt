@@ -1,1 +1,0 @@
-/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/mt_data.dir/link.d -Wl,-soname,libmt_data.so -o libmt_data.so CMakeFiles/mt_data.dir/mt_data_autogen/mocs_compilation.cpp.o CMakeFiles/mt_data.dir/mt_data.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Core.so.6.11.1

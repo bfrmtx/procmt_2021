@@ -1,1 +1,0 @@
-/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/atmfile.dir/link.d -Wl,-soname,libatmfile.so -o libatmfile.so CMakeFiles/atmfile.dir/atmfile_autogen/mocs_compilation.cpp.o CMakeFiles/atmfile.dir/atmfile.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Core.so.6.11.1

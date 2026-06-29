@@ -1,2 +1,0 @@
-/usr/bin/llvm-ar qc liblineedit_file.a CMakeFiles/lineedit_file.dir/lineedit_file_autogen/mocs_compilation.cpp.o CMakeFiles/lineedit_file.dir/lineedit_file.cpp.o
-/usr/bin/llvm-ranlib liblineedit_file.a

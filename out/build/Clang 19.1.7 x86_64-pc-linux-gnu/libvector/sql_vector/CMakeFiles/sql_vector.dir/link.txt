@@ -1,1 +1,0 @@
-/usr/bin/clang++ -fPIC -g -shared -Xlinker --dependency-file=CMakeFiles/sql_vector.dir/link.d -Wl,-soname,libsql_vector.so -o libsql_vector.so CMakeFiles/sql_vector.dir/sql_vector.cpp.o  -Wl,-rpath,:::::::::::::::::::::::::::::::::::: /usr/lib/libQt6Sql.so.6.11.1 /usr/lib/libQt6Core.so.6.11.1
