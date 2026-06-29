@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/local/procmt/bin/split %F
+Icon=/usr/local/procmt/share/desktop/split.svg
+Name=split
+StartupNotify=true
+Terminal=false
+Type=Application

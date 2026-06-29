@@ -23,3 +23,4 @@ CMakeLists.txt.user
 bfr_only/
 *.txt.user
 .copilot_tmp_build/
+/out/

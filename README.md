@@ -2,21 +2,30 @@
 
 ProcMT stands for **Proc**ess **M**agneto**T**elluric data.
 
+It is your **QC** (quality control) tool for your MT data. <br>
+Your professional SW should give better results. If ProcMT gives no results, it is questionable if your data is good enough for professional processing.
+
 I was not able to make a complete port of the "older" ProcMT version.
-But most - and all important - parts are ported to Qt 6.5.
+But most - and all important - parts are ported to Qt 6.X
 
 May 2023: changes for Qt 6.5
-August 2023: edi files with ZROT and TROT
+
+August 2023: edi files with ZROT and TROT (required by Geotools®)
+
 December 2023: Mac OS port.
 
+June 2026: split and unsplit. 
 
-# Prerequisites
+**The induction arrows seem not to be good.** <br>
 
-* Linux: clang++ / gcc compiler with C++ 17 support 
+
+## Prerequisites
+
+* Linux: clang++ / gcc compiler with C++ 20 support 
 * Apple clang version 12 or above
 * tested with MinGW64 compiler & Ninja make, shipped with Qt 6.5
-* CMake 3.20 or above (Version is upgrading fast - Cmake is tied to compilers and their features)
-* C++ Boost library installed 1.6 or later (*find_package(Boost REQUIRED)*)
+* CMake 3.24 or above (Version is upgrading fast - Cmake is tied to compilers and their features)
+* C++ Boost library installed 1.6 or later 
 * the Boost libraries do not necessarily to be compiled
 * Qt 6.5 or later be installed (on Mac OS: brew install qt)
 
@@ -50,7 +59,23 @@ brew install --cask db-browser-for-sqlite
 
 ## Windows
 
-... to be done ...
+Environment variables: <br>
+
+* BOOST_ROOT = C:/devel/boost (I rename boost_1_81_0 to boost) <br>
+
+Path
+
+* Path = C:\Qt\6.11.1\mscv2022_64\bin (or your Qt version) <br>
+* Path = C:\devel\VulkanSDK\Bin <br>
+* Path = C:\windows\system32\OpenSSH\ - maybe needed
+
+System variables:
+
+* VK_SDK_PATH = C:\devel\VulkanSDK\
+* Vulkan_INCLUDE_DIR = C:\devel\VulkanSDK\Include
+* Vulkan_SDK = C:\devel\VulkanSDK
+
+as you realize, "chaos".
 
 ## START
 
@@ -84,15 +109,25 @@ otherwise use your file manager!
 
 In case you want to save time, use this:
 
-```bash
+```zsh
 cd $HOME
 mkdir -p $HOME/build
-mkdpir -p $HOME/devel/github_procmt_2021
+mkdir -p $HOME/devel/github_procmt_2021
 cd $HOME/devel/github_procmt_2021
 git clone https://github.com/bfrmtx/procmt_2021.git
 cd procmt_2021
-zsh clang_build_release.sh
+zsh cpp_build_release.zsh
 ```
+
+On Windows, after installing Qt and MSCV 2022:
+
+You can use my *.bat files, located in windows_bat directory. <br>
+You need to edit Path, username, and maybe the Qt version. <br>
+Then you can use the *.bat files to build the project. <br>
+I open "Windows PowerShell for VS 2022" or "Developer Command Prompt for VS 2022" and run the *.bat files from there. When the Terminal opens, you get a message: <br>
+`** Visual Studio 2022 Developer Command Prompt v17.7.4 **` <br>
+(or similar, depending on your version) <br>
+Then you can run the *.bat files. <br>
 
 ## Rebuild
 
