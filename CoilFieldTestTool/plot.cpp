@@ -344,7 +344,6 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
   QVector<double> qvecMag;
   QVector<double> qvecCoh;
   QVector<double> qvecNoise;
-  QVector<double> qvecError;
 
   QVector<double> qvecMagLimLow;
   QVector<double> qvecMagLimUp;
@@ -401,7 +400,6 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
     qvecMag.clear();
     qvecCoh.clear();
     qvecNoise.clear();
-    qvecError.clear();
 
     dLastSampeFreq = 0.0;
 
@@ -428,9 +426,6 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
 
           // noise
           qvecNoise.push_back(qvecTFData[uiSetID][CHCounter][4][Counter]);
-
-          // error
-          qvecError.push_back(qvecTFData[uiSetID][CHCounter][5][Counter]);
 
           // limit values (used from channel 0)
           if (CHCounter == 0) {
@@ -475,17 +470,6 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
 
       pclMagPlot->graph(uiGraphCount)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, pclPen->color(), 10.0));
 
-      // add error bars:
-      if (qvecErrorBars.size() < (CHCounter + 1)) {
-        qvecErrorBars.push_back(new QCPErrorBars(pclMagPlot->xAxis, pclMagPlot->yAxis));
-      }
-      qvecErrorBars[CHCounter]->removeFromLegend();
-      qvecErrorBars[CHCounter]->setAntialiased(false);
-      qvecErrorBars[CHCounter]->setDataPlottable(pclMagPlot->graph(uiGraphCount));
-      qvecErrorBars[CHCounter]->setPen(*pclPen);
-      qvecErrorBars[CHCounter]->setData(qvecError);
-      qvecErrorBars[CHCounter]->setVisible(false);
-
       // QCPAxisTickerLog shall be used for y-axis, 2025
       pclMagPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
       pclMagPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
@@ -501,7 +485,7 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
 
       pclMagPlot->update();
       pclMagPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
-      pclMagPlot->rescaleAxes();
+      pclMagPlot->rescaleAxes(true);
 
       pclMagPlot->legend->setVisible(true);
       pclMagPlot->legend->setFont(QFont("Helvetica", 9));
@@ -732,7 +716,7 @@ bool Plot::showData(QVector<QVector<QVector<QString>>> &qvecTFHeader, QVector<QV
       */
   }
 
-  pclMagPlot->rescaleAxes();
+  pclMagPlot->rescaleAxes(true);
   pclNoisePlot->rescaleAxes();
 
   pclCalChopperOnAmplPlot->rescaleAxes();
@@ -895,7 +879,6 @@ void Plot::on_pbShowDatapoints_clicked(int iID) {
   if (qvechowPointsButtons.at(iID)->isChecked() == true) {
     if (iID < ui->plotMag->graphCount()) {
       ui->plotMag->graph(iID)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, qvecColours.at(iID), 10.0));
-      qvecErrorBars[iID]->setVisible(true);
     }
     if (iID < ui->plotCoh->graphCount()) {
       ui->plotCoh->graph(iID)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, qvecColours.at(iID), 10.0));
@@ -919,7 +902,6 @@ void Plot::on_pbShowDatapoints_clicked(int iID) {
   } else {
     if (iID < ui->plotMag->graphCount()) {
       ui->plotMag->graph(iID)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssNone, qvecColours.at(iID), 10.0));
-      qvecErrorBars[iID]->setVisible(false);
     }
     if (iID < ui->plotCoh->graphCount()) {
       ui->plotCoh->graph(iID)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssNone, qvecColours.at(iID), 10.0));

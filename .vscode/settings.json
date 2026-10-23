@@ -92,7 +92,7 @@
   },
   "cmake.configureOnOpen": true,
   "cmake.sourceDirectory": "${workspaceFolder}",
-  "cmake.buildDirectory": "${userHome}/build/${workspaceFolderBasename}/vscode",
+  "cmake.configurePreset": "procmt",
   "cmake.installPrefix": "/usr/local/procmt",
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "cSpell.words": [

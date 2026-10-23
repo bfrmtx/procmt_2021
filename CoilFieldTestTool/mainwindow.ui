@@ -113,38 +113,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_3">
-         <property name="minimumSize">
-          <size>
-           <width>160</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Spectra Type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="cbFFTWindowLength">
-            <property name="currentIndex">
-             <number>-1</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <widget class="QFrame" name="frame_5">
          <property name="minimumSize">
           <size>
@@ -245,66 +213,6 @@
            <height>30</height>
           </size>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_6">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLabel" name="cut_label">
-            <property name="text">
-             <string>cut</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="cbFFT_cuts"/>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_7">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QLabel" name="xstddev_label">
-            <property name="text">
-             <string>xstddev</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="xstddev_doubleSpinBox">
-            <property name="decimals">
-             <number>1</number>
-            </property>
-            <property name="minimum">
-             <double>0.400000000000000</double>
-            </property>
-            <property name="maximum">
-             <double>3.400000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.300000000000000</double>
-            </property>
-            <property name="value">
-             <double>1.600000000000000</double>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
        <item>

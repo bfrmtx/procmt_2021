@@ -227,11 +227,11 @@ void mt_site::open(std::shared_ptr<all_spectra_collector<std::complex<double>>> 
 
     if (sizes.at(i) > this->sztvalue("min_stacks")) {
       this->ac_spectra.emplace_back(*all_channel_collector, f, ac1_ssp2_acssp3);
-      qDebug() << "    accepted " << doublefreq2string_unit(f) << "with size" << sizes.at(i);
+      //  qDebug() << "    accepted " << doublefreq2string_unit(f) << "with size" << sizes.at(i);
       emit this->signal_frequency_added(f);
 
     } else {
-      qDebug() << "NOT accepted " << doublefreq2string_unit(f) << "with size" << sizes.at(i);
+      // qDebug() << "NOT accepted " << doublefreq2string_unit(f) << "with size" << sizes.at(i);
     }
 
     ++i;

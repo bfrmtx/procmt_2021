@@ -104,13 +104,6 @@ private slots:
 
   void on_pbShowPlot_clicked(void);
 
-  // void on_cbFFTWindowLength_currentIndexChanged(const QString &arg1);
-  void on_cbFFTWindowLength_currentTextChanged(const QString &arg1);
-
-  void on_cbFFT_cuts_currentIndexChanged(const QString &arg1);
-
-  void on_xstddev_doubleSpinBox_valueChanged(const double arg1);
-
   void on_cbCalType_currentTextChanged(const QString &arg1);
 
 private:

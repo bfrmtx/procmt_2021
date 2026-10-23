@@ -2,16 +2,24 @@
   "version": 8,
   "configurePresets": [
     {
-      "name": "Clang 19.1.7 x86_64-pc-linux-gnu",
-      "displayName": "Clang 19.1.7 x86_64-pc-linux-gnu",
+      "name": "procmt",
+      "displayName": "procmt (Clang Debug)",
       "description": "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "generator": "Ninja",
+      "binaryDir": "$env{HOME}/build/procmt_2021/build",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_INSTALL_PREFIX": "/usr/local/procmt",
         "CMAKE_C_COMPILER": "/usr/bin/clang",
         "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
         "CMAKE_BUILD_TYPE": "Debug"
       }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "procmt",
+      "configurePreset": "procmt",
+      "jobs": 0
     }
   ]
 }

@@ -60,33 +60,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
   this->setWindowTitle(qstrTmp);
 
-  QStringList fcombo;
-  // fcombo << "FFT_freqs" << "auto_gen_tf_80" << "auto_gen_tf_40"  << "MT_Freqs" ;
-  fcombo << "FFT_freqs"
-         << "auto_gen_tf_80"
-         << "auto_gen_tf_40";
-
-  this->ui->cbFFTWindowLength->addItems(fcombo);
-
-  QStringList cutcombo;
-  cutcombo << "sharp"
-           << "medium"
-           << "smooth";
-
-  this->ui->cbFFT_cuts->addItems(cutcombo);
-
-  this->cmdline->insert("target_frequencies", this->ui->cbFFTWindowLength->currentText());
-
-  this->on_cbFFT_cuts_currentIndexChanged(this->ui->cbFFTWindowLength->currentText());
-
-  this->cmdline->insert_double("mt_site_xstddev", this->ui->xstddev_doubleSpinBox->value());
+  this->cmdline->insert("target_frequencies", "FFT_freqs");
+  this->cmdline->insert_double("fcut_upper", 0.2);
+  this->cmdline->insert_double("fcut_lower", 0.01);
 
   // activate the parallel test part
   this->cmdline->insert("calib_lab_run", "parallel_test");
   this->cmdline->insert_int("skip_marked_parts", 1);
-  // default
-  this->cmdline->insert_double("fcut_upper", 0.5);
-  this->cmdline->insert_double("fcut_lower", 0.01);
 
   QList<QString> qstrlFiles;
   qstrlFiles.append("HxHx_ampl.dat");
@@ -468,37 +448,6 @@ void MainWindow::on_pbShowPlot_clicked(void) {
       QMessageBox::warning(this, "Show Plot", "No data was processed yet to be plotted!");
     }
   }
-}
-
-void MainWindow::on_cbFFTWindowLength_currentTextChanged(const QString &arg1)
-// void MainWindow::on_cbFFTWindowLength_currentIndexChanged(const QString &arg1)
-{
-  this->cmdline->insert("target_frequencies", arg1);
-  std::cout << "target freqs changed " << arg1.toStdString() << std::endl;
-  if (arg1 == "MT_Freqs") {
-    this->cmdline->insert_double("fcut_upper", 0.4);
-    this->cmdline->insert_double("fcut_lower", 0.15);
-  }
-}
-
-void MainWindow::on_cbFFT_cuts_currentIndexChanged(const QString &arg1) {
-  if (arg1 == "smooth") {
-    this->cmdline->insert_double("fcut_upper", 0.4);
-    this->cmdline->insert_double("fcut_lower", 0.15);
-  }
-  if (arg1 == "medium") {
-    this->cmdline->insert_double("fcut_upper", 0.4);
-    this->cmdline->insert_double("fcut_lower", 0.05);
-  }
-  if (arg1 == "sharp") {
-    this->cmdline->insert_double("fcut_upper", 0.4);
-    this->cmdline->insert_double("fcut_lower", 0.01);
-  }
-}
-
-void MainWindow::on_xstddev_doubleSpinBox_valueChanged(const double arg1) {
-  this->cmdline->insert_double("mt_site_xstddev", arg1);
-  std::cout << "stdev changed " << arg1 << std::endl;
 }
 
 void MainWindow::on_cbCalType_currentTextChanged(const QString &arg1) {

@@ -13,7 +13,6 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -41,10 +40,6 @@ public:
   QPushButton *pbCloseData;
   QPushButton *pbSave;
   QFrame *line;
-  QFrame *frame_3;
-  QHBoxLayout *horizontalLayout_3;
-  QLabel *label;
-  QComboBox *cbFFTWindowLength;
   QFrame *frame_5;
   QHBoxLayout *horizontalLayout_5;
   QLabel *label_2;
@@ -52,14 +47,6 @@ public:
   QFrame *line_2;
   QPushButton *pbComputeTF;
   QPushButton *pbShowPlot;
-  QFrame *frame_6;
-  QHBoxLayout *horizontalLayout_6;
-  QLabel *cut_label;
-  QComboBox *cbFFT_cuts;
-  QFrame *frame_7;
-  QHBoxLayout *horizontalLayout_7;
-  QLabel *xstddev_label;
-  QDoubleSpinBox *xstddev_doubleSpinBox;
   QSpacerItem *horizontalSpacer;
   QFrame *frame_2;
   QHBoxLayout *horizontalLayout;
@@ -130,27 +117,6 @@ public:
 
     horizontalLayout_2->addWidget(line);
 
-    frame_3 = new QFrame(frame);
-    frame_3->setObjectName(QString::fromUtf8("frame_3"));
-    frame_3->setMinimumSize(QSize(160, 0));
-    frame_3->setFrameShape(QFrame::Panel);
-    frame_3->setFrameShadow(QFrame::Raised);
-    horizontalLayout_3 = new QHBoxLayout(frame_3);
-    horizontalLayout_3->setSpacing(6);
-    horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-    label = new QLabel(frame_3);
-    label->setObjectName(QString::fromUtf8("label"));
-
-    horizontalLayout_3->addWidget(label);
-
-    cbFFTWindowLength = new QComboBox(frame_3);
-    cbFFTWindowLength->setObjectName(QString::fromUtf8("cbFFTWindowLength"));
-
-    horizontalLayout_3->addWidget(cbFFTWindowLength);
-
-    horizontalLayout_2->addWidget(frame_3);
-
     frame_5 = new QFrame(frame);
     frame_5->setObjectName(QString::fromUtf8("frame_5"));
     frame_5->setMinimumSize(QSize(160, 0));
@@ -201,51 +167,6 @@ public:
     pbShowPlot->setIconSize(QSize(30, 30));
 
     horizontalLayout_2->addWidget(pbShowPlot);
-
-    frame_6 = new QFrame(frame);
-    frame_6->setObjectName(QString::fromUtf8("frame_6"));
-    frame_6->setFrameShape(QFrame::StyledPanel);
-    frame_6->setFrameShadow(QFrame::Raised);
-    horizontalLayout_6 = new QHBoxLayout(frame_6);
-    horizontalLayout_6->setSpacing(6);
-    horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-    cut_label = new QLabel(frame_6);
-    cut_label->setObjectName(QString::fromUtf8("cut_label"));
-
-    horizontalLayout_6->addWidget(cut_label);
-
-    cbFFT_cuts = new QComboBox(frame_6);
-    cbFFT_cuts->setObjectName(QString::fromUtf8("cbFFT_cuts"));
-
-    horizontalLayout_6->addWidget(cbFFT_cuts);
-
-    horizontalLayout_2->addWidget(frame_6);
-
-    frame_7 = new QFrame(frame);
-    frame_7->setObjectName(QString::fromUtf8("frame_7"));
-    frame_7->setFrameShape(QFrame::StyledPanel);
-    frame_7->setFrameShadow(QFrame::Raised);
-    horizontalLayout_7 = new QHBoxLayout(frame_7);
-    horizontalLayout_7->setSpacing(6);
-    horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-    xstddev_label = new QLabel(frame_7);
-    xstddev_label->setObjectName(QString::fromUtf8("xstddev_label"));
-
-    horizontalLayout_7->addWidget(xstddev_label);
-
-    xstddev_doubleSpinBox = new QDoubleSpinBox(frame_7);
-    xstddev_doubleSpinBox->setObjectName(QString::fromUtf8("xstddev_doubleSpinBox"));
-    xstddev_doubleSpinBox->setDecimals(1);
-    xstddev_doubleSpinBox->setMinimum(0.400000000000000);
-    xstddev_doubleSpinBox->setMaximum(3.400000000000000);
-    xstddev_doubleSpinBox->setSingleStep(0.300000000000000);
-    xstddev_doubleSpinBox->setValue(1.600000000000000);
-
-    horizontalLayout_7->addWidget(xstddev_doubleSpinBox);
-
-    horizontalLayout_2->addWidget(frame_7);
 
     horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -337,7 +258,6 @@ public:
 
     retranslateUi(MainWindow);
 
-    cbFFTWindowLength->setCurrentIndex(-1);
     cbCalType->setCurrentIndex(0);
 
     QMetaObject::connectSlotsByName(MainWindow);
@@ -348,7 +268,6 @@ public:
     pbOpenData->setText(QCoreApplication::translate("MainWindow", "Open TS", nullptr));
     pbCloseData->setText(QCoreApplication::translate("MainWindow", "Close TS", nullptr));
     pbSave->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
-    label->setText(QCoreApplication::translate("MainWindow", "Spectra Type", nullptr));
     label_2->setText(QCoreApplication::translate("MainWindow", "Cal Type", nullptr));
     cbCalType->setItemText(0, QCoreApplication::translate("MainWindow", "auto", nullptr));
     cbCalType->setItemText(1, QCoreApplication::translate("MainWindow", "theo", nullptr));
@@ -356,8 +275,6 @@ public:
 
     pbComputeTF->setText(QCoreApplication::translate("MainWindow", "Compute PST", nullptr));
     pbShowPlot->setText(QCoreApplication::translate("MainWindow", "Show Plot", nullptr));
-    cut_label->setText(QCoreApplication::translate("MainWindow", "cut", nullptr));
-    xstddev_label->setText(QCoreApplication::translate("MainWindow", "xstddev", nullptr));
     QTableWidgetItem *___qtablewidgetitem = tableTSFiles->horizontalHeaderItem(0);
     ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Use for TF", nullptr));
     QTableWidgetItem *___qtablewidgetitem1 = tableTSFiles->horizontalHeaderItem(1);

@@ -126,8 +126,6 @@ private:
 
   QVector<QGroupBox *> qvecGraphButtons;
 
-  QVector<QCPErrorBars *> qvecErrorBars;
-
   void on_pbShowDatapoints_clicked(int iID);
   void on_pbShowCurve_clicked(int iID);
 

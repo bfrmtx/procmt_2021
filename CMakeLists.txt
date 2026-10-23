@@ -4,6 +4,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(procmt_2021 VERSION 3.1 LANGUAGES CXX)
 
+# Disable qDebug output in release binaries without affecting debug builds.
+add_compile_definitions($<$<CONFIG:Release>:QT_NO_DEBUG_OUTPUT>)
+
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "/usr/local/procmt" CACHE PATH "Install path prefix" FORCE)
 endif()

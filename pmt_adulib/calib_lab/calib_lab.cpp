@@ -81,7 +81,7 @@ void calib_lab::run(const prc_com &cmdline_parm, const QList<QFileInfo> &qfis) {
   }
 
   std::cout << std::endl
-            << "cut " << this->cmdline->dvalue("fcut_lower") << " " << this->cmdline->dvalue("fcut_lower") << std::endl;
+            << "cut " << this->cmdline->dvalue("fcut_lower") << " " << this->cmdline->dvalue("fcut_upper") << std::endl;
 
   // do this first before we run anything
 
@@ -274,8 +274,8 @@ void calib_lab::process() {
     this->mtsite->resize_auto_spc_only();
     this->mtsite->slot_calc_auto_spc();
     this->mtsite->slot_ssp_stack_all();
-    this->mtsite->ssp_xstddev();
-    this->mtsite->slot_ssp_stack_all();
+    // this->mtsite->ssp_xstddev();
+    // this->mtsite->slot_ssp_stack_all();
     this->mtsite->prepare_parallel_coherency();
     this->mtsite->get_vectors_fde("single_amplitude_stacked_spectra");
     this->mtsite->get_vectors_fde("parallel_coherency");
