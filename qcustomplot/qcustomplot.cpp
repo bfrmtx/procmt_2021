@@ -19545,8 +19545,7 @@ void QCPGraph::setData(const QVector<double> &keys, const QVector<double> &value
 }
 
 // bfr ----
-void QCPGraph::setData(const std::vector<double> &keys, const std::vector<double> &values,
-                       bool alreadySorted) {
+void QCPGraph::setData(const std::vector<double> &keys, const std::vector<double> &values, bool alreadySorted) {
   mDataContainer->clear();
   vaddData(keys.cbegin(), keys.cend(), values.cbegin(), values.cend(), alreadySorted);
 }
